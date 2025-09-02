@@ -4,10 +4,6 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Compile LaTeX document
@@ -27,7 +23,7 @@ jobs:
           compiler: pdflatex
       - name: create directory
         shell: bash
-        run: mkdir dist && mkdir dist/${{ steps.extract_branch.outputs.branch }} && cp problems.pdf dist/${{ steps.extract_branch.outputs.branch }}
+        run: mkdir dist &&  cp problems.pdf dist
 #      - name: create list of questions latex document
 #        shell: bash
 #        run: cd exam && python3 generate_list.py
