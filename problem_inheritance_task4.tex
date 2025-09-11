@@ -1,0 +1,1228 @@
+
+\textbf{Задача 4}
+
+\begin{enumerate}
+    \item 
+
+    Написать программу на Python, которая создает абстрактный класс \texttt{Shape} для представления геометрической фигуры. 
+Класс должен содержать абстрактные методы \texttt{calculate\_area} и \texttt{calculate\_perimeter}, 
+которые вычисляют площадь и периметр фигуры соответственно. 
+Программа также должна создавать дочерние классы \texttt{Circle}, \texttt{Rectangle} и \texttt{Triangle}, 
+которые наследуют от класса \texttt{Shape} и реализуют специфические для каждого класса методы вычисления площади и периметра.
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Shape} (с использованием модуля \texttt{abc}) с абстрактными методами 
+    \texttt{calculate\_area()} и \texttt{calculate\_perimeter()}.
+    \item Создайте класс \texttt{Circle} с конструктором \texttt{\_\_init\_\_(self, radius)}, 
+    который принимает радиус окружности в качестве аргумента и сохраняет его в приватном атрибуте \texttt{\_\_radius}.  
+    Добавьте \texttt{@property}-геттер \texttt{radius} для получения значения радиуса.  
+    Реализуйте методы \texttt{calculate\_area()} и \texttt{calculate\_perimeter()} для вычисления площади и периметра окружности.
+    \item Создайте класс \texttt{Rectangle} с конструктором \texttt{\_\_init\_\_(self, length, width)}, 
+    который принимает длину и ширину прямоугольника в качестве аргументов и сохраняет их в приватных атрибутах 
+    \texttt{\_length} и \texttt{\_width}.  
+    Добавьте \texttt{@property}-геттеры \texttt{length} и \texttt{width} для получения значений атрибутов.  
+    Реализуйте методы \texttt{calculate\_area()} и \texttt{calculate\_perimeter()} для вычисления площади и периметра прямоугольника.
+    \item Создайте класс \texttt{Triangle} с конструктором \texttt{\_\_init\_\_(self, base, height, side1, side2, side3)}, 
+    который принимает основание, высоту и три стороны треугольника в качестве аргументов и сохраняет их в приватных атрибутах 
+    \texttt{\_base}, \texttt{\_height}, \texttt{\_side1}, \texttt{\_side2} и \texttt{\_side3}.  
+    Добавьте \texttt{@property}-геттеры \texttt{base}, \texttt{height}, \texttt{side1}, \texttt{side2}, \texttt{side3}.  
+    Реализуйте методы \texttt{calculate\_area()} и \texttt{calculate\_perimeter()} для вычисления площади и периметра треугольника.
+    \item Создайте экземпляр каждого класса и вызовите методы \texttt{calculate\_area()} и \texttt{calculate\_perimeter()} 
+    для вычисления площади и периметра фигуры. Выведите результаты на экран, используя геттеры для доступа к атрибутам.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+# Вычисление параметров окружности.
+r = 7
+circle = Circle(r)
+print("Радиус окружности:", circle.radius)
+print("Площадь окружности:", circle.calculate_area())
+print("Периметр окружности:", circle.calculate_perimeter())
+\end{verbatim}
+
+\textbf{Примечание:} В этом примере используется библиотека \texttt{math} для вычисления числа $\pi$ и квадратного корня.
+
+\textbf{Вывод:}
+\begin{verbatim}
+Радиус окружности: 7
+Площадь окружности: 153.93804002589985
+Периметр окружности: 43.982297150257104
+\end{verbatim}
+
+Далее вывод для прямоугольника и треугольника.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{ElectricalComponent} (с использованием модуля \texttt{abc}) для представления электрических элементов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_power()} и \texttt{calculate\_energy()}. 
+Программа также должна создавать дочерние классы \texttt{Resistor}, \texttt{Capacitor} и \texttt{Inductor}, 
+которые наследуют от класса \texttt{ElectricalComponent} и реализуют специфические для каждого класса методы вычисления мощности и энергии.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Resistor}: $P = U^2 / R$, $E = P \cdot t$
+    \item \texttt{Capacitor}: $P = V \cdot I$, $E = 0.5 \cdot C \cdot V^2$
+    \item \texttt{Inductor}: $P = L \cdot I^2$, $E = 0.5 \cdot L \cdot I^2$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{ElectricalComponent} с методами \texttt{calculate\_power()} и \texttt{calculate\_energy()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Resistor} с конструктором \texttt{\_\_init\_\_(self, voltage, resistance, time)}, который сохраняет приватные атрибуты \texttt{\_\_voltage}, \texttt{\_\_resistance}, \texttt{\_\_time}. Добавьте \texttt{@property}-геттеры для всех атрибутов. Реализуйте методы вычисления мощности и энергии.
+    \item Создайте класс \texttt{Capacitor} с конструктором \texttt{\_\_init\_\_(self, voltage, current, capacitance)}, приватными атрибутами \texttt{\_\_voltage}, \texttt{\_\_current}, \texttt{\_\_capacitance} и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Inductor} с конструктором \texttt{\_\_init\_\_(self, inductance, current)}, приватными атрибутами \texttt{\_\_inductance}, \texttt{\_\_current} и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы \texttt{calculate\_power()} и \texttt{calculate\_energy()}, используя геттеры для доступа к атрибутам. Выведите результаты на экран.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+r = Resistor(10, 5, 10)
+print("Сопротивление резистора:", r.resistance)
+print("Мощность резистора:", r.calculate_power())
+print("Энергия резистора:", r.calculate_energy())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Сопротивление резистора: 5
+Мощность резистора: 20
+Энергия резистора: 200
+\end{verbatim}
+
+Далее вывод для конденсатора и катушки индуктивности.
+
+\item
+
+Написать программу на Python, которая создает абстрактный класс \texttt{MotionObject} (с использованием модуля \texttt{abc}) для представления движущихся тел. 
+Класс должен содержать абстрактные методы \texttt{calculate\_kinetic\_energy()} и \texttt{calculate\_momentum()}. 
+Программа также должна создавать дочерние классы \texttt{LinearBody}, \texttt{RotatingBody} и \texttt{FallingBody}, 
+которые наследуют от класса \texttt{MotionObject} и реализуют специфические для каждого класса методы вычисления кинетической энергии и импульса.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{LinearBody}: $KE = 0.5 \cdot m \cdot v^2$, $p = m \cdot v$
+    \item \texttt{RotatingBody}: $KE = 0.5 \cdot I \cdot \omega^2$, $p = I \cdot \omega$
+    \item \texttt{FallingBody}: $KE = m \cdot g \cdot h$, $p = m \cdot v$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{MotionObject} с методами \texttt{calculate\_kinetic\_energy()} и \texttt{calculate\_momentum()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{LinearBody} с конструктором \texttt{\_\_init\_\_(self, mass, velocity)}, приватными атрибутами \texttt{\_\_mass}, \texttt{\_\_velocity} и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{RotatingBody} с конструктором \texttt{\_\_init\_\_(self, moment\_of\_inertia, angular\_velocity)}, приватными атрибутами \texttt{\_\_moment\_of\_inertia}, \texttt{\_\_angular\_velocity} и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{FallingBody} с конструктором \texttt{\_\_init\_\_(self, mass, height, velocity)}, приватными атрибутами \texttt{\_\_mass}, \texttt{\_\_height}, \texttt{\_\_velocity} и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы \texttt{calculate\_kinetic\_energy()} и \texttt{calculate\_momentum()}, используя геттеры для доступа к атрибутам. Выведите результаты на экран.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+body = LinearBody(2, 3)
+print("Масса тела:", body.mass)
+print("Кинетическая энергия:", body.calculate_kinetic_energy())
+print("Импульс:", body.calculate_momentum())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Масса тела: 2
+Кинетическая энергия: 6
+Импульс: 6
+\end{verbatim}
+
+Далее вывод для вращающегося тела и падающего тела.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Investment} (с использованием модуля \texttt{abc}) для финансовых вложений. 
+Класс должен содержать абстрактные методы \texttt{calculate\_simple\_interest()} и \texttt{calculate\_total\_value()}. 
+Программа также должна создавать дочерние классы \texttt{ShortTerm}, \texttt{LongTerm} и \texttt{CompoundInvestment}, 
+которые наследуют от класса \texttt{Investment} и реализуют специфические методы вычисления процентов и итоговой суммы.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{ShortTerm}: $SI = P \cdot R \cdot T / 100$, $Total = P + SI$
+    \item \texttt{LongTerm}: $SI = P \cdot R \cdot T / 100 + 50$, $Total = P + SI$
+    \item \texttt{CompoundInvestment}: $Total = P \cdot (1 + R/100)^T$, $SI = Total - P$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Investment} с методами \texttt{calculate\_simple\_interest()} и \texttt{calculate\_total\_value()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{ShortTerm} с конструктором \texttt{\_\_init\_\_(self, principal, rate, time)}, приватными атрибутами \texttt{\_\_principal}, \texttt{\_\_rate}, \texttt{\_\_time} и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{LongTerm} с конструктором \texttt{\_\_init\_\_(self, principal, rate, time)}, приватными атрибутами \texttt{\_\_principal}, \texttt{\_\_rate}, \texttt{\_\_time} и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{CompoundInvestment} с конструктором \texttt{\_\_init\_\_(self, principal, rate, time)}, приватными атрибутами \texttt{\_\_principal}, \texttt{\_\_rate}, \texttt{\_\_time} и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы \texttt{calculate\_simple\_interest()} и \texttt{calculate\_total\_value()}, используя геттеры для доступа к атрибутам. Выведите результаты на экран.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+inv = ShortTerm(1000, 5, 2)
+print("Начальная сумма:", inv.principal)
+print("Простой процент:", inv.calculate_simple_interest())
+print("Итоговая сумма:", inv.calculate_total_value())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Начальная сумма: 1000
+Простой процент: 100
+Итоговая сумма: 1100
+\end{verbatim}
+
+Далее вывод для долгосрочного и сложного вложения.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Solid} (с использованием модуля \texttt{abc}) для твердого тела. 
+Класс должен содержать абстрактные методы \texttt{calculate\_volume()} и \texttt{calculate\_surface\_area()}. 
+Программа также должна создавать дочерние классы \texttt{Cube}, \texttt{RectangularPrism} и \texttt{Cylinder}, 
+которые наследуют от класса \texttt{Solid} и реализуют специфические методы вычисления объема и площади поверхности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Cube}: $V = a^3$, $S = 6 \cdot a^2$
+    \item \texttt{RectangularPrism}: $V = l \cdot w \cdot h$, $S = 2(lw + lh + wh)$
+    \item \texttt{Cylinder}: $V = \pi r^2 h$, $S = 2 \pi r (r + h)$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Solid} с методами \texttt{calculate\_volume()} и \texttt{calculate\_surface\_area()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Cube} с конструктором \texttt{\_\_init\_\_(self, side)}, приватным атрибутом \texttt{\_\_side} и геттером. Реализуйте методы.
+    \item Создайте класс \texttt{RectangularPrism} с конструктором \texttt{\_\_init\_\_(self, length, width, height)}, приватными атрибутами \texttt{\_\_length}, \texttt{\_\_width}, \texttt{\_\_height} и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Cylinder} с конструктором \texttt{\_\_init\_\_(self, radius, height)}, приватными атрибутами \texttt{\_\_radius}, \texttt{\_\_height} и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы \texttt{calculate\_volume()} и \texttt{calculate\_surface\_area()}, используя геттеры. Выведите результаты на экран.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+cube = Cube(3)
+print("Сторона куба:", cube.side)
+print("Объем куба:", cube.calculate_volume())
+print("Площадь поверхности куба:", cube.calculate_surface_area())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Сторона куба: 3
+Объем куба: 27
+Площадь поверхности куба: 54
+\end{verbatim}
+
+Далее вывод для прямоугольного параллелепипеда и цилиндра.
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{ChemicalSubstance} (с использованием модуля \texttt{abc}) для химических веществ. 
+Класс должен содержать абстрактные методы \texttt{calculate\_molar\_mass()} и \texttt{calculate\_density()}. 
+Программа также должна создавать дочерние классы \texttt{Element}, \texttt{Compound} и \texttt{Mixture}, 
+которые наследуют от класса \texttt{ChemicalSubstance} и реализуют специфические методы вычисления молярной массы и плотности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Element}: $M = atomic\_mass$, $\rho = mass / volume$
+    \item \texttt{Compound}: $M = \sum (fraction \cdot atomic\_mass)$, $\rho = mass / volume$
+    \item \texttt{Mixture}: $M = \sum (fraction \cdot molar\_mass)$, $\rho = \sum (fraction \cdot density)$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{ChemicalSubstance} с методами \texttt{calculate\_molar\_mass()} и \texttt{calculate\_density()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Element} с конструктором \texttt{\_\_init\_\_(self, atomic\_mass, mass, volume)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Compound} с конструктором \texttt{\_\_init\_\_(self, fractions, atomic\_masses, mass, volume)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Mixture} с конструктором \texttt{\_\_init\_\_(self, fractions, molar\_masses, densities)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+el = Element(12, 24, 2)
+print("Атомная масса элемента:", el.atomic_mass)
+print("Молярная масса:", el.calculate_molar_mass())
+print("Плотность:", el.calculate_density())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Атомная масса элемента: 12
+Молярная масса: 12
+Плотность: 12
+\end{verbatim}
+
+Далее вывод для соединения и смеси.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{BankAccount} (с использованием модуля \texttt{abc}) для банковских счетов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_interest()} и \texttt{calculate\_balance()}. 
+Программа также должна создавать дочерние классы \texttt{Savings}, \texttt{Checking} и \texttt{FixedDeposit}, 
+которые наследуют от класса \texttt{BankAccount} и реализуют специфические методы вычисления процентов и баланса.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Savings}: $Interest = balance \cdot rate \cdot time / 100$, $Balance = balance + Interest$
+    \item \texttt{Checking}: $Interest = balance \cdot rate \cdot time / 100 - fee$, $Balance = balance + Interest$
+    \item \texttt{FixedDeposit}: $Balance = principal \cdot (1 + rate/100)^time$, $Interest = Balance - principal$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{BankAccount} с методами \texttt{calculate\_interest()} и \texttt{calculate\_balance()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Savings} с конструктором \texttt{\_\_init\_\_(self, balance, rate, time)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Checking} с конструктором \texttt{\_\_init\_\_(self, balance, rate, time, fee)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{FixedDeposit} с конструктором \texttt{\_\_init\_\_(self, principal, rate, time)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+s = Savings(1000, 5, 2)
+print("Баланс на сберегательном счете:", s.balance)
+print("Проценты:", s.calculate_interest())
+print("Итоговый баланс:", s.calculate_balance())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Баланс на сберегательном счете: 1000
+Проценты: 100
+Итоговый баланс: 1100
+\end{verbatim}
+
+Далее вывод для расчетного счета и срочного депозита.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Shape3D} (с использованием модуля \texttt{abc}) для трехмерных фигур. 
+Класс должен содержать абстрактные методы \texttt{calculate\_volume()} и \texttt{calculate\_surface\_area()}. 
+Программа также должна создавать дочерние классы \texttt{Sphere}, \texttt{Cone} и \texttt{Pyramid}, 
+которые наследуют от класса \texttt{Shape3D} и реализуют специфические методы вычисления объема и площади поверхности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Sphere}: $V = 4/3 \cdot \pi r^3$, $S = 4 \cdot \pi r^2$
+    \item \texttt{Cone}: $V = 1/3 \cdot \pi r^2 h$, $S = \pi r (r + \sqrt{r^2 + h^2})$
+    \item \texttt{Pyramid}: $V = 1/3 \cdot base\_area \cdot height$, $S = base\_area + lateral\_area$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Shape3D} с методами \texttt{calculate\_volume()} и \texttt{calculate\_surface\_area()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Sphere} с конструктором \texttt{\_\_init\_\_(self, radius)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте класс \texttt{Cone} с конструктором \texttt{\_\_init\_\_(self, radius, height)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Pyramid} с конструктором \texttt{\_\_init\_\_(self, base\_area, lateral\_area, height)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+s = Sphere(3)
+print("Радиус сферы:", s.radius)
+print("Объем сферы:", s.calculate_volume())
+print("Площадь поверхности сферы:", s.calculate_surface_area())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Радиус сферы: 3
+Объем сферы: 113.097
+Площадь поверхности сферы: 113.097
+\end{verbatim}
+
+Далее вывод для конуса и пирамиды.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Vehicle} (с использованием модуля \texttt{abc}) для транспортных средств. 
+Класс должен содержать абстрактные методы \texttt{calculate\_fuel\_consumption()} и \texttt{calculate\_range()}. 
+Программа также должна создавать дочерние классы \texttt{Car}, \texttt{Truck} и \texttt{Motorcycle}, 
+которые наследуют от класса \texttt{Vehicle} и реализуют специфические методы вычисления расхода топлива и запаса хода.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Car}: $fuel = distance / efficiency$, $range = tank\_capacity \cdot efficiency$
+    \item \texttt{Truck}: $fuel = (distance / efficiency) \cdot load\_factor$, $range = tank\_capacity \cdot efficiency / load\_factor$
+    \item \texttt{Motorcycle}: $fuel = distance / efficiency \cdot 0.8$, $range = tank\_capacity \cdot efficiency \cdot 1.2$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Vehicle} с методами \texttt{calculate\_fuel\_consumption()} и \texttt{calculate\_range()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Car} с конструктором \texttt{\_\_init\_\_(self, efficiency, distance, tank\_capacity)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Truck} с конструктором \texttt{\_\_init\_\_(self, efficiency, distance, tank\_capacity, load\_factor)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Motorcycle} с конструктором \texttt{\_\_init\_\_(self, efficiency, distance, tank\_capacity)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+car = Car(15, 150, 50)
+print("Эффективность автомобиля:", car.efficiency)
+print("Расход топлива:", car.calculate_fuel_consumption())
+print("Запас хода:", car.calculate_range())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Эффективность автомобиля: 15
+Расход топлива: 10
+Запас хода: 750
+\end{verbatim}
+
+Далее вывод для грузовика и мотоцикла.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Plant} (с использованием модуля \texttt{abc}) для растений. 
+Класс должен содержать абстрактные методы \texttt{calculate\_growth()} и \texttt{calculate\_water\_needs()}. 
+Программа также должна создавать дочерние классы \texttt{Tree}, \texttt{Flower} и \texttt{Shrub}, 
+которые наследуют от класса \texttt{Plant} и реализуют специфические методы вычисления роста и потребности в воде.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Tree}: $growth = height\_rate \cdot time$, $water = area \cdot water\_rate$
+    \item \texttt{Flower}: $growth = height\_rate \cdot time \cdot 0.5$, $water = area \cdot water\_rate \cdot 0.3$
+    \item \texttt{Shrub}: $growth = height\_rate \cdot time \cdot 0.8$, $water = area \cdot water\_rate \cdot 0.6$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Plant} с методами \texttt{calculate\_growth()} и \texttt{calculate\_water\_needs()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Tree} с конструктором \texttt{\_\_init\_\_(self, height\_rate, time, area, water\_rate)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Flower} с конструктором \texttt{\_\_init\_\_(self, height\_rate, time, area, water\_rate)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Shrub} с конструктором \texttt{\_\_init\_\_(self, height\_rate, time, area, water\_rate)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+tree = Tree(2, 5, 10, 3)
+print("Скорость роста дерева:", tree.height_rate)
+print("Рост:", tree.calculate_growth())
+print("Потребность в воде:", tree.calculate_water_needs())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Скорость роста дерева: 2
+Рост: 10
+Потребность в воде: 30
+\end{verbatim}
+
+Далее вывод для цветка и кустарника.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Sensor} (с использованием модуля \texttt{abc}) для измерительных датчиков. 
+Класс должен содержать абстрактные методы \texttt{calculate\_signal()} и \texttt{calculate\_accuracy()}. 
+Программа также должна создавать дочерние классы \texttt{TemperatureSensor}, \texttt{PressureSensor} и \texttt{LightSensor}, 
+которые наследуют от класса \texttt{Sensor} и реализуют специфические методы вычисления сигнала и точности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{TemperatureSensor}: $signal = voltage \cdot sensitivity$, $accuracy = tolerance$
+    \item \texttt{PressureSensor}: $signal = pressure \cdot sensitivity$, $accuracy = tolerance \cdot 1.1$
+    \item \texttt{LightSensor}: $signal = intensity \cdot sensitivity$, $accuracy = tolerance \cdot 0.9$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Sensor} с методами \texttt{calculate\_signal()} и \texttt{calculate\_accuracy()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{TemperatureSensor} с конструктором \texttt{\_\_init\_\_(self, voltage, sensitivity, tolerance)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{PressureSensor} с конструктором \texttt{\_\_init\_\_(self, pressure, sensitivity, tolerance)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{LightSensor} с конструктором \texttt{\_\_init\_\_(self, intensity, sensitivity, tolerance)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+temp_sensor = TemperatureSensor(5, 2, 0.1)
+print("Напряжение:", temp_sensor.voltage)
+print("Сигнал:", temp_sensor.calculate_signal())
+print("Точность:", temp_sensor.calculate_accuracy())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Напряжение: 5
+Сигнал: 10
+Точность: 0.1
+\end{verbatim}
+
+Далее вывод для датчиков давления и света.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{CookingIngredient} (с использованием модуля \texttt{abc}) для ингредиентов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_calories()} и \texttt{calculate\_mass()}. 
+Программа также должна создавать дочерние классы \texttt{Vegetable}, \texttt{Meat} и \texttt{Grain}, 
+которые наследуют от класса \texttt{CookingIngredient} и реализуют специфические методы вычисления калорий и массы.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Vegetable}: $calories = weight \cdot cal\_per\_100g / 100$, $mass = weight$
+    \item \texttt{Meat}: $calories = weight \cdot cal\_per\_100g / 100 \cdot 1.2$, $mass = weight$
+    \item \texttt{Grain}: $calories = weight \cdot cal\_per\_100g / 100 \cdot 1.1$, $mass = weight$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{CookingIngredient} с методами \texttt{calculate\_calories()} и \texttt{calculate\_mass()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Vegetable} с конструктором \texttt{\_\_init\_\_(self, weight, cal\_per\_100g)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Meat} с конструктором \texttt{\_\_init\_\_(self, weight, cal\_per\_100g)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Grain} с конструктором \texttt{\_\_init\_\_(self, weight, cal\_per\_100g)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+veg = Vegetable(200, 30)
+print("Вес овоща:", veg.weight)
+print("Калории:", veg.calculate_calories())
+print("Масса:", veg.calculate_mass())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Вес овоща: 200
+Калории: 60
+Масса: 200
+\end{verbatim}
+
+Далее вывод для мяса и зерна.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{ElectronicDevice} (с использованием модуля \texttt{abc}) для электронных устройств. 
+Класс должен содержать абстрактные методы \texttt{calculate\_power()} и \texttt{calculate\_efficiency()}. 
+Программа также должна создавать дочерние классы \texttt{Laptop}, \texttt{Smartphone} и \texttt{Tablet}, 
+которые наследуют от класса \texttt{ElectronicDevice} и реализуют специфические методы вычисления мощности и эффективности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Laptop}: $power = voltage \cdot current$, $efficiency = useful\_power / power$
+    \item \texttt{Smartphone}: $power = voltage \cdot current \cdot 0.8$, $efficiency = useful\_power / power$
+    \item \texttt{Tablet}: $power = voltage \cdot current \cdot 0.9$, $efficiency = useful\_power / power$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{ElectronicDevice} с методами \texttt{calculate\_power()} и \texttt{calculate\_efficiency()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Laptop} с конструктором \texttt{\_\_init\_\_(self, voltage, current, useful\_power)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Smartphone} с конструктором \texttt{\_\_init\_\_(self, voltage, current, useful\_power)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Tablet} с конструктором \texttt{\_\_init\_\_(self, voltage, current, useful\_power)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+laptop = Laptop(19, 3, 50)
+print("Напряжение ноутбука:", laptop.voltage)
+print("Мощность:", laptop.calculate_power())
+print("Эффективность:", laptop.calculate_efficiency())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Напряжение ноутбука: 19
+Мощность: 57
+Эффективность: 0.877
+\end{verbatim}
+
+Далее вывод для смартфона и планшета.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{MusicalInstrument} (с использованием модуля \texttt{abc}) для музыкальных инструментов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_sound\_level()} и \texttt{calculate\_frequency()}. 
+Программа также должна создавать дочерние классы \texttt{Piano}, \texttt{Guitar} и \texttt{Flute}, 
+которые наследуют от класса \texttt{MusicalInstrument} и реализуют специфические методы вычисления уровня звука и частоты.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Piano}: $sound\_level = keys \cdot intensity$, $frequency = 440 \cdot 2^{(note-49)/12}$
+    \item \texttt{Guitar}: $sound\_level = strings \cdot intensity \cdot 0.8$, $frequency = 440 \cdot 2^{(note-49)/12}$
+    \item \texttt{Flute}: $sound\_level = holes \cdot intensity \cdot 0.9$, $frequency = 440 \cdot 2^{(note-49)/12}$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{MusicalInstrument} с методами \texttt{calculate\_sound\_level()} и \texttt{calculate\_frequency()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Piano} с конструктором \texttt{\_\_init\_\_(self, keys, intensity, note)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Guitar} с конструктором \texttt{\_\_init\_\_(self, strings, intensity, note)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Flute} с конструктором \texttt{\_\_init\_\_(self, holes, intensity, note)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+piano = Piano(88, 5, 49)
+print("Клавиши:", piano.keys)
+print("Уровень звука:", piano.calculate_sound_level())
+print("Частота:", piano.calculate_frequency())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Клавиши: 88
+Уровень звука: 440
+Частота: 440
+\end{verbatim}
+
+Далее вывод для гитары и флейты.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Workout} (с использованием модуля \texttt{abc}) для физических упражнений. 
+Класс должен содержать абстрактные методы \texttt{calculate\_calories\_burned()} и \texttt{calculate\_duration()}. 
+Программа также должна создавать дочерние классы \texttt{Cardio}, \texttt{Strength} и \texttt{Flexibility}, 
+которые наследуют от класса \texttt{Workout} и реализуют специфические методы вычисления сожженных калорий и длительности тренировки.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Cardio}: $calories = weight \cdot time \cdot 0.1$, $duration = time$
+    \item \texttt{Strength}: $calories = weight \cdot time \cdot 0.08$, $duration = time$
+    \item \texttt{Flexibility}: $calories = weight \cdot time \cdot 0.05$, $duration = time$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Workout} с методами \texttt{calculate\_calories\_burned()} и \texttt{calculate\_duration()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Cardio} с конструктором \texttt{\_\_init\_\_(self, weight, time)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Strength} с конструктором \texttt{\_\_init\_\_(self, weight, time)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Flexibility} с конструктором \texttt{\_\_init\_\_(self, weight, time)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+cardio = Cardio(70, 30)
+print("Вес:", cardio.weight)
+print("Сожженные калории:", cardio.calculate_calories_burned())
+print("Длительность:", cardio.calculate_duration())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Вес: 70
+Сожженные калории: 210
+Длительность: 30
+\end{verbatim}
+
+Далее вывод для силовой и растяжки.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{ComputerComponent} (с использованием модуля \texttt{abc}) для компонентов компьютера. 
+Класс должен содержать абстрактные методы \texttt{calculate\_power\_consumption()} и \texttt{calculate\_cost()}. 
+Программа также должна создавать дочерние классы \texttt{CPU}, \texttt{GPU} и \texttt{RAM}, 
+которые наследуют от класса \texttt{ComputerComponent} и реализуют специфические методы вычисления энергопотребления и стоимости.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{CPU}: $power = cores \cdot frequency \cdot 10$, $cost = cores \cdot 50$
+    \item \texttt{GPU}: $power = cores \cdot frequency \cdot 12$, $cost = cores \cdot 80$
+    \item \texttt{RAM}: $power = size \cdot 3$, $cost = size \cdot 20$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{ComputerComponent} с методами \texttt{calculate\_power\_consumption()} и \texttt{calculate\_cost()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{CPU} с конструктором \texttt{\_\_init\_\_(self, cores, frequency)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{GPU} с конструктором \texttt{\_\_init\_\_(self, cores, frequency)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{RAM} с конструктором \texttt{\_\_init\_\_(self, size)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+cpu = CPU(4, 3.5)
+print("Ядра CPU:", cpu.cores)
+print("Энергопотребление:", cpu.calculate_power_consumption())
+print("Стоимость:", cpu.calculate_cost())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Ядра CPU: 4
+Энергопотребление: 140
+Стоимость: 200
+\end{verbatim}
+
+Далее вывод для GPU и RAM.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Building} (с использованием модуля \texttt{abc}) для зданий. 
+Класс должен содержать абстрактные методы \texttt{calculate\_volume()} и \texttt{calculate\_floor\_area()}. 
+Программа также должна создавать дочерние классы \texttt{House}, \texttt{Office} и \texttt{Warehouse}, 
+которые наследуют от класса \texttt{Building} и реализуют специфические методы вычисления объема и площади.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{House}: $volume = length \cdot width \cdot height$, $floor\_area = length \cdot width$
+    \item \texttt{Office}: $volume = length \cdot width \cdot height \cdot 1.2$, $floor\_area = length \cdot width \cdot 1.1$
+    \item \texttt{Warehouse}: $volume = length \cdot width \cdot height \cdot 1.5$, $floor\_area = length \cdot width \cdot 1.3$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Building} с методами \texttt{calculate\_volume()} и \texttt{calculate\_floor\_area()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{House} с конструктором \texttt{\_\_init\_\_(self, length, width, height)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Office} с конструктором \texttt{\_\_init\_\_(self, length, width, height)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Warehouse} с конструктором \texttt{\_\_init\_\_(self, length, width, height)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+house = House(10, 8, 3)
+print("Длина дома:", house.length)
+print("Объем:", house.calculate_volume())
+print("Площадь пола:", house.calculate_floor_area())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Длина дома: 10
+Объем: 240
+Площадь пола: 80
+\end{verbatim}
+
+Далее вывод для офиса и склада.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Vehicle} (с использованием модуля \texttt{abc}) для транспортных средств. 
+Класс должен содержать абстрактные методы \texttt{calculate\_max\_speed()} и \texttt{calculate\_range()}. 
+Программа также должна создавать дочерние классы \texttt{Car}, \texttt{Motorcycle} и \texttt{Bicycle}, 
+которые наследуют от класса \texttt{Vehicle} и реализуют специфические методы вычисления максимальной скорости и дальности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Car}: $max\_speed = engine\_power \cdot 2$, $range = fuel\_capacity \cdot 10$
+    \item \texttt{Motorcycle}: $max\_speed = engine\_power \cdot 2.5$, $range = fuel\_capacity \cdot 8$
+    \item \texttt{Bicycle}: $max\_speed = pedaling\_power \cdot 3$, $range = stamina \cdot 5$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Vehicle} с методами \texttt{calculate\_max\_speed()} и \texttt{calculate\_range()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Car} с конструктором \texttt{\_\_init\_\_(self, engine\_power, fuel\_capacity)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Motorcycle} с конструктором \texttt{\_\_init\_\_(self, engine\_power, fuel\_capacity)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Bicycle} с конструктором \texttt{\_\_init\_\_(self, pedaling\_power, stamina)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+car = Car(150, 50)
+print("Мощность двигателя автомобиля:", car.engine_power)
+print("Максимальная скорость:", car.calculate_max_speed())
+print("Дальность:", car.calculate_range())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Мощность двигателя автомобиля: 150
+Максимальная скорость: 300
+Дальность: 500
+\end{verbatim}
+
+Далее вывод для мотоцикла и велосипеда.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{BankAccount} (с использованием модуля \texttt{abc}) для банковских счетов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_interest()} и \texttt{calculate\_fees()}. 
+Программа также должна создавать дочерние классы \texttt{SavingsAccount}, \texttt{CheckingAccount} и \texttt{InvestmentAccount}, 
+которые наследуют от класса \texttt{BankAccount} и реализуют специфические методы вычисления процентов и комиссий.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{SavingsAccount}: $interest = balance \cdot 0.03$, $fees = 5$
+    \item \texttt{CheckingAccount}: $interest = balance \cdot 0.01$, $fees = 2$
+    \item \texttt{InvestmentAccount}: $interest = balance \cdot 0.05$, $fees = 10$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{BankAccount} с методами \texttt{calculate\_interest()} и \texttt{calculate\_fees()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{SavingsAccount} с конструктором \texttt{\_\_init\_\_(self, balance)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{CheckingAccount} с конструктором \texttt{\_\_init\_\_(self, balance)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{InvestmentAccount} с конструктором \texttt{\_\_init\_\_(self, balance)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+savings = SavingsAccount(1000)
+print("Баланс сберегательного счета:", savings.balance)
+print("Проценты:", savings.calculate_interest())
+print("Комиссии:", savings.calculate_fees())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Баланс сберегательного счета: 1000
+Проценты: 30.0
+Комиссии: 5
+\end{verbatim}
+
+Далее вывод для расчетного и инвестиционного счета.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Appliance} (с использованием модуля \texttt{abc}) для бытовой техники. 
+Класс должен содержать абстрактные методы \texttt{calculate\_energy\_usage()} и \texttt{calculate\_operating\_cost()}. 
+Программа также должна создавать дочерние классы \texttt{Refrigerator}, \texttt{WashingMachine} и \texttt{Microwave}, 
+которые наследуют от класса \texttt{Appliance} и реализуют специфические методы вычисления энергопотребления и стоимости эксплуатации.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Refrigerator}: $energy = power \cdot hours$, $cost = energy \cdot 0.12$
+    \item \texttt{WashingMachine}: $energy = power \cdot hours \cdot 1.1$, $cost = energy \cdot 0.12$
+    \item \texttt{Microwave}: $energy = power \cdot hours \cdot 0.8$, $cost = energy \cdot 0.12$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Appliance} с методами \texttt{calculate\_energy\_usage()} и \texttt{calculate\_operating\_cost()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Refrigerator} с конструктором \texttt{\_\_init\_\_(self, power, hours)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{WashingMachine} с конструктором \texttt{\_\_init\_\_(self, power, hours)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Microwave} с конструктором \texttt{\_\_init\_\_(self, power, hours)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+fridge = Refrigerator(150, 24)
+print("Мощность холодильника:", fridge.power)
+print("Энергопотребление:", fridge.calculate_energy_usage())
+print("Стоимость эксплуатации:", fridge.calculate_operating_cost())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Мощность холодильника: 150
+Энергопотребление: 3600
+Стоимость эксплуатации: 432.0
+\end{verbatim}
+
+Далее вывод для стиральной машины и микроволновки.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Planet} (с использованием модуля \texttt{abc}) для планет. 
+Класс должен содержать абстрактные методы \texttt{calculate\_surface\_area()} и \texttt{calculate\_gravity()}. 
+Программа также должна создавать дочерние классы \texttt{Earth}, \texttt{Mars} и \texttt{Jupiter}, 
+которые наследуют от класса \texttt{Planet} и реализуют специфические методы вычисления площади поверхности и силы гравитации.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Earth}: $surface\_area = 4 \cdot \pi \cdot radius^2$, $gravity = G \cdot mass / radius^2$
+    \item \texttt{Mars}: $surface\_area = 4 \cdot \pi \cdot radius^2 \cdot 0.95$, $gravity = G \cdot mass / radius^2 \cdot 0.38$
+    \item \texttt{Jupiter}: $surface\_area = 4 \cdot \pi \cdot radius^2 \cdot 11.2$, $gravity = G \cdot mass / radius^2 \cdot 2.5$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Planet} с методами \texttt{calculate\_surface\_area()} и \texttt{calculate\_gravity()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Earth} с конструктором \texttt{\_\_init\_\_(self, radius, mass)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Mars} с конструктором \texttt{\_\_init\_\_(self, radius, mass)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Jupiter} с конструктором \texttt{\_\_init\_\_(self, radius, mass)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+earth = Earth(6371, 5.97e24)
+print("Радиус Земли:", earth.radius)
+print("Площадь поверхности:", earth.calculate_surface_area())
+print("Сила гравитации:", earth.calculate_gravity())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Радиус Земли: 6371
+Площадь поверхности: 510064471
+Сила гравитации: 9.8
+\end{verbatim}
+
+Далее вывод для Марса и Юпитера.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{FoodItem} (с использованием модуля \texttt{abc}) для пищевых продуктов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_calories()} и \texttt{calculate\_price()}. 
+Программа также должна создавать дочерние классы \texttt{Fruit}, \texttt{Vegetable} и \texttt{Meat}, 
+которые наследуют от класса \texttt{FoodItem} и реализуют специфические методы вычисления калорийности и стоимости.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Fruit}: $calories = weight \cdot 0.52$, $price = weight \cdot 3$
+    \item \texttt{Vegetable}: $calories = weight \cdot 0.3$, $price = weight \cdot 2$
+    \item \texttt{Meat}: $calories = weight \cdot 2.5$, $price = weight \cdot 10$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{FoodItem} с методами \texttt{calculate\_calories()} и \texttt{calculate\_price()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Fruit} с конструктором \texttt{\_\_init\_\_(self, weight)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте класс \texttt{Vegetable} с конструктором \texttt{\_\_init\_\_(self, weight)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте класс \texttt{Meat} с конструктором \texttt{\_\_init\_\_(self, weight)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+apple = Fruit(150)
+print("Вес фрукта:", apple.weight)
+print("Калории:", apple.calculate_calories())
+print("Стоимость:", apple.calculate_price())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Вес фрукта: 150
+Калории: 78.0
+Стоимость: 450
+\end{verbatim}
+
+Далее вывод для овощей и мяса.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Tool} (с использованием модуля \texttt{abc}) для инструментов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_efficiency()} и \texttt{calculate\_durability()}. 
+Программа также должна создавать дочерние классы \texttt{Hammer}, \texttt{Screwdriver} и \texttt{Wrench}, 
+которые наследуют от класса \texttt{Tool} и реализуют специфические методы вычисления эффективности и прочности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Hammer}: $efficiency = weight \cdot swing\_speed$, $durability = material\_hardness \cdot 10$
+    \item \texttt{Screwdriver}: $efficiency = length \cdot torque$, $durability = material\_hardness \cdot 8$
+    \item \texttt{Wrench}: $efficiency = size \cdot torque$, $durability = material\_hardness \cdot 12$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Tool} с методами \texttt{calculate\_efficiency()} и \texttt{calculate\_durability()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Hammer} с конструктором \texttt{\_\_init\_\_(self, weight, swing\_speed, material\_hardness)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Screwdriver} с конструктором \texttt{\_\_init\_\_(self, length, torque, material\_hardness)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Wrench} с конструктором \texttt{\_\_init\_\_(self, size, torque, material\_hardness)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+hammer = Hammer(2, 5, 7)
+print("Вес молотка:", hammer.weight)
+print("Эффективность:", hammer.calculate_efficiency())
+print("Прочность:", hammer.calculate_durability())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Вес молотка: 2
+Эффективность: 10
+Прочность: 70
+\end{verbatim}
+
+Далее вывод для отвертки и ключа.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Book} (с использованием модуля \texttt{abc}) для книг. 
+Класс должен содержать абстрактные методы \texttt{calculate\_reading\_time()} и \texttt{calculate\_cost()}. 
+Программа также должна создавать дочерние классы \texttt{Fiction}, \texttt{NonFiction} и \texttt{Comics}, 
+которые наследуют от класса \texttt{Book} и реализуют специфические методы вычисления времени чтения и стоимости.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Fiction}: $reading\_time = pages \cdot 2$, $cost = pages \cdot 1.5$
+    \item \texttt{NonFiction}: $reading\_time = pages \cdot 2.5$, $cost = pages \cdot 2$
+    \item \texttt{Comics}: $reading\_time = pages \cdot 1$, $cost = pages \cdot 1$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Book} с методами \texttt{calculate\_reading\_time()} и \texttt{calculate\_cost()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Fiction} с конструктором \texttt{\_\_init\_\_(self, pages)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте класс \texttt{NonFiction} с конструктором \texttt{\_\_init\_\_(self, pages)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте класс \texttt{Comics} с конструктором \texttt{\_\_init\_\_(self, pages)}, приватным атрибутом и геттером. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+novel = Fiction(300)
+print("Количество страниц:", novel.pages)
+print("Время чтения:", novel.calculate_reading_time())
+print("Стоимость:", novel.calculate_cost())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Количество страниц: 300
+Время чтения: 600
+Стоимость: 450.0
+\end{verbatim}
+
+Далее вывод для научной литературы и комиксов.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{ElectronicDevice} (с использованием модуля \texttt{abc}) для электронных устройств. 
+Класс должен содержать абстрактные методы \texttt{calculate\_power\_consumption()} и \texttt{calculate\_battery\_life()}. 
+Программа также должна создавать дочерние классы \texttt{Smartphone}, \texttt{Laptop} и \texttt{Tablet}, 
+которые наследуют от класса \texttt{ElectronicDevice} и реализуют специфические методы вычисления потребляемой мощности и времени работы от батареи.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Smartphone}: $power = voltage \cdot current \cdot hours$, $battery\_life = battery\_capacity / current$
+    \item \texttt{Laptop}: $power = voltage \cdot current \cdot hours \cdot 1.5$, $battery\_life = battery\_capacity / (current \cdot 1.5)$
+    \item \texttt{Tablet}: $power = voltage \cdot current \cdot hours \cdot 1.2$, $battery\_life = battery\_capacity / (current \cdot 1.2)$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{ElectronicDevice} с методами \texttt{calculate\_power\_consumption()} и \texttt{calculate\_battery\_life()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Smartphone} с конструктором \texttt{\_\_init\_\_(self, voltage, current, hours, battery\_capacity)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Laptop} с конструктором \texttt{\_\_init\_\_(self, voltage, current, hours, battery\_capacity)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Tablet} с конструктором \texttt{\_\_init\_\_(self, voltage, current, hours, battery\_capacity)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+phone = Smartphone(5, 1, 10, 5000)
+print("Напряжение смартфона:", phone.voltage)
+print("Потребляемая мощность:", phone.calculate_power_consumption())
+print("Время работы от батареи:", phone.calculate_battery_life())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Напряжение смартфона: 5
+Потребляемая мощность: 50
+Время работы от батареи: 5000.0
+\end{verbatim}
+
+Далее вывод для ноутбука и планшета.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{MusicalInstrument} (с использованием модуля \texttt{abc}) для музыкальных инструментов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_sound\_volume()} и \texttt{calculate\_weight()}. 
+Программа также должна создавать дочерние классы \texttt{Piano}, \texttt{Guitar} и \texttt{Drum}, 
+которые наследуют от класса \texttt{MusicalInstrument} и реализуют специфические методы вычисления громкости и веса.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Piano}: $volume = keys \cdot 2$, $weight = base\_weight \cdot 3$
+    \item \texttt{Guitar}: $volume = strings \cdot 3$, $weight = base\_weight \cdot 1.5$
+    \item \texttt{Drum}: $volume = diameter \cdot 4$, $weight = base\_weight \cdot 2$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{MusicalInstrument} с методами \texttt{calculate\_sound\_volume()} и \texttt{calculate\_weight()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Piano} с конструктором \texttt{\_\_init\_\_(self, keys, base\_weight)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Guitar} с конструктором \texttt{\_\_init\_\_(self, strings, base\_weight)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Drum} с конструктором \texttt{\_\_init\_\_(self, diameter, base\_weight)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+piano = Piano(88, 200)
+print("Количество клавиш:", piano.keys)
+print("Громкость:", piano.calculate_sound_volume())
+print("Вес:", piano.calculate_weight())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Количество клавиш: 88
+Громкость: 176
+Вес: 600
+\end{verbatim}
+
+Далее вывод для гитары и барабана.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{VehiclePart} (с использованием модуля \texttt{abc}) для частей транспортного средства. 
+Класс должен содержать абстрактные методы \texttt{calculate\_durability()} и \texttt{calculate\_maintenance\_cost()}. 
+Программа также должна создавать дочерние классы \texttt{Engine}, \texttt{Wheel} и \texttt{Brake}, 
+которые наследуют от класса \texttt{VehiclePart} и реализуют специфические методы вычисления долговечности и стоимости обслуживания.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Engine}: $durability = hours\_run \cdot 1.2$, $maintenance = base\_cost \cdot 5$
+    \item \texttt{Wheel}: $durability = rotation\_count \cdot 0.8$, $maintenance = base\_cost \cdot 2$
+    \item \texttt{Brake}: $durability = pressure\_applied \cdot 0.5$, $maintenance = base\_cost \cdot 3$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{VehiclePart} с методами \texttt{calculate\_durability()} и \texttt{calculate\_maintenance\_cost()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Engine} с конструктором \texttt{\_\_init\_\_(self, hours\_run, base\_cost)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Wheel} с конструктором \texttt{\_\_init\_\_(self, rotation\_count, base\_cost)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Brake} с конструктором \texttt{\_\_init\_\_(self, pressure\_applied, base\_cost)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+engine = Engine(1000, 200)
+print("Наработка двигателя:", engine.hours_run)
+print("Долговечность:", engine.calculate_durability())
+print("Стоимость обслуживания:", engine.calculate_maintenance_cost())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Наработка двигателя: 1000
+Долговечность: 1200.0
+Стоимость обслуживания: 1000
+\end{verbatim}
+
+Далее вывод для колес и тормозов.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{Appliance} (с использованием модуля \texttt{abc}) для бытовых приборов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_energy\_consumption()} и \texttt{calculate\_cost()}. 
+Программа также должна создавать дочерние классы \texttt{Refrigerator}, \texttt{WashingMachine} и \texttt{Microwave}, 
+которые наследуют от класса \texttt{Appliance} и реализуют специфические методы вычисления потребляемой энергии и стоимости эксплуатации.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Refrigerator}: $energy = power \cdot hours \cdot 30$, $cost = energy \cdot rate$
+    \item \texttt{WashingMachine}: $energy = power \cdot hours \cdot 1.5$, $cost = energy \cdot rate$
+    \item \texttt{Microwave}: $energy = power \cdot hours \cdot 0.8$, $cost = energy \cdot rate$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{Appliance} с методами \texttt{calculate\_energy\_consumption()} и \texttt{calculate\_cost()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Refrigerator} с конструктором \texttt{\_\_init\_\_(self, power, hours, rate)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{WashingMachine} с конструктором \texttt{\_\_init\_\_(self, power, hours, rate)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Microwave} с конструктором \texttt{\_\_init\_\_(self, power, hours, rate)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+fridge = Refrigerator(150, 24, 0.1)
+print("Мощность холодильника:", fridge.power)
+print("Энергопотребление:", fridge.calculate_energy_consumption())
+print("Стоимость эксплуатации:", fridge.calculate_cost())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Мощность холодильника: 150
+Энергопотребление: 108000
+Стоимость эксплуатации: 10800.0
+\end{verbatim}
+
+Далее вывод для стиральной машины и микроволновки.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{SportActivity} (с использованием модуля \texttt{abc}) для спортивных занятий. 
+Класс должен содержать абстрактные методы \texttt{calculate\_calories\_burned()} и \texttt{calculate\_duration()}. 
+Программа также должна создавать дочерние классы \texttt{Running}, \texttt{Swimming} и \texttt{Cycling}, 
+которые наследуют от класса \texttt{SportActivity} и реализуют специфические методы вычисления сожженных калорий и продолжительности.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Running}: $calories = weight \cdot distance \cdot 1.036$, $duration = distance / speed$
+    \item \texttt{Swimming}: $calories = weight \cdot distance \cdot 1.5$, $duration = distance / speed$
+    \item \texttt{Cycling}: $calories = weight \cdot distance \cdot 0.8$, $duration = distance / speed$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{SportActivity} с методами \texttt{calculate\_calories\_burned()} и \texttt{calculate\_duration()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Running} с конструктором \texttt{\_\_init\_\_(self, weight, distance, speed)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Swimming} с конструктором \texttt{\_\_init\_\_(self, weight, distance, speed)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Cycling} с конструктором \texttt{\_\_init\_\_(self, weight, distance, speed)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+run = Running(70, 5, 10)
+print("Вес бегуна:", run.weight)
+print("Сожженные калории:", run.calculate_calories_burned())
+print("Продолжительность:", run.calculate_duration())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Вес бегуна: 70
+Сожженные калории: 362.6
+Продолжительность: 0.5
+\end{verbatim}
+
+Далее вывод для плавания и езды на велосипеде.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{BuildingMaterial} (с использованием модуля \texttt{abc}) для строительных материалов. 
+Класс должен содержать абстрактные методы \texttt{calculate\_strength()} и \texttt{calculate\_cost()}. 
+Программа также должна создавать дочерние классы \texttt{Concrete}, \texttt{Wood}, \texttt{Steel}, 
+которые наследуют от класса \texttt{BuildingMaterial} и реализуют специфические методы вычисления прочности и стоимости.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Concrete}: $strength = density \cdot compressive\_factor$, $cost = volume \cdot price\_per\_m3$
+    \item \texttt{Wood}: $strength = density \cdot elastic\_factor$, $cost = volume \cdot price\_per\_m3$
+    \item \texttt{Steel}: $strength = density \cdot tensile\_factor$, $cost = volume \cdot price\_per\_m3$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{BuildingMaterial} с методами \texttt{calculate\_strength()} и \texttt{calculate\_cost()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Concrete} с конструктором \texttt{\_\_init\_\_(self, density, compressive\_factor, volume, price\_per\_m3)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Wood} с конструктором \texttt{\_\_init\_\_(self, density, elastic\_factor, volume, price\_per\_m3)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Steel} с конструктором \texttt{\_\_init\_\_(self, density, tensile\_factor, volume, price\_per\_m3)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+concrete = Concrete(2400, 30, 2, 100)
+print("Плотность бетона:", concrete.density)
+print("Прочность:", concrete.calculate_strength())
+print("Стоимость:", concrete.calculate_cost())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Плотность бетона: 2400
+Прочность: 72000
+Стоимость: 200
+\end{verbatim}
+
+Далее вывод для древесины и стали.
+
+\item
+Написать программу на Python, которая создает абстрактный класс \texttt{TransportVehicle} (с использованием модуля \texttt{abc}) для транспортных средств. 
+Класс должен содержать абстрактные методы \texttt{calculate\_range()} и \texttt{calculate\_fuel\_cost()}. 
+Программа также должна создавать дочерние классы \texttt{Car}, \texttt{Motorcycle} и \texttt{ElectricScooter}, 
+которые наследуют от класса \texttt{TransportVehicle} и реализуют специфические методы вычисления дальности хода и стоимости топлива/энергии.
+
+\textbf{Подсказка по формулам:}
+\begin{itemize}
+    \item \texttt{Car}: $range = tank\_capacity / consumption \cdot 100$, $fuel\_cost = tank\_capacity \cdot fuel\_price$
+    \item \texttt{Motorcycle}: $range = tank\_capacity / consumption \cdot 120$, $fuel\_cost = tank\_capacity \cdot fuel\_price$
+    \item \texttt{ElectricScooter}: $range = battery\_capacity / consumption \cdot 100$, $fuel\_cost = battery\_capacity \cdot electricity\_rate$
+\end{itemize}
+
+\textbf{Инструкции:}
+\begin{enumerate}
+    \item Создайте абстрактный класс \texttt{TransportVehicle} с методами \texttt{calculate\_range()} и \texttt{calculate\_fuel\_cost()}, используя модуль \texttt{abc}.
+    \item Создайте класс \texttt{Car} с конструктором \texttt{\_\_init\_\_(self, tank\_capacity, consumption, fuel\_price)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{Motorcycle} с конструктором \texttt{\_\_init\_\_(self, tank\_capacity, consumption, fuel\_price)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте класс \texttt{ElectricScooter} с конструктором \texttt{\_\_init\_\_(self, battery\_capacity, consumption, electricity\_rate)}, приватными атрибутами и геттерами. Реализуйте методы.
+    \item Создайте экземпляр каждого класса и вызовите методы, используя геттеры, и выведите результаты.
+\end{enumerate}
+
+\textbf{Пример использования:}
+\begin{verbatim}
+car = Car(50, 8, 1.5)
+print("Ёмкость бака автомобиля:", car.tank_capacity)
+print("Дальность хода:", car.calculate_range())
+print("Стоимость топлива:", car.calculate_fuel_cost())
+\end{verbatim}
+
+\textbf{Вывод:}
+\begin{verbatim}
+Ёмкость бака автомобиля: 50
+Дальность хода: 625.0
+Стоимость топлива: 75.0
+\end{verbatim}
+
+Далее вывод для Motorcycle и ElectricScooter.
+
+
+
+\end{enumerate}
