@@ -1,0 +1,1374 @@
+\begin{enumerate}
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией внутренней структуры. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает данные data и сохраняет их в атрибуте self.\_data. Также инициализирует self.\_next и self.\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head и self.\_tail как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит все элементы списка через пробел, двигаясь от головы к хвосту. Если список пуст — выводит "Список пуст".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет новый узел \textbf{в конец списка}. Обновляет self.\_tail и ссылки prev/next.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое} вхождение узла с этим значением. Корректно обновляет соседние ссылки и self.\_head/self.\_tail при необходимости.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы со значениями 10, 20, 30, 40.
+    \item Вызовите display и выведите результат.
+    \item Вставьте узел со значением 50.
+    \item Снова вызовите display.
+    \item Удалите узел со значением 20.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(10)
+dll.insert(20)
+dll.insert(30)
+dll.insert(40)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(50)
+print("After inserting 50:")
+dll.display()
+
+dll.delete(20)
+print("After deleting 20:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_value. Инициализирует self.\_next и self.\_previous как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first и self.\_last как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы списка от первого к последнему, разделенные запятыми. Если список пуст — выводит "Нет элементов".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает элемент и вставляет его \textbf{в начало списка}. Обновляет self.\_first и ссылки.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее} вхождение узла с этим значением. Корректно обновляет связи и границы списка.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 5, 15, 25, 15.
+    \item Вызовите display.
+    \item Вставьте узел 35 в начало.
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 15.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(5)
+dll.insert(15)
+dll.insert(25)
+dll.insert(15)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(35)
+print("After inserting 35 at start:")
+dll.display()
+
+dll.delete(15)
+print("After deleting last occurrence of 15:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает content и сохраняет его в self.\_payload. Инициализирует self.\_forward и self.\_backward как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_root и self.\_end как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в формате "[элемент1] <-> [элемент2] <-> ...". Если пуст — "Пусто".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{после первого узла} (если список не пуст; если пуст — вставляет как первый).
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения} этого значения. Обновляет ссылки и границы.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 100, 200, 300.
+    \item Вызовите display.
+    \item Вставьте 150 после первого узла.
+    \item Снова вызовите display.
+    \item Удалите все вхождения 150.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(100)
+dll.insert(200)
+dll.insert(300)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(150)
+print("After inserting 150 after first:")
+dll.display()
+
+dll.delete(150)
+print("After deleting all 150s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает entry и сохраняет его в self.\_item. Инициализирует self.\_succ и self.\_pred как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_top и self.\_bottom как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в обратном порядке (от хвоста к голове), разделенные " | ". Если пуст — "Обратный просмотр: пусто".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{перед последним узлом} (если узлов >1; если 0 или 1 — вставляет в конец).
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет первый найденный узел. Если узел — единственный, обнуляет self.\_top и self.\_bottom.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 7, 14, 21.
+    \item Вызовите display.
+    \item Вставьте 18 перед последним узлом.
+    \item Снова вызовите display.
+    \item Удалите узел со значением 14.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(7)
+dll.insert(14)
+dll.insert(21)
+
+print("Initial Doubly Linked List (reversed):")
+dll.display()
+
+dll.insert(18)
+print("After inserting 18 before last:")
+dll.display()
+
+dll.delete(14)
+print("After deleting 14:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_key. Инициализирует self.\_link\_next и self.\_link\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_header и self.\_trailer как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в квадратных скобках через запятую: [a, b, c]. Если пуст — [].
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если такого значения еще нет в списке}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет узел, если он существует. Если не существует — ничего не делает.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 3, 6, 9, 6 (второй 6 не вставится).
+    \item Вызовите display.
+    \item Вставьте 12.
+    \item Снова вызовите display.
+    \item Удалите 6.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(3)
+dll.insert(6)
+dll.insert(9)
+dll.insert(6)  # игнорируется
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(12)
+print("After inserting 12:")
+dll.display()
+
+dll.delete(6)
+print("After deleting 6:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data\_point и сохраняет его в self.\_datum. Инициализирует self.\_next\_node и self.\_prev\_node как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_start и self.\_finish как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в формате "Элементы: val1 -> val2 -> val3", двигаясь от начала к концу. Если пуст — "Элементы: (нет)".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно больше последнего элемента} (если список не пуст). Если пуст — вставляет. Иначе — игнорирует.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первый узел}, если он равен значению. Не ищет дальше.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 1, 5, 3 (игнорируется), 10.
+    \item Вызовите display.
+    \item Вставьте 7 (игнорируется, т.к. 7 < 10).
+    \item Снова вызовите display.
+    \item Удалите 5.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(1)
+dll.insert(5)
+dll.insert(3)  # игнорируется
+dll.insert(10)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(7)  # игнорируется
+print("After attempting to insert 7:")
+dll.display()
+
+dll.delete(5)
+print("After deleting 5:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item\_value и сохраняет его в self.\_content. Инициализирует self.\_ptr\_next и self.\_ptr\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_node и self.\_tail\_node как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде строки, разделенной точками: "a.b.c". Если пуст — "пусто".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{в середину списка} (если четное количество — после левой средней позиции; если нечетное — в центр). Если список пуст — вставляет как первый.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все узлы с этим значением}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 10, 20, 30.
+    \item Вызовите display.
+    \item Вставьте 25 в середину (между 20 и 30).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 25.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(10)
+dll.insert(20)
+dll.insert(30)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(25)
+print("After inserting 25 in middle:")
+dll.display()
+
+dll.delete(25)
+print("After deleting 25:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает node\_data и сохраняет его в self.\_info. Инициализирует self.\_nxt и self.\_prv как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_front и self.\_rear как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в формате "Front->Back: [значения]" и "Back->Front: [значения в обратном порядке]". Если пуст — "Список пуст в обоих направлениях".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{в начало, только если значение четное}. Если нечетное — вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 4 (в начало), 7 (в конец), 6 (в начало), 9 (в конец).
+    \item Вызовите display.
+    \item Вставьте 8 (в начало).
+    \item Снова вызовите display.
+    \item Удалите 7.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(4)
+dll.insert(7)
+dll.insert(6)
+dll.insert(9)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(8)
+print("After inserting 8:")
+dll.display()
+
+dll.delete(7)
+print("After deleting 7:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_element. Инициализирует self.\_next\_elem и self.\_prev\_elem как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_elem и self.\_tail\_elem как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "HEAD <-> val1 <-> val2 <-> ... <-> TAIL". Если пуст — "HEAD <-> TAIL (пусто)".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{после узла с наименьшим значением} (если несколько — после первого). Если список пуст — вставляет как единственный.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 50, 30, 40.
+    \item Вызовите display.
+    \item Вставьте 35 (после 30 — минимального).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 40.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(50)
+dll.insert(30)
+dll.insert(40)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(35)
+print("After inserting 35 after min:")
+dll.display()
+
+dll.delete(40)
+print("After deleting last occurrence of 40:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_val. Инициализирует self.\_link\_f и self.\_link\_b как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_item и self.\_last\_item как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Элементы (прямой порядок): ...", а затем "Элементы (обратный порядок): ...". Если пуст — "Нет данных".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{перед узлом с наибольшим значением} (если несколько — перед первым). Если список пуст — вставляет как единственный.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 5, 15, 10.
+    \item Вызовите display.
+    \item Вставьте 12 (перед 15 — максимальным).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 10.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(5)
+dll.insert(15)
+dll.insert(10)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(12)
+print("After inserting 12 before max:")
+dll.display()
+
+dll.delete(10)
+print("After deleting all 10s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_data\_field. Инициализирует self.\_next\_ref и self.\_prev\_ref как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_entry\_point и self.\_exit\_point как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в одну строку, разделенные " => ", и в конце добавляет " => None". Если пуст — "None".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{в позицию, равную значению по модулю длины списка} (если список не пуст; если пуст — вставляет как первый). Например, при длине 3 и значении 7: 7 \% 3 = 1 → вставка на позицию 1 (второй элемент).
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 2, 4, 6.
+    \item Вызовите display.
+    \item Вставьте 5 (5 \% 3 = 2 → вставка на позицию 2, т.е. после 4, перед 6).
+    \item Снова вызовите display.
+    \item Удалите 4.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(2)
+dll.insert(4)
+dll.insert(6)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(5)
+print("After inserting 5 at position 5 % 3 = 2:")
+dll.display()
+
+dll.delete(4)
+print("After deleting 4:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает content и сохраняет его в self.\_stored\_value. Инициализирует self.\_connection\_next и self.\_connection\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_input и self.\_output как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в формате: "List: [значения через пробел] (размер: N)". Если пуст — "List: [] (размер: 0)".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно не отрицательное}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение, только если значение положительное}. Если значение <=0 — ничего не делает.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: -1 (игнорируется), 8, 0, 12, -5 (игнорируется).
+    \item Вызовите display.
+    \item Вставьте 10.
+    \item Снова вызовите display.
+    \item Удалите 0 (не удаляется, т.к. не положительное).
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(-1)  # игнорируется
+dll.insert(8)
+dll.insert(0)
+dll.insert(12)
+dll.insert(-5)  # игнорируется
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(10)
+print("After inserting 10:")
+dll.display()
+
+dll.delete(0)  # не удаляется
+print("After attempting to delete 0:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_record. Инициализирует self.\_next\_entry и self.\_prev\_entry как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_record и self.\_tail\_record как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Записи: val1, val2, ..., valN". Если пуст — "Записей нет".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{в начало, если значение нечетное, и в конец, если четное}.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все узлы с этим значением}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 3 (в начало), 4 (в конец), 5 (в начало), 6 (в конец).
+    \item Вызовите display.
+    \item Вставьте 7 (в начало).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 4.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(3)
+dll.insert(4)
+dll.insert(5)
+dll.insert(6)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(7)
+print("After inserting 7:")
+dll.display()
+
+dll.delete(4)
+print("After deleting all 4s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_cell. Инициализирует self.\_cell\_next и self.\_cell\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_cell и self.\_last\_cell как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Ячейки: [значения]" и отдельно "Количество: N". Если пуст — "Список ячеек пуст".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{после каждого узла, значение которого кратно 3} (если таких нет — вставляет в конец).
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 6, 9, 4.
+    \item Вызовите display.
+    \item Вставьте 12 (вставится после 6 и после 9 — но по условию вставляется только один узел; вставим после первого кратного 3, т.е. после 6).
+    \item Снова вызовите display.
+    \item Удалите 9.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(6)
+dll.insert(9)
+dll.insert(4)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(12)
+print("After inserting 12 after first multiple of 3:")
+dll.display()
+
+dll.delete(9)
+print("After deleting 9:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_slot. Инициализирует self.\_slot\_next и self.\_slot\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_start\_slot и self.\_end\_slot как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Слоты: val1 | val2 | val3". Если пуст — "Слоты отсутствуют".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{перед каждым узлом, значение которого кратно 5} (если таких нет — вставляет в начало).
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 10, 15, 7.
+    \item Вызовите display.
+    \item Вставьте 5 (вставится перед 10 и перед 15 — но по условию вставляется только один узел; вставим перед первым кратным 5, т.е. перед 10).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 15.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(10)
+dll.insert(15)
+dll.insert(7)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(5)
+print("After inserting 5 before first multiple of 5:")
+dll.display()
+
+dll.delete(15)
+print("After deleting last occurrence of 15:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_block. Инициализирует self.\_block\_next и self.\_block\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_block и self.\_tail\_block как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Блоки: [значения]" и "Обратный порядок: [значения в обратном порядке]". Если пуст — "Нет блоков".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если сумма цифр значения четная}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 23 (2+3=5 — нечет, не вставляется), 24 (2+4=6 — чет, вставляется), 35 (3+5=8 — чет, вставляется), 13 (1+3=4 — чет, вставляется).
+    \item Вызовите display.
+    \item Вставьте 46 (4+6=10 — чет, вставляется).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 24.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(23)  # не вставляется
+dll.insert(24)
+dll.insert(35)
+dll.insert(13)
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(46)
+print("After inserting 46:")
+dll.display()
+
+dll.delete(24)
+print("After deleting all 24s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_unit. Инициализирует self.\_unit\_next и self.\_unit\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_unit и self.\_last\_unit как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Единицы: val1 → val2 → val3 → null". Если пуст — "null".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно простое число} (используйте вспомогательную функцию is\_prime). Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте вспомогательную функцию is\_prime(n).
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 4 (не простое), 5 (простое), 6 (не простое), 7 (простое), 8 (не простое), 11 (простое).
+    \item Вызовите display.
+    \item Вставьте 13 (простое).
+    \item Снова вызовите display.
+    \item Удалите 7.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return False
+    return True
+
+dll = DoublyLinkedList()
+dll.insert(4)   # нет
+dll.insert(5)   # да
+dll.insert(6)   # нет
+dll.insert(7)   # да
+dll.insert(8)   # нет
+dll.insert(11)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(13)
+print("After inserting 13:")
+dll.display()
+
+dll.delete(7)
+print("After deleting 7:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_segment. Инициализирует self.\_seg\_next и self.\_seg\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_seg и self.\_tail\_seg как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Сегменты (вперед): ...", "Сегменты (назад): ...". Если пуст — "Список сегментов пуст".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно палиндром} (например, 121, 33). Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 12 (не палиндром), 22 (палиндром), 34 (не палиндром), 55 (палиндром), 121 (палиндром).
+    \item Вызовите display.
+    \item Вставьте 33 (палиндром).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 55.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(12)  # нет
+dll.insert(22)  # да
+dll.insert(34)  # нет
+dll.insert(55)  # да
+dll.insert(121) # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(33)
+print("After inserting 33:")
+dll.display()
+
+dll.delete(55)
+print("After deleting last occurrence of 55:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_piece. Инициализирует self.\_piece\_next и self.\_piece\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_piece и self.\_last\_piece как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Части: val1 - val2 - val3". Если пуст — "Нет частей".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно степень двойки} (1,2,4,8,16...). Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 3 (нет), 4 (да), 5 (нет), 8 (да), 9 (нет), 16 (да).
+    \item Вызовите display.
+    \item Вставьте 32 (да).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 8.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(3)   # нет
+dll.insert(4)   # да
+dll.insert(5)   # нет
+dll.insert(8)   # да
+dll.insert(9)   # нет
+dll.insert(16)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(32)
+print("After inserting 32:")
+dll.display()
+
+dll.delete(8)
+print("After deleting all 8s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_fragment. Инициализирует self.\_frag\_next и self.\_frag\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_start\_frag и self.\_end\_frag как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Фрагменты → val1 → val2 → val3 → конец". Если пуст — "Фрагменты: конец".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно делится на 3 без остатка}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 1 (нет), 3 (да), 4 (нет), 6 (да), 7 (нет), 9 (да).
+    \item Вызовите display.
+    \item Вставьте 12 (да).
+    \item Снова вызовите display.
+    \item Удалите 6.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(1)  # нет
+dll.insert(3)  # да
+dll.insert(4)  # нет
+dll.insert(6)  # да
+dll.insert(7)  # нет
+dll.insert(9)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(12)
+print("After inserting 12:")
+dll.display()
+
+dll.delete(6)
+print("After deleting 6:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_chunk. Инициализирует self.\_chunk\_next и self.\_chunk\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_chunk и self.\_tail\_chunk как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Чанки: [значения]" и "Размер: N". Если пуст — "Чанков нет".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно не делится на 5}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 10 (делится на 5 — не вставляется), 11 (не делится — вставляется), 15 (делится — не вставляется), 16 (не делится — вставляется), 20 (делится — не вставляется), 21 (не делится — вставляется).
+    \item Вызовите display.
+    \item Вставьте 26 (не делится — вставляется).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 16.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(10)  # нет
+dll.insert(11)  # да
+dll.insert(15)  # нет
+dll.insert(16)  # да
+dll.insert(20)  # нет
+dll.insert(21)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(26)
+print("After inserting 26:")
+dll.display()
+
+dll.delete(16)
+print("After deleting last occurrence of 16:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_item\_data. Инициализирует self.\_next\_item и self.\_prev\_item как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_data и self.\_last\_data как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Данные (→): val1, val2, val3" и "Данные (←): val3, val2, val1". Если пуст — "Данные отсутствуют".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно больше 10}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 5 (нет), 15 (да), 8 (нет), 20 (да), 12 (да).
+    \item Вызовите display.
+    \item Вставьте 25 (да).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 20.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(5)   # нет
+dll.insert(15)  # да
+dll.insert(8)   # нет
+dll.insert(20)  # да
+dll.insert(12)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(25)
+print("After inserting 25:")
+dll.display()
+
+dll.delete(20)
+print("After deleting all 20s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_node\_value. Инициализирует self.\_node\_next и self.\_node\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_start\_node и self.\_end\_node как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Узлы: val1 <-> val2 <-> val3". Если пуст — "Нет узлов".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно меньше 50}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 60 (нет), 30 (да), 70 (нет), 40 (да), 45 (да).
+    \item Вызовите display.
+    \item Вставьте 25 (да).
+    \item Снова вызовите display.
+    \item Удалите 40.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(60)  # нет
+dll.insert(30)  # да
+dll.insert(70)  # нет
+dll.insert(40)  # да
+dll.insert(45)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(25)
+print("After inserting 25:")
+dll.display()
+
+dll.delete(40)
+print("After deleting 40:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_data\_item. Инициализирует self.\_item\_next и self.\_item\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_item и self.\_tail\_item как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Элементы списка: val1 val2 val3 (всего N)". Если пуст — "Список пуст".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно не равно 0}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 0 (нет), 10 (да), 0 (нет), 20 (да), 30 (да).
+    \item Вызовите display.
+    \item Вставьте 40 (да).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 20.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(0)   # нет
+dll.insert(10)  # да
+dll.insert(0)   # нет
+dll.insert(20)  # да
+dll.insert(30)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(40)
+print("After inserting 40:")
+dll.display()
+
+dll.delete(20)
+print("After deleting last occurrence of 20:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_list\_data. Инициализирует self.\_data\_next и self.\_data\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_list и self.\_last\_list как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Список: val1 | val2 | val3 | ...". Если пуст — "Пустой список".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно положительное}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: -5 (нет), 15 (да), -3 (нет), 25 (да), 0 (нет, если считать 0 не положительным).
+    \item Вызовите display.
+    \item Вставьте 35 (да).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 25.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(-5)  # нет
+dll.insert(15)  # да
+dll.insert(-3)  # нет
+dll.insert(25)  # да
+dll.insert(0)   # нет
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(35)
+print("After inserting 35:")
+dll.display()
+
+dll.delete(25)
+print("After deleting all 25s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_entry\_value. Инициализирует self.\_value\_next и self.\_value\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_value и self.\_tail\_value как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Значения → val1 → val2 → val3 → конец". Если пуст — "→ конец".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно нечетное}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 2 (нет), 3 (да), 4 (нет), 5 (да), 6 (нет), 7 (да).
+    \item Вызовите display.
+    \item Вставьте 9 (да).
+    \item Снова вызовите display.
+    \item Удалите 5.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(2)  # нет
+dll.insert(3)  # да
+dll.insert(4)  # нет
+dll.insert(5)  # да
+dll.insert(6)  # нет
+dll.insert(7)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(9)
+print("After inserting 9:")
+dll.display()
+
+dll.delete(5)
+print("After deleting 5:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_data\_point. Инициализирует self.\_point\_next и self.\_point\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_start\_point и self.\_end\_point как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Точки: val1, val2, val3 (обратно: val3, val2, val1)". Если пуст — "Точек нет".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно четное}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 1 (нет), 4 (да), 3 (нет), 6 (да), 5 (нет), 8 (да).
+    \item Вызовите display.
+    \item Вставьте 10 (да).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 6.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(1)  # нет
+dll.insert(4)  # да
+dll.insert(3)  # нет
+dll.insert(6)  # да
+dll.insert(5)  # нет
+dll.insert(8)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(10)
+print("After inserting 10:")
+dll.display()
+
+dll.delete(6)
+print("After deleting last occurrence of 6:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_node\_data. Инициализирует self.\_data\_link\_next и self.\_data\_link\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_link и self.\_last\_link как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Связи: val1 <-> val2 <-> val3". Если пуст — "Связи отсутствуют".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно кратно 4}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 2 (нет), 4 (да), 6 (нет), 8 (да), 10 (нет), 12 (да).
+    \item Вызовите display.
+    \item Вставьте 16 (да).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 8.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(2)   # нет
+dll.insert(4)   # да
+dll.insert(6)   # нет
+dll.insert(8)   # да
+dll.insert(10)  # нет
+dll.insert(12)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(16)
+print("After inserting 16:")
+dll.display()
+
+dll.delete(8)
+print("After deleting all 8s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_item\_val. Инициализирует self.\_val\_next и self.\_val\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_val и self.\_tail\_val как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Значения: val1 - val2 - val3 (размер N)". Если пуст — "Нет значений".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно заканчивается на 5}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 10 (нет), 15 (да), 20 (нет), 25 (да), 30 (нет), 35 (да).
+    \item Вызовите display.
+    \item Вставьте 45 (да).
+    \item Снова вызовите display.
+    \item Удалите 25.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(10)  # нет
+dll.insert(15)  # да
+dll.insert(20)  # нет
+dll.insert(25)  # да
+dll.insert(30)  # нет
+dll.insert(35)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(45)
+print("After inserting 45:")
+dll.display()
+
+dll.delete(25)
+print("After deleting 25:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_data\_field. Инициализирует self.\_field\_next и self.\_field\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_field и self.\_last\_field как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Поля: val1 → val2 → val3 → null". Если пуст — "null".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если первая цифра числа — 1}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 5 (нет), 12 (да), 23 (нет), 18 (да), 31 (нет), 19 (да).
+    \item Вызовите display.
+    \item Вставьте 11 (да).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 18.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(5)   # нет
+dll.insert(12)  # да
+dll.insert(23)  # нет
+dll.insert(18)  # да
+dll.insert(31)  # нет
+dll.insert(19)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(11)
+print("After inserting 11:")
+dll.display()
+
+dll.delete(18)
+print("After deleting last occurrence of 18:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_record\_data. Инициализирует self.\_data\_record\_next и self.\_data\_record\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_record и self.\_tail\_record как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Записи: [val1, val2, val3]". Если пуст — "[]".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно начинается с цифры 2}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 15 (нет), 25 (да), 35 (нет), 28 (да), 45 (нет), 22 (да).
+    \item Вызовите display.
+    \item Вставьте 20 (да).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 28.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(15)  # нет
+dll.insert(25)  # да
+dll.insert(35)  # нет
+dll.insert(28)  # да
+dll.insert(45)  # нет
+dll.insert(22)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(20)
+print("After inserting 20:")
+dll.display()
+
+dll.delete(28)
+print("After deleting all 28s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_cell\_value. Инициализирует self.\_value\_cell\_next и self.\_value\_cell\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_cell и self.\_last\_cell как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Ячейки: val1 | val2 | val3 (всего N)". Если пуст — "Нет ячеек".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если сумма его цифр нечетная}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 12 (1+2=3 — нечет, да), 14 (1+4=5 — нечет, да), 16 (1+6=7 — нечет, да), 18 (1+8=9 — нечет, да), 20 (2+0=2 — чет, нет).
+    \item Вызовите display.
+    \item Вставьте 21 (2+1=3 — нечет, да).
+    \item Снова вызовите display.
+    \item Удалите 16.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(12)  # да
+dll.insert(14)  # да
+dll.insert(16)  # да
+dll.insert(18)  # да
+dll.insert(20)  # нет
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(21)
+print("After inserting 21:")
+dll.display()
+
+dll.delete(16)
+print("After deleting 16:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает item и сохраняет его в self.\_slot\_data. Инициализирует self.\_data\_slot\_next и self.\_data\_slot\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_slot и self.\_tail\_slot как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Слоты → val1 → val2 → val3 → конец". Если пуст — "→ конец".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно заканчивается на 0}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{последнее вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 5 (нет), 10 (да), 15 (нет), 20 (да), 25 (нет), 30 (да).
+    \item Вызовите display.
+    \item Вставьте 40 (да).
+    \item Снова вызовите display.
+    \item Удалите последнее вхождение 20.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(5)   # нет
+dll.insert(10)  # да
+dll.insert(15)  # нет
+dll.insert(20)  # да
+dll.insert(25)  # нет
+dll.insert(30)  # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(40)
+print("After inserting 40:")
+dll.display()
+
+dll.delete(20)
+print("After deleting last occurrence of 20:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает data и сохраняет его в self.\_block\_data. Инициализирует self.\_data\_block\_next и self.\_data\_block\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_first\_block и self.\_last\_block как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Блоки: val1, val2, val3 (обратный: val3, val2, val1)". Если пуст — "Пусто".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно простое и больше 10}. Вставляет в конец.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{все вхождения}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 7 (простое, но <=10 — нет), 11 (да), 13 (да), 15 (нет), 17 (да), 9 (нет).
+    \item Вызовите display.
+    \item Вставьте 19 (да).
+    \item Снова вызовите display.
+    \item Удалите все вхождения 13.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return False
+    return True
+
+dll = DoublyLinkedList()
+dll.insert(7)   # нет
+dll.insert(11)  # да
+dll.insert(13)  # да
+dll.insert(15)  # нет
+dll.insert(17)  # да
+dll.insert(9)   # нет
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(19)
+print("After inserting 19:")
+dll.display()
+
+dll.delete(13)
+print("After deleting all 13s:")
+dll.display()
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс DoublyLinkedList, представляющий \textbf{двусвязный список} с инкапсуляцией. Класс должен содержать методы для отображения данных, вставки и удаления узлов. Программа также должна создавать экземпляр класса, вставлять узлы и удалять узлы.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс Node с методом \_\_init\_\_, который принимает value и сохраняет его в self.\_unit\_value. Инициализирует self.\_value\_unit\_next и self.\_value\_unit\_prev как None.
+    \item Создайте класс DoublyLinkedList с методом \_\_init\_\_, который инициализирует self.\_head\_unit и self.\_tail\_unit как None.
+    \item Создайте метод display в классе DoublyLinkedList, который выводит элементы в виде: "Единицы: val1 <-> val2 <-> val3". Если пуст — "Нет данных".
+    \item Создайте метод insert в классе DoublyLinkedList, который принимает значение и вставляет его \textbf{только если оно палиндром и двузначное}. Вставляет в начало.
+    \item Создайте метод delete в классе DoublyLinkedList, который принимает значение и удаляет \textbf{первое вхождение}.
+    \item Создайте экземпляр класса DoublyLinkedList.
+    \item Вставьте узлы: 121 (трехзначное — нет), 22 (да), 34 (нет), 55 (да), 5 (однозначное — нет), 66 (да).
+    \item Вызовите display.
+    \item Вставьте 77 (да).
+    \item Снова вызовите display.
+    \item Удалите 55.
+    \item Снова вызовите display.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dll = DoublyLinkedList()
+dll.insert(121)  # нет
+dll.insert(22)   # да
+dll.insert(34)   # нет
+dll.insert(55)   # да
+dll.insert(5)    # нет
+dll.insert(66)   # да
+
+print("Initial Doubly Linked List:")
+dll.display()
+
+dll.insert(77)
+print("After inserting 77:")
+dll.display()
+
+dll.delete(55)
+print("After deleting 55:")
+dll.display()
+\end{lstlisting}
+
+\end{enumerate}
