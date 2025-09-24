@@ -1,0 +1,1290 @@
+\subsubsection{Задача 2 (ограничение количества экземпляров)}
+\begin{enumerate}
+\item Написать программу на Python, которая создает класс `LimitedInstances` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 5.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `LimitedInstances`.
+    \item Добавьте атрибут класса `\_instances` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `\_limit` и инициализируйте его значением 5.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_instances) >= \_limit`, выбросьте `RuntimeError("Превышен лимит объектов: 5")`. Иначе, создайте экземпляр с помощью `super().\_\_new\_\_(cls)`, добавьте его в `\_instances` и верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_instances` при уничтожении объекта.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `name` и устанавливает `self.name = name`.
+    \item Создайте 5 экземпляров класса.
+    \item Попытайтесь создать 6-й экземпляр - должно возникнуть исключение `RuntimeError`.
+    \item Удалите один из первых 5 экземпляров (например, `del obj1`).
+    \item Создайте 6-й экземпляр - теперь это должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 5 объектов
+objs = [LimitedInstances(f"Obj{i}") for i in range(1, 6)]
+
+# Попытка создать 6-й - вызовет ошибку
+try:
+    obj6 = LimitedInstances("Obj6")
+except RuntimeError as e:
+    print(e)
+
+# Удаляем один объект
+del objs[0]
+
+# Теперь можно создать 6-й
+obj6 = LimitedInstances("Obj6")
+print("Успешно создан 6-й объект:", obj6.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `BoundedObjects` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 3.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `BoundedObjects`.
+    \item Добавьте атрибут класса `\_pool` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `MAX\_OBJECTS` и инициализируйте его значением 3.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_pool) >= MAX\_OBJECTS`, выбросьте `RuntimeError("Максимум 3 объекта!")`. Иначе, создайте экземпляр, добавьте в `\_pool`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_pool`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `id` и устанавливает `self.object\_id = id`.
+    \item Создайте 3 экземпляра.
+    \item Попытайтесь создать 4-й - поймайте и выведите исключение.
+    \item Удалите один экземпляр.
+    \item Создайте 4-й экземпляр - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 3 объекта
+obj1 = BoundedObjects(1)
+obj2 = BoundedObjects(2)
+obj3 = BoundedObjects(3)
+
+# Попытка создать 4-й
+try:
+    obj4 = BoundedObjects(4)
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем один
+del obj1
+
+# Создаем 4-й - успешно
+obj4 = BoundedObjects(4)
+print("ID нового объекта:", obj4.object_id)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ResourcePool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 10.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ResourcePool`.
+    \item Добавьте атрибут класса `\_allocated` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `CAPACITY` и инициализируйте его значением 10.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_allocated) >= CAPACITY`, выбросьте `RuntimeError("Ресурсы исчерпаны!")`. Иначе, создайте экземпляр, добавьте в `\_allocated`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_allocated`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `resource\_type` и устанавливает `self.type = resource\_type`.
+    \item Создайте 10 экземпляров.
+    \item Попытайтесь создать 11-й - поймайте и выведите исключение.
+    \item Удалите два экземпляра.
+    \item Создайте 11-й и 12-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 10 объектов
+resources = [ResourcePool(f"Type{i}") for i in range(10)]
+
+# Попытка создать 11-й
+try:
+    r11 = ResourcePool("Type11")
+except RuntimeError as e:
+    print(e)
+
+# Удаляем два
+del resources[0], resources[1]
+
+# Создаем 11-й и 12-й - успешно
+r11 = ResourcePool("Type11")
+r12 = ResourcePool("Type12")
+print("Созданы:", r11.type, r12.type)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `CarFleet` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 7.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `CarFleet`.
+    \item Добавьте атрибут класса `\_cars` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `FLEET\_SIZE` и инициализируйте его значением 7.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_cars) >= FLEET\_SIZE`, выбросьте `RuntimeError("Автопарк переполнен!")`. Иначе, создайте экземпляр, добавьте в `\_cars`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_cars`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `model` и устанавливает `self.model = model`.
+    \item Создайте 7 экземпляров.
+    \item Попытайтесь создать 8-й - поймайте и выведите исключение.
+    \item Удалите три экземпляра.
+    \item Создайте 8-й, 9-й и 10-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 7 машин
+fleet = [CarFleet(f"Model{i}") for i in range(7)]
+
+# Попытка создать 8-ю
+try:
+    car8 = CarFleet("Model8")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем три
+del fleet[0], fleet[1], fleet[2]
+
+# Создаем 8-ю, 9-ю, 10-ю - успешно
+car8 = CarFleet("Model8")
+car9 = CarFleet("Model9")
+car10 = CarFleet("Model10")
+print("Новые модели:", car8.model, car9.model, car10.model)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `StudentGroup` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 30.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `StudentGroup`.
+    \item Добавьте атрибут класса `\_students` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `GROUP\_MAX` и инициализируйте его значением 30.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_students) >= GROUP\_MAX`, выбросьте `RuntimeError("Группа заполнена!")`. Иначе, создайте экземпляр, добавьте в `\_students`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_students`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `student\_name` и устанавливает `self.name = student\_name`.
+    \item Создайте 30 экземпляров.
+    \item Попытайтесь создать 31-й - поймайте и выведите исключение.
+    \item Удалите пять экземпляров.
+    \item Создайте 31-й, 32-й, 33-й, 34-й, 35-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 30 студентов
+students = [StudentGroup(f"Student{i}") for i in range(30)]
+
+# Попытка создать 31-го
+try:
+    s31 = StudentGroup("Alice")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем пять
+for i in range(5):
+    del students[0]
+
+# Создаем 31-го, 32-го, 33-го, 34-го, 35-го - успешно
+new_students = [StudentGroup(f"New{i}") for i in range(31, 36)]
+for s in new_students:
+    print("Добавлен:", s.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `TaskQueue` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 100.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `TaskQueue`.
+    \item Добавьте атрибут класса `\_tasks` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `QUEUE\_LIMIT` и инициализируйте его значением 100.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_tasks) >= QUEUE\_LIMIT`, выбросьте `RuntimeError("Очередь задач переполнена!")`. Иначе, создайте экземпляр, добавьте в `\_tasks`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_tasks`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `task\_name` и устанавливает `self.task = task\_name`.
+    \item Создайте 100 экземпляров.
+    \item Попытайтесь создать 101-й - поймайте и выведите исключение.
+    \item Удалите десять экземпляров.
+    \item Создайте 101-й, 102-й, ..., 110-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 100 задач
+tasks = [TaskQueue(f"Task{i}") for i in range(100)]
+
+# Попытка создать 101-ю
+try:
+    t101 = TaskQueue("FinalTask")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 10 задач
+for i in range(10):
+    del tasks[0]
+
+# Создаем 101-ю, 102-ю, ..., 110-ю - успешно
+new_tasks = [TaskQueue(f"NewTask{i}") for i in range(101, 111)]
+for t in new_tasks:
+    print("Добавлена задача:", t.task)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ConnectionPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 8.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ConnectionPool`.
+    \item Добавьте атрибут класса `\_connections` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `POOL\_SIZE` и инициализируйте его значением 8.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_connections) >= POOL\_SIZE`, выбросьте `RuntimeError("Пул соединений полон!")`. Иначе, создайте экземпляр, добавьте в `\_connections`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_connections`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `connection\_id` и устанавливает `self.id = connection\_id`.
+    \item Создайте 8 экземпляров.
+    \item Попытайтесь создать 9-й - поймайте и выведите исключение.
+    \item Удалите четыре экземпляра.
+    \item Создайте 9-й, 10-й, 11-й, 12-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 8 соединений
+pool = [ConnectionPool(f"Conn{i}") for i in range(8)]
+
+# Попытка создать 9-е
+try:
+    conn9 = ConnectionPool("Conn9")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 4
+del pool[0], pool[1], pool[2], pool[3]
+
+# Создаем 9-е, 10-е, 11-е, 12-е - успешно
+new_conns = [ConnectionPool(f"Conn{i}") for i in range(9, 13)]
+for c in new_conns:
+    print("Создано соединение:", c.id)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `DeviceManager` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 15.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `DeviceManager`.
+    \item Добавьте атрибут класса `\_devices` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `MANAGER\_LIMIT` и инициализируйте его значением 15.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_devices) >= MANAGER\_LIMIT`, выбросьте `RuntimeError("Менеджер устройств перегружен!")`. Иначе, создайте экземпляр, добавьте в `\_devices`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_devices`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `device\_name` и устанавливает `self.device = device\_name`.
+    \item Создайте 15 экземпляров.
+    \item Попытайтесь создать 16-й - поймайте и выведите исключение.
+    \item Удалите семь экземпляров.
+    \item Создайте 16-й, 17-й, ..., 22-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 15 устройств
+devices = [DeviceManager(f"Device{i}") for i in range(15)]
+
+# Попытка создать 16-е
+try:
+    d16 = DeviceManager("NewDevice")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 7
+for i in range(7):
+    del devices[0]
+
+# Создаем 16-е, 17-е, ..., 22-е - успешно
+new_devices = [DeviceManager(f"Device{i}") for i in range(16, 23)]
+for d in new_devices:
+    print("Добавлено устройство:", d.device)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `SessionPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 6.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `SessionPool`.
+    \item Добавьте атрибут класса `\_sessions` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `SESSION\_LIMIT` и инициализируйте его значением 6.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_sessions) >= SESSION\_LIMIT`, выбросьте `RuntimeError("Пул сессий исчерпан!")`. Иначе, создайте экземпляр, добавьте в `\_sessions`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_sessions`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `session\_token` и устанавливает `self.token = session\_token`.
+    \item Создайте 6 экземпляров.
+    \item Попытайтесь создать 7-й - поймайте и выведите исключение.
+    \item Удалите два экземпляра.
+    \item Создайте 7-й и 8-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 6 сессий
+sessions = [SessionPool(f"Token{i}") for i in range(6)]
+
+# Попытка создать 7-ю
+try:
+    s7 = SessionPool("Token7")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 2
+del sessions[0], sessions[1]
+
+# Создаем 7-ю и 8-ю - успешно
+s7 = SessionPool("Token7")
+s8 = SessionPool("Token8")
+print("Созданы токены:", s7.token, s8.token)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ThreadPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 12.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ThreadPool`.
+    \item Добавьте атрибут класса `\_threads` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `THREAD\_MAX` и инициализируйте его значением 12.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_threads) >= THREAD\_MAX`, выбросьте `RuntimeError("Достигнут лимит потоков!")`. Иначе, создайте экземпляр, добавьте в `\_threads`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_threads`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `thread\_id` и устанавливает `self.thread = thread\_id`.
+    \item Создайте 12 экземпляров.
+    \item Попытайтесь создать 13-й - поймайте и выведите исключение.
+    \item Удалите три экземпляра.
+    \item Создайте 13-й, 14-й, 15-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 12 потоков
+threads = [ThreadPool(f"Thread{i}") for i in range(12)]
+
+# Попытка создать 13-й
+try:
+    t13 = ThreadPool("Thread13")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 3
+del threads[0], threads[1], threads[2]
+
+# Создаем 13-й, 14-й, 15-й - успешно
+t13 = ThreadPool("Thread13")
+t14 = ThreadPool("Thread14")
+t15 = ThreadPool("Thread15")
+print("Созданы потоки:", t13.thread, t14.thread, t15.thread)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `CachePool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 20.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `CachePool`.
+    \item Добавьте атрибут класса `\_caches` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `CACHE\_LIMIT` и инициализируйте его значением 20.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_caches) >= CACHE\_LIMIT`, выбросьте `RuntimeError("Кэш-пул переполнен!")`. Иначе, создайте экземпляр, добавьте в `\_caches`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_caches`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `cache\_key` и устанавливает `self.key = cache\_key`.
+    \item Создайте 20 экземпляров.
+    \item Попытайтесь создать 21-й - поймайте и выведите исключение.
+    \item Удалите пять экземпляров.
+    \item Создайте 21-й, 22-й, ..., 25-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 20 кэшей
+caches = [CachePool(f"Key{i}") for i in range(20)]
+
+# Попытка создать 21-й
+try:
+    c21 = CachePool("Key21")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 5
+for i in range(5):
+    del caches[0]
+
+# Создаем 21-й, 22-й, ..., 25-й - успешно
+new_caches = [CachePool(f"Key{i}") for i in range(21, 26)]
+for c in new_caches:
+    print("Создан ключ:", c.key)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `DatabasePool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 4.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `DatabasePool`.
+    \item Добавьте атрибут класса `\_databases` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `DB\_LIMIT` и инициализируйте его значением 4.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_databases) >= DB\_LIMIT`, выбросьте `RuntimeError("Базы данных: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_databases`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_databases`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `db\_name` и устанавливает `self.name = db\_name`.
+    \item Создайте 4 экземпляра.
+    \item Попытайтесь создать 5-й - поймайте и выведите исключение.
+    \item Удалите один экземпляр.
+    \item Создайте 5-й экземпляр - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 4 базы
+dbs = [DatabasePool(f"DB{i}") for i in range(4)]
+
+# Попытка создать 5-ю
+try:
+    db5 = DatabasePool("DB5")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем одну
+del dbs[0]
+
+# Создаем 5-ю - успешно
+db5 = DatabasePool("DB5")
+print("Создана база:", db5.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `FileHandlerPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 9.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `FileHandlerPool`.
+    \item Добавьте атрибут класса `\_handlers` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `HANDLER\_MAX` и инициализируйте его значением 9.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_handlers) >= HANDLER\_MAX`, выбросьте `RuntimeError("Слишком много обработчиков файлов!")`. Иначе, создайте экземпляр, добавьте в `\_handlers`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_handlers`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `file\_path` и устанавливает `self.path = file\_path`.
+    \item Создайте 9 экземпляров.
+    \item Попытайтесь создать 10-й - поймайте и выведите исключение.
+    \item Удалите четыре экземпляра.
+    \item Создайте 10-й, 11-й, 12-й, 13-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 9 обработчиков
+handlers = [FileHandlerPool(f"/path/to/file{i}.txt") for i in range(9)]
+
+# Попытка создать 10-й
+try:
+    h10 = FileHandlerPool("/path/to/newfile.txt")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 4
+del handlers[0], handlers[1], handlers[2], handlers[3]
+
+# Создаем 10-й, 11-й, 12-й, 13-й - успешно
+new_handlers = [FileHandlerPool(f"/path/to/newfile{i}.txt") for i in range(10, 14)]
+for h in new_handlers:
+    print("Обработчик для:", h.path)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `NetworkPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 11.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `NetworkPool`.
+    \item Добавьте атрибут класса `\_networks` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `NETWORK\_CAP` и инициализируйте его значением 11.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_networks) >= NETWORK\_CAP`, выбросьте `RuntimeError("Сеть: превышен лимит!")`. Иначе, создайте экземпляр, добавьте в `\_networks`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_networks`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `network\_id` и устанавливает `self.net\_id = network\_id`.
+    \item Создайте 11 экземпляров.
+    \item Попытайтесь создать 12-й - поймайте и выведите исключение.
+    \item Удалите шесть экземпляров.
+    \item Создайте 12-й, 13-й, ..., 17-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 11 сетей
+networks = [NetworkPool(f"Net{i}") for i in range(11)]
+
+# Попытка создать 12-ю
+try:
+    n12 = NetworkPool("Net12")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 6
+for i in range(6):
+    del networks[0]
+
+# Создаем 12-ю, 13-ю, ..., 17-ю - успешно
+new_networks = [NetworkPool(f"Net{i}") for i in range(12, 18)]
+for n in new_networks:
+    print("Создана сеть:", n.net_id)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `MemoryPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 25.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `MemoryPool`.
+    \item Добавьте атрибут класса `\_blocks` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `MEMORY\_LIMIT` и инициализируйте его значением 25.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_blocks) >= MEMORY\_LIMIT`, выбросьте `RuntimeError("Память: лимит блоков превышен!")`. Иначе, создайте экземпляр, добавьте в `\_blocks`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_blocks`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `block\_size` и устанавливает `self.size = block\_size`.
+    \item Создайте 25 экземпляров.
+    \item Попытайтесь создать 26-й - поймайте и выведите исключение.
+    \item Удалите десять экземпляров.
+    \item Создайте 26-й, 27-й, ..., 35-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 25 блоков
+blocks = [MemoryPool(f"Size{i}") for i in range(25)]
+
+# Попытка создать 26-й
+try:
+    b26 = MemoryPool("Size26")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 10
+for i in range(10):
+    del blocks[0]
+
+# Создаем 26-й, 27-й, ..., 35-й - успешно
+new_blocks = [MemoryPool(f"Size{i}") for i in range(26, 36)]
+for b in new_blocks:
+    print("Создан блок размером:", b.size)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ProcessPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 16.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ProcessPool`.
+    \item Добавьте атрибут класса `\_processes` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `PROCESS\_MAX` и инициализируйте его значением 16.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_processes) >= PROCESS\_MAX`, выбросьте `RuntimeError("Процессы: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_processes`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_processes`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `process\_name` и устанавливает `self.name = process\_name`.
+    \item Создайте 16 экземпляров.
+    \item Попытайтесь создать 17-й - поймайте и выведите исключение.
+    \item Удалите восемь экземпляров.
+    \item Создайте 17-й, 18-й, ..., 24-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 16 процессов
+processes = [ProcessPool(f"Proc{i}") for i in range(16)]
+
+# Попытка создать 17-й
+try:
+    p17 = ProcessPool("Proc17")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 8
+for i in range(8):
+    del processes[0]
+
+# Создаем 17-й, 18-й, ..., 24-й - успешно
+new_processes = [ProcessPool(f"Proc{i}") for i in range(17, 25)]
+for p in new_processes:
+    print("Запущен процесс:", p.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `BufferPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 18.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `BufferPool`.
+    \item Добавьте атрибут класса `\_buffers` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `BUFFER\_SIZE` и инициализируйте его значением 18.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_buffers) >= BUFFER\_SIZE`, выбросьте `RuntimeError("Буфер: переполнение!")`. Иначе, создайте экземпляр, добавьте в `\_buffers`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_buffers`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `buffer\_id` и устанавливает `self.id = buffer\_id`.
+    \item Создайте 18 экземпляров.
+    \item Попытайтесь создать 19-й - поймайте и выведите исключение.
+    \item Удалите девять экземпляров.
+    \item Создайте 19-й, 20-й, ..., 27-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 18 буферов
+buffers = [BufferPool(f"Buf{i}") for i in range(18)]
+
+# Попытка создать 19-й
+try:
+    b19 = BufferPool("Buf19")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 9
+for i in range(9):
+    del buffers[0]
+
+# Создаем 19-й, 20-й, ..., 27-й - успешно
+new_buffers = [BufferPool(f"Buf{i}") for i in range(19, 28)]
+for b in new_buffers:
+    print("Создан буфер:", b.id)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ChannelPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 13.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ChannelPool`.
+    \item Добавьте атрибут класса `\_channels` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `CHANNEL\_LIMIT` и инициализируйте его значением 13.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_channels) >= CHANNEL\_LIMIT`, выбросьте `RuntimeError("Каналы: лимит исчерпан!")`. Иначе, создайте экземпляр, добавьте в `\_channels`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_channels`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `channel\_name` и устанавливает `self.name = channel\_name`.
+    \item Создайте 13 экземпляров.
+    \item Попытайтесь создать 14-й - поймайте и выведите исключение.
+    \item Удалите три экземпляра.
+    \item Создайте 14-й, 15-й, 16-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 13 каналов
+channels = [ChannelPool(f"Channel{i}") for i in range(13)]
+
+# Попытка создать 14-й
+try:
+    c14 = ChannelPool("Channel14")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 3
+del channels[0], channels[1], channels[2]
+
+# Создаем 14-й, 15-й, 16-й - успешно
+c14 = ChannelPool("Channel14")
+c15 = ChannelPool("Channel15")
+c16 = ChannelPool("Channel16")
+print("Созданы каналы:", c14.name, c15.name, c16.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `SocketPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 22.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `SocketPool`.
+    \item Добавьте атрибут класса `\_sockets` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `SOCKET\_MAX` и инициализируйте его значением 22.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_sockets) >= SOCKET\_MAX`, выбросьте `RuntimeError("Сокеты: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_sockets`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_sockets`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `socket\_port` и устанавливает `self.port = socket\_port`.
+    \item Создайте 22 экземпляра.
+    \item Попытайтесь создать 23-й - поймайте и выведите исключение.
+    \item Удалите одиннадцать экземпляров.
+    \item Создайте 23-й, 24-й, ..., 33-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 22 сокета
+sockets = [SocketPool(8000 + i) for i in range(22)]
+
+# Попытка создать 23-й
+try:
+    s23 = SocketPool(8022)
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 11
+for i in range(11):
+    del sockets[0]
+
+# Создаем 23-й, 24-й, ..., 33-й - успешно
+new_sockets = [SocketPool(8022 + i) for i in range(11)]
+for s in new_sockets:
+    print("Создан сокет на порту:", s.port)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `LockPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 14.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `LockPool`.
+    \item Добавьте атрибут класса `\_locks` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `LOCK\_COUNT` и инициализируйте его значением 14.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_locks) >= LOCK\_COUNT`, выбросьте `RuntimeError("Замки: все заняты!")`. Иначе, создайте экземпляр, добавьте в `\_locks`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_locks`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `lock\_name` и устанавливает `self.name = lock\_name`.
+    \item Создайте 14 экземпляров.
+    \item Попытайтесь создать 15-й - поймайте и выведите исключение.
+    \item Удалите семь экземпляров.
+    \item Создайте 15-й, 16-й, ..., 21-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 14 замков
+locks = [LockPool(f"Lock{i}") for i in range(14)]
+
+# Попытка создать 15-й
+try:
+    l15 = LockPool("Lock15")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 7
+for i in range(7):
+    del locks[0]
+
+# Создаем 15-й, 16-й, ..., 21-й - успешно
+new_locks = [LockPool(f"Lock{i}") for i in range(15, 22)]
+for l in new_locks:
+    print("Создан замок:", l.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `QueuePool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 19.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `QueuePool`.
+    \item Добавьте атрибут класса `\_queues` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `QUEUE\_COUNT` и инициализируйте его значением 19.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_queues) >= QUEUE\_COUNT`, выбросьте `RuntimeError("Очереди: лимит достигнут!")`. Иначе, создайте экземпляр, добавьте в `\_queues`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_queues`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `queue\_name` и устанавливает `self.name = queue\_name`.
+    \item Создайте 19 экземпляров.
+    \item Попытайтесь создать 20-й - поймайте и выведите исключение.
+    \item Удалите десять экземпляров.
+    \item Создайте 20-й, 21-й, ..., 29-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 19 очередей
+queues = [QueuePool(f"Queue{i}") for i in range(19)]
+
+# Попытка создать 20-ю
+try:
+    q20 = QueuePool("Queue20")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 10
+for i in range(10):
+    del queues[0]
+
+# Создаем 20-ю, 21-ю, ..., 29-ю - успешно
+new_queues = [QueuePool(f"Queue{i}") for i in range(20, 30)]
+for q in new_queues:
+    print("Создана очередь:", q.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `SemaphorePool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 8.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `SemaphorePool`.
+    \item Добавьте атрибут класса `\_semaphores` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `SEMA\_LIMIT` и инициализируйте его значением 8.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_semaphores) >= SEMA\_LIMIT`, выбросьте `RuntimeError("Семафоры: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_semaphores`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_semaphores`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `sema\_id` и устанавливает `self.id = sema\_id`.
+    \item Создайте 8 экземпляров.
+    \item Попытайтесь создать 9-й - поймайте и выведите исключение.
+    \item Удалите четыре экземпляра.
+    \item Создайте 9-й, 10-й, 11-й, 12-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 8 семафоров
+semas = [SemaphorePool(f"Sema{i}") for i in range(8)]
+
+# Попытка создать 9-й
+try:
+    s9 = SemaphorePool("Sema9")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 4
+del semas[0], semas[1], semas[2], semas[3]
+
+# Создаем 9-й, 10-й, 11-й, 12-й - успешно
+s9 = SemaphorePool("Sema9")
+s10 = SemaphorePool("Sema10")
+s11 = SemaphorePool("Sema11")
+s12 = SemaphorePool("Sema12")
+print("Созданы семафоры:", s9.id, s10.id, s11.id, s12.id)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `TimerPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 21.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `TimerPool`.
+    \item Добавьте атрибут класса `\_timers` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `TIMER\_MAX` и инициализируйте его значением 21.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_timers) >= TIMER\_MAX`, выбросьте `RuntimeError("Таймеры: лимит исчерпан!")`. Иначе, создайте экземпляр, добавьте в `\_timers`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_timers`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `timer\_duration` и устанавливает `self.duration = timer\_duration`.
+    \item Создайте 21 экземпляр.
+    \item Попытайтесь создать 22-й - поймайте и выведите исключение.
+    \item Удалите одиннадцать экземпляров.
+    \item Создайте 22-й, 23-й, ..., 32-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 21 таймер
+timers = [TimerPool(i * 10) for i in range(21)]
+
+# Попытка создать 22-й
+try:
+    t22 = TimerPool(220)
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 11
+for i in range(11):
+    del timers[0]
+
+# Создаем 22-й, 23-й, ..., 32-й - успешно
+new_timers = [TimerPool(i * 10) for i in range(22, 33)]
+for t in new_timers:
+    print("Создан таймер на:", t.duration, "сек")
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `WorkerPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 23.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `WorkerPool`.
+    \item Добавьте атрибут класса `\_workers` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `WORKER\_LIMIT` и инициализируйте его значением 23.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_workers) >= WORKER\_LIMIT`, выбросьте `RuntimeError("Рабочие: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_workers`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_workers`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `worker\_id` и устанавливает `self.id = worker\_id`.
+    \item Создайте 23 экземпляра.
+    \item Попытайтесь создать 24-й - поймайте и выведите исключение.
+    \item Удалите двенадцать экземпляров.
+    \item Создайте 24-й, 25-й, ..., 35-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 23 рабочих
+workers = [WorkerPool(f"Worker{i}") for i in range(23)]
+
+# Попытка создать 24-го
+try:
+    w24 = WorkerPool("Worker24")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 12
+for i in range(12):
+    del workers[0]
+
+# Создаем 24-го, 25-го, ..., 35-го - успешно
+new_workers = [WorkerPool(f"Worker{i}") for i in range(24, 36)]
+for w in new_workers:
+    print("Создан рабочий:", w.id)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `JobPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 26.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `JobPool`.
+    \item Добавьте атрибут класса `\_jobs` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `JOB\_CAP` и инициализируйте его значением 26.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_jobs) >= JOB\_CAP`, выбросьте `RuntimeError("Задания: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_jobs`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_jobs`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `job\_name` и устанавливает `self.name = job\_name`.
+    \item Создайте 26 экземпляров.
+    \item Попытайтесь создать 27-й - поймайте и выведите исключение.
+    \item Удалите тринадцать экземпляров.
+    \item Создайте 27-й, 28-й, ..., 39-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 26 заданий
+jobs = [JobPool(f"Job{i}") for i in range(26)]
+
+# Попытка создать 27-е
+try:
+    j27 = JobPool("Job27")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 13
+for i in range(13):
+    del jobs[0]
+
+# Создаем 27-е, 28-е, ..., 39-е - успешно
+new_jobs = [JobPool(f"Job{i}") for i in range(27, 40)]
+for j in new_jobs:
+    print("Создано задание:", j.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `RequestPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 27.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `RequestPool`.
+    \item Добавьте атрибут класса `\_requests` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `REQUEST\_MAX` и инициализируйте его значением 27.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_requests) >= REQUEST\_MAX`, выбросьте `RuntimeError("Запросы: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_requests`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_requests`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `request\_url` и устанавливает `self.url = request\_url`.
+    \item Создайте 27 экземпляров.
+    \item Попытайтесь создать 28-й - поймайте и выведите исключение.
+    \item Удалите четырнадцать экземпляров.
+    \item Создайте 28-й, 29-й, ..., 41-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 27 запросов
+requests = [RequestPool(f"http://site{i}.com") for i in range(27)]
+
+# Попытка создать 28-й
+try:
+    r28 = RequestPool("http://newsite.com")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 14
+for i in range(14):
+    del requests[0]
+
+# Создаем 28-й, 29-й, ..., 41-й - успешно
+new_requests = [RequestPool(f"http://newsite{i}.com") for i in range(28, 42)]
+for r in new_requests:
+    print("Создан запрос к:", r.url)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `EventPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 28.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `EventPool`.
+    \item Добавьте атрибут класса `\_events` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `EVENT\_LIMIT` и инициализируйте его значением 28.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_events) >= EVENT\_LIMIT`, выбросьте `RuntimeError("События: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_events`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_events`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `event\_type` и устанавливает `self.type = event\_type`.
+    \item Создайте 28 экземпляров.
+    \item Попытайтесь создать 29-е - поймайте и выведите исключение.
+    \item Удалите пятнадцать экземпляров.
+    \item Создайте 29-е, 30-е, ..., 43-е экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 28 событий
+events = [EventPool(f"Event{i}") for i in range(28)]
+
+# Попытка создать 29-е
+try:
+    e29 = EventPool("Event29")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 15
+for i in range(15):
+    del events[0]
+
+# Создаем 29-е, 30-е, ..., 43-е - успешно
+new_events = [EventPool(f"Event{i}") for i in range(29, 44)]
+for e in new_events:
+    print("Создано событие типа:", e.type)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `MessagePool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 29.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `MessagePool`.
+    \item Добавьте атрибут класса `\_messages` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `MSG\_MAX` и инициализируйте его значением 29.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_messages) >= MSG\_MAX`, выбросьте `RuntimeError("Сообщения: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_messages`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_messages`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `message\_text` и устанавливает `self.text = message\_text`.
+    \item Создайте 29 экземпляров.
+    \item Попытайтесь создать 30-й - поймайте и выведите исключение.
+    \item Удалите шестнадцать экземпляров.
+    \item Создайте 30-й, 31-й, ..., 45-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 29 сообщений
+messages = [MessagePool(f"Message{i}") for i in range(29)]
+
+# Попытка создать 30-е
+try:
+    m30 = MessagePool("Message30")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 16
+for i in range(16):
+    del messages[0]
+
+# Создаем 30-е, 31-е, ..., 45-е - успешно
+new_messages = [MessagePool(f"Message{i}") for i in range(30, 46)]
+for m in new_messages:
+    print("Создано сообщение:", m.text)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `NotificationPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 31.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `NotificationPool`.
+    \item Добавьте атрибут класса `\_notifications` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `NOTIF\_LIMIT` и инициализируйте его значением 31.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_notifications) >= NOTIF\_LIMIT`, выбросьте `RuntimeError("Уведомления: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_notifications`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_notifications`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `notification\_title` и устанавливает `self.title = notification\_title`.
+    \item Создайте 31 экземпляр.
+    \item Попытайтесь создать 32-й - поймайте и выведите исключение.
+    \item Удалите семнадцать экземпляров.
+    \item Создайте 32-й, 33-й, ..., 48-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 31 уведомление
+notifications = [NotificationPool(f"Notif{i}") for i in range(31)]
+
+# Попытка создать 32-е
+try:
+    n32 = NotificationPool("Notif32")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 17
+for i in range(17):
+    del notifications[0]
+
+# Создаем 32-е, 33-е, ..., 48-е - успешно
+new_notifications = [NotificationPool(f"Notif{i}") for i in range(32, 49)]
+for n in new_notifications:
+    print("Создано уведомление:", n.title)
+\end{lstlisting}
+\item Написать программу на Python, которая создает класс `LoggerPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 5.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `LoggerPool`.
+    \item Добавьте атрибут класса `\_loggers` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `LOGGER\_LIMIT` и инициализируйте его значением 5.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_loggers) >= LOGGER\_LIMIT`, выбросьте `RuntimeError("Логгеры: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_loggers`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_loggers`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `logger\_name` и устанавливает `self.name = logger\_name`.
+    \item Создайте 5 экземпляров.
+    \item Попытайтесь создать 6-й - поймайте и выведите исключение.
+    \item Удалите два экземпляра.
+    \item Создайте 6-й и 7-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 5 логгеров
+loggers = [LoggerPool(f"Logger{i}") for i in range(5)]
+
+# Попытка создать 6-й
+try:
+    l6 = LoggerPool("Logger6")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 2
+del loggers[0], loggers[1]
+
+# Создаем 6-й и 7-й - успешно
+l6 = LoggerPool("Logger6")
+l7 = LoggerPool("Logger7")
+print("Созданы логгеры:", l6.name, l7.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ConfigPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 12.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ConfigPool`.
+    \item Добавьте атрибут класса `\_configs` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `CONFIG\_MAX` и инициализируйте его значением 12.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_configs) >= CONFIG\_MAX`, выбросьте `RuntimeError("Конфигурации: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_configs`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_configs`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `config\_name` и устанавливает `self.name = config\_name`.
+    \item Создайте 12 экземпляров.
+    \item Попытайтесь создать 13-й - поймайте и выведите исключение.
+    \item Удалите шесть экземпляров.
+    \item Создайте 13-й, 14-й, ..., 18-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 12 конфигураций
+configs = [ConfigPool(f"Config{i}") for i in range(12)]
+
+# Попытка создать 13-ю
+try:
+    c13 = ConfigPool("Config13")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 6
+for i in range(6):
+    del configs[0]
+
+# Создаем 13-ю, 14-ю, ..., 18-ю - успешно
+new_configs = [ConfigPool(f"Config{i}") for i in range(13, 19)]
+for c in new_configs:
+    print("Создана конфигурация:", c.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `PluginPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 10.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `PluginPool`.
+    \item Добавьте атрибут класса `\_plugins` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `PLUGIN\_CAP` и инициализируйте его значением 10.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_plugins) >= PLUGIN\_CAP`, выбросьте `RuntimeError("Плагины: лимит исчерпан!")`. Иначе, создайте экземпляр, добавьте в `\_plugins`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_plugins`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `plugin\_id` и устанавливает `self.id = plugin\_id`.
+    \item Создайте 10 экземпляров.
+    \item Попытайтесь создать 11-й - поймайте и выведите исключение.
+    \item Удалите пять экземпляров.
+    \item Создайте 11-й, 12-й, ..., 15-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 10 плагинов
+plugins = [PluginPool(f"Plugin{i}") for i in range(10)]
+
+# Попытка создать 11-й
+try:
+    p11 = PluginPool("Plugin11")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 5
+for i in range(5):
+    del plugins[0]
+
+# Создаем 11-й, 12-й, ..., 15-й - успешно
+new_plugins = [PluginPool(f"Plugin{i}") for i in range(11, 16)]
+for p in new_plugins:
+    print("Создан плагин:", p.id)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ServicePool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 8.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ServicePool`.
+    \item Добавьте атрибут класса `\_services` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `SERVICE\_LIMIT` и инициализируйте его значением 8.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_services) >= SERVICE\_LIMIT`, выбросьте `RuntimeError("Сервисы: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_services`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_services`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `service\_name` и устанавливает `self.name = service\_name`.
+    \item Создайте 8 экземпляров.
+    \item Попытайтесь создать 9-й - поймайте и выведите исключение.
+    \item Удалите четыре экземпляра.
+    \item Создайте 9-й, 10-й, 11-й, 12-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 8 сервисов
+services = [ServicePool(f"Service{i}") for i in range(8)]
+
+# Попытка создать 9-й
+try:
+    s9 = ServicePool("Service9")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 4
+del services[0], services[1], services[2], services[3]
+
+# Создаем 9-й, 10-й, 11-й, 12-й - успешно
+s9 = ServicePool("Service9")
+s10 = ServicePool("Service10")
+s11 = ServicePool("Service11")
+s12 = ServicePool("Service12")
+print("Созданы сервисы:", s9.name, s10.name, s11.name, s12.name)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `CacheEntryPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 15.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `CacheEntryPool`.
+    \item Добавьте атрибут класса `\_entries` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `ENTRY\_MAX` и инициализируйте его значением 15.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_entries) >= ENTRY\_MAX`, выбросьте `RuntimeError("Кэш-записи: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_entries`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_entries`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `entry\_key` и устанавливает `self.key = entry\_key`.
+    \item Создайте 15 экземпляров.
+    \item Попытайтесь создать 16-й - поймайте и выведите исключение.
+    \item Удалите семь экземпляров.
+    \item Создайте 16-й, 17-й, ..., 22-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 15 записей
+entries = [CacheEntryPool(f"Key{i}") for i in range(15)]
+
+# Попытка создать 16-ю
+try:
+    e16 = CacheEntryPool("Key16")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 7
+for i in range(7):
+    del entries[0]
+
+# Создаем 16-ю, 17-ю, ..., 22-ю - успешно
+new_entries = [CacheEntryPool(f"Key{i}") for i in range(16, 23)]
+for e in new_entries:
+    print("Создана запись с ключом:", e.key)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ConnectionHandlerPool` с использованием метода `\_\_new\_\_` для ограничения количества создаваемых экземпляров до 20.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ConnectionHandlerPool`.
+    \item Добавьте атрибут класса `\_handlers` и инициализируйте его пустым списком.
+    \item Добавьте атрибут класса `HANDLER\_LIMIT` и инициализируйте его значением 20.
+    \item Переопределите метод `\_\_new\_\_`. Если `len(\_handlers) >= HANDLER\_LIMIT`, выбросьте `RuntimeError("Обработчики соединений: лимит превышен!")`. Иначе, создайте экземпляр, добавьте в `\_handlers`, верните.
+    \item Переопределите метод `\_\_del\_\_`, чтобы он удалял `self` из `\_handlers`.
+    \item Переопределите метод `\_\_init\_\_`, который принимает `handler\_id` и устанавливает `self.id = handler\_id`.
+    \item Создайте 20 экземпляров.
+    \item Попытайтесь создать 21-й - поймайте и выведите исключение.
+    \item Удалите десять экземпляров.
+    \item Создайте 21-й, 22-й, ..., 30-й экземпляры - должно сработать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+# Создаем 20 обработчиков
+handlers = [ConnectionHandlerPool(f"H{i}") for i in range(20)]
+
+# Попытка создать 21-й
+try:
+    h21 = ConnectionHandlerPool("H21")
+except RuntimeError as e:
+    print("Ошибка:", e)
+
+# Удаляем 10
+for i in range(10):
+    del handlers[0]
+
+# Создаем 21-й, 22-й, ..., 30-й - успешно
+new_handlers = [ConnectionHandlerPool(f"H{i}") for i in range(21, 31)]
+for h in new_handlers:
+    print("Создан обработчик:", h.id)
+\end{lstlisting}
+
+\end{enumerate}

@@ -1,0 +1,54 @@
+\subsection{Семинар <<Структуры данных (закрепление) и \texttt{\_\_new\_\_}>>  
+(2 часа)}
+
+При создании подкласса неизменяемого встроенного типа данных 
+(например, \texttt{float}, \texttt{str}, \texttt{int}) 
+возникает проблема: значение объекта 
+устанавливается \textit{в момент его создания}, 
+и метод \texttt{\_\_init\_\_} вызывается уже 
+\textit{после} этого, когда изменить базовое значение невозможно.
+
+Кроме того, конструктор родительского неизменяемого типа 
+(например, \texttt{float.\_\_new\_\_()}) часто не принимает 
+дополнительные аргументы так же гибко, 
+как \texttt{object.\_\_new\_\_()}, что приводит к ошибкам.
+
+\textbf{Решение:} Использовать метод \texttt{\_\_new\_\_} для 
+инициализации объекта \textit{в момент его создания}.
+
+\begin{lstlisting}[language=Python, caption=Пример: Класс Distance с использованием \_\_new\_\_]
+class Distance(float):
+    def __new__(cls, value, unit):
+        # 1. Создаем новый экземпляр float с заданным значением
+        instance = super().__new__(cls, value)
+        # 2. Настраиваем экземпляр, добавляя изменяемый атрибут
+        instance.unit = unit
+        # 3. Возвращаем настроенный экземпляр
+        return instance
+
+# Использование:
+d = Distance(10.5, "km")
+print(d)      # 10.5
+print(d.unit) # km
+d.unit = "m"  # Атрибут unit изменяем!
+print(d.unit) # m
+\end{lstlisting}
+
+В этом примере \texttt{\_\_new\_\_} выполняет три шага:
+\begin{enumerate}
+    \item Создает новый экземпляр текущего класса \texttt{cls}, вызывая \texttt{super().\_\_new\_\_(cls, value)}. Это обращение к \texttt{float.\_\_new\_\_()}, который создает и инициализирует новый экземпляр \texttt{float}.
+    \item Настраивает новый экземпляр, добавляя к нему изменяемый атрибут \texttt{unit}.
+    \item Возвращает новый, настроенный экземпляр.
+\end{enumerate}
+
+Теперь класс \texttt{Distance} работает корректно, позволяя хранить единицы измерения в изменяемом атрибуте \texttt{unit}.
+
+\textbf{Замечение}: для упрщения мы не применяли свойство ООП 
+\textit{инкапсуляция} 
+в примере.
+
+\input{problem_singleton}
+\input{problem_restricted_new}
+\input{problem_capacity}
+\input{problem_things}
+\input{problem_finance}

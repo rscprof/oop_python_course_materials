@@ -1,0 +1,1256 @@
+\subsubsection{Задача 3 (именование)}
+
+\begin{enumerate}
+\item Написать программу на Python, которая создает класс `Vagon` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "vagon\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Vagon`.
+    \item Добавьте атрибут класса `numbers` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `number`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "vagon\_", выбросьте `ValueError("Имя должно начинаться с 'vagon\_'")`.
+    \item Извлеките номер вагона: `vagon\_number = name[6:]` (удаляем "vagon\_").
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте номер в словарь: `cls.numbers[vagon\_number] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"v{vagon\_number}", number)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой: `def \_\_init\_\_(self, *args, **kwargs): pass`.
+    \item Создайте объект `v1` с именем "vagon\_1" и номером 101.
+    \item Создайте объект `v2` с именем "vagon\_2" и номером 102.
+    \item Попытайтесь создать объект с именем "car\_3" — должно возникнуть исключение `ValueError`.
+    \item Выведите `v1.v1` и `v2.v2`.
+    \item Выведите `Vagon.numbers`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+v1 = Vagon("vagon_1", 101)
+v2 = Vagon("vagon_2", 102)
+
+try:
+    v3 = Vagon("car_3", 103)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("v1.v1:", v1.v1)  # 101
+print("v2.v2:", v2.v2)  # 102
+print("Vagon.numbers:", Vagon.numbers)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Room` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "room\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Room`.
+    \item Добавьте атрибут класса `registry` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `capacity`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "room\_", выбросьте `ValueError("Недопустимое имя комнаты")`.
+    \item Извлеките номер комнаты: `room\_num = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте номер в словарь: `cls.registry[room\_num] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"r{room\_num}", capacity)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `r1` с именем "room\_101" и вместимостью 50.
+    \item Создайте объект `r2` с именем "room\_202" и вместимостью 30.
+    \item Попытайтесь создать объект с именем "hall\_A" — поймайте исключение.
+    \item Выведите `r1.r101` и `r2.r202`.
+    \item Выведите `Room.registry`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+r1 = Room("room_101", 50)
+r2 = Room("room_202", 30)
+
+try:
+    r3 = Room("hall_A", 100)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("r1.r101:", r1.r101)  # 50
+print("r2.r202:", r2.r202)  # 30
+print("Room.registry:", Room.registry)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Device` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "dev\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Device`.
+    \item Добавьте атрибут класса `inventory` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `model`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "dev\_", выбросьте `ValueError("Неверный префикс устройства")`.
+    \item Извлеките ID устройства: `dev\_id = name[4:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.inventory[dev\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"d{dev\_id}", model)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `d1` с именем "dev\_001" и моделью "X1".
+    \item Создайте объект `d2` с именем "dev\_002" и моделью "Y2".
+    \item Попытайтесь создать объект с именем "sensor\_01" — поймайте исключение.
+    \item Выведите `d1.d001` и `d2.d002`.
+    \item Выведите `Device.inventory`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+d1 = Device("dev_001", "X1")
+d2 = Device("dev_002", "Y2")
+
+try:
+    d3 = Device("sensor_01", "Z3")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("d1.d001:", d1.d001)  # X1
+print("d2.d002:", d2.d002)  # Y2
+print("Device.inventory:", Device.inventory)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Book` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "book\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Book`.
+    \item Добавьте атрибут класса `catalog` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `author`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "book\_", выбросьте `ValueError("Книга должна иметь префикс 'book\_'")`.
+    \item Извлеките ID книги: `book\_id = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.catalog[book\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"b{book\_id}", author)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `b1` с именем "book\_001" и автором "Толстой".
+    \item Создайте объект `b2` с именем "book\_002" и автором "Достоевский".
+    \item Попытайтесь создать объект с именем "magazine\_01" — поймайте исключение.
+    \item Выведите `b1.b001` и `b2.b002`.
+    \item Выведите `Book.catalog`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+b1 = Book("book_001", "Толстой")
+b2 = Book("book_002", "Достоевский")
+
+try:
+    b3 = Book("magazine_01", "Пушкин")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("b1.b001:", b1.b001)  # Толстой
+print("b2.b002:", b2.b002)  # Достоевский
+print("Book.catalog:", Book.catalog)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `File` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "file\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `File`.
+    \item Добавьте атрибут класса `index` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `size`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "file\_", выбросьте `ValueError("Файл должен иметь префикс 'file\_'")`.
+    \item Извлеките ID файла: `file\_id = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.index[file\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"f{file\_id}", size)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `f1` с именем "file\_config" и размером 1024.
+    \item Создайте объект `f2` с именем "file\_data" и размером 2048.
+    \item Попытайтесь создать объект с именем "document\_1" — поймайте исключение.
+    \item Выведите `f1.fconfig` и `f2.fdata`.
+    \item Выведите `File.index`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+f1 = File("file_config", 1024)
+f2 = File("file_data", 2048)
+
+try:
+    f3 = File("document_1", 512)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("f1.fconfig:", f1.fconfig)  # 1024
+print("f2.fdata:", f2.fdata)      # 2048
+print("File.index:", File.index)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `User` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "user\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `User`.
+    \item Добавьте атрибут класса `directory` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `email`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "user\_", выбросьте `ValueError("Пользователь должен иметь префикс 'user\_'")`.
+    \item Извлеките ID пользователя: `user\_id = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.directory[user\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"u{user\_id}", email)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `u1` с именем "user\_alice" и email "alice@example.com".
+    \item Создайте объект `u2` с именем "user\_bob" и email "bob@example.com".
+    \item Попытайтесь создать объект с именем "admin\_john" — поймайте исключение.
+    \item Выведите `u1.ualice` и `u2.ubob`.
+    \item Выведите `User.directory`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+u1 = User("user_alice", "alice@example.com")
+u2 = User("user_bob", "bob@example.com")
+
+try:
+    u3 = User("admin_john", "john@example.com")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("u1.ualice:", u1.ualice)  # alice@example.com
+print("u2.ubob:", u2.ubob)      # bob@example.com
+print("User.directory:", User.directory)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Product` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "prod\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Product`.
+    \item Добавьте атрибут класса `warehouse` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `price`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "prod\_", выбросьте `ValueError("Продукт должен иметь префикс 'prod\_'")`.
+    \item Извлеките ID продукта: `prod\_id = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.warehouse[prod\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"p{prod\_id}", price)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `p1` с именем "prod\_laptop" и ценой 999.
+    \item Создайте объект `p2` с именем "prod\_mouse" и ценой 25.
+    \item Попытайтесь создать объект с именем "item\_keyboard" — поймайте исключение.
+    \item Выведите `p1.plaptop` и `p2.pmouse`.
+    \item Выведите `Product.warehouse`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+p1 = Product("prod_laptop", 999)
+p2 = Product("prod_mouse", 25)
+
+try:
+    p3 = Product("item_keyboard", 50)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("p1.plaptop:", p1.plaptop)  # 999
+print("p2.pmouse:", p2.pmouse)    # 25
+print("Product.warehouse:", Product.warehouse)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Employee` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "emp\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Employee`.
+    \item Добавьте атрибут класса `staff` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `department`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "emp\_", выбросьте `ValueError("Сотрудник должен иметь префикс 'emp\_'")`.
+    \item Извлеките ID сотрудника: `emp\_id = name[4:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.staff[emp\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"e{emp\_id}", department)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `e1` с именем "emp\_001" и отделом "IT".
+    \item Создайте объект `e2` с именем "emp\_002" и отделом "HR".
+    \item Попытайтесь создать объект с именем "worker\_003" — поймайте исключение.
+    \item Выведите `e1.e001` и `e2.e002`.
+    \item Выведите `Employee.staff`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+e1 = Employee("emp_001", "IT")
+e2 = Employee("emp_002", "HR")
+
+try:
+    e3 = Employee("worker_003", "Sales")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("e1.e001:", e1.e001)  # IT
+print("e2.e002:", e2.e002)  # HR
+print("Employee.staff:", Employee.staff)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Order` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "order\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Order`.
+    \item Добавьте атрибут класса `ledger` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `total`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "order\_", выбросьте `ValueError("Заказ должен иметь префикс 'order\_'")`.
+    \item Извлеките ID заказа: `order\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.ledger[order\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"o{order\_id}", total)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `o1` с именем "order\_1001" и суммой 150.0.
+    \item Создайте объект `o2` с именем "order\_1002" и суммой 89.99.
+    \item Попытайтесь создать объект с именем "purchase\_1003" — поймайте исключение.
+    \item Выведите `o1.o1001` и `o2.o1002`.
+    \item Выведите `Order.ledger`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+o1 = Order("order_1001", 150.0)
+o2 = Order("order_1002", 89.99)
+
+try:
+    o3 = Order("purchase_1003", 200.0)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("o1.o1001:", o1.o1001)  # 150.0
+print("o2.o1002:", o2.o1002)  # 89.99
+print("Order.ledger:", Order.ledger)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Ticket` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "ticket\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Ticket`.
+    \item Добавьте атрибут класса `database` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `priority`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "ticket\_", выбросьте `ValueError("Тикет должен иметь префикс 'ticket\_'")`.
+    \item Извлеките ID тикета: `ticket\_id = name[7:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.database[ticket\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"t{ticket\_id}", priority)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `t1` с именем "ticket\_001" и приоритетом "High".
+    \item Создайте объект `t2` с именем "ticket\_002" и приоритетом "Low".
+    \item Попытайтесь создать объект с именем "issue\_003" — поймайте исключение.
+    \item Выведите `t1.t001` и `t2.t002`.
+    \item Выведите `Ticket.database`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+t1 = Ticket("ticket_001", "High")
+t2 = Ticket("ticket_002", "Low")
+
+try:
+    t3 = Ticket("issue_003", "Medium")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("t1.t001:", t1.t001)  # High
+print("t2.t002:", t2.t002)  # Low
+print("Ticket.database:", Ticket.database)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Project` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "proj\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Project`.
+    \item Добавьте атрибут класса `portfolio` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `status`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "proj\_", выбросьте `ValueError("Проект должен иметь префикс 'proj\_'")`.
+    \item Извлеките ID проекта: `proj\_id = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.portfolio[proj\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"pr{proj\_id}", status)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `pr1` с именем "proj\_alpha" и статусом "Active".
+    \item Создайте объект `pr2` с именем "proj\_beta" и статусом "Inactive".
+    \item Попытайтесь создать объект с именем "task\_gamma" — поймайте исключение.
+    \item Выведите `pr1.pralpha` и `pr2.prbeta`.
+    \item Выведите `Project.portfolio`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+pr1 = Project("proj_alpha", "Active")
+pr2 = Project("proj_beta", "Inactive")
+
+try:
+    pr3 = Project("task_gamma", "Pending")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("pr1.pralpha:", pr1.pralpha)  # Active
+print("pr2.prbeta:", pr2.prbeta)    # Inactive
+print("Project.portfolio:", Project.portfolio)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Sensor` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "sensor\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Sensor`.
+    \item Добавьте атрибут класса `registry` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `type`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "sensor\_", выбросьте `ValueError("Сенсор должен иметь префикс 'sensor\_'")`.
+    \item Извлеките ID сенсора: `sensor\_id = name[7:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.registry[sensor\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"s{sensor\_id}", type)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `s1` с именем "sensor\_temp" и типом "Temperature".
+    \item Создайте объект `s2` с именем "sensor\_humid" и типом "Humidity".
+    \item Попытайтесь создать объект с именем "device\_press" — поймайте исключение.
+    \item Выведите `s1.stemp` и `s2.shumid`.
+    \item Выведите `Sensor.registry`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+s1 = Sensor("sensor_temp", "Temperature")
+s2 = Sensor("sensor_humid", "Humidity")
+
+try:
+    s3 = Sensor("device_press", "Pressure")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("s1.stemp:", s1.stemp)    # Temperature
+print("s2.shumid:", s2.shumid)  # Humidity
+print("Sensor.registry:", Sensor.registry)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Vehicle` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "veh\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Vehicle`.
+    \item Добавьте атрибут класса `fleet` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `model`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "veh\_", выбросьте `ValueError("Транспортное средство должно иметь префикс 'veh\_'")`.
+    \item Извлеките ID транспорта: `veh\_id = name[4:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.fleet[veh\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"v{veh\_id}", model)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `v1` с именем "veh\_car1" и моделью "Sedan".
+    \item Создайте объект `v2` с именем "veh\_truck1" и моделью "Pickup".
+    \item Попытайтесь создать объект с именем "bike\_01" — поймайте исключение.
+    \item Выведите `v1.vcar1` и `v2.vtruck1`.
+    \item Выведите `Vehicle.fleet`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+v1 = Vehicle("veh_car1", "Sedan")
+v2 = Vehicle("veh_truck1", "Pickup")
+
+try:
+    v3 = Vehicle("bike_01", "Mountain")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("v1.vcar1:", v1.vcar1)    # Sedan
+print("v2.vtruck1:", v2.vtruck1) # Pickup
+print("Vehicle.fleet:", Vehicle.fleet)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Animal` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "animal\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Animal`.
+    \item Добавьте атрибут класса `zoo` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `species`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "animal\_", выбросьте `ValueError("Животное должно иметь префикс 'animal\_'")`.
+    \item Извлеките ID животного: `animal\_id = name[7:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.zoo[animal\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"a{animal\_id}", species)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `a1` с именем "animal\_lion" и видом "Panthera leo".
+    \item Создайте объект `a2` с именем "animal\_elephant" и видом "Loxodonta".
+    \item Попытайтесь создать объект с именем "creature\_tiger" — поймайте исключение.
+    \item Выведите `a1.alion` и `a2.aelephant`.
+    \item Выведите `Animal.zoo`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+a1 = Animal("animal_lion", "Panthera leo")
+a2 = Animal("animal_elephant", "Loxodonta")
+
+try:
+    a3 = Animal("creature_tiger", "Panthera tigris")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("a1.alion:", a1.alion)        # Panthera leo
+print("a2.aelephant:", a2.aelephant) # Loxodonta
+print("Animal.zoo:", Animal.zoo)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Plant` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "plant\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Plant`.
+    \item Добавьте атрибут класса `greenhouse` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `family`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "plant\_", выбросьте `ValueError("Растение должно иметь префикс 'plant\_'")`.
+    \item Извлеките ID растения: `plant\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.greenhouse[plant\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"pl{plant\_id}", family)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `pl1` с именем "plant\_rose" и семейством "Rosaceae".
+    \item Создайте объект `pl2` с именем "plant\_oak" и семейством "Fagaceae".
+    \item Попытайтесь создать объект с именем "tree\_pine" — поймайте исключение.
+    \item Выведите `pl1.plrose` и `pl2.ploak`.
+    \item Выведите `Plant.greenhouse`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+pl1 = Plant("plant_rose", "Rosaceae")
+pl2 = Plant("plant_oak", "Fagaceae")
+
+try:
+    pl3 = Plant("tree_pine", "Pinaceae")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("pl1.plrose:", pl1.plrose)  # Rosaceae
+print("pl2.ploak:", pl2.ploak)    # Fagaceae
+print("Plant.greenhouse:", Plant.greenhouse)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Planet` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "planet\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Planet`.
+    \item Добавьте атрибут класса `solar\_system` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `type`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "planet\_", выбросьте `ValueError("Планета должна иметь префикс 'planet\_'")`.
+    \item Извлеките ID планеты: `planet\_id = name[7:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.solar\_system[planet\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"pn{planet\_id}", type)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `pn1` с именем "planet\_earth" и типом "Terrestrial".
+    \item Создайте объект `pn2` с именем "planet\_jupiter" и типом "Gas Giant".
+    \item Попытайтесь создать объект с именем "star\_sun" — поймайте исключение.
+    \item Выведите `pn1.pnearth` и `pn2.pnjupiter`.
+    \item Выведите `Planet.solar\_system`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+pn1 = Planet("planet_earth", "Terrestrial")
+pn2 = Planet("planet_jupiter", "Gas Giant")
+
+try:
+    pn3 = Planet("star_sun", "Star")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("pn1.pnearth:", pn1.pnearth)    # Terrestrial
+print("pn2.pnjupiter:", pn2.pnjupiter) # Gas Giant
+print("Planet.solar_system:", Planet.solar_system)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Star` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "star\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Star`.
+    \item Добавьте атрибут класса `galaxy` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `class\_type`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "star\_", выбросьте `ValueError("Звезда должна иметь префикс 'star\_'")`.
+    \item Извлеките ID звезды: `star\_id = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.galaxy[star\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"st{star\_id}", class\_type)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `st1` с именем "star\_sol" и классом "G2V".
+    \item Создайте объект `st2` с именем "star\_proxima" и классом "M5.5V".
+    \item Попытайтесь создать объект с именем "nova\_1" — поймайте исключение.
+    \item Выведите `st1.stsol` и `st2.stproxima`.
+    \item Выведите `Star.galaxy`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+st1 = Star("star_sol", "G2V")
+st2 = Star("star_proxima", "M5.5V")
+
+try:
+    st3 = Star("nova_1", "Variable")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("st1.stsol:", st1.stsol)      # G2V
+print("st2.stproxima:", st2.stproxima) # M5.5V
+print("Star.galaxy:", Star.galaxy)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Galaxy` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "galaxy\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Galaxy`.
+    \item Добавьте атрибут класса `universe` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `type`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "galaxy\_", выбросьте `ValueError("Галактика должна иметь префикс 'galaxy\_'")`.
+    \item Извлеките ID галактики: `galaxy\_id = name[7:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.universe[galaxy\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"g{galaxy\_id}", type)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `g1` с именем "galaxy\_milkyway" и типом "Spiral".
+    \item Создайте объект `g2` с именем "galaxy\_andromeda" и типом "Spiral".
+    \item Попытайтесь создать объект с именем "cluster\_virgo" — поймайте исключение.
+    \item Выведите `g1.gmilkyway` и `g2.gandromeda`.
+    \item Выведите `Galaxy.universe`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+g1 = Galaxy("galaxy_milkyway", "Spiral")
+g2 = Galaxy("galaxy_andromeda", "Spiral")
+
+try:
+    g3 = Galaxy("cluster_virgo", "Cluster")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("g1.gmilkyway:", g1.gmilkyway)    # Spiral
+print("g2.gandromeda:", g2.gandromeda)  # Spiral
+print("Galaxy.universe:", Galaxy.universe)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Constellation` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "const\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Constellation`.
+    \item Добавьте атрибут класса `sky\_map` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `stars`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "const\_", выбросьте `ValueError("Созвездие должно иметь префикс 'const\_'")`.
+    \item Извлеките ID созвездия: `const\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.sky\_map[const\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"c{const\_id}", stars)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `c1` с именем "const\_orion" и количеством звезд 81.
+    \item Создайте объект `c2` с именем "const\_ursa" и количеством звезд 20.
+    \item Попытайтесь создать объект с именем "asterism\_bigdipper" — поймайте исключение.
+    \item Выведите `c1.corion` и `c2.cursa`.
+    \item Выведите `Constellation.sky\_map`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+c1 = Constellation("const_orion", 81)
+c2 = Constellation("const_ursa", 20)
+
+try:
+    c3 = Constellation("asterism_bigdipper", 7)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("c1.corion:", c1.corion)  # 81
+print("c2.cursa:", c2.cursa)    # 20
+print("Constellation.sky_map:", Constellation.sky_map)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Asteroid` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "ast\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Asteroid`.
+    \item Добавьте атрибут класса `belt` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `diameter`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "ast\_", выбросьте `ValueError("Астероид должен иметь префикс 'ast\_'")`.
+    \item Извлеките ID астероида: `ast\_id = name[4:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.belt[ast\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"a{ast\_id}", diameter)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `a1` с именем "ast\_ceres" и диаметром 939.
+    \item Создайте объект `a2` с именем "ast\_vesta" и диаметром 525.
+    \item Попытайтесь создать объект с именем "meteor\_id8" — поймайте исключение.
+    \item Выведите `a1.aceres` и `a2.avesta`.
+    \item Выведите `Asteroid.belt`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+a1 = Asteroid("ast_ceres", 939)
+a2 = Asteroid("ast_vesta", 525)
+
+try:
+    a3 = Asteroid("meteor_id8", 10)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("a1.aceres:", a1.aceres)  # 939
+print("a2.avesta:", a2.avesta)  # 525
+print("Asteroid.belt:", Asteroid.belt)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Comet` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "comet\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Comet`.
+    \item Добавьте атрибут класса `orbits` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `period`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "comet\_", выбросьте `ValueError("Комета должна иметь префикс 'comet\_'")`.
+    \item Извлеките ID кометы: `comet\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.orbits[comet\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"cm{comet\_id}", period)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `cm1` с именем "comet\_halley" и периодом 76.
+    \item Создайте объект `cm2` с именем "comet\_encke" и периодом 3.3.
+    \item Попытайтесь создать объект с именем "meteor\_shower" — поймайте исключение.
+    \item Выведите `cm1.cmhalley` и `cm2.cmencke`.
+    \item Выведите `Comet.orbits`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+cm1 = Comet("comet_halley", 76)
+cm2 = Comet("comet_encke", 3.3)
+
+try:
+    cm3 = Comet("meteor_shower", 0.1)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("cm1.cmhalley:", cm1.cmhalley)  # 76
+print("cm2.cmencke:", cm2.cmencke)    # 3.3
+print("Comet.orbits:", Comet.orbits)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Satellite` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "sat\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Satellite`.
+    \item Добавьте атрибут класса `orbiters` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `planet`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "sat\_", выбросьте `ValueError("Спутник должен иметь префикс 'sat\_'")`.
+    \item Извлеките ID спутника: `sat\_id = name[4:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.orbiters[sat\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"s{sat\_id}", planet)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `s1` с именем "sat\_moon" и планетой "Earth".
+    \item Создайте объект `s2` с именем "sat\_phobos" и планетой "Mars".
+    \item Попытайтесь создать объект с именем "rover\_curiosity" — поймайте исключение.
+    \item Выведите `s1.smoon` и `s2.sphobos`.
+    \item Выведите `Satellite.orbiters`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+s1 = Satellite("sat_moon", "Earth")
+s2 = Satellite("sat_phobos", "Mars")
+
+try:
+    s3 = Satellite("rover_curiosity", "Mars")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("s1.smoon:", s1.smoon)    # Earth
+print("s2.sphobos:", s2.sphobos) # Mars
+print("Satellite.orbiters:", Satellite.orbiters)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Rocket` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "rocket\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Rocket`.
+    \item Добавьте атрибут класса `launchpad` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `payload`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "rocket\_", выбросьте `ValueError("Ракета должна иметь префикс 'rocket\_'")`.
+    \item Извлеките ID ракеты: `rocket\_id = name[7:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.launchpad[rocket\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"r{rocket\_id}", payload)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `r1` с именем "rocket\_falcon9" и полезной нагрузкой "Starlink".
+    \item Создайте объект `r2` с именем "rocket\_atlas" и полезной нагрузкой "GPS".
+    \item Попытайтесь создать объект с именем "drone\_delivery" — поймайте исключение.
+    \item Выведите `r1.rfalcon9` и `r2.ratlas`.
+    \item Выведите `Rocket.launchpad`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+r1 = Rocket("rocket_falcon9", "Starlink")
+r2 = Rocket("rocket_atlas", "GPS")
+
+try:
+    r3 = Rocket("drone_delivery", "Package")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("r1.rfalcon9:", r1.rfalcon9)  # Starlink
+print("r2.ratlas:", r2.ratlas)      # GPS
+print("Rocket.launchpad:", Rocket.launchpad)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Drone` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "drone\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Drone`.
+    \item Добавьте атрибут класса `fleet` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `range`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "drone\_", выбросьте `ValueError("Дрон должен иметь префикс 'drone\_'")`.
+    \item Извлеките ID дрона: `drone\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.fleet[drone\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"d{drone\_id}", range)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `d1` с именем "drone\_x1" и дальностью 5.
+    \item Создайте объект `d2` с именем "drone\_x2" и дальностью 10.
+    \item Попытайтесь создать объект с именем "robot\_r1" — поймайте исключение.
+    \item Выведите `d1.dx1` и `d2.dx2`.
+    \item Выведите `Drone.fleet`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+d1 = Drone("drone_x1", 5)
+d2 = Drone("drone_x2", 10)
+
+try:
+    d3 = Drone("robot_r1", 2)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("d1.dx1:", d1.dx1)  # 5
+print("d2.dx2:", d2.dx2)  # 10
+print("Drone.fleet:", Drone.fleet)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Robot` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "robot\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Robot`.
+    \item Добавьте атрибут класса `factory` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `function`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "robot\_", выбросьте `ValueError("Робот должен иметь префикс 'robot\_'")`.
+    \item Извлеките ID робота: `robot\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.factory[robot\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"rb{robot\_id}", function)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `rb1` с именем "robot\_arm" и функцией "Assembly".
+    \item Создайте объект `rb2` с именем "robot\_cleaner" и функцией "Cleaning".
+    \item Попытайтесь создать объект с именем "android\_unit" — поймайте исключение.
+    \item Выведите `rb1.rbarm` и `rb2.rbcleaner`.
+    \item Выведите `Robot.factory`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+rb1 = Robot("robot_arm", "Assembly")
+rb2 = Robot("robot_cleaner", "Cleaning")
+
+try:
+    rb3 = Robot("android_unit", "General")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("rb1.rbarm:", rb1.rbarm)      # Assembly
+print("rb2.rbcleaner:", rb2.rbcleaner) # Cleaning
+print("Robot.factory:", Robot.factory)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `AI` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "ai\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `AI`.
+    \item Добавьте атрибут класса `network` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `capability`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "ai\_", выбросьте `ValueError("ИИ должен иметь префикс 'ai\_'")`.
+    \item Извлеките ID ИИ: `ai\_id = name[3:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.network[ai\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"a{ai\_id}", capability)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `a1` с именем "ai\_alpha" и возможностью "NLP".
+    \item Создайте объект `a2` с именем "ai\_beta" и возможностью "CV".
+    \item Попытайтесь создать объект с именем "ml\_model" — поймайте исключение.
+    \item Выведите `a1.aalpha` и `a2.abeta`.
+    \item Выведите `AI.network`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+a1 = AI("ai_alpha", "NLP")
+a2 = AI("ai_beta", "CV")
+
+try:
+    a3 = AI("ml_model", "Regression")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("a1.aalpha:", a1.aalpha)  # NLP
+print("a2.abeta:", a2.abeta)    # CV
+print("AI.network:", AI.network)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `MLModel` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "model\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `MLModel`.
+    \item Добавьте атрибут класса `repository` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `algorithm`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "model\_", выбросьте `ValueError("Модель должна иметь префикс 'model\_'")`.
+    \item Извлеките ID модели: `model\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.repository[model\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"m{model\_id}", algorithm)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `m1` с именем "model\_logreg" и алгоритмом "Logistic Regression".
+    \item Создайте объект `m2` с именем "model\_svm" и алгоритмом "Support Vector Machine".
+    \item Попытайтесь создать объект с именем "algo\_randomforest" — поймайте исключение.
+    \item Выведите `m1.mlogreg` и `m2.msvm`.
+    \item Выведите `MLModel.repository`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+m1 = MLModel("model_logreg", "Logistic Regression")
+m2 = MLModel("model_svm", "Support Vector Machine")
+
+try:
+    m3 = MLModel("algo_randomforest", "Random Forest")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("m1.mlogreg:", m1.mlogreg)  # Logistic Regression
+print("m2.msvm:", m2.msvm)        # Support Vector Machine
+print("MLModel.repository:", MLModel.repository)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Dataset` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "dataset\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Dataset`.
+    \item Добавьте атрибут класса `catalog` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `size`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "dataset\_", выбросьте `ValueError("Набор данных должен иметь префикс 'dataset\_'")`.
+    \item Извлеките ID набора данных: `dataset\_id = name[8:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.catalog[dataset\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"ds{dataset\_id}", size)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `ds1` с именем "dataset\_train" и размером 10000.
+    \item Создайте объект `ds2` с именем "dataset\_test" и размером 2000.
+    \item Попытайтесь создать объект с именем "data\_validation" — поймайте исключение.
+    \item Выведите `ds1.dstrain` и `ds2.dstest`.
+    \item Выведите `Dataset.catalog`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+ds1 = Dataset("dataset_train", 10000)
+ds2 = Dataset("dataset_test", 2000)
+
+try:
+    ds3 = Dataset("data_validation", 2000)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("ds1.dstrain:", ds1.dstrain)  # 10000
+print("ds2.dstest:", ds2.dstest)    # 2000
+print("Dataset.catalog:", Dataset.catalog)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Feature` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "feat\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Feature`.
+    \item Добавьте атрибут класса `registry` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `type`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "feat\_", выбросьте `ValueError("Признак должен иметь префикс 'feat\_'")`.
+    \item Извлеките ID признака: `feat\_id = name[5:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.registry[feat\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"f{feat\_id}", type)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `f1` с именем "feat\_age" и типом "Numeric".
+    \item Создайте объект `f2` с именем "feat\_gender" и типом "Categorical".
+    \item Попытайтесь создать объект с именем "attr\_income" — поймайте исключение.
+    \item Выведите `f1.fage` и `f2.fgender`.
+    \item Выведите `Feature.registry`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+f1 = Feature("feat_age", "Numeric")
+f2 = Feature("feat_gender", "Categorical")
+
+try:
+    f3 = Feature("attr_income", "Numeric")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("f1.fage:", f1.fage)      # Numeric
+print("f2.fgender:", f2.fgender) # Categorical
+print("Feature.registry:", Feature.registry)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Label` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "label\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Label`.
+    \item Добавьте атрибут класса `index` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `class\_name`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "label\_", выбросьте `ValueError("Метка должна иметь префикс 'label\_'")`.
+    \item Извлеките ID метки: `label\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.index[label\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"l{label\_id}", class\_name)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `l1` с именем "label\_cat" и классом "Animal".
+    \item Создайте объект `l2` с именем "label\_car" и классом "Vehicle".
+    \item Попытайтесь создать объект с именем "tag\_dog" — поймайте исключение.
+    \item Выведите `l1.lcat` и `l2.lcar`.
+    \item Выведите `Label.index`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+l1 = Label("label_cat", "Animal")
+l2 = Label("label_car", "Vehicle")
+
+try:
+    l3 = Label("tag_dog", "Animal")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("l1.lcat:", l1.lcat)  # Animal
+print("l2.lcar:", l2.lcar)  # Vehicle
+print("Label.index:", Label.index)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Layer` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "layer\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Layer`.
+    \item Добавьте атрибут класса `stack` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `neurons`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "layer\_", выбросьте `ValueError("Слой должен иметь префикс 'layer\_'")`.
+    \item Извлеките ID слоя: `layer\_id = name[6:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.stack[layer\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"ly{layer\_id}", neurons)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `ly1` с именем "layer\_input" и нейронами 784.
+    \item Создайте объект `ly2` с именем "layer\_hidden" и нейронами 128.
+    \item Попытайтесь создать объект с именем "unit\_output" — поймайте исключение.
+    \item Выведите `ly1.lyinput` и `ly2.lyhidden`.
+    \item Выведите `Layer.stack`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+ly1 = Layer("layer_input", 784)
+ly2 = Layer("layer_hidden", 128)
+
+try:
+    ly3 = Layer("unit_output", 10)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("ly1.lyinput:", ly1.lyinput)    # 784
+print("ly2.lyhidden:", ly2.lyhidden)  # 128
+print("Layer.stack:", Layer.stack)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Neuron` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "neuron\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Neuron`.
+    \item Добавьте атрибут класса `brain` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `activation`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "neuron\_", выбросьте `ValueError("Нейрон должен иметь префикс 'neuron\_'")`.
+    \item Извлеките ID нейрона: `neuron\_id = name[7:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.brain[neuron\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"n{neuron\_id}", activation)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `n1` с именем "neuron\_1" и активацией "ReLU".
+    \item Создайте объект `n2` с именем "neuron\_2" и активацией "Sigmoid".
+    \item Попытайтесь создать объект с именем "cell\_3" — поймайте исключение.
+    \item Выведите `n1.n1` и `n2.n2`.
+    \item Выведите `Neuron.brain`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+n1 = Neuron("neuron_1", "ReLU")
+n2 = Neuron("neuron_2", "Sigmoid")
+
+try:
+    n3 = Neuron("cell_3", "Tanh")
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("n1.n1:", n1.n1)  # ReLU
+print("n2.n2:", n2.n2)  # Sigmoid
+print("Neuron.brain:", Neuron.brain)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Synapse` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "syn\_". Метод `\_\_init\_\_` должен быть пустым.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Synapse`.
+    \item Добавьте атрибут класса `connections` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `weight`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "syn\_", выбросьте `ValueError("Синапс должен иметь префикс 'syn\_'")`.
+    \item Извлеките ID синапса: `syn\_id = name[4:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.connections[syn\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"s{syn\_id}", weight)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `s1` с именем "syn\_a1b1" и весом 0.5.
+    \item Создайте объект `s2` с именем "syn\_a2b2" и весом -0.3.
+    \item Попытайтесь создать объект с именем "link\_x1y1" — поймайте исключение.
+    \item Выведите `s1.sa1b1` и `s2.sa2b2`.
+    \item Выведите `Synapse.connections`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+s1 = Synapse("syn_a1b1", 0.5)
+s2 = Synapse("syn_a2b2", -0.3)
+
+try:
+    s3 = Synapse("link_x1y1", 0.8)
+except ValueError as e:
+    print("Ошибка:", e)
+
+print("s1.sa1b1:", s1.sa1b1)  # 0.5
+print("s2.sa2b2:", s2.sa2b2)  # -0.3
+print("Synapse.connections:", Synapse.connections)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Container` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "container\_". Метод `\_\_init\_\_` должен быть пустым.
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Container`.
+    \item Добавьте атрибут класса `depot` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `volume`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "container\_", выбросьте `ValueError("Контейнер должен иметь префикс 'container\_'")`.
+    \item Извлеките ID контейнера: `container\_id = name[9:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.depot[container\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"cn{container\_id}", volume)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `cn1` с именем "container\_20ft" и объемом 33.
+    \item Создайте объект `cn2` с именем "container\_40ft" и объемом 67.
+    \item Попытайтесь создать объект с именем "box\_small" — поймайте исключение.
+    \item Выведите `cn1.cn20ft` и `cn2.cn40ft`.
+    \item Выведите `Container.depot`.
+\end{enumerate}
+Пример использования:
+\begin{lstlisting}[language=Python]
+cn1 = Container("container_20ft", 33)
+cn2 = Container("container_40ft", 67)
+try:
+    cn3 = Container("box_small", 1)
+except ValueError as e:
+    print("Ошибка:", e)
+print("cn1.cn20ft:", cn1.cn20ft)  # 33
+print("cn2.cn40ft:", cn2.cn40ft)  # 67
+print("Container.depot:", Container.depot)
+\end{lstlisting}
+
+
+\item Написать программу на Python, которая создает класс `Module` с использованием метода `\_\_new\_\_` для контроля именования. Имена должны начинаться с "mod\_". Метод `\_\_init\_\_` должен быть пустым.
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Module`.
+    \item Добавьте атрибут класса `system` и инициализируйте его пустым словарем.
+    \item Переопределите метод `\_\_new\_\_`, принимающий `cls`, `name`, `version`.
+    \item В `\_\_new\_\_`: если `name` не начинается с "mod\_", выбросьте `ValueError("Модуль должен иметь префикс 'mod\_'")`.
+    \item Извлеките ID модуля: `mod\_id = name[4:]`.
+    \item Создайте экземпляр: `instance = super().\_\_new\_\_(cls)`.
+    \item Добавьте ID в словарь: `cls.system[mod\_id] = instance`.
+    \item Установите атрибут экземпляра: `setattr(instance, f"md{mod\_id}", version)`.
+    \item Верните `instance`.
+    \item Переопределите метод `\_\_init\_\_` как пустой.
+    \item Создайте объект `md1` с именем "mod\_auth" и версией "1.2.0".
+    \item Создайте объект `md2` с именем "mod\_payment" и версией "3.0.1".
+    \item Попытайтесь создать объект с именем "lib\_utils" — поймайте исключение.
+    \item Выведите `md1.mdauth` и `md2.mdpayment`.
+    \item Выведите `Module.system`.
+\end{enumerate}
+Пример использования:
+\begin{lstlisting}[language=Python]
+md1 = Module("mod_auth", "1.2.0")
+md2 = Module("mod_payment", "3.0.1")
+try:
+    md3 = Module("lib_utils", "0.9.5")
+except ValueError as e:
+    print("Ошибка:", e)
+print("md1.mdauth:", md1.mdauth)    # 1.2.0
+print("md2.mdpayment:", md2.mdpayment) # 3.0.1
+print("Module.system:", Module.system)
+\end{lstlisting}
+\end{enumerate}

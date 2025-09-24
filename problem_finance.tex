@@ -1,0 +1,1037 @@
+\subsubsection{Задача 5}
+
+\begin{enumerate}
+\item[1] Написать программу на Python, которая создает класс \texttt{Bank}, представляющий банк. Класс должен содержать методы для создания учетных записей клиентов, внесения депозитов, снятия средств и проверки баланса. Программа также должна создавать экземпляр класса \texttt{Bank}, создавать учетные записи клиентов, вносить депозиты, снимать средства и проверять баланс.
+
+\begin{itemize}
+    \item Создайте класс \texttt{Bank} с методом \texttt{\_\_init\_\_}, который создает пустой словарь клиентов.
+    \item Создайте метод \texttt{create\_account}, который принимает номер счета и начальный баланс в качестве аргументов. Метод должен проверять, существует ли уже номер счета в словаре клиентов. Если это так, он должен выводить сообщение об ошибке. В противном случае, он должен добавить номер счета в словарь клиентов с начальным балансом в качестве значения.
+    \item Создайте метод \texttt{make\_deposit}, который принимает номер счета и сумму в качестве аргументов. Метод должен проверять, существует ли номер счета в словаре клиентов. Если это так, он должен добавить сумму к текущему балансу счета. Если номер счета не существует, он должен вывести сообщение об ошибке.
+    \item Создайте метод \texttt{make\_withdrawal}, который принимает номер счета и сумму в качестве аргументов. Метод должен проверять, существует ли номер счета в словаре клиентов. Если это так, он должен проверить, достаточно ли средств на счете для снятия. Если это так, он должен вычесть сумму из текущего баланса счета. В противном случае, он должен вывести сообщение об ошибке, указывающее на недостаточность средств. Если номер счета не существует, он должен вывести сообщение об ошибке.
+    \item Создайте метод \texttt{check\_balance}, который принимает номер счета в качестве аргумента. Метод должен проверять, существует ли номер счета в словаре клиентов. Если это так, он должен извлечь и вывести текущий баланс счета. Если номер счета не существует, он должен вывести сообщение об ошибке.
+    \item Создайте экземпляр класса \texttt{Bank} и создайте учетные записи клиентов.
+    \item Вносите депозиты на счета клиентов.
+    \item Снимайте средства со счетов клиентов.
+    \item Проверяйте баланс счетов клиентов.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+bank = Bank()
+acno1 = "SB-123"
+damt1 = 1000
+print("Новый номер счета: ", acno1, " Внесенная сумма: ", damt1)
+bank.create_account(acno1, damt1)
+acno2 = "SB-124"
+damt2 = 1500
+print("Новый номер счета: ", acno2, " Внесенная сумма: ", damt2)
+bank.create_account(acno2, damt2)
+wamt1 = 600
+print("\nДепозит средств: ", wamt1, " на счет № ", acno1)
+bank.make_deposit(acno1, wamt1)
+wamt2 = 350
+print("Вывод средств: ", wamt2, " со счета № ", acno2)
+bank.make_withdrawal(acno2, wamt2)
+print("Номер расчетного счета: ", acno1)
+bank.check_balance(acno1)
+print("Номер расчетного счета: ", acno2)
+bank.check_balance(acno2)
+wamt3 = 1200
+print("Вывод средств: ", wamt3, " со счета № ", acno2)
+bank.make_withdrawal(acno2, wamt3)
+acno3 = "SB-134"
+print("Проверка баланса счета № ", acno3)
+bank.check_balance(acno3)  # Non-existent account number
+\end{verbatim}
+
+\item[2] Написать программу на Python, которая создает класс \texttt{CreditUnion}, представляющий кредитный союз. Класс должен содержать методы для открытия счетов участников, пополнения баланса, снятия денег и запроса текущего состояния счета. Программа также должна создавать экземпляр класса \texttt{CreditUnion}, открывать счета, выполнять операции и проверять балансы.
+
+\begin{itemize}
+    \item Создайте класс \texttt{CreditUnion} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь счетов.
+    \item Создайте метод \texttt{open\_account}, принимающий идентификатор счета и стартовый остаток. Если счет уже существует, выведите ошибку; иначе — добавьте запись.
+    \item Создайте метод \texttt{deposit}, принимающий идентификатор счета и сумму. Если счет существует, увеличьте баланс; иначе — сообщите об ошибке.
+    \item Создайте метод \texttt{withdraw}, принимающий идентификатор счета и сумму. Если счет существует и средств достаточно, уменьшите баланс; иначе — выведите соответствующую ошибку.
+    \item Создайте метод \texttt{get\_balance}, принимающий идентификатор счета. Если счет существует, выведите его баланс; иначе — сообщите об ошибке.
+    \item Создайте экземпляр \texttt{CreditUnion}.
+    \item Откройте несколько счетов.
+    \item Выполните пополнения.
+    \item Выполните снятия.
+    \item Проверьте балансы.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+cu = CreditUnion()
+cu.open_account("CU-001", 2000)
+cu.open_account("CU-002", 500)
+cu.deposit("CU-001", 300)
+cu.withdraw("CU-002", 200)
+cu.get_balance("CU-001")
+cu.get_balance("CU-002")
+cu.withdraw("CU-002", 400)  # недостаточно средств
+cu.get_balance("CU-999")     # несуществующий счет
+\end{verbatim}
+
+\item[3] Написать программу на Python, которая создает класс \texttt{SavingsBank}, моделирующий сберегательный банк. Класс должен поддерживать создание счетов, внесение вкладов, снятие средств и проверку баланса. Программа должна демонстрировать работу всех методов на примере нескольких счетов.
+
+\begin{itemize}
+    \item Создайте класс \texttt{SavingsBank} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{accounts}.
+    \item Метод \texttt{add\_account} принимает номер счета и начальный депозит. Если счет уже есть — ошибка; иначе — добавление.
+    \item Метод \texttt{credit} принимает номер счета и сумму. При наличии счета — пополнение; иначе — ошибка.
+    \item Метод \texttt{debit} принимает номер счета и сумму. При наличии счета и достаточном балансе — снятие; иначе — ошибка.
+    \item Метод \texttt{show\_balance} принимает номер счета и выводит баланс или сообщение об ошибке.
+    \item Создайте экземпляр \texttt{SavingsBank}.
+    \item Добавьте два счета.
+    \item Пополните один из них.
+    \item Снимите средства с другого.
+    \item Проверьте балансы обоих и несуществующего счета.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+sb = SavingsBank()
+sb.add_account("SAV-101", 1000)
+sb.add_account("SAV-102", 800)
+sb.credit("SAV-101", 200)
+sb.debit("SAV-102", 300)
+sb.show_balance("SAV-101")
+sb.show_balance("SAV-102")
+sb.debit("SAV-102", 600)  # недостаточно
+sb.show_balance("SAV-999") # несуществует
+\end{verbatim}
+
+\item[4] Написать программу на Python, которая создает класс \texttt{DigitalWallet}, представляющий цифровой кошелек. Класс должен поддерживать регистрацию кошельков, пополнение, списание и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{DigitalWallet} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{wallets}.
+    \item Метод \texttt{register\_wallet} принимает ID кошелька и начальный баланс. Если ID занят — ошибка; иначе — регистрация.
+    \item Метод \texttt{top\_up} принимает ID и сумму. При существовании кошелька — пополнение; иначе — ошибка.
+    \item Метод \texttt{spend} принимает ID и сумму. При наличии кошелька и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{get\_wallet\_balance} принимает ID и выводит баланс или сообщение об ошибке.
+    \item Создайте экземпляр \texttt{DigitalWallet}.
+    \item Зарегистрируйте два кошелька.
+    \item Пополните один.
+    \item Потратьте с другого.
+    \item Проверьте балансы и попытайтесь проверить несуществующий.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+dw = DigitalWallet()
+dw.register_wallet("WAL-01", 500)
+dw.register_wallet("WAL-02", 300)
+dw.top_up("WAL-01", 100)
+dw.spend("WAL-02", 150)
+dw.get_wallet_balance("WAL-01")
+dw.get_wallet_balance("WAL-02")
+dw.spend("WAL-02", 200)  # недостаточно
+dw.get_wallet_balance("WAL-99")  # несуществует
+\end{verbatim}
+
+\item[5] Написать программу на Python, которая создает класс \texttt{PaymentSystem}, моделирующий систему платежей. Класс должен поддерживать создание счетов, зачисление средств, списание и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{PaymentSystem} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{accounts}.
+    \item Метод \texttt{create\_user\_account} принимает идентификатор и начальный баланс. Если уже есть — ошибка; иначе — создание.
+    \item Метод \texttt{credit\_account} принимает ID и сумму. При наличии счета — зачисление; иначе — ошибка.
+    \item Метод \texttt{debit\_account} принимает ID и сумму. При наличии счета и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_account\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{PaymentSystem}.
+    \item Создайте два счета.
+    \item Зачислите средства на один.
+    \item Спишите с другого.
+    \item Проверьте балансы и несуществующий счет.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ps = PaymentSystem()
+ps.create_user_account("USR-1", 1200)
+ps.create_user_account("USR-2", 700)
+ps.credit_account("USR-1", 300)
+ps.debit_account("USR-2", 200)
+ps.check_account_balance("USR-1")
+ps.check_account_balance("USR-2")
+ps.debit_account("USR-2", 600)  # недостаточно
+ps.check_account_balance("USR-999")  # несуществует
+\end{verbatim}
+
+\item[6] Написать программу на Python, которая создает класс \texttt{MicroFinance}, представляющий микрофинансовую организацию. Класс должен поддерживать открытие счетов, пополнение, снятие и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{MicroFinance} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{clients}.
+    \item Метод \texttt{open\_client\_account} принимает номер счета и стартовый баланс. Если счет существует — ошибка; иначе — открытие.
+    \item Метод \texttt{fund\_account} принимает номер счета и сумму. При наличии счета — пополнение; иначе — ошибка.
+    \item Метод \texttt{withdraw\_funds} принимает номер счета и сумму. При наличии счета и достаточном балансе — снятие; иначе — ошибка.
+    \item Метод \texttt{view\_balance} принимает номер счета и выводит баланс или сообщение об ошибке.
+    \item Создайте экземпляр \texttt{MicroFinance}.
+    \item Откройте два счета.
+    \item Пополните один.
+    \item Снимите с другого.
+    \item Проверьте балансы и несуществующий счет.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+mf = MicroFinance()
+mf.open_client_account("MF-201", 900)
+mf.open_client_account("MF-202", 400)
+mf.fund_account("MF-201", 100)
+mf.withdraw_funds("MF-202", 150)
+mf.view_balance("MF-201")
+mf.view_balance("MF-202")
+mf.withdraw_funds("MF-202", 300)  # недостаточно
+mf.view_balance("MF-999")  # несуществует
+\end{verbatim}
+
+\item[7] Написать программу на Python, которая создает класс \texttt{OnlineBank}, моделирующий онлайн-банк. Класс должен поддерживать регистрацию счетов, депозиты, выводы и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{OnlineBank} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{accounts}.
+    \item Метод \texttt{register\_account} принимает ID и начальный баланс. Если ID занят — ошибка; иначе — регистрация.
+    \item Метод \texttt{deposit\_funds} принимает ID и сумму. При наличии счета — пополнение; иначе — ошибка.
+    \item Метод \texttt{withdraw\_funds} принимает ID и сумму. При наличии счета и достаточном балансе — снятие; иначе — ошибка.
+    \item Метод \texttt{check\_current\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{OnlineBank}.
+    \item Зарегистрируйте два счета.
+    \item Пополните один.
+    \item Снимите с другого.
+    \item Проверьте балансы и несуществующий счет.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ob = OnlineBank()
+ob.register_account("ONB-501", 1500)
+ob.register_account("ONB-502", 600)
+ob.deposit_funds("ONB-501", 200)
+ob.withdraw_funds("ONB-502", 250)
+ob.check_current_balance("ONB-501")
+ob.check_current_balance("ONB-502")
+ob.withdraw_funds("ONB-502", 400)  # недостаточно
+ob.check_current_balance("ONB-999")  # несуществует
+\end{verbatim}
+
+\item[8] Написать программу на Python, которая создает класс \texttt{FinTechApp}, представляющий финтех-приложение. Класс должен поддерживать создание аккаунтов, пополнение, снятие и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{FinTechApp} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{users}.
+    \item Метод \texttt{create\_user} принимает логин и начальный баланс. Если логин занят — ошибка; иначе — создание.
+    \item Метод \texttt{add\_money} принимает логин и сумму. При наличии аккаунта — пополнение; иначе — ошибка.
+    \item Метод \texttt{remove\_money} принимает логин и сумму. При наличии аккаунта и достаточном балансе — снятие; иначе — ошибка.
+    \item Метод \texttt{get\_user\_balance} принимает логин и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{FinTechApp}.
+    \item Создайте двух пользователей.
+    \item Пополните одного.
+    \item Снимите у другого.
+    \item Проверьте балансы и несуществующего пользователя.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ft = FinTechApp()
+ft.create_user("alice", 2000)
+ft.create_user("bob", 800)
+ft.add_money("alice", 300)
+ft.remove_money("bob", 200)
+ft.get_user_balance("alice")
+ft.get_user_balance("bob")
+ft.remove_money("bob", 700)  # недостаточно
+ft.get_user_balance("charlie")  # несуществует
+\end{verbatim}
+
+\item[9] Написать программу на Python, которая создает класс \texttt{CryptoWallet}, моделирующий криптовалютный кошелек. Класс должен поддерживать создание кошельков, пополнение, перевод и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{CryptoWallet} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{wallets}.
+    \item Метод \texttt{generate\_wallet} принимает адрес и начальный баланс. Если адрес уже есть — ошибка; иначе — создание.
+    \item Метод \texttt{receive\_coins} принимает адрес и сумму. При наличии кошелька — пополнение; иначе — ошибка.
+    \item Метод \texttt{send\_coins} принимает адрес и сумму. При наличии кошелька и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_wallet\_balance} принимает адрес и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{CryptoWallet}.
+    \item Создайте два кошелька.
+    \item Пополните один.
+    \item Отправьте с другого.
+    \item Проверьте балансы и несуществующий адрес.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+cw = CryptoWallet()
+cw.generate_wallet("0x1a2b", 10.5)
+cw.generate_wallet("0x3c4d", 5.0)
+cw.receive_coins("0x1a2b", 2.0)
+cw.send_coins("0x3c4d", 1.5)
+cw.check_wallet_balance("0x1a2b")
+cw.check_wallet_balance("0x3c4d")
+cw.send_coins("0x3c4d", 4.0)  # недостаточно
+cw.check_wallet_balance("0x9999")  # несуществует
+\end{verbatim}
+
+\item[10] Написать программу на Python, которая создает класс \texttt{StudentFund}, представляющий студенческий фонд. Класс должен поддерживать создание счетов студентов, внесение средств, снятие и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{StudentFund} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{students}.
+    \item Метод \texttt{enroll\_student} принимает ID студента и начальный грант. Если ID уже есть — ошибка; иначе — зачисление.
+    \item Метод \texttt{add\_grant} принимает ID и сумму. При наличии студента — пополнение; иначе — ошибка.
+    \item Метод \texttt{use\_funds} принимает ID и сумму. При наличии студента и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{view\_student\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{StudentFund}.
+    \item Зачислите двух студентов.
+    \item Пополните одного.
+    \item Снимите у другого.
+    \item Проверьте балансы и несуществующего студента.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+sf = StudentFund()
+sf.enroll_student("STU-01", 5000)
+sf.enroll_student("STU-02", 3000)
+sf.add_grant("STU-01", 1000)
+sf.use_funds("STU-02", 800)
+sf.view_student_balance("STU-01")
+sf.view_student_balance("STU-02")
+sf.use_funds("STU-02", 2500)  # недостаточно
+sf.view_student_balance("STU-99")  # несуществует
+\end{verbatim}
+
+\item[11] Написать программу на Python, которая создает класс \texttt{GameCurrency}, моделирующий внутриигровую валюту. Класс должен поддерживать создание аккаунтов игроков, начисление монет, трату и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{GameCurrency} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{players}.
+    \item Метод \texttt{create\_player} принимает ник и начальный баланс. Если ник занят — ошибка; иначе — создание.
+    \item Метод \texttt{award\_coins} принимает ник и сумму. При наличии игрока — начисление; иначе — ошибка.
+    \item Метод \texttt{spend\_coins} принимает ник и сумму. При наличии игрока и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{get\_player\_balance} принимает ник и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{GameCurrency}.
+    \item Создайте двух игроков.
+    \item Начислите одному.
+    \item Потратьте у другого.
+    \item Проверьте балансы и несуществующего игрока.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+gc = GameCurrency()
+gc.create_player("hero1", 100)
+gc.create_player("hero2", 75)
+gc.award_coins("hero1", 25)
+gc.spend_coins("hero2", 30)
+gc.get_player_balance("hero1")
+gc.get_player_balance("hero2")
+gc.spend_coins("hero2", 50)  # недостаточно
+gc.get_player_balance("hero99")  # несуществует
+\end{verbatim}
+
+\item[12] Написать программу на Python, которая создает класс \texttt{CharityFund}, представляющий благотворительный фонд. Класс должен поддерживать создание счетов доноров, получение пожертвований, выдачу средств и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{CharityFund} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{donors}.
+    \item Метод \texttt{register\_donor} принимает ID и начальный взнос. Если ID есть — ошибка; иначе — регистрация.
+    \item Метод \texttt{accept\_donation} принимает ID и сумму. При наличии донора — пополнение; иначе — ошибка.
+    \item Метод \texttt{distribute\_funds} принимает ID и сумму. При наличии донора и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_donor\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{CharityFund}.
+    \item Зарегистрируйте двух доноров.
+    \item Примите пожертвование от одного.
+    \item Распределите средства от другого.
+    \item Проверьте балансы и несуществующего донора.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+cf = CharityFund()
+cf.register_donor("DON-1", 2000)
+cf.register_donor("DON-2", 1500)
+cf.accept_donation("DON-1", 500)
+cf.distribute_funds("DON-2", 600)
+cf.check_donor_balance("DON-1")
+cf.check_donor_balance("DON-2")
+cf.distribute_funds("DON-2", 1000)  # недостаточно
+cf.check_donor_balance("DON-99")  # несуществует
+\end{verbatim}
+
+\item[13] Написать программу на Python, которая создает класс \texttt{TravelWallet}, моделирующий кошелек для путешествий. Класс должен поддерживать создание профилей, пополнение, оплату и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{TravelWallet} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{profiles}.
+    \item Метод \texttt{create\_profile} принимает имя профиля и начальный бюджет. Если профиль существует — ошибка; иначе — создание.
+    \item Метод \texttt{load\_funds} принимает имя профиля и сумму. При наличии профиля — пополнение; иначе — ошибка.
+    \item Метод \texttt{pay\_expense} принимает имя профиля и сумму. При наличии профиля и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_budget} принимает имя профиля и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{TravelWallet}.
+    \item Создайте два профиля.
+    \item Пополните один.
+    \item Оплатите по другому.
+    \item Проверьте балансы и несуществующий профиль.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+tw = TravelWallet()
+tw.create_profile("ParisTrip", 3000)
+tw.create_profile("TokyoTrip", 2500)
+tw.load_funds("ParisTrip", 500)
+tw.pay_expense("TokyoTrip", 700)
+tw.check_budget("ParisTrip")
+tw.check_budget("TokyoTrip")
+tw.pay_expense("TokyoTrip", 2000)  # недостаточно
+tw.check_budget("LondonTrip")  # несуществует
+\end{verbatim}
+
+\item[14] Написать программу на Python, которая создает класс \texttt{SchoolFund}, представляющий школьный фонд. Класс должен поддерживать создание счетов классов, внесение средств, расход и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{SchoolFund} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{classes}.
+    \item Метод \texttt{add\_class} принимает номер класса и начальный бюджет. Если класс уже есть — ошибка; иначе — добавление.
+    \item Метод \texttt{collect\_money} принимает номер класса и сумму. При наличии класса — пополнение; иначе — ошибка.
+    \item Метод \texttt{spend\_money} принимает номер класса и сумму. При наличии класса и достаточном бюджете — списание; иначе — ошибка.
+    \item Метод \texttt{get\_class\_balance} принимает номер класса и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{SchoolFund}.
+    \item Добавьте два класса.
+    \item Соберите средства у одного.
+    \item Потратьте у другого.
+    \item Проверьте балансы и несуществующий класс.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+sf = SchoolFund()
+sf.add_class("10A", 1200)
+sf.add_class("11B", 900)
+sf.collect_money("10A", 300)
+sf.spend_money("11B", 400)
+sf.get_class_balance("10A")
+sf.get_class_balance("11B")
+sf.spend_money("11B", 600)  # недостаточно
+sf.get_class_balance("12C")  # несуществует
+\end{verbatim}
+
+\item[15] Написать программу на Python, которая создает класс \texttt{ClubAccount}, моделирующий счет клуба. Класс должен поддерживать создание счетов участников, пополнение взносами, снятие на мероприятия и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{ClubAccount} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{members}.
+    \item Метод \texttt{join\_club} принимает ID участника и вступительный взнос. Если ID есть — ошибка; иначе — добавление.
+    \item Метод \texttt{pay\_dues} принимает ID и сумму. При наличии участника — пополнение; иначе — ошибка.
+    \item Метод \texttt{request\_funds} принимает ID и сумму. При наличии участника и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_member\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{ClubAccount}.
+    \item Зарегистрируйте двух участников.
+    \item Внесите взносы за одного.
+    \item Запросите средства у другого.
+    \item Проверьте балансы и несуществующего участника.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ca = ClubAccount()
+ca.join_club("MEM-01", 500)
+ca.join_club("MEM-02", 400)
+ca.pay_dues("MEM-01", 100)
+ca.request_funds("MEM-02", 150)
+ca.check_member_balance("MEM-01")
+ca.check_member_balance("MEM-02")
+ca.request_funds("MEM-02", 300)  # недостаточно
+ca.check_member_balance("MEM-99")  # несуществует
+\end{verbatim}
+
+\item[16] Написать программу на Python, которая создает класс \texttt{ProjectBudget}, представляющий бюджет проекта. Класс должен поддерживать создание проектов, выделение средств, расход и проверку остатка.
+
+\begin{itemize}
+    \item Создайте класс \texttt{ProjectBudget} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{projects}.
+    \item Метод \texttt{initiate\_project} принимает код проекта и начальный бюджет. Если проект существует — ошибка; иначе — инициализация.
+    \item Метод \texttt{allocate\_funds} принимает код проекта и сумму. При наличии проекта — пополнение; иначе — ошибка.
+    \item Метод \texttt{expend\_funds} принимает код проекта и сумму. При наличии проекта и достаточном бюджете — списание; иначе — ошибка.
+    \item Метод \texttt{check\_project\_balance} принимает код проекта и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{ProjectBudget}.
+    \item Инициируйте два проекта.
+    \item Выделите средства одному.
+    \item Потратьте у другого.
+    \item Проверьте балансы и несуществующий проект.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+pb = ProjectBudget()
+pb.initiate_project("PRJ-Alpha", 10000)
+pb.initiate_project("PRJ-Beta", 8000)
+pb.allocate_funds("PRJ-Alpha", 2000)
+pb.expend_funds("PRJ-Beta", 3000)
+pb.check_project_balance("PRJ-Alpha")
+pb.check_project_balance("PRJ-Beta")
+pb.expend_funds("PRJ-Beta", 6000)  # недостаточно
+pb.check_project_balance("PRJ-Gamma")  # несуществует
+\end{verbatim}
+
+\item[17] Написать программу на Python, которая создает класс \texttt{EventFund}, моделирующий фонд мероприятия. Класс должен поддерживать создание событий, сбор средств, оплату расходов и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{EventFund} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{events}.
+    \item Метод \texttt{create\_event} принимает название события и стартовый бюджет. Если событие есть — ошибка; иначе — создание.
+    \item Метод \texttt{collect\_sponsorship} принимает название и сумму. При наличии события — пополнение; иначе — ошибка.
+    \item Метод \texttt{pay\_vendor} принимает название и сумму. При наличии события и достаточном бюджете — списание; иначе — ошибка.
+    \item Метод \texttt{view\_event\_balance} принимает название и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{EventFund}.
+    \item Создайте два события.
+    \item Соберите спонсорские средства для одного.
+    \item Оплатите поставщика для другого.
+    \item Проверьте балансы и несуществующее событие.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ef = EventFund()
+ef.create_event("Conference", 5000)
+ef.create_event("Workshop", 3000)
+ef.collect_sponsorship("Conference", 1500)
+ef.pay_vendor("Workshop", 1000)
+ef.view_event_balance("Conference")
+ef.view_event_balance("Workshop")
+ef.pay_vendor("Workshop", 2500)  # недостаточно
+ef.view_event_balance("Seminar")  # несуществует
+\end{verbatim}
+
+\item[18] Написать программу на Python, которая создает класс \texttt{PersonalFinance}, представляющий личные финансы. Класс должен поддерживать создание категорий, пополнение доходами, списание расходами и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{PersonalFinance} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{categories}.
+    \item Метод \texttt{add\_category} принимает название категории и начальный баланс. Если категория есть — ошибка; иначе — добавление.
+    \item Метод \texttt{record\_income} принимает название и сумму. При наличии категории — пополнение; иначе — ошибка.
+    \item Метод \texttt{record\_expense} принимает название и сумму. При наличии категории и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_category\_balance} принимает название и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{PersonalFinance}.
+    \item Добавьте две категории.
+    \item Запишите доход в одну.
+    \item Запишите расход в другую.
+    \item Проверьте балансы и несуществующую категорию.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+pf = PersonalFinance()
+pf.add_category("Salary", 25000)
+pf.add_category("Entertainment", 2000)
+pf.record_income("Salary", 5000)
+pf.record_expense("Entertainment", 800)
+pf.check_category_balance("Salary")
+pf.check_category_balance("Entertainment")
+pf.record_expense("Entertainment", 1500)  # недостаточно
+pf.check_category_balance("Travel")  # несуществует
+\end{verbatim}
+
+\item[19] Написать программу на Python, которая создает класс \texttt{InvestmentAccount}, моделирующий инвестиционный счет. Класс должен поддерживать создание счетов, внесение капитала, снятие прибыли и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{InvestmentAccount} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{accounts}.
+    \item Метод \texttt{open\_investment} принимает ID счета и начальный капитал. Если счет есть — ошибка; иначе — открытие.
+    \item Метод \texttt{invest\_more} принимает ID и сумму. При наличии счета — пополнение; иначе — ошибка.
+    \item Метод \texttt{withdraw\_profit} принимает ID и сумму. При наличии счета и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_investment\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{InvestmentAccount}.
+    \item Откройте два счета.
+    \item Инвестируйте дополнительно в один.
+    \item Снимите прибыль с другого.
+    \item Проверьте балансы и несуществующий счет.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ia = InvestmentAccount()
+ia.open_investment("INV-01", 10000)
+ia.open_investment("INV-02", 7000)
+ia.invest_more("INV-01", 2000)
+ia.withdraw_profit("INV-02", 1500)
+ia.check_investment_balance("INV-01")
+ia.check_investment_balance("INV-02")
+ia.withdraw_profit("INV-02", 6000)  # недостаточно
+ia.check_investment_balance("INV-99")  # несуществует
+\end{verbatim}
+
+\item[20] Написать программу на Python, которая создает класс \texttt{FamilyBudget}, представляющий семейный бюджет. Класс должен поддерживать создание членов семьи, пополнение общими доходами, списание личными расходами и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{FamilyBudget} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{members}.
+    \item Метод \texttt{add\_family\_member} принимает имя и начальный вклад. Если имя есть — ошибка; иначе — добавление.
+    \item Метод \texttt{add\_income} принимает имя и сумму. При наличии члена — пополнение; иначе — ошибка.
+    \item Метод \texttt{deduct\_expense} принимает имя и сумму. При наличии члена и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_member\_balance} принимает имя и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{FamilyBudget}.
+    \item Добавьте двух членов семьи.
+    \item Добавьте доход одному.
+    \item Спишите расход у другого.
+    \item Проверьте балансы и несуществующего члена.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+fb = FamilyBudget()
+fb.add_family_member("Mother", 20000)
+fb.add_family_member("Father", 25000)
+fb.add_income("Mother", 5000)
+fb.deduct_expense("Father", 3000)
+fb.check_member_balance("Mother")
+fb.check_member_balance("Father")
+fb.deduct_expense("Father", 23000)  # недостаточно
+fb.check_member_balance("Child")  # несуществует
+\end{verbatim}
+
+\item[21] Написать программу на Python, которая создает класс \texttt{StartupFund}, моделирующий фонд стартапа. Класс должен поддерживать создание стартапов, привлечение инвестиций, оплату расходов и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{StartupFund} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{startups}.
+    \item Метод \texttt{launch\_startup} принимает название и начальный капитал. Если стартап есть — ошибка; иначе — запуск.
+    \item Метод \texttt{attract\_investment} принимает название и сумму. При наличии стартапа — пополнение; иначе — ошибка.
+    \item Метод \texttt{cover\_costs} принимает название и сумму. При наличии стартапа и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_startup\_balance} принимает название и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{StartupFund}.
+    \item Запустите два стартапа.
+    \item Привлеките инвестиции в один.
+    \item Покройте расходы другого.
+    \item Проверьте балансы и несуществующий стартап.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+sf = StartupFund()
+sf.launch_startup("TechApp", 50000)
+sf.launch_startup("EcoShop", 30000)
+sf.attract_investment("TechApp", 20000)
+sf.cover_costs("EcoShop", 10000)
+sf.check_startup_balance("TechApp")
+sf.check_startup_balance("EcoShop")
+sf.cover_costs("EcoShop", 25000)  # недостаточно
+sf.check_startup_balance("FoodDelivery")  # несуществует
+\end{verbatim}
+
+\item[22] Написать программу на Python, которая создает класс \texttt{NonProfitAccount}, представляющий счет некоммерческой организации. Класс должен поддерживать создание проектов, получение грантов, оплату деятельности и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{NonProfitAccount} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{projects}.
+    \item Метод \texttt{initiate\_nonprofit\_project} принимает ID и начальный грант. Если проект есть — ошибка; иначе — инициализация.
+    \item Метод \texttt{receive\_grant} принимает ID и сумму. При наличии проекта — пополнение; иначе — ошибка.
+    \item Метод \texttt{pay\_operational\_costs} принимает ID и сумму. При наличии проекта и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_project\_funds} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{NonProfitAccount}.
+    \item Инициируйте два проекта.
+    \item Получите грант на один.
+    \item Оплатите расходы другого.
+    \item Проверьте балансы и несуществующий проект.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+np = NonProfitAccount()
+np.initiate_nonprofit_project("EDU-01", 15000)
+np.initiate_nonprofit_project("HEALTH-02", 12000)
+np.receive_grant("EDU-01", 5000)
+np.pay_operational_costs("HEALTH-02", 4000)
+np.check_project_funds("EDU-01")
+np.check_project_funds("HEALTH-02")
+np.pay_operational_costs("HEALTH-02", 9000)  # недостаточно
+np.check_project_funds("ENV-99")  # несуществует
+\end{verbatim}
+
+\item[23] Написать программу на Python, которая создает класс \texttt{FreelancerWallet}, моделирующий кошелек фрилансера. Класс должен поддерживать создание профилей, получение оплаты, оплату налогов и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{FreelancerWallet} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{freelancers}.
+    \item Метод \texttt{register\_freelancer} принимает ник и начальный баланс. Если ник есть — ошибка; иначе — регистрация.
+    \item Метод \texttt{receive\_payment} принимает ник и сумму. При наличии фрилансера — пополнение; иначе — ошибка.
+    \item Метод \texttt{pay\_taxes} принимает ник и сумму. При наличии фрилансера и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_freelancer\_balance} принимает ник и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{FreelancerWallet}.
+    \item Зарегистрируйте двух фрилансеров.
+    \item Получите оплату для одного.
+    \item Оплатите налоги для другого.
+    \item Проверьте балансы и несуществующего фрилансера.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+fw = FreelancerWallet()
+fw.register_freelancer("dev_alex", 0)
+fw.register_freelancer("design_maria", 0)
+fw.receive_payment("dev_alex", 10000)
+fw.receive_payment("design_maria", 2500)
+fw.pay_taxes("design_maria", 2000)
+fw.check_freelancer_balance("dev_alex")
+fw.check_freelancer_balance("design_maria")
+fw.pay_taxes("design_maria", 1000)  # недостаточно
+fw.check_freelancer_balance("writer_john")  # несуществует
+\end{verbatim}
+
+\item[24] Написать программу на Python, которая создает класс \texttt{RentalIncome}, представляющий доход от аренды. Класс должен поддерживать создание объектов недвижимости, получение арендной платы, оплату расходов и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{RentalIncome} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{properties}.
+    \item Метод \texttt{add\_property} принимает адрес и начальный баланс. Если адрес есть — ошибка; иначе — добавление.
+    \item Метод \texttt{collect\_rent} принимает адрес и сумму. При наличии объекта — пополнение; иначе — ошибка.
+    \item Метод \texttt{pay\_maintenance} принимает адрес и сумму. При наличии объекта и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_property\_balance} принимает адрес и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{RentalIncome}.
+    \item Добавьте два объекта.
+    \item Соберите арендную плату с одного.
+    \item Оплатите обслуживание другого.
+    \item Проверьте балансы и несуществующий адрес.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ri = RentalIncome()
+ri.add_property("123 Main St", 0)
+ri.add_property("456 Oak Ave", 0)
+ri.collect_rent("123 Main St", 2000)
+ri.collect_rent("456 Oak Ave", 700)
+ri.pay_maintenance("456 Oak Ave", 300)
+ri.check_property_balance("123 Main St")
+ri.check_property_balance("456 Oak Ave")
+ri.pay_maintenance("456 Oak Ave", 500)  # недостаточно
+ri.check_property_balance("789 Pine Rd")  # несуществует
+\end{verbatim}
+
+\item[25] Написать программу на Python, которая создает класс \texttt{ScholarshipFund}, моделирующий стипендиальный фонд. Класс должен поддерживать создание получателей, выдачу стипендий, возврат средств и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{ScholarshipFund} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{recipients}.
+    \item Метод \texttt{enroll\_recipient} принимает ID и начальную стипендию. Если ID есть — ошибка; иначе — зачисление.
+    \item Метод \texttt{award\_scholarship} принимает ID и сумму. При наличии получателя — пополнение; иначе — ошибка.
+    \item Метод \texttt{return\_funds} принимает ID и сумму. При наличии получателя и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_recipient\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{ScholarshipFund}.
+    \item Зачислите двух получателей.
+    \item Выдайте стипендию одному.
+    \item Примите возврат от другого.
+    \item Проверьте балансы и несуществующего получателя.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+sf = ScholarshipFund()
+sf.enroll_recipient("SCH-01", 5000)
+sf.enroll_recipient("SCH-02", 4000)
+sf.award_scholarship("SCH-01", 1000)
+sf.return_funds("SCH-02", 500)
+sf.check_recipient_balance("SCH-01")
+sf.check_recipient_balance("SCH-02")
+sf.return_funds("SCH-02", 4000)  # недостаточно
+sf.check_recipient_balance("SCH-99")  # несуществует
+\end{verbatim}
+
+\item[26] Написать программу на Python, которая создает класс \texttt{Crowdfunding}, представляющий краудфандинговую платформу. Класс должен поддерживать создание кампаний, сбор средств, возврат пожертвований и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{Crowdfunding} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{campaigns}.
+    \item Метод \texttt{start\_campaign} принимает название и начальный баланс. Если кампания есть — ошибка; иначе — создание.
+    \item Метод \texttt{donate} принимает название и сумму. При наличии кампании — пополнение; иначе — ошибка.
+    \item Метод \texttt{refund} принимает название и сумму. При наличии кампании и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_campaign\_balance} принимает название и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{Crowdfunding}.
+    \item Запустите две кампании.
+    \item Пожертвуйте в одну.
+    \item Верните средства из другой.
+    \item Проверьте балансы и несуществующую кампанию.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+cf = Crowdfunding()
+cf.start_campaign("BookPublish", 10000)
+cf.start_campaign("ArtExhibit", 8000)
+cf.donate("BookPublish", 3000)
+cf.refund("ArtExhibit", 500)
+cf.check_campaign_balance("BookPublish")
+cf.check_campaign_balance("ArtExhibit")
+cf.refund("ArtExhibit", 8000)  # недостаточно
+cf.check_campaign_balance("FilmProject")  # несуществует
+\end{verbatim}
+
+\item[27] Написать программу на Python, которая создает класс \texttt{PiggyBank}, моделирующий копилку. Класс должен поддерживать создание копилок, добавление монет, извлечение средств и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{PiggyBank} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{banks}.
+    \item Метод \texttt{create\_piggy} принимает имя и начальную сумму. Если имя есть — ошибка; иначе — создание.
+    \item Метод \texttt{add\_coins} принимает имя и сумму. При наличии копилки — пополнение; иначе — ошибка.
+    \item Метод \texttt{break\_piggy} принимает имя и сумму. При наличии копилки и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_piggy\_balance} принимает имя и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{PiggyBank}.
+    \item Создайте две копилки.
+    \item Добавьте монеты в одну.
+    \item Разбейте другую частично.
+    \item Проверьте балансы и несуществующую копилку.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+pb = PiggyBank()
+pb.create_piggy("Vacation", 200)
+pb.create_piggy("Gadget", 150)
+pb.add_coins("Vacation", 100)
+pb.break_piggy("Gadget", 50)
+pb.check_piggy_balance("Vacation")
+pb.check_piggy_balance("Gadget")
+pb.break_piggy("Gadget", 120)  # недостаточно
+pb.check_piggy_balance("Car")  # несуществует
+\end{verbatim}
+
+\item[28] Написать программу на Python, которая создает класс \texttt{BusinessAccount}, представляющий бизнес-счет. Класс должен поддерживать создание компаний, зачисление выручки, оплату счетов и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{BusinessAccount} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{companies}.
+    \item Метод \texttt{register\_business} принимает название и начальный капитал. Если компания есть — ошибка; иначе — регистрация.
+    \item Метод \texttt{record\_revenue} принимает название и сумму. При наличии компании — пополнение; иначе — ошибка.
+    \item Метод \texttt{pay\_bills} принимает название и сумму. При наличии компании и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_business\_balance} принимает название и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{BusinessAccount}.
+    \item Зарегистрируйте две компании.
+    \item Запишите выручку одной.
+    \item Оплатите счета другой.
+    \item Проверьте балансы и несуществующую компанию.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ba = BusinessAccount()
+ba.register_business("TechCorp", 50000)
+ba.register_business("CafeLtd", 20000)
+ba.record_revenue("TechCorp", 15000)
+ba.pay_bills("CafeLtd", 3000)
+ba.check_business_balance("TechCorp")
+ba.check_business_balance("CafeLtd")
+ba.pay_bills("CafeLtd", 18000)  # недостаточно
+ba.check_business_balance("ShopInc")  # несуществует
+\end{verbatim}
+
+\item[29] Написать программу на Python, которая создает класс \texttt{GrantManager}, моделирующий управление грантами. Класс должен поддерживать создание грантов, выделение средств, отчетность и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{GrantManager} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{grants}.
+    \item Метод \texttt{issue\_grant} принимает код и сумму. Если код есть — ошибка; иначе — создание.
+    \item Метод \texttt{disburse\_funds} принимает код и сумму. При наличии гранта и достаточном балансе — списание (выдача средств); иначе — ошибка.
+    \item Метод \texttt{submit\_report} принимает код и сумму. При наличии гранта и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_grant\_status} принимает код и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{GrantManager}.
+    \item Выдайте два гранта.
+    \item Распределите средства по одному.
+    \item Подайте отчет по другому.
+    \item Проверьте статусы и несуществующий грант.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+gm = GrantManager()
+gm.issue_grant("GR-2024-01", 10000)
+gm.issue_grant("GR-2024-02", 8000)
+gm.disburse_funds("GR-2024-01", 4000)
+gm.submit_report("GR-2024-02", 2000)
+gm.check_grant_status("GR-2024-01")
+gm.check_grant_status("GR-2024-02")
+gm.submit_report("GR-2024-02", 7000)  # недостаточно
+gm.check_grant_status("GR-2024-99")  # несуществует
+\end{verbatim}
+
+\item[30] Написать программу на Python, которая создает класс \texttt{SubscriptionService}, представляющий сервис подписок. Класс должен поддерживать создание пользователей, оплату подписок, возврат средств и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{SubscriptionService} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{subscribers}.
+    \item Метод \texttt{subscribe\_user} принимает email и начальный баланс. Если email есть — ошибка; иначе — подписка.
+    \item Метод \texttt{charge\_payment} принимает email и сумму. При наличии пользователя — пополнение; иначе — ошибка.
+    \item Метод \texttt{refund\_payment} принимает email и сумму. При наличии пользователя и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_subscription\_balance} принимает email и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{SubscriptionService}.
+    \item Подпишите двух пользователей.
+    \item Спишите оплату с одного.
+    \item Верните средства другому.
+    \item Проверьте балансы и несуществующий email.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ss = SubscriptionService()
+ss.subscribe_user("user1@example.com", 100)
+ss.subscribe_user("user2@example.com", 80)
+ss.charge_payment("user1@example.com", 20)
+ss.refund_payment("user2@example.com", 10)
+ss.check_subscription_balance("user1@example.com")
+ss.check_subscription_balance("user2@example.com")
+ss.refund_payment("user2@example.com", 80)  # недостаточно
+ss.check_subscription_balance("user3@example.com")  # несуществует
+\end{verbatim}
+
+\item[31] Написать программу на Python, которая создает класс \texttt{LoyaltyProgram}, моделирующий программу лояльности. Класс должен поддерживать создание участников, начисление баллов, списание за вознаграждения и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{LoyaltyProgram} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{members}.
+    \item Метод \texttt{enroll\_member} принимает ID и начальные баллы. Если ID есть — ошибка; иначе — зачисление.
+    \item Метод \texttt{earn\_points} принимает ID и количество. При наличии участника — пополнение; иначе — ошибка.
+    \item Метод \texttt{redeem\_points} принимает ID и количество. При наличии участника и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_points\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{LoyaltyProgram}.
+    \item Зачислите двух участников.
+    \item Начислите баллы одному.
+    \item Спишите у другого.
+    \item Проверьте балансы и несуществующего участника.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+lp = LoyaltyProgram()
+lp.enroll_member("MEM-101", 500)
+lp.enroll_member("MEM-102", 300)
+lp.earn_points("MEM-101", 200)
+lp.redeem_points("MEM-102", 100)
+lp.check_points_balance("MEM-101")
+lp.check_points_balance("MEM-102")
+lp.redeem_points("MEM-102", 250)  # недостаточно
+lp.check_points_balance("MEM-999")  # несуществует
+\end{verbatim}
+
+\item[32] Написать программу на Python, которая создает класс \texttt{UtilityBill}, представляющий оплату коммунальных услуг. Класс должен поддерживать создание лицевых счетов, внесение платежей, списание задолженностей и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{UtilityBill} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{accounts}.
+    \item Метод \texttt{create\_utility\_account} принимает номер и начальный долг. Если номер есть — ошибка; иначе — создание.
+    \item Метод \texttt{make\_payment} принимает номер и сумму. При наличии счета — пополнение; иначе — ошибка.
+    \item Метод \texttt{apply\_charges} принимает номер и сумму. При наличии счета и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_account\_status} принимает номер и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{UtilityBill}.
+    \item Создайте два счета.
+    \item Внесите платеж по одному.
+    \item Начислите плату по другому.
+    \item Проверьте статусы и несуществующий счет.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ub = UtilityBill()
+ub.create_utility_account("UTIL-01", 0)
+ub.create_utility_account("UTIL-02", 0)
+ub.make_payment("UTIL-01", 1500)
+ub.make_payment("UTIL-02", 1200)
+ub.apply_charges("UTIL-02", 800)
+ub.check_account_status("UTIL-01")
+ub.check_account_status("UTIL-02")
+ub.apply_charges("UTIL-02", 1000)  # недостаточно
+ub.check_account_status("UTIL-99")  # несуществует
+\end{verbatim}
+
+\item[33] Написать программу на Python, которая создает класс \texttt{InsuranceFund}, моделирующий страховой фонд. Класс должен поддерживать создание полисов, уплату премий, выплату возмещений и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{InsuranceFund} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{policies}.
+    \item Метод \texttt{issue\_policy} принимает номер полиса и начальный взнос. Если полис есть — ошибка; иначе — выдача.
+    \item Метод \texttt{pay\_premium} принимает номер и сумму. При наличии полиса — пополнение; иначе — ошибка.
+    \item Метод \texttt{process\_claim} принимает номер и сумму. При наличии полиса и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_policy\_balance} принимает номер и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{InsuranceFund}.
+    \item Выдайте два полиса.
+    \item Уплатите премию по одному.
+    \item Обработайте заявку по другому.
+    \item Проверьте балансы и несуществующий полис.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+ifund = InsuranceFund()
+ifund.issue_policy("POL-501", 10000)
+ifund.issue_policy("POL-502", 8000)
+ifund.pay_premium("POL-501", 2000)
+ifund.process_claim("POL-502", 3000)
+ifund.check_policy_balance("POL-501")
+ifund.check_policy_balance("POL-502")
+ifund.process_claim("POL-502", 6000)  # недостаточно
+ifund.check_policy_balance("POL-999")  # несуществует
+\end{verbatim}
+
+\item[34] Написать программу на Python, которая создает класс \texttt{DonationBox}, представляющий ящик для пожертвований. Класс должен поддерживать создание ящиков, сбор средств, выдачу помощи и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{DonationBox} с методом \texttt{\_\_init\_\_}, создающим пустой словарь \texttt{boxes}.
+    \item Метод \texttt{install\_box} принимает локацию и начальный сбор. Если локация есть — ошибка; иначе — установка.
+    \item Метод \texttt{collect\_donations} принимает локацию и сумму. При наличии ящика — пополнение; иначе — ошибка.
+    \item Метод \texttt{distribute\_aid} принимает локацию и сумму. При наличии ящика и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_box\_balance} принимает локацию и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{DonationBox}.
+    \item Установите два ящика.
+    \item Соберите пожертвования в один.
+    \item Распределите помощь из другого.
+    \item Проверьте балансы и несуществующую локацию.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+db = DonationBox()
+db.install_box("Hospital", 0)
+db.install_box("School", 0)
+db.collect_donations("Hospital", 5000)
+db.collect_donations("School", 1500)
+db.distribute_aid("School", 1000)
+db.check_box_balance("Hospital")
+db.check_box_balance("School")
+db.distribute_aid("School", 2000)  # недостаточно
+db.check_box_balance("Park")  # несуществует
+\end{verbatim}
+
+\item[35] Написать программу на Python, которая создает класс \texttt{RewardWallet}, моделирующий кошелек вознаграждений. Класс должен поддерживать создание кошельков, начисление бонусов, списание за покупки и проверку баланса.
+
+\begin{itemize}
+    \item Создайте класс \texttt{RewardWallet} с методом \texttt{\_\_init\_\_}, инициализирующим пустой словарь \texttt{wallets}.
+    \item Метод \texttt{activate\_wallet} принимает ID и начальные бонусы. Если ID есть — ошибка; иначе — активация.
+    \item Метод \texttt{award\_bonus} принимает ID и сумму. При наличии кошелька — пополнение; иначе — ошибка.
+    \item Метод \texttt{redeem\_reward} принимает ID и сумму. При наличии кошелька и достаточном балансе — списание; иначе — ошибка.
+    \item Метод \texttt{check\_reward\_balance} принимает ID и выводит баланс или ошибку.
+    \item Создайте экземпляр \texttt{RewardWallet}.
+    \item Активируйте два кошелька.
+    \item Начислите бонусы одному.
+    \item Потратьте у другого.
+    \item Проверьте балансы и несуществующий ID.
+\end{itemize}
+
+\textbf{Пример использования:}
+
+\begin{verbatim}
+rw = RewardWallet()
+rw.activate_wallet("RW-001", 1000)
+rw.activate_wallet("RW-002", 800)
+rw.award_bonus("RW-001", 200)
+rw.redeem_reward("RW-002", 300)
+rw.check_reward_balance("RW-001")
+rw.check_reward_balance("RW-002")
+rw.redeem_reward("RW-002", 600)  # недостаточно
+rw.check_reward_balance("RW-999")  # несуществует
+\end{verbatim}
+\end{enumerate}

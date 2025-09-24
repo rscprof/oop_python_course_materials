@@ -1,0 +1,995 @@
+\subsubsection {Задача 1 (Singleton)}
+
+Реализуйте задание согласно своему варианту. Обратите внимание, что мы
+не реализуем логику работы сложных вещей, а только её имитируем во всех 
+вариантах. 
+
+\textbf{Замечание}: Singleton -- это антипаттерн, в production его использовать
+не стоит, но для учебных целей он хорош и, кроме того, знание его
+сущности обязательно для разработчика.
+
+\begin{enumerate}
+
+\item Написать программу на Python, которая создает класс `DataBase` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton (один экземпляр). Программа должна принимать параметры при создании и выводить сообщение при подключении.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `DataBase`.
+    \item Добавьте приватный атрибут класса `\_instance` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он проверял, существует ли уже экземпляр. Если нет — создает новый с помощью `super().\_\_new\_\_(cls)` и присваивает его `\_instance`. Возвращает `\_instance`.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `user`, `psw`, `port`. Устанавливает эти атрибуты экземпляра, но только если они еще не были установлены (чтобы не перезаписывать при повторном "создании").
+    \item Добавьте метод `connect`, который выводит сообщение "Подключение к БД: \{user\}, \{psw\}, \{port\}".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Закрытие соединения с БД".
+    \item Добавьте метод `get\_data`, который возвращает строку "Данные получены".
+    \item Добавьте метод `set\_data`, который принимает `data` и выводит "Данные '\{data\}' записаны".
+    \item Создайте два экземпляра `db1` и `db2` с разными параметрами.
+    \item Вызовите `connect` для `db1`, затем для `db2`.
+    \item Выведите `id(db1)` и `id(db2)` — они должны совпадать.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+db1 = DataBase("admin", "secret", 5432)
+db2 = DataBase("user", "12345", 3306)  # Это тот же объект, что и db1!
+
+db1.connect()
+db2.connect()  # Выведет те же параметры, что и db1
+
+print("ID db1:", id(db1))
+print("ID db2:", id(db2))  # ID будут одинаковыми
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ConnectionManager` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `host`, `username`, `timeout` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ConnectionManager`.
+    \item Добавьте приватный атрибут класса `\_shared\_instance` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал существующий экземпляр, если он есть, или создавал новый.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `host`, `username`, `timeout`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `establish`, который выводит "Соединение установлено с \{host\} под пользователем \{username\} (таймаут: \{timeout\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Соединение разорвано".
+    \item Добавьте метод `fetch`, который возвращает "Запрос выполнен".
+    \item Добавьте метод `commit`, который принимает `transaction` и выводит "Транзакция '\{transaction\}' зафиксирована".
+    \item Создайте два экземпляра `cm1` и `cm2` с разными параметрами.
+    \item Вызовите `establish` для `cm1`, затем для `cm2`.
+    \item Выведите `cm1 is cm2` — должно быть `True`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+cm1 = ConnectionManager("localhost", "root", 30)
+cm2 = ConnectionManager("remote.server", "guest", 60)
+
+cm1.establish()
+cm2.establish()  # Параметры будут от cm1
+
+print("cm1 is cm2:", cm1 is cm2)  # True
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ConfigLoader` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `config\_file`, `env`, `debug` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ConfigLoader`.
+    \item Добавьте приватный атрибут класса `\_instance\_ref` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он обеспечивал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `config\_file`, `env`, `debug`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `load`, который выводит "Конфигурация загружена из '\{config\_file\}' для среды '\{env\}' (debug=\{debug\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Конфигурация выгружена".
+    \item Добавьте метод `get\_setting`, который принимает `key` и возвращает "Значение для \{key\}".
+    \item Добавьте метод `set\_setting`, который принимает `key`, `value` и выводит "Настройка \{key\} установлена в \{value\}".
+    \item Создайте два экземпляра `cfg1` и `cfg2` с разными параметрами.
+    \item Вызовите `load` для `cfg1`, затем для `cfg2`.
+    \item Проверьте, что `cfg1.debug == cfg2.debug` (должно быть `True`, если первый был создан с `debug=True`).
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+cfg1 = ConfigLoader("app.yaml", "prod", True)
+cfg2 = ConfigLoader("dev.yaml", "dev", False)
+
+cfg1.load()
+cfg2.load()  # Параметры будут от cfg1
+
+print("Debug mode (cfg1):", cfg1.debug)
+print("Debug mode (cfg2):", cfg2.debug)  # Будет True, как у cfg1
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Logger` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `log\_level`, `output\_file`, `rotate` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Logger`.
+    \item Добавьте приватный атрибут класса `\_the\_logger` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `log\_level`, `output\_file`, `rotate`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `log`, который принимает `message` и выводит "[\{log\_level\}] \{message\} -> \{output\_file\}".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Логгер остановлен".
+    \item Добавьте метод `set\_level`, который принимает `level` и устанавливает `self.log\_level = level`.
+    \item Добавьте метод `flush`, который выводит "Буфер логов сброшен".
+    \item Создайте два экземпляра `log1` и `log2` с разными параметрами.
+    \item Вызовите `log` для `log1`, затем `set\_level("ERROR")` для `log2`.
+    \item Вызовите `log` для `log1` снова — уровень должен измениться.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+log1 = Logger("INFO", "app.log", True)
+log2 = Logger("DEBUG", "debug.log", False)
+
+log1.log("Старт приложения")
+log2.set\_level("ERROR")  # Меняет уровень для log1 тоже!
+log1.log("Ошибка!")  # Выведет [ERROR] Ошибка! -> app.log
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `Cache` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `max\_size`, `ttl`, `strategy` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `Cache`.
+    \item Добавьте приватный атрибут класса `\_cache\_instance` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он обеспечивал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `max\_size`, `ttl`, `strategy`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `put`, который принимает `key`, `value` и выводит "Ключ '\{key\}' закеширован (стратегия: \{strategy\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Кеш очищен".
+    \item Добавьте метод `get`, который принимает `key` и возвращает "Значение для \{key\}".
+    \item Добавьте метод `clear`, который выводит "Кеш принудительно очищен".
+    \item Создайте два экземпляра `cache1` и `cache2` с разными параметрами.
+    \item Вызовите `put` для `cache1`, затем `clear` для `cache2`.
+    \item Проверьте, что `cache1.max\_size == cache2.max\_size`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+cache1 = Cache(1000, 3600, "LRU")
+cache2 = Cache(500, 1800, "FIFO")
+
+cache1.put("user\_123", \{"name": "Alice"\})
+cache2.clear()  # Очищает кеш cache1 тоже
+
+print("Max size:", cache1.max\_size)  # 1000 (от первого вызова)
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `SessionHandler` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `session\_id`, `timeout`, `secure` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `SessionHandler`.
+    \item Добавьте приватный атрибут класса `\_handler` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `session\_id`, `timeout`, `secure`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `start`, который выводит "Сессия \{session\_id\} начата (timeout=\{timeout\}, secure=\{secure\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Сессия завершена".
+    \item Добавьте метод `get\_session\_data`, который возвращает "Данные сессии".
+    \item Добавьте метод `invalidate`, который выводит "Сессия аннулирована".
+    \item Создайте два экземпляра `sh1` и `sh2` с разными параметрами.
+    \item Вызовите `start` для `sh1`, затем `invalidate` для `sh2`.
+    \item Выведите `sh1.session\_id` и `sh2.session\_id` — они должны быть одинаковыми.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+sh1 = SessionHandler("SID-001", 1800, True)
+sh2 = SessionHandler("SID-999", 600, False)
+
+sh1.start()
+sh2.invalidate()  # Аннулирует сессию sh1
+
+print("Session ID sh1:", sh1.session\_id)  # SID-001
+print("Session ID sh2:", sh2.session\_id)  # SID-001
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ResourceManager` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `resource\_type`, `capacity`, `priority` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ResourceManager`.
+    \item Добавьте приватный атрибут класса `\_manager` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `resource\_type`, `capacity`, `priority`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `allocate`, который выводит "Выделено \{capacity\} ресурсов типа \{resource\_type\} (приоритет: \{priority\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Освобождение ресурсов".
+    \item Добавьте метод `status`, который возвращает "Ресурсы доступны".
+    \item Добавьте метод `release`, который выводит "Ресурсы освобождены".
+    \item Создайте два экземпляра `rm1` и `rm2` с разными параметрами.
+    \item Вызовите `allocate` для `rm1`, затем `release` для `rm2`.
+    \item Проверьте, что `rm1.capacity == rm2.capacity`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+rm1 = ResourceManager("CPU", 4, 1)
+rm2 = ResourceManager("GPU", 2, 2)
+
+rm1.allocate()
+rm2.release()  # Освобождает ресурсы rm1
+
+print("Capacity:", rm1.capacity)  # 4
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `PrinterPool` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `printer\_id`, `speed`, `color` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `PrinterPool`.
+    \item Добавьте приватный атрибут класса `\_pool` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `printer\_id`, `speed`, `color`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `print`, который выводит "Печать документа на принтере \{printer\_id\} (скорость: \{speed\}, цвет: \{color\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Принтер выключен".
+    \item Добавьте метод `get\_status`, который возвращает "Готов к печати".
+    \item Добавьте метод `add\_job`, который принимает `job` и выводит "Добавлено задание: \{job\}".
+    \item Создайте два экземпляра `pp1` и `pp2` с разными параметрами.
+    \item Вызовите `print` для `pp1`, затем `add\_job` для `pp2`.
+    \item Проверьте, что `pp1.speed == pp2.speed`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+pp1 = PrinterPool("P100", 10, "Yes")
+pp2 = PrinterPool("P200", 8, "No")
+
+pp1.print()
+pp2.add\_job("Report.pdf")  # Добавляет задание для pp1
+
+print("Speed:", pp1.speed)  # 10
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `NetworkInterface` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `interface\_name`, `ip`, `mac` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `NetworkInterface`.
+    \item Добавьте приватный атрибут класса `\_interface` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `interface\_name`, `ip`, `mac`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `connect`, который выводит "Подключение к сети через \{interface\_name\} (\{ip\}, \{mac\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Отключение от сети".
+    \item Добавьте метод `ping`, который возвращает "Пинг успешен".
+    \item Добавьте метод `configure`, который принимает `new\_ip` и выводит "IP изменен на \{new\_ip\}".
+    \item Создайте два экземпляра `ni1` и `ni2` с разными параметрами.
+    \item Вызовите `connect` для `ni1`, затем `configure` для `ni2`.
+    \item Проверьте, что `ni1.ip == ni2.ip`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+ni1 = NetworkInterface("eth0", "192.168.1.100", "AA:BB:CC:DD:EE:FF")
+ni2 = NetworkInterface("wlan0", "192.168.1.101", "11:22:33:44:55:66")
+
+ni1.connect()
+ni2.configure("192.168.1.102")  # Изменяет IP для ni1
+
+print("IP:", ni1.ip)  # 192.168.1.102
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `FileManager` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `path`, `mode`, `buffered` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `FileManager`.
+    \item Добавьте приватный атрибут класса `\_manager` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `path`, `mode`, `buffered`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `open`, который выводит "Открытие файла '\{path\}' в режиме '\{mode\}' (буферизация: \{buffered\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Файл закрыт".
+    \item Добавьте метод `read`, который возвращает "Данные прочитаны".
+    \item Добавьте метод `write`, который принимает `data` и выводит "Данные '\{data\}' записаны".
+    \item Создайте два экземпляра `fm1` и `fm2` с разными параметрами.
+    \item Вызовите `open` для `fm1`, затем `write` для `fm2`.
+    \item Проверьте, что `fm1.mode == fm2.mode`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+fm1 = FileManager("data.txt", "r", True)
+fm2 = FileManager("log.txt", "w", False)
+
+fm1.open()
+fm2.write("Hello")  # Записывает в файл fm1
+
+print("Mode:", fm1.mode)  # r
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `DatabaseConnector` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `dbname`, `host`, `port` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `DatabaseConnector`.
+    \item Добавьте приватный атрибут класса `\_connector` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `dbname`, `host`, `port`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `connect`, который выводит "Подключение к базе данных '\{dbname\}' на \{host\}:\{port\}".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Отключение от базы данных".
+    \item Добавьте метод `query`, который возвращает "Запрос выполнен".
+    \item Добавьте метод `disconnect`, который выводит "Разрыв соединения".
+    \item Создайте два экземпляра `dc1` и `dc2` с разными параметрами.
+    \item Вызовите `connect` для `dc1`, затем `disconnect` для `dc2`.
+    \item Проверьте, что `dc1.port == dc2.port`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dc1 = DatabaseConnector("users", "localhost", 5432)
+dc2 = DatabaseConnector("products", "db.example.com", 5432)
+
+dc1.connect()
+dc2.disconnect()  # Разрывает соединение dc1
+
+print("Port:", dc1.port)  # 5432
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `MessageQueue` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `queue\_name`, `max\_messages`, `timeout` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `MessageQueue`.
+    \item Добавьте приватный атрибут класса `\_queue` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `queue\_name`, `max\_messages`, `timeout`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `send`, который принимает `message` и выводит "Отправка сообщения '\{message\}' в очередь \{queue\_name\}".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Очередь закрыта".
+    \item Добавьте метод `receive`, который возвращает "Сообщение получено".
+    \item Добавьте метод `clear`, который выводит "Очередь очищена".
+    \item Создайте два экземпляра `mq1` и `mq2` с разными параметрами.
+    \item Вызовите `send` для `mq1`, затем `clear` для `mq2`.
+    \item Проверьте, что `mq1.max\_messages == mq2.max\_messages`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+mq1 = MessageQueue("orders", 100, 30)
+mq2 = MessageQueue("notifications", 50, 60)
+
+mq1.send("New order")
+mq2.clear()  # Очищает очередь mq1
+
+print("Max messages:", mq1.max\_messages)  # 100
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `StorageDevice` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `device\_id`, `capacity`, `type` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `StorageDevice`.
+    \item Добавьте приватный атрибут класса `\_device` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `device\_id`, `capacity`, `type`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `mount`, который выводит "Подключение устройства \{device\_id\} (тип: \{type\}, емкость: \{capacity\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Отключение устройства".
+    \item Добавьте метод `read`, который возвращает "Чтение данных".
+    \item Добавьте метод `write`, который принимает `data` и выводит "Запись данных '\{data\}'".
+    \item Создайте два экземпляра `sd1` и `sd2` с разными параметрами.
+    \item Вызовите `mount` для `sd1`, затем `write` для `sd2`.
+    \item Проверьте, что `sd1.capacity == sd2.capacity`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+sd1 = StorageDevice("SSD-001", 512, "SSD")
+sd2 = StorageDevice("HDD-002", 1024, "HDD")
+
+sd1.mount()
+sd2.write("File.txt")  # Записывает в устройство sd1
+
+print("Capacity:", sd1.capacity)  # 512
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `APIGateway` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `api\_url`, `token`, `version` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `APIGateway`.
+    \item Добавьте приватный атрибут класса `\_gateway` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `api\_url`, `token`, `version`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `call`, который принимает `endpoint` и выводит "Вызов API \{endpoint\} на \{api\_url\} (версия: \{version\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "API шлюз отключен".
+    \item Добавьте метод `get`, который возвращает "Данные получены".
+    \item Добавьте метод `post`, который принимает `data` и выводит "Отправлено: \{data\}".
+    \item Создайте два экземпляра `ag1` и `ag2` с разными параметрами.
+    \item Вызовите `call` для `ag1`, затем `post` для `ag2`.
+    \item Проверьте, что `ag1.version == ag2.version`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+ag1 = APIGateway("https://api.example.com", "abc123", "v1")
+ag2 = APIGateway("https://api.test.com", "def456", "v2")
+
+ag1.call("/users")
+ag2.post("Hello")  # Отправляет данные через ag1
+
+print("Version:", ag1.version)  # v2
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `TaskScheduler` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `scheduler\_id`, `interval`, `enabled` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `TaskScheduler`.
+    \item Добавьте приватный атрибут класса `\_scheduler` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `scheduler\_id`, `interval`, `enabled`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `start`, который выводит "Запуск планировщика \{scheduler\_id\} (интервал: \{interval\}, включен: \{enabled\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Планировщик остановлен".
+    \item Добавьте метод `schedule`, который принимает `task` и выводит "Запланирована задача: \{task\}".
+    \item Добавьте метод `stop`, который выводит "Остановка планировщика".
+    \item Создайте два экземпляра `ts1` и `ts2` с разными параметрами.
+    \item Вызовите `start` для `ts1`, затем `schedule` для `ts2`.
+    \item Проверьте, что `ts1.interval == ts2.interval`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+ts1 = TaskScheduler("daily", 3600, True)
+ts2 = TaskScheduler("hourly", 300, False)
+
+ts1.start()
+ts2.schedule("Backup")  # Запланирована задача для ts1
+
+print("Interval:", ts1.interval)  # 3600
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ServiceMonitor` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `service\_name`, `check\_interval`, `threshold` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ServiceMonitor`.
+    \item Добавьте приватный атрибут класса `\_monitor` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `service\_name`, `check\_interval`, `threshold`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `start`, который выводит "Мониторинг службы \{service\_name\} запущен (интервал: \{check\_interval\}, порог: \{threshold\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Мониторинг остановлен".
+    \item Добавьте метод `check`, который возвращает "Проверка завершена".
+    \item Добавьте метод `alert`, который принимает `message` и выводит "Алерт: \{message\}".
+    \item Создайте два экземпляра `sm1` и `sm2` с разными параметрами.
+    \item Вызовите `start` для `sm1`, затем `alert` для `sm2`.
+    \item Проверьте, что `sm1.check\_interval == sm2.check\_interval`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+sm1 = ServiceMonitor("web", 60, 0.9)
+sm2 = ServiceMonitor("db", 30, 0.8)
+
+sm1.start()
+sm2.alert("High load")  # Алерт для sm1
+
+print("Check interval:", sm1.check\_interval)  # 60
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `EventBus` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `bus\_id`, `topic`, `max\_listeners` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `EventBus`.
+    \item Добавьте приватный атрибут класса `\_bus` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `bus\_id`, `topic`, `max\_listeners`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `publish`, который принимает `event` и выводит "Опубликовано событие '\{event\}' в топик \{topic\}".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Шина событий закрыта".
+    \item Добавьте метод `subscribe`, который принимает `listener` и выводит "Подписан слушатель: \{listener\}".
+    \item Добавьте метод `unsubscribe`, который принимает `listener` и выводит "Отписка слушателя: \{listener\}".
+    \item Создайте два экземпляра `eb1` и `eb2` с разными параметрами.
+    \item Вызовите `publish` для `eb1`, затем `subscribe` для `eb2`.
+    \item Проверьте, что `eb1.max\_listeners == eb2.max\_listeners`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+eb1 = EventBus("main", "system", 10)
+eb2 = EventBus("backup", "alerts", 5)
+
+eb1.publish("Start")
+eb2.subscribe("User")  # Подписка на eb1
+
+print("Max listeners:", eb1.max\_listeners)  # 10
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `SignalProcessor` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `processor\_id`, `sample\_rate`, `filter\_type` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `SignalProcessor`.
+    \item Добавьте приватный атрибут класса `\_processor` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `processor\_id`, `sample\_rate`, `filter\_type`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `process`, который принимает `signal` и выводит "Обработка сигнала '\{signal\}' (частота: \{sample\_rate\}, фильтр: \{filter\_type\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Процессор сигналов остановлен".
+    \item Добавьте метод `analyze`, который возвращает "Анализ завершен".
+    \item Добавьте метод `apply\_filter`, который принимает `filter\_params` и выводит "Применён фильтр с параметрами: \{filter\_params\}".
+    \item Создайте два экземпляра `sp1` и `sp2` с разными параметрами.
+    \item Вызовите `process` для `sp1`, затем `apply\_filter` для `sp2`.
+    \item Проверьте, что `sp1.sample\_rate == sp2.sample\_rate`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+sp1 = SignalProcessor("audio", 44100, "lowpass")
+sp2 = SignalProcessor("video", 30000, "bandpass")
+
+sp1.process("sound")
+sp2.apply\_filter(\{"cutoff": 1000\})  # Применяет фильтр для sp1
+
+print("Sample rate:", sp1.sample\_rate)  # 44100
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `DataPipeline` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `pipeline\_id`, `source`, `destination` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `DataPipeline`.
+    \item Добавьте приватный атрибут класса `\_pipeline` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `pipeline\_id`, `source`, `destination`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `start`, который выводит "Запуск потока данных \{pipeline\_id\} (\{source\} → \{destination\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Поток данных остановлен".
+    \item Добавьте метод `transform`, который возвращает "Трансформация завершена".
+    \item Добавьте метод `transfer`, который принимает `data` и выводит "Передача данных '\{data\}'".
+    \item Создайте два экземпляра `dp1` и `dp2` с разными параметрами.
+    \item Вызовите `start` для `dp1`, затем `transfer` для `dp2`.
+    \item Проверьте, что `dp1.destination == dp2.destination`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+dp1 = DataPipeline("etl", "db", "cloud")
+dp2 = DataPipeline("backup", "local", "cloud")
+
+dp1.start()
+dp2.transfer("records")  # Передача данных через dp1
+
+print("Destination:", dp1.destination)  # cloud
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `SecurityGuard` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `guard\_id`, `access\_level`, `rules` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `SecurityGuard`.
+    \item Добавьте приватный атрибут класса `\_guard` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `guard\_id`, `access\_level`, `rules`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `authorize`, который принимает `request` и выводит "Авторизация запроса '\{request\}' (уровень: \{access\_level\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Система безопасности отключена".
+    \item Добавьте метод `audit`, который возвращает "Аудит завершен".
+    \item Добавьте метод `block`, который принимает `entity` и выводит "Блокировка сущности: \{entity\}".
+    \item Создайте два экземпляра `sg1` и `sg2` с разными параметрами.
+    \item Вызовите `authorize` для `sg1`, затем `block` для `sg2`.
+    \item Проверьте, что `sg1.access\_level == sg2.access\_level`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+sg1 = SecurityGuard("main", "admin", ["rule1"])
+sg2 = SecurityGuard("backup", "user", ["rule2"])
+
+sg1.authorize("login")
+sg2.block("malware")  # Блокировка для sg1
+
+print("Access level:", sg1.access\_level)  # admin
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `SystemTray` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `tray\_id`, `icon`, `tooltip` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `SystemTray`.
+    \item Добавьте приватный атрибут класса `\_tray` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `tray\_id`, `icon`, `tooltip`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `show`, который выводит "Показать значок \{icon\} в трее (подсказка: \{tooltip\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Значок скрыт".
+    \item Добавьте метод `hide`, который выводит "Скрыть значок".
+    \item Добавьте метод `notify`, который принимает `message` и выводит "Уведомление: \{message\}".
+    \item Создайте два экземпляра `st1` и `st2` с разными параметрами.
+    \item Вызовите `show` для `st1`, затем `notify` для `st2`.
+    \item Проверьте, что `st1.icon == st2.icon`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+st1 = SystemTray("app", "app.ico", "My App")
+st2 = SystemTray("tool", "tool.ico", "My Tool")
+
+st1.show()
+st2.notify("Update available")  # Уведомление для st1
+
+print("Icon:", st1.icon)  # app.ico
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ApplicationLauncher` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `launcher\_id`, `apps`, `auto\_start` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ApplicationLauncher`.
+    \item Добавьте приватный атрибут класса `\_launcher` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `launcher\_id`, `apps`, `auto\_start`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `launch`, который принимает `app` и выводит "Запуск приложения '\{app\}' (автозапуск: \{auto\_start\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Запускатор остановлен".
+    \item Добавьте метод `list\_apps`, который возвращает "Список приложений: \{apps\}".
+    \item Добавьте метод `add\_app`, который принимает `app` и выводит "Добавлено приложение: \{app\}".
+    \item Создайте два экземпляра `al1` и `al2` с разными параметрами.
+    \item Вызовите `launch` для `al1`, затем `add\_app` для `al2`.
+    \item Проверьте, что `al1.apps == al2.apps`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+al1 = ApplicationLauncher("main", ["browser", "editor"], True)
+al2 = ApplicationLauncher("backup", ["backup", "sync"], False)
+
+al1.launch("browser")
+al2.add\_app("calc")  # Добавляет приложение в al1
+
+print("Apps:", al1.apps)  # ['browser', 'editor', 'calc']
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `NetworkScanner` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `scanner\_id`, `target`, `timeout` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `NetworkScanner`.
+    \item Добавьте приватный атрибут класса `\_scanner` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `scanner\_id`, `target`, `timeout`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `scan`, который выводит "Сканирование сети \{target\} (таймаут: \{timeout\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Сканер остановлен".
+    \item Добавьте метод `report`, который возвращает "Отчет о сканировании".
+    \item Добавьте метод `ping`, который принимает `host` и выводит "Проверка доступности \{host\}".
+    \item Создайте два экземпляра `ns1` и `ns2` с разными параметрами.
+    \item Вызовите `scan` для `ns1`, затем `ping` для `ns2`.
+    \item Проверьте, что `ns1.timeout == ns2.timeout`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+ns1 = NetworkScanner("fast", "192.168.1.0/24", 1)
+ns2 = NetworkScanner("slow", "10.0.0.0/8", 5)
+
+ns1.scan()
+ns2.ping("192.168.1.1")  # Проверка для ns1
+
+print("Timeout:", ns1.timeout)  # 1
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `HealthChecker` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `checker\_id`, `services`, `frequency` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `HealthChecker`.
+    \item Добавьте приватный атрибут класса `\_checker` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `checker\_id`, `services`, `frequency`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `check`, который выводит "Проверка состояния сервисов \{services\} (частота: \{frequency\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Проверка здоровья остановлена".
+    \item Добавьте метод `status`, который возвращает "Состояние: OK".
+    \item Добавьте метод `alert`, который принимает `service` и выводит "Алерт: \{service\} не отвечает".
+    \item Создайте два экземпляра `h1` и `h2` с разными параметрами.
+    \item Вызовите `check` для `h1`, затем `alert` для `h2`.
+    \item Проверьте, что `h1.frequency == h2.frequency`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+h1 = HealthChecker("main", ["web", "db"], 60)
+h2 = HealthChecker("backup", ["cache", "redis"], 30)
+
+h1.check()
+h2.alert("redis")  # Алерт для h1
+
+print("Frequency:", h1.frequency)  # 60
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `PerformanceMonitor` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `monitor\_id`, `metrics`, `interval` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `PerformanceMonitor`.
+    \item Добавьте приватный атрибут класса `\_monitor` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `monitor\_id`, `metrics`, `interval`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `start`, который выводит "Мониторинг производительности \{monitor\_id\} запущен (метрики: \{metrics\}, интервал: \{interval\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Мониторинг остановлен".
+    \item Добавьте метод `collect`, который возвращает "Сбор метрик завершен".
+    \item Добавьте метод `report`, который принимает `data` и выводит "Отчет: \{data\}".
+    \item Создайте два экземпляра `pm1` и `pm2` с разными параметрами.
+    \item Вызовите `start` для `pm1`, затем `report` для `pm2`.
+    \item Проверьте, что `pm1.interval == pm2.interval`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+pm1 = PerformanceMonitor("cpu", ["usage", "temp"], 10)
+pm2 = PerformanceMonitor("memory", ["ram", "swap"], 5)
+
+pm1.start()
+pm2.report("High CPU load")  # Отчет для pm1
+
+print("Interval:", pm1.interval)  # 10
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `LogAggregator` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `aggregator\_id`, `sources`, `format` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `LogAggregator`.
+    \item Добавьте приватный атрибут класса `\_aggregator` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `aggregator\_id`, `sources`, `format`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `aggregate`, который выводит "Агрегация логов из \{sources\} (формат: \{format\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Агрегатор остановлен".
+    \item Добавьте метод `forward`, который принимает `logs` и выводит "Передача логов: \{logs\}".
+    \item Добавьте метод `filter`, который принимает `criteria` и выводит "Фильтрация по критерию: \{criteria\}".
+    \item Создайте два экземпляра `la1` и `la2` с разными параметрами.
+    \item Вызовите `aggregate` для `la1`, затем `forward` для `la2`.
+    \item Проверьте, что `la1.format == la2.format`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+la1 = LogAggregator("main", ["app", "db"], "json")
+la2 = LogAggregator("backup", ["web", "api"], "text")
+
+la1.aggregate()
+la2.forward("error logs")  # Передача для la1
+
+print("Format:", la1.format)  # json
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ResourceTracker` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `tracker\_id`, `resources`, `threshold` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ResourceTracker`.
+    \item Добавьте приватный атрибут класса `\_tracker` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `tracker\_id`, `resources`, `threshold`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `track`, который выводит "Отслеживание ресурсов \{resources\} (порог: \{threshold\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Отслеживание остановлено".
+    \item Добавьте метод `update`, который принимает `data` и выводит "Обновление данных: \{data\}".
+    \item Добавьте метод `alarm`, который принимает `resource` и выводит "Авария: \{resource\} исчерпан".
+    \item Создайте два экземпляра `rt1` и `rt2` с разными параметрами.
+    \item Вызовите `track` для `rt1`, затем `alarm` для `rt2`.
+    \item Проверьте, что `rt1.threshold == rt2.threshold`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+rt1 = ResourceTracker("cpu", ["cores", "freq"], 0.8)
+rt2 = ResourceTracker("memory", ["ram", "swap"], 0.9)
+
+rt1.track()
+rt2.alarm("ram")  # Авария для rt1
+
+print("Threshold:", rt1.threshold)  # 0.8
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `NotificationCenter` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `center\_id`, `channels`, `priority` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `NotificationCenter`.
+    \item Добавьте приватный атрибут класса `\_center` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `center\_id`, `channels`, `priority`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `notify`, который принимает `message` и выводит "Уведомление: \{message\} (каналы: \{channels\}, приоритет: \{priority\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Центр уведомлений остановлен".
+    \item Добавьте метод `subscribe`, который принимает `channel` и выводит "Подписан на канал: \{channel\}".
+    \item Добавьте метод `unsubcribe`, который принимает `channel` и выводит "Отписка от канала: \{channel\}".
+    \item Создайте два экземпляра `nc1` и `nc2` с разными параметрами.
+    \item Вызовите `notify` для `nc1`, затем `subscribe` для `nc2`.
+    \item Проверьте, что `nc1.priority == nc2.priority`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+nc1 = NotificationCenter("main", ["email", "push"], 1)
+nc2 = NotificationCenter("backup", ["sms", "phone"], 2)
+
+nc1.notify("Update ready")
+nc2.subscribe("email")  # Подписка на nc1
+
+print("Priority:", nc1.priority)  # 1
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ConfigurationManager` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `manager\_id`, `config\_files`, `reload\_on\_change` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ConfigurationManager`.
+    \item Добавьте приватный атрибут класса `\_manager` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `manager\_id`, `config\_files`, `reload\_on\_change`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `load`, который выводит "Загрузка конфигураций из \{config\_files\} (перезагрузка при изменении: \{reload\_on\_change\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Конфигурации выгружены".
+    \item Добавьте метод `get`, который принимает `key` и возвращает "Значение для \{key\}".
+    \item Добавьте метод `set`, который принимает `key`, `value` и выводит "Настройка \{key\} установлена в \{value\}".
+    \item Создайте два экземпляра `cm1` и `cm2` с разными параметрами.
+    \item Вызовите `load` для `cm1`, затем `set` для `cm2`.
+    \item Проверьте, что `cm1.reload\_on\_change == cm2.reload\_on\_change`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+cm1 = ConfigurationManager("app", ["config.yaml"], True)
+cm2 = ConfigurationManager("test", ["test.conf"], False)
+
+cm1.load()
+cm2.set("debug", True)  # Установка для cm1
+
+print("Reload on change:", cm1.reload\_on\_change)  # True
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `JobScheduler` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `scheduler\_id`, `jobs`, `time\_zone` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `JobScheduler`.
+    \item Добавьте приватный атрибут класса `\_scheduler` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `scheduler\_id`, `jobs`, `time\_zone`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `schedule`, который выводит "Запланированы задания \{jobs\} (часовой пояс: \{time\_zone\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Планировщик остановлен".
+    \item Добавьте метод `run`, который возвращает "Выполнение заданий".
+    \item Добавьте метод `cancel`, который принимает `job` и выводит "Отмена задания: \{job\}".
+    \item Создайте два экземпляра `js1` и `js2` с разными параметрами.
+    \item Вызовите `schedule` для `js1`, затем `cancel` для `js2`.
+    \item Проверьте, что `js1.time\_zone == js2.time\_zone`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+js1 = JobScheduler("daily", ["backup", "cleanup"], "UTC")
+js2 = JobScheduler("weekly", ["report", "archive"], "Europe/Moscow")
+
+js1.schedule()
+js2.cancel("report")  # Отмена для js1
+
+print("Time zone:", js1.time\_zone)  # UTC
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `AnalyticsEngine` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `engine\_id`, `datasets`, `model` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `AnalyticsEngine`.
+    \item Добавьте приватный атрибут класса `\_engine` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `engine\_id`, `datasets`, `model`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `analyze`, который выводит "Анализ данных \{datasets\} с моделью \{model\}".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Аналитический движок остановлен".
+    \item Добавьте метод `train`, который возвращает "Обучение модели завершено".
+    \item Добавьте метод `predict`, который принимает `data` и выводит "Прогноз на основе данных: \{data\}".
+    \item Создайте два экземпляра `ae1` и `ae2` с разными параметрами.
+    \item Вызовите `analyze` для `ae1`, затем `predict` для `ae2`.
+    \item Проверьте, что `ae1.model == ae2.model`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+ae1 = AnalyticsEngine("sales", ["orders", "customers"], "linear")
+ae2 = AnalyticsEngine("marketing", ["ads", "clicks"], "neural")
+
+ae1.analyze()
+ae2.predict("next month")  # Прогноз для ae1
+
+print("Model:", ae1.model)  # linear
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `AuditTrail` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `trail\_id`, `events`, `retention` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `AuditTrail`.
+    \item Добавьте приватный атрибут класса `\_trail` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `trail\_id`, `events`, `retention`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `log`, который принимает `action` и выводит "Запись действия '\{action\}' в журнал (события: \{events\}, срок хранения: \{retention\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Журнал аудита закрыт".
+    \item Добавьте метод `search`, который принимает `query` и возвращает "Результаты поиска: \{query\}".
+    \item Добавьте метод `purge`, который выводит "Очистка журнала".
+    \item Создайте два экземпляра `at1` и `at2` с разными параметрами.
+    \item Вызовите `log` для `at1`, затем `search` для `at2`.
+    \item Проверьте, что `at1.retention == at2.retention`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+at1 = AuditTrail("security", ["login", "logout"], 365)
+at2 = AuditTrail("operations", ["start", "stop"], 90)
+
+at1.log("User login")
+at2.search("logout")  # Поиск в at1
+
+print("Retention:", at1.retention)  # 365
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `ContentFilter` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `filter\_id`, `rules`, `strict` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `ContentFilter`.
+    \item Добавьте приватный атрибут класса `\_filter` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `filter\_id`, `rules`, `strict`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `filter`, который принимает `content` и выводит "Фильтрация контента '\{content\}' (правила: \{rules\}, строгий режим: \{strict\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Фильтр отключен".
+    \item Добавьте метод `get\_rules`, который возвращает "Правила: \{rules\}".
+    \item Добавьте метод `add\_rule`, который принимает `rule` и выводит "Добавлено правило: \{rule\}".
+    \item Создайте два экземпляра `cf1` и `cf2` с разными параметрами.
+    \item Вызовите `filter` для `cf1`, затем `add\_rule` для `cf2`.
+    \item Проверьте, что `cf1.strict == cf2.strict`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+cf1 = ContentFilter("main", ["bad", "spam"], True)
+cf2 = ContentFilter("backup", ["offensive", "inappropriate"], False)
+
+cf1.filter("This is spam")
+cf2.add\_rule("hate")  # Добавление правила для cf1
+
+print("Strict:", cf1.strict)  # True
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `RateLimiter` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `limiter\_id`, `rate`, `burst` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `RateLimiter`.
+    \item Добавьте приватный атрибут класса `\_limiter` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `limiter\_id`, `rate`, `burst`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `limit`, который принимает `request` и выводит "Ограничение запроса '\{request\}' (скорость: \{rate\}, burst: \{burst\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Ограничитель отключен".
+    \item Добавьте метод `allow`, который возвращает "Запрос разрешен".
+    \item Добавьте метод `deny`, который принимает `reason` и выводит "Запрос отклонен: \{reason\}".
+    \item Создайте два экземпляра `rl1` и `rl2` с разными параметрами.
+    \item Вызовите `limit` для `rl1`, затем `deny` для `rl2`.
+    \item Проверьте, что `rl1.rate == rl2.rate`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+rl1 = RateLimiter("api", 10, 5)
+rl2 = RateLimiter("web", 5, 3)
+
+rl1.limit("GET /users")
+rl2.deny("Too many requests")  # Отклонение для rl1
+
+print("Rate:", rl1.rate)  # 10
+\end{lstlisting}
+
+\item Написать программу на Python, которая создает класс `CacheManager` с использованием метода `\_\_new\_\_` для реализации паттерна Singleton. Программа должна принимать параметры `manager\_id`, `cache\_size`, `eviction\_policy` при создании экземпляра.
+
+Инструкции:
+\begin{enumerate}
+    \item Создайте класс `CacheManager`.
+    \item Добавьте приватный атрибут класса `\_manager` и инициализируйте его значением `None`.
+    \item Переопределите метод `\_\_new\_\_`, чтобы он возвращал единственный экземпляр.
+    \item Переопределите метод `\_\_init\_\_`, принимающий `manager\_id`, `cache\_size`, `eviction\_policy`. Устанавливает атрибуты, только если они еще не заданы.
+    \item Добавьте метод `put`, который принимает `key`, `value` и выводит "Кэширование ключа '\{key\}' (размер: \{cache\_size\}, политика: \{eviction\_policy\})".
+    \item Добавьте метод `\_\_del\_\_`, который выводит "Кэш очищен".
+    \item Добавьте метод `get`, который принимает `key` и возвращает "Значение для \{key\}".
+    \item Добавьте метод `evict`, который выводит "Освобождение места в кэше".
+    \item Создайте два экземпляра `cm1` и `cm2` с разными параметрами.
+    \item Вызовите `put` для `cm1`, затем `evict` для `cm2`.
+    \item Проверьте, что `cm1.cache\_size == cm2.cache\_size`.
+\end{enumerate}
+
+Пример использования:
+\begin{lstlisting}[language=Python]
+cm1 = CacheManager("main", 1000, "LRU")
+cm2 = CacheManager("backup", 500, "FIFO")
+
+cm1.put("user\_123", \{"name": "Alice"\})
+cm2.evict()  # Освобождение для cm1
+
+print("Cache size:", cm1.cache\_size)  # 1000
+\end{lstlisting}
+
+\end{enumerate}
