@@ -1,0 +1,147 @@
+\subsection{Семинар <<Ограничения доступа и Unit-тестирование>>  
+(2 часа)}
+
+В ходе работы решите 2 задачи. 
+
+Первое задание предполагает просто описание способов доступа к свойствам и 
+методам различными способами.
+
+Второе задание -- реализацию простого класса и unit-тестов для него.
+
+\subsubsection{Принципы unit-тестирования в Python}
+
+Unit-тестирование позволяет проверять отдельные части кода — функции, методы или классы. Основные принципы:
+
+\begin{itemize}
+    \item Каждый тест проверяет \textbf{одну конкретную функциональность}.
+    \item Тесты должны покрывать \textbf{все важные сценарии использования}, включая краевые и граничные значения.
+    \item Тесты должны быть \textbf{повторяемыми и независимыми} друг от друга.
+    \item Используются утверждения: \texttt{assertEqual}, \texttt{assertTrue}, \texttt{assertFalse}, \texttt{assertRaises}.
+\end{itemize}
+
+\subsubsection{Как анализировать код для тестирования всех случаев}
+
+При разработке unit-тестов важно систематически анализировать код и выявлять все ветви и варианты поведения:
+
+\begin{enumerate}
+    \item \textbf{Анализ условных операторов (if/else)}:  
+    Для каждого условия нужно проверить как «истинный» путь, так и «ложный».  
+    Пример:  
+    \begin{verbatim}
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Division by zero")
+    return a / b
+    \end{verbatim}  
+    Тесты должны проверять:
+    \begin{itemize}
+        \item деление на ненулевое число (if=False)
+        \item деление на ноль (if=True)
+    \end{itemize}
+
+    \item \textbf{Анализ циклов (for/while)}:  
+    Циклы проверяются на:
+    \begin{itemize}
+        \item пустой вход (0 итераций)
+        \item одну итерацию
+        \item несколько итераций
+        \item граничные случаи (максимально допустимое число элементов)
+    \end{itemize}
+
+    \item \textbf{Граничные значения (boundary values)}:  
+    Любой метод, работающий с числами или индексами, должен проверяться на:
+    \begin{itemize}
+        \item минимальные допустимые значения
+        \item максимальные допустимые значения
+        \item ноль и отрицательные значения (если применимо)
+    \end{itemize}
+
+    \item \textbf{Исключения и ошибки}:  
+    Нужно проверять, что код корректно реагирует на некорректные входные данные, выбрасывая ожидаемые исключения.
+
+    \item \textbf{Комбинации входных данных}:  
+    Для методов с несколькими параметрами важно проверять сочетания «нормальных» и «краевых» значений.
+\end{enumerate}
+
+\subsubsection{Пример простого класса с unit-тестами}
+
+Рассмотрим класс \texttt{Calculator}, который выполняет сложение и деление чисел:
+
+\begin{verbatim}
+# calculator.py
+class Calculator:
+    def add(self, a, b):
+        return a + b
+
+    def divide(self, a, b):
+        if b == 0:
+            raise ValueError("Division by zero")
+        return a / b
+\end{verbatim}
+
+\begin{verbatim}
+# test_calculator.py
+import unittest
+from calculator import Calculator
+
+class TestCalculator(unittest.TestCase):
+
+    def setUp(self):
+        self.calc = Calculator()
+
+    # Проверка всех важных случаев для сложения
+    def test_add_positive_numbers(self):
+        self.assertEqual(self.calc.add(2, 3), 5)
+
+    def test_add_negative_numbers(self):
+        self.assertEqual(self.calc.add(-2, -3), -5)
+
+    def test_add_zero(self):
+        self.assertEqual(self.calc.add(0, 5), 5)
+        self.assertEqual(self.calc.add(5, 0), 5)
+
+    # Проверка всех важных случаев для деления
+    def test_divide_normal(self):
+        self.assertEqual(self.calc.divide(10, 2), 5)
+
+    def test_divide_fraction(self):
+        self.assertEqual(self.calc.divide(1, 2), 0.5)
+
+    def test_divide_by_zero(self):
+        with self.assertRaises(ValueError):
+            self.calc.divide(5, 0)
+
+if __name__ == '__main__':
+    unittest.main()
+\end{verbatim}
+
+\textbf{Объяснение:}  
+
+\begin{itemize}
+    \item \texttt{setUp()} создает объект перед каждым тестом.
+    \item Каждый метод, имя которого начинается с \texttt{test\_}, проверяет отдельный сценарий.
+    \item Мы покрыли:
+    \begin{itemize}
+        \item положительные и отрицательные числа
+        \item ноль
+        \item дробные значения
+        \item исключения (деление на ноль)
+    \end{itemize}
+    \item Для более сложного кода нужно аналогично анализировать все условия и ветвления.
+\end{itemize}
+
+Для сдачи работы будьте готовы пояснить или модифицировать любую часть кода, а также ответить на вопросы:
+
+\begin{enumerate}
+    \item Как можно обеспечить инкапсуляцию в Python (перечислите все варианты)
+\end{enumerate}
+
+Если вы нашли в задачнике ошибки, опечатки и другие недостатки, то вы можете сделать pull-request.  
+
+\subsubsection{Задача 1}
+
+\input{problem_access_1}
+
+\subsubsection{Задача 2}
+
+\input{problem_unit}

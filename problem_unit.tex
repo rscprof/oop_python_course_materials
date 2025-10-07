@@ -1,0 +1,74 @@
+
+
+\textbf{Инструкция:} Напишите функцию и соответствующие unit-тесты, покрывающие все важные случаи. Для заданий с ветвлениями (\texttt{if}/\texttt{elif}/\texttt{else}) обязательно проверяйте все ветви.  
+
+\textbf{Пояснения:}  
+\begin{itemize}
+    \item \textbf{Triangle types:} 
+        \begin{itemize}
+            \item \texttt{equilateral} — все стороны равны  
+            \item \texttt{isosceles} — две стороны равны  
+            \item \texttt{scalene} — все стороны разные  
+            \item \texttt{invalid} — невозможно построить треугольник  
+        \end{itemize}
+    \item \textbf{BMI (Body Mass Index):} индекс массы тела. Категории: \texttt{Underweight}, \texttt{Normal}, \texttt{Overweight}, \texttt{Obese}  
+    \item \textbf{Palindrome:} строка или число, читающееся одинаково слева направо и справа налево  
+    \item \textbf{Perfect number:} число, равное сумме своих делителей, исключая само число  
+    \item \textbf{Triangle angles:} 
+        \begin{itemize}
+            \item \texttt{acute} — все углы < 90°  
+            \item \texttt{right} — один угол = 90°  
+            \item \texttt{obtuse} — один угол > 90°  
+            \item \texttt{invalid} — треугольник не существует  
+        \end{itemize}
+    \item \textbf{Traffic fine:} штраф за превышение скорости. Функция должна учитывать разные зоны (\texttt{residential}, \texttt{city}, \texttt{highway}) и уровни превышения скорости.
+\end{itemize}
+
+\begin{enumerate}
+    \item \texttt{classify\_triangle(a, b, c)} — возвращает тип треугольника.  
+    \item \texttt{classify\_number(n)} — возвращает `"positive even"`, `"positive odd"`, `"negative even"`, `"negative odd"`, `"zero"`.  
+    \item \texttt{middle\_value(a, b, c)} — возвращает среднее (не арифметическое) число среди трёх, через сравнения.  
+    \item \texttt{median\_of\_three(a, b, c)} — медиана трёх чисел через if/elif/else.  
+    \item \texttt{is\_leap\_year(year)} — проверяет високосный год (делится на 4, но не на 100, или на 400).  
+    \item \texttt{bmi\_category(weight, height)} — возвращает категорию BMI.  
+    \item \texttt{categorize\_temperature(temp)} — диапазоны: `"freezing"` $\leqslant$ 0°C, `"cold"` 1–10°C, `"cool"` 11–20°C, `"warm"` 21–30°C, `"hot"` >30°C.  
+    \item \texttt{triangle\_area\_type(a, b, c)} — возвращает `"acute"`, `"right"`, `"obtuse"` или `"invalid"`.  
+    \item \texttt{quadrant(x, y)} — возвращает номер четверти (1–4) или `"origin"`/`"axis"`.  
+    \item \texttt{days\_in\_month(month, leap)} — возвращает число дней в месяце; \texttt{leap} = True для високосного года.  
+    \item \texttt{traffic\_fine(speed, zone)} — вычисляет штраф за превышение скорости.  
+    \begin{itemize}
+        \item \textbf{speed} — скорость автомобиля (км/ч)  
+        \item \textbf{zone} — тип зоны: `"residential"`, `"city"`, `"highway"`  
+        \item \textbf{правила:}  
+        \begin{itemize}
+            \item `"residential"`: превышение >20 км/ч → 200, >10 км/ч → 100, иначе 0  
+            \item `"city"`: превышение >30 → 150, >15 → 75, иначе 0  
+            \item `"highway"`: превышение >40 → 100, >20 → 50, иначе 0  
+            \item некорректная зона → `"invalid zone"`  
+        \end{itemize}
+        \item \textbf{требования:} использовать ветвления if/elif/else, проверить все сценарии превышения и отсутствие превышения.  
+    \end{itemize}
+    \item \texttt{compare\_three\_numbers(a, b, c)} — возвращает `"all equal"`, `"all different"`, или `"two equal"`.  
+    \item \texttt{max\_digit(n)} — наибольшая цифра числа.  
+    \item \texttt{triangle\_angle\_category(a, b, c)} — вычисляет углы через теорему косинусов и возвращает `"acute"`, `"right"`, `"obtuse"`, `"invalid"`.  
+    \item \texttt{next\_day(day, month, leap)} — возвращает следующий день месяца, учитывая количество дней.  
+    \item \texttt{is\_inside\_rectangle(x, y, x1, y1, x2, y2)} — проверка попадания точки в прямоугольник.  
+    \item \texttt{discount(price)} — возврат цены со скидкой по условию (>1000 → 10%, >500 → 5%, иначе 0%).  
+    \item \texttt{closest\_to\_zero(lst)} — элемент списка, ближайший к нулю.  
+    \item \texttt{season(month)} — `"Winter"`, `"Spring"`, `"Summer"`, `"Autumn"`.  
+    \item \texttt{simple\_calculator(a, b, op)} — +, -, *, /; деление на 0 → `"error"`.  
+    \item \texttt{sum\_positive(lst)} — сумма положительных чисел.  
+    \item \texttt{sum\_even(lst)} — сумма чётных чисел.  
+    \item \texttt{sum\_odd(lst)} — сумма нечётных чисел.  
+    \item \texttt{reverse\_signs(lst)} — меняет знак всех элементов.  
+    \item \texttt{nearest\_multiple(n, m)} — ближайшее к n кратное m.  
+    \item \texttt{sort\_three(a, b, c)} — тройка чисел в порядке возрастания через if/elif/else.  
+    \item \texttt{validate\_password(password)} — True, если длина $\geqslant$8, есть цифра и заглавная буква.  
+    \item \texttt{is\_perfect(n)} — True, если число совершенное.  
+    \item \texttt{sum\_digits(n)} — сумма цифр числа.  
+    \item \texttt{count\_vowels(s)} — количество гласных.  
+    \item \texttt{is\_palindrome(s)} — True, если строка читается одинаково слева направо и справа налево.  
+    \item \texttt{remove\_duplicates(lst)} — возвращает список без повторов.  
+    \item \texttt{factorial\_iterative(n)} — факториал через цикл, без рекурсии.  
+    \item \texttt{fizz\_buzz(n)} — числа от 1 до n с заменой кратных 3 → `"Fizz"`, кратных 5 → `"Buzz"`, кратных 15 → `"FizzBuzz"`.  
+\end{enumerate}

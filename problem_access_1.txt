@@ -1,0 +1,2697 @@
+\begin{enumerate}
+\item[1] Разработать класс \texttt{Bus}, который будет описывать модель автобуса. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения автобуса  
+    \item \texttt{\_\_distance}: расстояние, которое автобус проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения автобуса  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в автобусе  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в автобусе  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж автобуса  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mybus1}, \texttt{mybus2}, \texttt{mybus3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mybus3.\_Bus\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра автобуса, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[2] Разработать класс \texttt{Train}, который будет описывать модель поезда. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения поезда  
+    \item \texttt{\_\_distance}: расстояние, которое поезд проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения поезда  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в поезде  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в поезде  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж поезда  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mytrain1}, \texttt{mytrain2}, \texttt{mytrain3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mytrain3.\_Train\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра поезда, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[3] Разработать класс \texttt{Airplane}, который будет описывать модель самолёта. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения самолёта  
+    \item \texttt{\_\_distance}: расстояние, которое самолёт пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения самолёта  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в самолёте  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в самолёте  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж самолёта  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myplane1}, \texttt{myplane2}, \texttt{myplane3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myplane3.\_Airplane\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра самолёта, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[4] Разработать класс \texttt{Ship}, который будет описывать модель корабля. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения корабля  
+    \item \texttt{\_\_distance}: расстояние, которое корабль прошёл  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения корабля  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на корабле  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на корабле  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж корабля  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myship1}, \texttt{myship2}, \texttt{myship3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myship3.\_Ship\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра корабля, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[5] Разработать класс \texttt{Truck}, который будет описывать модель грузовика. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения грузовика  
+    \item \texttt{\_\_distance}: расстояние, которое грузовик проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения грузовика  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в грузовике  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в грузовике  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж грузовика  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mytruck1}, \texttt{mytruck2}, \texttt{mytruck3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mytruck3.\_Truck\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра грузовика, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[6] Разработать класс \texttt{Motorcycle}, который будет описывать модель мотоцикла. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения мотоцикла  
+    \item \texttt{\_\_distance}: расстояние, которое мотоцикл проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения мотоцикла  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на мотоцикле  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на мотоцикле  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж мотоцикла  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mymoto1}, \texttt{mymoto2}, \texttt{mymoto3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mymoto3.\_Motorcycle\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра мотоцикла, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[7] Разработать класс \texttt{Bicycle}, который будет описывать модель велосипеда. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения велосипеда  
+    \item \texttt{\_\_distance}: расстояние, которое велосипед проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения велосипеда  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на велосипеде  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на велосипеде  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж велосипеда  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mybike1}, \texttt{mybike2}, \texttt{mybike3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mybike3.\_Bicycle\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра велосипеда, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[8] Разработать класс \texttt{Helicopter}, который будет описывать модель вертолёта. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения вертолёта  
+    \item \texttt{\_\_distance}: расстояние, которое вертолёт пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения вертолёта  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в вертолёте  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в вертолёте  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж вертолёта  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myheli1}, \texttt{myheli2}, \texttt{myheli3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myheli3.\_Helicopter\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра вертолёта, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[9] Разработать класс \texttt{Submarine}, который будет описывать модель подводной лодки. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения подводной лодки  
+    \item \texttt{\_\_distance}: расстояние, которое подводная лодка прошла  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения подводной лодки  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в подводной лодке  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в подводной лодке  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж подводной лодки  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mysub1}, \texttt{mysub2}, \texttt{mysub3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mysub3.\_Submarine\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра подводной лодки, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[10] Разработать класс \texttt{Spaceship}, который будет описывать модель космического корабля. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения космического корабля  
+    \item \texttt{\_\_distance}: расстояние, которое космический корабль пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения космического корабля  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в космическом корабле  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в космическом корабле  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж космического корабля  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myspace1}, \texttt{myspace2}, \texttt{myspace3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myspace3.\_Spaceship\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра космического корабля, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[11] Разработать класс \texttt{Drone}, который будет описывать модель дрона. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения дрона  
+    \item \texttt{\_\_distance}: расстояние, которое дрон пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения дрона  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на дроне  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на дроне  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж дрона  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mydrone1}, \texttt{mydrone2}, \texttt{mydrone3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mydrone3.\_Drone\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра дрона, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[12] Разработать класс \texttt{Scooter}, который будет описывать модель скутера. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения скутера  
+    \item \texttt{\_\_distance}: расстояние, которое скутер проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения скутера  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на скутере  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на скутере  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж скутера  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myscoot1}, \texttt{myscoot2}, \texttt{myscoot3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myscoot3.\_Scooter\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра скутера, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[13] Разработать класс \texttt{Taxi}, который будет описывать модель такси. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения такси  
+    \item \texttt{\_\_distance}: расстояние, которое такси проехало  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения такси  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в такси  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в такси  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж такси  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mytaxi1}, \texttt{mytaxi2}, \texttt{mytaxi3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mytaxi3.\_Taxi\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра такси, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[14] Разработать класс \texttt{Ambulance}, который будет описывать модель скорой помощи. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения скорой помощи  
+    \item \texttt{\_\_distance}: расстояние, которое скорая помощь проехала  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения скорой помощи  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в скорой помощи  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в скорой помощи  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж скорой помощи  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myamb1}, \texttt{myamb2}, \texttt{myamb3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myamb3.\_Ambulance\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра скорой помощи, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[15] Разработать класс \texttt{FireTruck}, который будет описывать модель пожарной машины. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения пожарной машины  
+    \item \texttt{\_\_distance}: расстояние, которое пожарная машина проехала  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения пожарной машины  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в пожарной машине  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в пожарной машине  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж пожарной машины  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myfire1}, \texttt{myfire2}, \texttt{myfire3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myfire3.\_FireTruck\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра пожарной машины, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[16] Разработать класс \texttt{PoliceCar}, который будет описывать модель полицейского автомобиля. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения полицейского автомобиля  
+    \item \texttt{\_\_distance}: расстояние, которое полицейский автомобиль проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения полицейского автомобиля  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в полицейском автомобиле  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в полицейском автомобиле  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж полицейского автомобиля  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mypolice1}, \texttt{mypolice2}, \texttt{mypolice3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mypolice3.\_PoliceCar\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра полицейского автомобиля, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[17] Разработать класс \texttt{Crane}, который будет описывать модель подъёмного крана. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения крана  
+    \item \texttt{\_\_distance}: расстояние, которое кран проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения крана  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в кране  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в кране  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж крана  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mycrane1}, \texttt{mycrane2}, \texttt{mycrane3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mycrane3.\_Crane\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра подъёмного крана, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[18] Разработать класс \texttt{Excavator}, который будет описывать модель экскаватора. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения экскаватора  
+    \item \texttt{\_\_distance}: расстояние, которое экскаватор проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения экскаватора  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в экскаваторе  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в экскаваторе  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж экскаватора  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myex1}, \texttt{myex2}, \texttt{myex3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myex3.\_Excavator\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра экскаватора, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[19] Разработать класс \texttt{Tractor}, который будет описывать модель трактора. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения трактора  
+    \item \texttt{\_\_distance}: расстояние, которое трактор проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения трактора  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в тракторе  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в тракторе  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж трактора  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mytractor1}, \texttt{mytractor2}, \texttt{mytractor3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mytractor3.\_Tractor\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра трактора, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[20] Разработать класс \texttt{Snowmobile}, который будет описывать модель снегохода. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения снегохода  
+    \item \texttt{\_\_distance}: расстояние, которое снегоход проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения снегохода  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на снегоходе  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на снегоходе  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж снегохода  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mysnow1}, \texttt{mysnow2}, \texttt{mysnow3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mysnow3.\_Snowmobile\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра снегохода, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[21] Разработать класс \texttt{ATV}, который будет описывать модель вездехода (quad bike). В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения вездехода  
+    \item \texttt{\_\_distance}: расстояние, которое вездеход проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения вездехода  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на вездеходе  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на вездеходе  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж вездехода  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myatv1}, \texttt{myatv2}, \texttt{myatv3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myatv3.\_ATV\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра вездехода, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[22] Разработать класс \texttt{Hovercraft}, который будет описывать модель судна на воздушной подушке. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения судна на воздушной подушке  
+    \item \texttt{\_\_distance}: расстояние, которое судно на воздушной подушке прошло  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения судна на воздушной подушке  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на судне на воздушной подушке  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на судне на воздушной подушке  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж судна на воздушной подушке  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myhover1}, \texttt{myhover2}, \texttt{myhover3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myhover3.\_Hovercraft\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра судна на воздушной подушке, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[23] Разработать класс \texttt{Rocket}, который будет описывать модель ракеты. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения ракеты  
+    \item \texttt{\_\_distance}: расстояние, которое ракета пролетела  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения ракеты  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в ракете  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в ракете  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж ракеты  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myrocket1}, \texttt{myrocket2}, \texttt{myrocket3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myrocket3.\_Rocket\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра ракеты, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[24] Разработать класс \texttt{Glider}, который будет описывать модель планера. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения планера  
+    \item \texttt{\_\_distance}: расстояние, которое планер пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения планера  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в планере  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в планере  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж планера  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myglider1}, \texttt{myglider2}, \texttt{myglider3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myglider3.\_Glider\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра планера, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[25] Разработать класс \texttt{Zeppelin}, который будет описывать модель дирижабля. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения дирижабля  
+    \item \texttt{\_\_distance}: расстояние, которое дирижабль пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения дирижабля  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в дирижабле  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в дирижабле  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж дирижабля  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myzep1}, \texttt{myzep2}, \texttt{myzep3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myzep3.\_Zeppelin\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра дирижабля, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[26] Разработать класс \texttt{Ferry}, который будет описывать модель парома. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения парома  
+    \item \texttt{\_\_distance}: расстояние, которое паром прошёл  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения парома  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на пароме  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на пароме  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж парома  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myferry1}, \texttt{myferry2}, \texttt{myferry3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myferry3.\_Ferry\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра парома, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[27] Разработать класс \texttt{Yacht}, который будет описывать модель яхты. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения яхты  
+    \item \texttt{\_\_distance}: расстояние, которое яхта прошла  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения яхты  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на яхте  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на яхте  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж яхты  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myyacht1}, \texttt{myyacht2}, \texttt{myyacht3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myyacht3.\_Yacht\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра яхты, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[28] Разработать класс \texttt{Speedboat}, который будет описывать модель быстроходной лодки. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения быстроходной лодки  
+    \item \texttt{\_\_distance}: расстояние, которое быстроходная лодка прошла  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения быстроходной лодки  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на быстроходной лодке  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на быстроходной лодке  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж быстроходной лодки  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myspeed1}, \texttt{myspeed2}, \texttt{myspeed3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myspeed3.\_Speedboat\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра быстроходной лодки, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[29] Разработать класс \texttt{CargoPlane}, который будет описывать модель грузового самолёта. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения грузового самолёта  
+    \item \texttt{\_\_distance}: расстояние, которое грузовой самолёт пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения грузового самолёта  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в грузовом самолёте  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в грузовом самолёте  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж грузового самолёта  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mycargo1}, \texttt{mycargo2}, \texttt{mycargo3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mycargo3.\_CargoPlane\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра грузового самолёта, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[30] Разработать класс \texttt{PassengerPlane}, который будет описывать модель пассажирского самолёта. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения пассажирского самолёта  
+    \item \texttt{\_\_distance}: расстояние, которое пассажирский самолёт пролетел  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения пассажирского самолёта  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в пассажирском самолёте  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в пассажирском самолёте  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж пассажирского самолёта  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mypass1}, \texttt{mypass2}, \texttt{mypass3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mypass3.\_PassengerPlane\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра пассажирского самолёта, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[31] Разработать класс \texttt{MetroCar}, который будет описывать модель вагона метро. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения вагона метро  
+    \item \texttt{\_\_distance}: расстояние, которое вагон метро проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения вагона метро  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в вагоне метро  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в вагоне метро  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж вагона метро  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mymetro1}, \texttt{mymetro2}, \texttt{mymetro3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mymetro3.\_MetroCar\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра вагона метро, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[32] Разработать класс \texttt{Trolleybus}, который будет описывать модель троллейбуса. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения троллейбуса  
+    \item \texttt{\_\_distance}: расстояние, которое троллейбус проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения троллейбуса  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в троллейбусе  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в троллейбусе  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж троллейбуса  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{mytrol1}, \texttt{mytrol2}, \texttt{mytrol3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{mytrol3.\_Trolleybus\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра троллейбуса, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[33] Разработать класс \texttt{ElectricCar}, который будет описывать модель электромобиля. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения электромобиля  
+    \item \texttt{\_\_distance}: расстояние, которое электромобиль проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения электромобиля  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров в электромобиле  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест в электромобиле  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж электромобиля  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myev1}, \texttt{myev2}, \texttt{myev3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myev3.\_ElectricCar\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра электромобиля, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[34] Разработать класс \texttt{Hydrofoil}, который будет описывать модель гидрофойла. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения гидрофойла  
+    \item \texttt{\_\_distance}: расстояние, которое гидрофойл прошёл  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения гидрофойла  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на гидрофойле  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на гидрофойле  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж гидрофойла  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myhydro1}, \texttt{myhydro2}, \texttt{myhydro3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myhydro3.\_Hydrofoil\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра гидрофойла, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\item[35] Разработать класс \texttt{Segway}, который будет описывать модель сигвея. В классе должны быть следующие поля с доступом уровня \textbf{private} (только внутри класса):
+
+\begin{itemize}
+    \item \texttt{\_\_speed}: скорость движения сигвея  
+    \item \texttt{\_\_distance}: расстояние, которое сигвей проехал  
+    \item \texttt{\_\_max\_speed}: максимальная разрешённая скорость движения сигвея  
+    \item \texttt{\_\_passengers}: список пассажиров  
+    \item \texttt{\_\_capacity}: максимальная вместимость пассажиров на сигвее  
+    \item \texttt{\_\_empty\_seats}: число свободных мест  
+    \item \texttt{\_\_seats\_occupied}: число занятых мест на сигвее  
+    \item \texttt{\_\_fuel\_tank}: объём топливного бака  
+    \item \texttt{\_\_toplivo}: количество топлива в литрах  
+    \item \texttt{\_\_kartet\_tank}: объём картера масла двигателя (литры)  
+    \item \texttt{\_\_maslo}: количество моторного масла в литрах  
+    \item \texttt{\_\_luggage\_spaces}: количество багажных мест  
+    \item \texttt{\_\_luggage}: багаж сигвея  
+\end{itemize}
+
+Уровень доступа к полям должен быть следующим:
+
+\begin{itemize}
+    \item \texttt{\_\_max\_speed}, \texttt{\_\_capacity}, \texttt{\_\_fuel\_tank}, \texttt{\_\_kartet\_tank}, \texttt{\_\_luggage\_spaces}: \textbf{только чтение} (через геттеры)  
+    \item \texttt{\_\_speed}, \texttt{\_\_distance}, \texttt{\_\_passengers}, \texttt{\_\_empty\_seats}, \texttt{\_\_seats\_occupied}, \texttt{\_\_toplivo}, \texttt{\_\_maslo}, \texttt{\_\_luggage}: \textbf{чтение и запись} (через геттеры и сеттеры)
+\end{itemize}
+
+Требования к сеттерам:
+
+\begin{itemize}
+    \item Для полей \texttt{\_\_empty\_seats} и \texttt{\_\_seats\_occupied} в сеттерах необходимо проверять, что передаваемое значение не превышает \texttt{\_\_capacity} и неотрицательно.  
+    \item Для поля \texttt{\_\_passengers} в сеттере необходимо проверять, что количество пассажиров (длина списка) не превышает \texttt{\_\_capacity}.  
+    \item Для поля \texttt{\_\_speed} в сеттере необходимо проверять, что заданная скорость не превышает \texttt{\_\_max\_speed} и неотрицательна.  
+    \item Для поля \texttt{\_\_luggage} в сеттере необходимо проверять, что количество единиц багажа не превышает \texttt{\_\_luggage\_spaces}.
+\end{itemize}
+
+Реализовать метод вывода всех установленных через сеттеры значений закрытых полей экземпляра класса.
+
+На основе этого класса реализовать три подхода к управлению доступом:
+
+\begin{enumerate}
+    \item \textbf{С использованием объекта \texttt{property}}:  
+    Для каждого поля определить отдельные методы-геттеры и сеттеры (например, \texttt{get\_speed}, \texttt{set\_speed}), а затем создать свойство:  
+    \begin{verbatim}
+speed = property(get_speed, set_speed)
+    \end{verbatim}  
+    Этот код должен располагаться после определения соответствующих методов. Первый аргумент — геттер, второй — сеттер.  
+    Продемонстрировать работу на трёх экземплярах класса: создать \texttt{myseg1}, \texttt{myseg2}, \texttt{myseg3}, установить значения через свойства и вывести их.
+
+    \item \textbf{С использованием декораторов \texttt{@property} и \texttt{@<имя>.setter}}:  
+    Создать новую версию класса, в которой геттеры оформляются с декоратором \texttt{@property}, а сеттеры — с декоратором вида \texttt{@speed.setter}. Имена методов должны совпадать и не содержать префиксов \texttt{get\_}/\texttt{set\_}.  
+    Пример:  
+    \begin{verbatim}
+@property
+def speed(self):
+    return self.__speed
+
+@speed.setter
+def speed(self, value):
+    if 0 <= value <= self.__max_speed:
+        self.__speed = value
+    else:
+        raise ValueError("Недопустимая скорость")
+    \end{verbatim}  
+    Продемонстрировать работу на трёх экземплярах и сделать выводы об оптимизации кода по сравнению с первым подходом.
+
+    \item \textbf{С использованием модуля \texttt{accessify}}:  
+    Установить модуль командой \texttt{pip install accessify} и импортировать:  
+    \begin{verbatim}
+from accessify import private, protected
+    \end{verbatim}  
+    Сделать поля \texttt{max\_speed}, \texttt{capacity}, \texttt{fuel\_tank}, \texttt{kartet\_tank}, \texttt{luggage\_spaces} по-настоящему приватными с помощью функции \texttt{private} (например, как атрибуты класса до \texttt{\_\_init\_\_}). Удалить их из инициализатора.  
+    Проверки в сеттерах реализовать через вспомогательные методы, помеченные декоратором \texttt{@private}.  
+    Учитывать, что методы с \texttt{@private} нельзя вызывать из методов, использующих \texttt{@property}, поэтому для этой версии использовать только классические геттеры и сеттеры (\texttt{get\_...}, \texttt{set\_...}).  
+    Продемонстрировать, что попытка доступа извне (включая \texttt{myseg3.\_Segway\_\_max\_speed}) \textbf{не даёт результата}, а вызов приватного метода или чтение приватного поля вызывает ошибку доступа.
+\end{enumerate}
+
+Для всех трёх подходов создать по три экземпляра сигвея, установить значения полей с учётом всех ограничений и вывести текущие значения всех полей каждого экземпляра.
+
+\end{enumerate}
