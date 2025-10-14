@@ -1,0 +1,1763 @@
+\subsection{Семинар <<Наследование \#2>> (2 часа)}
+
+
+\subsubsection{Задача 1.}
+\begin{enumerate}
+\item[1]
+Паспорт. Класс \texttt{ForeignPassport} является производным от класса \texttt{Passport}. Метод \texttt{PrintInfo} существует в обоих классах. \texttt{PassportList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Passport}, который будет базовым классом для класса \texttt{ForeignPassport}. В конструкторе класса \texttt{Passport} задайте параметры \texttt{first\_name}, \texttt{last\_name}, \texttt{country}, \texttt{date\_of\_birth} и \texttt{numb\_of\_pasport}.
+    \item В классе \texttt{Passport} создайте метод \texttt{PrintInfo}, который будет выводить информацию о паспорте.
+    \item Создайте класс \texttt{ForeignPassport}, который будет наследоваться от класса \texttt{Passport}. В конструкторе класса \texttt{ForeignPassport} добавьте параметр \texttt{visa}.
+    \item В классе \texttt{ForeignPassport} переопределите метод \texttt{PrintInfo}, чтобы он выводил информацию о паспорте и визу.
+    \item В основной части программы создайте список \texttt{PassportList} и добавьте в него объекты классов \texttt{Passport} и \texttt{ForeignPassport}.
+    \item Для каждого объекта в списке \texttt{PassportList} вызовите метод \texttt{PrintInfo}.
+\end{enumerate}
+
+\item[2]
+Автомобиль. Класс \texttt{ElectricCar} является производным от класса \texttt{Car}. Метод \texttt{DisplayDetails} существует в обоих классах. \texttt{CarFleet} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Car}, который будет базовым классом для класса \texttt{ElectricCar}. В конструкторе класса \texttt{Car} задайте параметры \texttt{brand}, \texttt{model}, \texttt{year} и \texttt{fuel\_type}.
+    \item В классе \texttt{Car} создайте метод \texttt{DisplayDetails}, который будет выводить информацию об автомобиле.
+    \item Создайте класс \texttt{ElectricCar}, который будет наследоваться от класса \texttt{Car}. В конструкторе класса \texttt{ElectricCar} добавьте параметр \texttt{battery\_capacity}.
+    \item В классе \texttt{ElectricCar} переопределите метод \texttt{DisplayDetails}, чтобы он выводил информацию об автомобиле и ёмкости батареи.
+    \item В основной части программы создайте список \texttt{CarFleet} и добавьте в него объекты классов \texttt{Car} и \texttt{ElectricCar}.
+    \item Для каждого объекта в списке \texttt{CarFleet} вызовите метод \texttt{DisplayDetails}.
+\end{enumerate}
+
+\item[3]
+Животное. Класс \texttt{Bird} является производным от класса \texttt{Animal}. Метод \texttt{MakeSound} существует в обоих классах. \texttt{Zoo} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Animal}, который будет базовым классом для класса \texttt{Bird}. В конструкторе класса \texttt{Animal} задайте параметры \texttt{name}, \texttt{species}, \texttt{age} и \texttt{habitat}.
+    \item В классе \texttt{Animal} создайте метод \texttt{MakeSound}, который будет выводить общий звук животного.
+    \item Создайте класс \texttt{Bird}, который будет наследоваться от класса \texttt{Animal}. В конструкторе класса \texttt{Bird} добавьте параметр \texttt{wing\_span}.
+    \item В классе \texttt{Bird} переопределите метод \texttt{MakeSound}, чтобы он выводил характерный звук птицы.
+    \item В основной части программы создайте список \texttt{Zoo} и добавьте в него объекты классов \texttt{Animal} и \texttt{Bird}.
+    \item Для каждого объекта в списке \texttt{Zoo} вызовите метод \texttt{MakeSound}.
+\end{enumerate}
+
+\item[4]
+Сотрудник. Класс \texttt{Manager} является производным от класса \texttt{Employee}. Метод \texttt{ShowProfile} существует в обоих классах. \texttt{StaffList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Employee}, который будет базовым классом для класса \texttt{Manager}. В конструкторе класса \texttt{Employee} задайте параметры \texttt{first\_name}, \texttt{last\_name}, \texttt{position} и \texttt{salary}.
+    \item В классе \texttt{Employee} создайте метод \texttt{ShowProfile}, который будет выводить информацию о сотруднике.
+    \item Создайте класс \texttt{Manager}, который будет наследоваться от класса \texttt{Employee}. В конструкторе класса \texttt{Manager} добавьте параметр \texttt{department}.
+    \item В классе \texttt{Manager} переопределите метод \texttt{ShowProfile}, чтобы он выводил информацию о сотруднике и управляемом отделе.
+    \item В основной части программы создайте список \texttt{StaffList} и добавьте в него объекты классов \texttt{Employee} и \texttt{Manager}.
+    \item Для каждого объекта в списке \texttt{StaffList} вызовите метод \texttt{ShowProfile}.
+\end{enumerate}
+
+\item[5]
+Фигура. Класс \texttt{Circle} является производным от класса \texttt{Shape}. Метод \texttt{CalculateArea} существует в обоих классах. \texttt{ShapesCollection} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Shape}, который будет базовым классом для класса \texttt{Circle}. В конструкторе класса \texttt{Shape} задайте параметр \texttt{name}.
+    \item В классе \texttt{Shape} создайте метод \texttt{CalculateArea}, который будет возвращать значение 0 (заглушка).
+    \item Создайте класс \texttt{Circle}, который будет наследоваться от класса \texttt{Shape}. В конструкторе класса \texttt{Circle} добавьте параметр \texttt{radius}.
+    \item В классе \texttt{Circle} переопределите метод \texttt{CalculateArea}, чтобы он вычислял и возвращал площадь круга.
+    \item В основной части программы создайте список \texttt{ShapesCollection} и добавьте в него объекты классов \texttt{Shape} и \texttt{Circle}.
+    \item Для каждого объекта в списке \texttt{ShapesCollection} вызовите метод \texttt{CalculateArea} и выведите результат.
+\end{enumerate}
+
+\item[6]
+Книга. Класс \texttt{Textbook} является производным от класса \texttt{Book}. Метод \texttt{GetInfo} существует в обоих классах. \texttt{Library} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Book}, который будет базовым классом для класса \texttt{Textbook}. В конструкторе класса \texttt{Book} задайте параметры \texttt{title}, \texttt{author}, \texttt{isbn} и \texttt{year}.
+    \item В классе \texttt{Book} создайте метод \texttt{GetInfo}, который будет выводить информацию о книге.
+    \item Создайте класс \texttt{Textbook}, который будет наследоваться от класса \texttt{Book}. В конструкторе класса \texttt{Textbook} добавьте параметр \texttt{subject}.
+    \item В классе \texttt{Textbook} переопределите метод \texttt{GetInfo}, чтобы он выводил информацию о книге и учебном предмете.
+    \item В основной части программы создайте список \texttt{Library} и добавьте в него объекты классов \texttt{Book} и \texttt{Textbook}.
+    \item Для каждого объекта в списке \texttt{Library} вызовите метод \texttt{GetInfo}.
+\end{enumerate}
+
+\item[7]
+Транспорт. Класс \texttt{Bicycle} является производным от класса \texttt{Vehicle}. Метод \texttt{Describe} существует в обоих классах. \texttt{Vehicles} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Vehicle}, который будет базовым классом для класса \texttt{Bicycle}. В конструкторе класса \texttt{Vehicle} задайте параметры \texttt{make}, \texttt{model}, \texttt{year} и \texttt{type}.
+    \item В классе \texttt{Vehicle} создайте метод \texttt{Describe}, который будет выводить общую информацию о транспорте.
+    \item Создайте класс \texttt{Bicycle}, который будет наследоваться от класса \texttt{Vehicle}. В конструкторе класса \texttt{Bicycle} добавьте параметр \texttt{frame\_size}.
+    \item В классе \texttt{Bicycle} переопределите метод \texttt{Describe}, чтобы он выводил информацию о велосипеде, включая размер рамы.
+    \item В основной части программы создайте список \texttt{Vehicles} и добавьте в него объекты классов \texttt{Vehicle} и \texttt{Bicycle}.
+    \item Для каждого объекта в списке \texttt{Vehicles} вызовите метод \texttt{Describe}.
+\end{enumerate}
+
+\item[8]
+Продукт. Класс \texttt{PerishableProduct} является производным от класса \texttt{Product}. Метод \texttt{Display} существует в обоих классах. \texttt{Inventory} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Product}, который будет базовым классом для класса \texttt{PerishableProduct}. В конструкторе класса \texttt{Product} задайте параметры \texttt{name}, \texttt{price}, \texttt{category} и \texttt{barcode}.
+    \item В классе \texttt{Product} создайте метод \texttt{Display}, который будет выводить информацию о продукте.
+    \item Создайте класс \texttt{PerishableProduct}, который будет наследоваться от класса \texttt{Product}. В конструкторе класса \texttt{PerishableProduct} добавьте параметр \texttt{expiry\_date}.
+    \item В классе \texttt{PerishableProduct} переопределите метод \texttt{Display}, чтобы он выводил информацию о продукте и сроке годности.
+    \item В основной части программы создайте список \texttt{Inventory} и добавьте в него объекты классов \texttt{Product} и \texttt{PerishableProduct}.
+    \item Для каждого объекта в списке \texttt{Inventory} вызовите метод \texttt{Display}.
+\end{enumerate}
+
+\item[9]
+Устройство. Класс \texttt{Smartphone} является производным от класса \texttt{Device}. Метод \texttt{DeviceInfo} существует в обоих классах. \texttt{Gadgets} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Device}, который будет базовым классом для класса \texttt{Smartphone}. В конструкторе класса \texttt{Device} задайте параметры \texttt{brand}, \texttt{model}, \texttt{serial\_number} и \texttt{power\_source}.
+    \item В классе \texttt{Device} создайте метод \texttt{DeviceInfo}, который будет выводить информацию об устройстве.
+    \item Создайте класс \texttt{Smartphone}, который будет наследоваться от класса \texttt{Device}. В конструкторе класса \texttt{Smartphone} добавьте параметр \texttt{os\_version}.
+    \item В классе \texttt{Smartphone} переопределите метод \texttt{DeviceInfo}, чтобы он выводил информацию об устройстве и версии ОС.
+    \item В основной части программы создайте список \texttt{Gadgets} и добавьте в него объекты классов \texttt{Device} и \texttt{Smartphone}.
+    \item Для каждого объекта в списке \texttt{Gadgets} вызовите метод \texttt{DeviceInfo}.
+\end{enumerate}
+
+\item[10]
+Студент. Класс \texttt{GraduateStudent} является производным от класса \texttt{Student}. Метод \texttt{ShowRecord} существует в обоих классах. \texttt{StudentsList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Student}, который будет базовым классом для класса \texttt{GraduateStudent}. В конструкторе класса \texttt{Student} задайте параметры \texttt{first\_name}, \texttt{last\_name}, \texttt{student\_id} и \texttt{major}.
+    \item В классе \texttt{Student} создайте метод \texttt{ShowRecord}, который будет выводить информацию о студенте.
+    \item Создайте класс \texttt{GraduateStudent}, который будет наследоваться от класса \texttt{Student}. В конструкторе класса \texttt{GraduateStudent} добавьте параметр \texttt{thesis\_topic}.
+    \item В классе \texttt{GraduateStudent} переопределите метод \texttt{ShowRecord}, чтобы он выводил информацию о студенте и теме диплома.
+    \item В основной части программы создайте список \texttt{StudentsList} и добавьте в него объекты классов \texttt{Student} и \texttt{GraduateStudent}.
+    \item Для каждого объекта в списке \texttt{StudentsList} вызовите метод \texttt{ShowRecord}.
+\end{enumerate}
+
+\item[11]
+Счёт. Класс \texttt{SavingsAccount} является производным от класса \texttt{BankAccount}. Метод \texttt{AccountSummary} существует в обоих классах. \texttt{Accounts} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{BankAccount}, который будет базовым классом для класса \texttt{SavingsAccount}. В конструкторе класса \texttt{BankAccount} задайте параметры \texttt{account\_holder}, \texttt{account\_number} и \texttt{balance}.
+    \item В классе \texttt{BankAccount} создайте метод \texttt{AccountSummary}, который будет выводить информацию о счёте.
+    \item Создайте класс \texttt{SavingsAccount}, который будет наследоваться от класса \texttt{BankAccount}. В конструкторе класса \texttt{SavingsAccount} добавьте параметр \texttt{interest\_rate}.
+    \item В классе \texttt{SavingsAccount} переопределите метод \texttt{AccountSummary}, чтобы он выводил информацию о счёте и процентной ставке.
+    \item В основной части программы создайте список \texttt{Accounts} и добавьте в него объекты классов \texttt{BankAccount} и \texttt{SavingsAccount}.
+    \item Для каждого объекта в списке \texttt{Accounts} вызовите метод \texttt{AccountSummary}.
+\end{enumerate}
+
+\item[12]
+Инструмент. Класс \texttt{PowerDrill} является производным от класса \texttt{Tool}. Метод \texttt{ToolInfo} существует в обоих классах. \texttt{Toolbox} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Tool}, который будет базовым классом для класса \texttt{PowerDrill}. В конструкторе класса \texttt{Tool} задайте параметры \texttt{name}, \texttt{brand}, \texttt{weight} и \texttt{material}.
+    \item В классе \texttt{Tool} создайте метод \texttt{ToolInfo}, который будет выводить информацию об инструменте.
+    \item Создайте класс \texttt{PowerDrill}, который будет наследоваться от класса \texttt{Tool}. В конструкторе класса \texttt{PowerDrill} добавьте параметр \texttt{voltage}.
+    \item В классе \texttt{PowerDrill} переопределите метод \texttt{ToolInfo}, чтобы он выводил информацию об инструменте и напряжении.
+    \item В основной части программы создайте список \texttt{Toolbox} и добавьте в него объекты классов \texttt{Tool} и \texttt{PowerDrill}.
+    \item Для каждого объекта в списке \texttt{Toolbox} вызовите метод \texttt{ToolInfo}.
+\end{enumerate}
+
+\item[13]
+Файл. Класс \texttt{AudioFile} является производным от класса \texttt{File}. Метод \texttt{FileInfo} существует в обоих классах. \texttt{FileList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{File}, который будет базовым классом для класса \texttt{AudioFile}. В конструкторе класса \texttt{File} задайте параметры \texttt{filename}, \texttt{size}, \texttt{extension} и \texttt{created\_date}.
+    \item В классе \texttt{File} создайте метод \texttt{FileInfo}, который будет выводить информацию о файле.
+    \item Создайте класс \texttt{AudioFile}, который будет наследоваться от класса \texttt{File}. В конструкторе класса \texttt{AudioFile} добавьте параметр \texttt{duration}.
+    \item В классе \texttt{AudioFile} переопределите метод \texttt{FileInfo}, чтобы он выводил информацию о файле и длительности аудио.
+    \item В основной части программы создайте список \texttt{FileList} и добавьте в него объекты классов \texttt{File} и \texttt{AudioFile}.
+    \item Для каждого объекта в списке \texttt{FileList} вызовите метод \texttt{FileInfo}.
+\end{enumerate}
+
+\item[14]
+Пользователь. Класс \texttt{PremiumUser} является производным от класса \texttt{User}. Метод \texttt{UserProfile} существует в обоих классах. \texttt{UserDirectory} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{User}, который будет базовым классом для класса \texttt{PremiumUser}. В конструкторе класса \texttt{User} задайте параметры \texttt{username}, \texttt{email}, \texttt{registration\_date} и \texttt{status}.
+    \item В классе \texttt{User} создайте метод \texttt{UserProfile}, который будет выводить информацию о пользователе.
+    \item Создайте класс \texttt{PremiumUser}, который будет наследоваться от класса \texttt{User}. В конструкторе класса \texttt{PremiumUser} добавьте параметр \texttt{subscription\_end}.
+    \item В классе \texttt{PremiumUser} переопределите метод \texttt{UserProfile}, чтобы он выводил информацию о пользователе и дате окончания подписки.
+    \item В основной части программы создайте список \texttt{UserDirectory} и добавьте в него объекты классов \texttt{User} и \texttt{PremiumUser}.
+    \item Для каждого объекта в списке \texttt{UserDirectory} вызовите метод \texttt{UserProfile}.
+\end{enumerate}
+
+\item[15]
+Игра. Класс \texttt{MultiplayerGame} является производным от класса \texttt{Game}. Метод \texttt{GameDetails} существует в обоих классах. \texttt{GameLibrary} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Game}, который будет базовым классом для класса \texttt{MultiplayerGame}. В конструкторе класса \texttt{Game} задайте параметры \texttt{title}, \texttt{genre}, \texttt{release\_year} и \texttt{developer}.
+    \item В классе \texttt{Game} создайте метод \texttt{GameDetails}, который будет выводить информацию об игре.
+    \item Создайте класс \texttt{MultiplayerGame}, который будет наследоваться от класса \texttt{Game}. В конструкторе класса \texttt{MultiplayerGame} добавьте параметр \texttt{max\_players}.
+    \item В классе \texttt{MultiplayerGame} переопределите метод \texttt{GameDetails}, чтобы он выводил информацию об игре и максимальном числе игроков.
+    \item В основной части программы создайте список \texttt{GameLibrary} и добавьте в него объекты классов \texttt{Game} и \texttt{MultiplayerGame}.
+    \item Для каждого объекта в списке \texttt{GameLibrary} вызовите метод \texttt{GameDetails}.
+\end{enumerate}
+
+\item[16]
+Документ. Класс \texttt{Invoice} является производным от класса \texttt{Document}. Метод \texttt{PrintDocument} существует в обоих классах. \texttt{DocumentArchive} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Document}, который будет базовым классом для класса \texttt{Invoice}. В конструкторе класса \texttt{Document} задайте параметры \texttt{doc\_id}, \texttt{title}, \texttt{author} и \texttt{creation\_date}.
+    \item В классе \texttt{Document} создайте метод \texttt{PrintDocument}, который будет выводить информацию о документе.
+    \item Создайте класс \texttt{Invoice}, который будет наследоваться от класса \texttt{Document}. В конструкторе класса \texttt{Invoice} добавьте параметр \texttt{amount}.
+    \item В классе \texttt{Invoice} переопределите метод \texttt{PrintDocument}, чтобы он выводил информацию о документе и сумму счёта.
+    \item В основной части программы создайте список \texttt{DocumentArchive} и добавьте в него объекты классов \texttt{Document} и \texttt{Invoice}.
+    \item Для каждого объекта в списке \texttt{DocumentArchive} вызовите метод \texttt{PrintDocument}.
+\end{enumerate}
+
+\item[17]
+Покупка. Класс \texttt{OnlineOrder} является производным от класса \texttt{Purchase}. Метод \texttt{OrderSummary} существует в обоих классах. \texttt{Orders} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Purchase}, который будет базовым классом для класса \texttt{OnlineOrder}. В конструкторе класса \texttt{Purchase} задайте параметры \texttt{customer\_name}, \texttt{item}, \texttt{price} и \texttt{purchase\_date}.
+    \item В классе \texttt{Purchase} создайте метод \texttt{OrderSummary}, который будет выводить информацию о покупке.
+    \item Создайте класс \texttt{OnlineOrder}, который будет наследоваться от класса \texttt{Purchase}. В конструкторе класса \texttt{OnlineOrder} добавьте параметр \texttt{delivery\_address}.
+    \item В классе \texttt{OnlineOrder} переопределите метод \texttt{OrderSummary}, чтобы он выводил информацию о покупке и адресе доставки.
+    \item В основной части программы создайте список \texttt{Orders} и добавьте в него объекты классов \texttt{Purchase} и \texttt{OnlineOrder}.
+    \item Для каждого объекта в списке \texttt{Orders} вызовите метод \texttt{OrderSummary}.
+\end{enumerate}
+
+\item[18]
+Клиент. Класс \texttt{VipClient} является производным от класса \texttt{Client}. Метод \texttt{ClientCard} существует в обоих классах. \texttt{Clients} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Client}, который будет базовым классом для класса \texttt{VipClient}. В конструкторе класса \texttt{Client} задайте параметры \texttt{client\_id}, \texttt{full\_name}, \texttt{phone} и \texttt{email}.
+    \item В классе \texttt{Client} создайте метод \texttt{ClientCard}, который будет выводить информацию о клиенте.
+    \item Создайте класс \texttt{VipClient}, который будет наследоваться от класса \texttt{Client}. В конструкторе класса \texttt{VipClient} добавьте параметр \texttt{discount\_rate}.
+    \item В классе \texttt{VipClient} переопределите метод \texttt{ClientCard}, чтобы он выводил информацию о клиенте и размере скидки.
+    \item В основной части программы создайте список \texttt{Clients} и добавьте в него объекты классов \texttt{Client} и \texttt{VipClient}.
+    \item Для каждого объекта в списке \texttt{Clients} вызовите метод \texttt{ClientCard}.
+\end{enumerate}
+
+\item[19]
+Событие. Класс \texttt{Conference} является производным от класса \texttt{Event}. Метод \texttt{EventInfo} существует в обоих классах. \texttt{EventsSchedule} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Event}, который будет базовым классом для класса \texttt{Conference}. В конструкторе класса \texttt{Event} задайте параметры \texttt{title}, \texttt{location}, \texttt{start\_date} и \texttt{duration\_days}.
+    \item В классе \texttt{Event} создайте метод \texttt{EventInfo}, который будет выводить информацию о событии.
+    \item Создайте класс \texttt{Conference}, который будет наследоваться от класса \texttt{Event}. В конструкторе класса \texttt{Conference} добавьте параметр \texttt{speakers\_list}.
+    \item В классе \texttt{Conference} переопределите метод \texttt{EventInfo}, чтобы он выводил информацию о событии и списке спикеров.
+    \item В основной части программы создайте список \texttt{EventsSchedule} и добавьте в него объекты классов \texttt{Event} и \texttt{Conference}.
+    \item Для каждого объекта в списке \texttt{EventsSchedule} вызовите метод \texttt{EventInfo}.
+\end{enumerate}
+
+\item[20]
+Платёж. Класс \texttt{CreditCardPayment} является производным от класса \texttt{Payment}. Метод \texttt{PaymentDetails} существует в обоих классах. \texttt{PaymentsList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Payment}, который будет базовым классом для класса \texttt{CreditCardPayment}. В конструкторе класса \texttt{Payment} задайте параметры \texttt{amount}, \texttt{currency}, \texttt{payment\_date} и \texttt{status}.
+    \item В классе \texttt{Payment} создайте метод \texttt{PaymentDetails}, который будет выводить информацию о платеже.
+    \item Создайте класс \texttt{CreditCardPayment}, который будет наследоваться от класса \texttt{Payment}. В конструкторе класса \texttt{CreditCardPayment} добавьте параметр \texttt{card\_last\_digits}.
+    \item В классе \texttt{CreditCardPayment} переопределите метод \texttt{PaymentDetails}, чтобы он выводил информацию о платеже и последние цифры карты.
+    \item В основной части программы создайте список \texttt{PaymentsList} и добавьте в него объекты классов \texttt{Payment} и \texttt{CreditCardPayment}.
+    \item Для каждого объекта в списке \texttt{PaymentsList} вызовите метод \texttt{PaymentDetails}.
+\end{enumerate}
+
+\item[21]
+Рецепт. Класс \texttt{VeganRecipe} является производным от класса \texttt{Recipe}. Метод \texttt{ShowRecipe} существует в обоих классах. \texttt{Cookbook} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Recipe}, который будет базовым классом для класса \texttt{VeganRecipe}. В конструкторе класса \texttt{Recipe} задайте параметры \texttt{name}, \texttt{prep\_time}, \texttt{servings} и \texttt{ingredients}.
+    \item В классе \texttt{Recipe} создайте метод \texttt{ShowRecipe}, который будет выводить информацию о рецепте.
+    \item Создайте класс \texttt{VeganRecipe}, который будет наследоваться от класса \texttt{Recipe}. В конструкторе класса \texttt{VeganRecipe} добавьте параметр \texttt{is\_gluten\_free}.
+    \item В классе \texttt{VeganRecipe} переопределите метод \texttt{ShowRecipe}, чтобы он выводил информацию о рецепте и отметку о безглютеновости.
+    \item В основной части программы создайте список \texttt{Cookbook} и добавьте в него объекты классов \texttt{Recipe} и \texttt{VeganRecipe}.
+    \item Для каждого объекта в списке \texttt{Cookbook} вызовите метод \texttt{ShowRecipe}.
+\end{enumerate}
+
+\item[22]
+Заказ. Класс \texttt{ExpressOrder} является производным от класса \texttt{Order}. Метод \texttt{OrderStatus} существует в обоих классах. \texttt{OrderQueue} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Order}, который будет базовым классом для класса \texttt{ExpressOrder}. В конструкторе класса \texttt{Order} задайте параметры \texttt{order\_id}, \texttt{customer}, \texttt{items} и \texttt{order\_date}.
+    \item В классе \texttt{Order} создайте метод \texttt{OrderStatus}, который будет выводить информацию о заказе.
+    \item Создайте класс \texttt{ExpressOrder}, который будет наследоваться от класса \texttt{Order}. В конструкторе класса \texttt{ExpressOrder} добавьте параметр \texttt{delivery\_time\_hours}.
+    \item В классе \texttt{ExpressOrder} переопределите метод \texttt{OrderStatus}, чтобы он выводил информацию о заказе и времени доставки.
+    \item В основной части программы создайте список \texttt{OrderQueue} и добавьте в него объекты классов \texttt{Order} и \texttt{ExpressOrder}.
+    \item Для каждого объекта в списке \texttt{OrderQueue} вызовите метод \texttt{OrderStatus}.
+\end{enumerate}
+
+\item[23]
+Пассажир. Класс \texttt{BusinessClassPassenger} является производным от класса \texttt{Passenger}. Метод \texttt{BoardingInfo} существует в обоих классах. \texttt{PassengerList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Passenger}, который будет базовым классом для класса \texttt{BusinessClassPassenger}. В конструкторе класса \texttt{Passenger} задайте параметры \texttt{first\_name}, \texttt{last\_name}, \texttt{passport\_number} и \texttt{seat\_number}.
+    \item В классе \texttt{Passenger} создайте метод \texttt{BoardingInfo}, который будет выводить информацию о пассажире.
+    \item Создайте класс \texttt{BusinessClassPassenger}, который будет наследоваться от класса \texttt{Passenger}. В конструкторе класса \texttt{BusinessClassPassenger} добавьте параметр \texttt{lounge\_access}.
+    \item В классе \texttt{BusinessClassPassenger} переопределите метод \texttt{BoardingInfo}, чтобы он выводил информацию о пассажире и доступе в лаунж.
+    \item В основной части программы создайте список \texttt{PassengerList} и добавьте в него объекты классов \texttt{Passenger} и \texttt{BusinessClassPassenger}.
+    \item Для каждого объекта в списке \texttt{PassengerList} вызовите метод \texttt{BoardingInfo}.
+\end{enumerate}
+
+\item[24]
+Товар. Класс \texttt{DigitalProduct} является производным от класса \texttt{ProductItem}. Метод \texttt{ProductInfo} существует в обоих классах. \texttt{ShoppingCart} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{ProductItem}, который будет базовым классом для класса \texttt{DigitalProduct}. В конструкторе класса \texttt{ProductItem} задайте параметры \texttt{name}, \texttt{price}, \texttt{category} и \texttt{in\_stock}.
+    \item В классе \texttt{ProductItem} создайте метод \texttt{ProductInfo}, который будет выводить информацию о товаре.
+    \item Создайте класс \texttt{DigitalProduct}, который будет наследоваться от класса \texttt{ProductItem}. В конструкторе класса \texttt{DigitalProduct} добавьте параметр \texttt{download\_link}.
+    \item В классе \texttt{DigitalProduct} переопределите метод \texttt{ProductInfo}, чтобы он выводил информацию о товаре и ссылку на скачивание.
+    \item В основной части программы создайте список \texttt{ShoppingCart} и добавьте в него объекты классов \texttt{ProductItem} и \texttt{DigitalProduct}.
+    \item Для каждого объекта в списке \texttt{ShoppingCart} вызовите метод \texttt{ProductInfo}.
+\end{enumerate}
+
+\item[25]
+Курс. Класс \texttt{OnlineCourse} является производным от класса \texttt{Course}. Метод \texttt{CourseOutline} существует в обоих классах. \texttt{CourseCatalog} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Course}, который будет базовым классом для класса \texttt{OnlineCourse}. В конструкторе класса \texttt{Course} задайте параметры \texttt{title}, \texttt{instructor}, \texttt{duration\_weeks} и \texttt{level}.
+    \item В классе \texttt{Course} создайте метод \texttt{CourseOutline}, который будет выводить информацию о курсе.
+    \item Создайте класс \texttt{OnlineCourse}, который будет наследоваться от класса \texttt{Course}. В конструкторе класса \texttt{OnlineCourse} добавьте параметр \texttt{platform}.
+    \item В классе \texttt{OnlineCourse} переопределите метод \texttt{CourseOutline}, чтобы он выводил информацию о курсе и платформе обучения.
+    \item В основной части программы создайте список \texttt{CourseCatalog} и добавьте в него объекты классов \texttt{Course} и \texttt{OnlineCourse}.
+    \item Для каждого объекта в списке \texttt{CourseCatalog} вызовите метод \texttt{CourseOutline}.
+\end{enumerate}
+
+\item[26]
+Поставка. Класс \texttt{InternationalShipment} является производным от класса \texttt{Shipment}. Метод \texttt{ShipmentInfo} существует в обоих классах. \texttt{ShipmentsLog} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Shipment}, который будет базовым классом для класса \texttt{InternationalShipment}. В конструкторе класса \texttt{Shipment} задайте параметры \texttt{tracking\_number}, \texttt{origin}, \texttt{destination} и \texttt{weight\_kg}.
+    \item В классе \texttt{Shipment} создайте метод \texttt{ShipmentInfo}, который будет выводить информацию о поставке.
+    \item Создайте класс \texttt{InternationalShipment}, который будет наследоваться от класса \texttt{Shipment}. В конструкторе класса \texttt{InternationalShipment} добавьте параметр \texttt{customs\_cleared}.
+    \item В классе \texttt{InternationalShipment} переопределите метод \texttt{ShipmentInfo}, чтобы он выводил информацию о поставке и статусе таможенной очистки.
+    \item В основной части программы создайте список \texttt{ShipmentsLog} и добавьте в него объекты классов \texttt{Shipment} и \texttt{InternationalShipment}.
+    \item Для каждого объекта в списке \texttt{ShipmentsLog} вызовите метод \texttt{ShipmentInfo}.
+\end{enumerate}
+
+\item[27]
+Сотрудник службы поддержки. Класс \texttt{SeniorSupportAgent} является производным от класса \texttt{SupportAgent}. Метод \texttt{AgentProfile} существует в обоих классах. \texttt{SupportTeam} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{SupportAgent}, который будет базовым классом для класса \texttt{SeniorSupportAgent}. В конструкторе класса \texttt{SupportAgent} задайте параметры \texttt{agent\_id}, \texttt{name}, \texttt{department} и \texttt{hire\_date}.
+    \item В классе \texttt{SupportAgent} создайте метод \texttt{AgentProfile}, который будет выводить информацию о сотруднике.
+    \item Создайте класс \texttt{SeniorSupportAgent}, который будет наследоваться от класса \texttt{SupportAgent}. В конструкторе класса \texttt{SeniorSupportAgent} добавьте параметр \texttt{certifications}.
+    \item В классе \texttt{SeniorSupportAgent} переопределите метод \texttt{AgentProfile}, чтобы он выводил информацию о сотруднике и его сертификатах.
+    \item В основной части программы создайте список \texttt{SupportTeam} и добавьте в него объекты классов \texttt{SupportAgent} и \texttt{SeniorSupportAgent}.
+    \item Для каждого объекта в списке \texttt{SupportTeam} вызовите метод \texttt{AgentProfile}.
+\end{enumerate}
+
+\item[28]
+Фотография. Класс \texttt{EditedPhoto} является производным от класса \texttt{Photo}. Метод \texttt{PhotoMetadata} существует в обоих классах. \texttt{PhotoAlbum} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Photo}, который будет базовым классом для класса \texttt{EditedPhoto}. В конструкторе класса \texttt{Photo} задайте параметры \texttt{filename}, \texttt{date\_taken}, \texttt{location} и \texttt{camera\_model}.
+    \item В классе \texttt{Photo} создайте метод \texttt{PhotoMetadata}, который будет выводить информацию о фотографии.
+    \item Создайте класс \texttt{EditedPhoto}, который будет наследоваться от класса \texttt{Photo}. В конструкторе класса \texttt{EditedPhoto} добавьте параметр \texttt{editing\_software}.
+    \item В классе \texttt{EditedPhoto} переопределите метод \texttt{PhotoMetadata}, чтобы он выводил информацию о фотографии и программе редактирования.
+    \item В основной части программы создайте список \texttt{PhotoAlbum} и добавьте в него объекты классов \texttt{Photo} и \texttt{EditedPhoto}.
+    \item Для каждого объекта в списке \texttt{PhotoAlbum} вызовите метод \texttt{PhotoMetadata}.
+\end{enumerate}
+
+\item[29]
+Абонемент. Класс \texttt{FamilyMembership} является производным от класса \texttt{Membership}. Метод \texttt{MembershipCard} существует в обоих классах. \texttt{MembersList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Membership}, который будет базовым классом для класса \texttt{FamilyMembership}. В конструкторе класса \texttt{Membership} задайте параметры \texttt{member\_name}, \texttt{membership\_id}, \texttt{start\_date} и \texttt{type}.
+    \item В классе \texttt{Membership} создайте метод \texttt{MembershipCard}, который будет выводить информацию об абонементе.
+    \item Создайте класс \texttt{FamilyMembership}, который будет наследоваться от класса \texttt{Membership}. В конструкторе класса \texttt{FamilyMembership} добавьте параметр \texttt{family\_size}.
+    \item В классе \texttt{FamilyMembership} переопределите метод \texttt{MembershipCard}, чтобы он выводил информацию об абонементе и количестве членов семьи.
+    \item В основной части программы создайте список \texttt{MembersList} и добавьте в него объекты классов \texttt{Membership} и \texttt{FamilyMembership}.
+    \item Для каждого объекта в списке \texttt{MembersList} вызовите метод \texttt{MembershipCard}.
+\end{enumerate}
+
+\item[30]
+Турист. Класс \texttt{Backpacker} является производным от класса \texttt{Traveler}. Метод \texttt{TravelProfile} существует в обоих классах. \texttt{TravelersGroup} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Traveler}, который будет базовым классом для класса \texttt{Backpacker}. В конструкторе класса \texttt{Traveler} задайте параметры \texttt{name}, \texttt{nationality}, \texttt{passport\_num} и \texttt{current\_location}.
+    \item В классе \texttt{Traveler} создайте метод \texttt{TravelProfile}, который будет выводить информацию о туристе.
+    \item Создайте класс \texttt{Backpacker}, который будет наследоваться от класса \texttt{Traveler}. В конструкторе класса \texttt{Backpacker} добавьте параметр \texttt{budget\_per\_day}.
+    \item В классе \texttt{Backpacker} переопределите метод \texttt{TravelProfile}, чтобы он выводил информацию о туристе и дневном бюджете.
+    \item В основной части программы создайте список \texttt{TravelersGroup} и добавьте в него объекты классов \texttt{Traveler} и \texttt{Backpacker}.
+    \item Для каждого объекта в списке \texttt{TravelersGroup} вызовите метод \texttt{TravelProfile}.
+\end{enumerate}
+
+\item[31]
+Климатическое устройство. Класс \texttt{AirConditioner} является производным от класса \texttt{ClimateDevice}. Метод \texttt{DeviceStatus} существует в обоих классах. \texttt{DevicesList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{ClimateDevice}, который будет базовым классом для класса \texttt{AirConditioner}. В конструкторе класса \texttt{ClimateDevice} задайте параметры \texttt{device\_id}, \texttt{brand}, \texttt{power\_watts} и \texttt{location}.
+    \item В классе \texttt{ClimateDevice} создайте метод \texttt{DeviceStatus}, который будет выводить информацию об устройстве.
+    \item Создайте класс \texttt{AirConditioner}, который будет наследоваться от класса \texttt{ClimateDevice}. В конструкторе класса \texttt{AirConditioner} добавьте параметр \texttt{cooling\_capacity}.
+    \item В классе \texttt{AirConditioner} переопределите метод \texttt{DeviceStatus}, чтобы он выводил информацию об устройстве и мощности охлаждения.
+    \item В основной части программы создайте список \texttt{DevicesList} и добавьте в него объекты классов \texttt{ClimateDevice} и \texttt{AirConditioner}.
+    \item Для каждого объекта в списке \texttt{DevicesList} вызовите метод \texttt{DeviceStatus}.
+\end{enumerate}
+
+\item[32]
+Задание. Класс \texttt{GroupAssignment} является производным от класса \texttt{Assignment}. Метод \texttt{AssignmentInfo} существует в обоих классах. \texttt{AssignmentsList} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Assignment}, который будет базовым классом для класса \texttt{GroupAssignment}. В конструкторе класса \texttt{Assignment} задайте параметры \texttt{title}, \texttt{due\_date}, \texttt{max\_score} и \texttt{description}.
+    \item В классе \texttt{Assignment} создайте метод \texttt{AssignmentInfo}, который будет выводить информацию о задании.
+    \item Создайте класс \texttt{GroupAssignment}, который будет наследоваться от класса \texttt{Assignment}. В конструкторе класса \texttt{GroupAssignment} добавьте параметр \texttt{team\_size}.
+    \item В классе \texttt{GroupAssignment} переопределите метод \texttt{AssignmentInfo}, чтобы он выводил информацию о задании и размере команды.
+    \item В основной части программы создайте список \texttt{AssignmentsList} и добавьте в него объекты классов \texttt{Assignment} и \texttt{GroupAssignment}.
+    \item Для каждого объекта в списке \texttt{AssignmentsList} вызовите метод \texttt{AssignmentInfo}.
+\end{enumerate}
+
+\item[33]
+Сертификат. Класс \texttt{ProfessionalCertification} является производным от класса \texttt{Certificate}. Метод \texttt{CertDetails} существует в обоих классах. \texttt{CertificatesPortfolio} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Certificate}, который будет базовым классом для класса \texttt{ProfessionalCertification}. В конструкторе класса \texttt{Certificate} задайте параметры \texttt{cert\_id}, \texttt{title}, \texttt{issuer} и \texttt{issue\_date}.
+    \item В классе \texttt{Certificate} создайте метод \texttt{CertDetails}, который будет выводить информацию о сертификате.
+    \item Создайте класс \texttt{ProfessionalCertification}, который будет наследоваться от класса \texttt{Certificate}. В конструкторе класса \texttt{ProfessionalCertification} добавьте параметр \texttt{valid\_until}.
+    \item В классе \texttt{ProfessionalCertification} переопределите метод \texttt{CertDetails}, чтобы он выводил информацию о сертификате и дате окончания действия.
+    \item В основной части программы создайте список \texttt{CertificatesPortfolio} и добавьте в него объекты классов \texttt{Certificate} и \texttt{ProfessionalCertification}.
+    \item Для каждого объекта в списке \texttt{CertificatesPortfolio} вызовите метод \texttt{CertDetails}.
+\end{enumerate}
+
+\item[34]
+Мероприятие. Класс \texttt{Workshop} является производным от класса \texttt{Activity}. Метод \texttt{ActivitySummary} существует в обоих классах. \texttt{ActivitiesSchedule} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Activity}, который будет базовым классом для класса \texttt{Workshop}. В конструкторе класса \texttt{Activity} задайте параметры \texttt{name}, \texttt{location}, \texttt{start\_time} и \texttt{duration\_hours}.
+    \item В классе \texttt{Activity} создайте метод \texttt{ActivitySummary}, который будет выводить информацию о мероприятии.
+    \item Создайте класс \texttt{Workshop}, который будет наследоваться от класса \texttt{Activity}. В конструкторе класса \texttt{Workshop} добавьте параметр \texttt{materials\_required}.
+    \item В классе \texttt{Workshop} переопределите метод \texttt{ActivitySummary}, чтобы он выводил информацию о мероприятии и необходимых материалах.
+    \item В основной части программы создайте список \texttt{ActivitiesSchedule} и добавьте в него объекты классов \texttt{Activity} и \texttt{Workshop}.
+    \item Для каждого объекта в списке \texttt{ActivitiesSchedule} вызовите метод \texttt{ActivitySummary}.
+\end{enumerate}
+
+\item[35]
+Транзакция. Класс \texttt{RefundTransaction} является производным от класса \texttt{Transaction}. Метод \texttt{TransactionReport} существует в обоих классах. \texttt{TransactionLog} представляет собой список, содержащий объекты обоих классов.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Transaction}, который будет базовым классом для класса \texttt{RefundTransaction}. В конструкторе класса \texttt{Transaction} задайте параметры \texttt{trans\_id}, \texttt{amount}, \texttt{currency} и \texttt{timestamp}.
+    \item В классе \texttt{Transaction} создайте метод \texttt{TransactionReport}, который будет выводить информацию о транзакции.
+    \item Создайте класс \texttt{RefundTransaction}, который будет наследоваться от класса \texttt{Transaction}. В конструкторе класса \texttt{RefundTransaction} добавьте параметр \texttt{reason}.
+    \item В классе \texttt{RefundTransaction} переопределите метод \texttt{TransactionReport}, чтобы он выводил информацию о транзакции и причине возврата.
+    \item В основной части программы создайте список \texttt{TransactionLog} и добавьте в него объекты классов \texttt{Transaction} и \texttt{RefundTransaction}.
+    \item Для каждого объекта в списке \texttt{TransactionLog} вызовите метод \texttt{TransactionReport}.
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Задача 2.} 
+\begin{enumerate}
+\item[1]
+Модель склада оргтехники. Классы \texttt{Printer}, \texttt{Scanner} и \texttt{Xerox} являются производными от класса \texttt{Equipment}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Printer}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Equipment}, который будет базовым классом для классов \texttt{Printer}, \texttt{Scanner} и \texttt{Xerox}. В конструкторе класса \texttt{Equipment} задайте параметры \texttt{name}, \texttt{make} и \texttt{year}.
+    \item В классе \texttt{Equipment} создайте метод \texttt{action}, который будет возвращать строку \texttt{'Не определено'}.
+    \item В классе \texttt{Equipment} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о оборудовании.
+    \item Создайте класс \texttt{Printer}, который будет наследоваться от класса \texttt{Equipment}. В конструкторе класса \texttt{Printer} задайте параметры \texttt{series}, \texttt{name}, \texttt{make} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Printer} переопределите метод \texttt{action}, чтобы он возвращал строку \texttt{'Печатает'}.
+    \item Создайте класс \texttt{Scanner}, который будет наследоваться от класса \texttt{Equipment}. В конструкторе класса \texttt{Scanner} задайте параметры \texttt{name}, \texttt{make} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Scanner} переопределите метод \texttt{action}, чтобы он возвращал строку \texttt{'Сканирует'}.
+    \item Создайте класс \texttt{Xerox}, который будет наследоваться от класса \texttt{Equipment}. В конструкторе класса \texttt{Xerox} задайте параметры \texttt{name}, \texttt{make} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Xerox} переопределите метод \texttt{action}, чтобы он возвращал строку \texttt{'Копирует'}.
+    \item В основной части программы создайте объекты классов \texttt{Printer}, \texttt{Scanner} и \texttt{Xerox} и добавьте их в список \texttt{warehouse}.
+    \item Выведите содержимое списка \texttt{warehouse}, используя метод \texttt{action} каждого объекта.
+    \item Удалите все объекты класса \texttt{Printer} из списка \texttt{warehouse}.
+    \item Выведите оставшееся содержимое списка \texttt{warehouse}, используя метод \texttt{action} каждого объекта.
+\end{enumerate}
+\item[2]
+Модель зоопарка. Классы \texttt{Lion}, \texttt{Tiger} и \texttt{Bear} являются производными от класса \texttt{Animal}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Lion}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Animal}, который будет базовым классом для классов \texttt{Lion}, \texttt{Tiger} и \texttt{Bear}. В конструкторе класса \texttt{Animal} задайте параметры \texttt{name}, \texttt{species} и \texttt{age}.
+    \item В классе \texttt{Animal} создайте метод \texttt{sound}, который будет возвращать строку \texttt{'Не определено'}.
+    \item В классе \texttt{Animal} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о животном.
+    \item Создайте класс \texttt{Lion}, который будет наследоваться от класса \texttt{Animal}. В конструкторе класса \texttt{Lion} задайте параметры \texttt{mane\_color}, \texttt{name}, \texttt{species} и \texttt{age}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Lion} переопределите метод \texttt{sound}, чтобы он возвращал строку \texttt{'Рычит'}.
+    \item Создайте класс \texttt{Tiger}, который будет наследоваться от класса \texttt{Animal}. В конструкторе класса \texttt{Tiger} задайте параметры \texttt{name}, \texttt{species} и \texttt{age}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Tiger} переопределите метод \texttt{sound}, чтобы он возвращал строку \texttt{'Рычит громко'}.
+    \item Создайте класс \texttt{Bear}, который будет наследоваться от класса \texttt{Animal}. В конструкторе класса \texttt{Bear} задайте параметры \texttt{name}, \texttt{species} и \texttt{age}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bear} переопределите метод \texttt{sound}, чтобы он возвращал строку \texttt{'Ревёт'}.
+    \item В основной части программы создайте объекты классов \texttt{Lion}, \texttt{Tiger} и \texttt{Bear} и добавьте их в список \texttt{zoo}.
+    \item Выведите содержимое списка \texttt{zoo}, используя метод \texttt{sound} каждого объекта.
+    \item Удалите все объекты класса \texttt{Lion} из списка \texttt{zoo}.
+    \item Выведите оставшееся содержимое списка \texttt{zoo}, используя метод \texttt{sound} каждого объекта.
+\end{enumerate}
+\item[3]
+Модель транспортного парка. Классы \texttt{Car}, \texttt{Truck} и \texttt{Motorcycle} являются производными от класса \texttt{Vehicle}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Car}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Vehicle}, который будет базовым классом для классов \texttt{Car}, \texttt{Truck} и \texttt{Motorcycle}. В конструкторе класса \texttt{Vehicle} задайте параметры \texttt{brand}, \texttt{model} и \texttt{year}.
+    \item В классе \texttt{Vehicle} создайте метод \texttt{move}, который будет возвращать строку \texttt{'Движется'}.
+    \item В классе \texttt{Vehicle} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о транспортном средстве.
+    \item Создайте класс \texttt{Car}, который будет наследоваться от класса \texttt{Vehicle}. В конструкторе класса \texttt{Car} задайте параметры \texttt{doors}, \texttt{brand}, \texttt{model} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Car} переопределите метод \texttt{move}, чтобы он возвращал строку \texttt{'Едет по дороге'}.
+    \item Создайте класс \texttt{Truck}, который будет наследоваться от класса \texttt{Vehicle}. В конструкторе класса \texttt{Truck} задайте параметры \texttt{brand}, \texttt{model} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Truck} переопределите метод \texttt{move}, чтобы он возвращал строку \texttt{'Перевозит груз'}.
+    \item Создайте класс \texttt{Motorcycle}, который будет наследоваться от класса \texttt{Vehicle}. В конструкторе класса \texttt{Motorcycle} задайте параметры \texttt{brand}, \texttt{model} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Motorcycle} переопределите метод \texttt{move}, чтобы он возвращал строку \texttt{'Мчится'}.
+    \item В основной части программы создайте объекты классов \texttt{Car}, \texttt{Truck} и \texttt{Motorcycle} и добавьте их в список \texttt{fleet}.
+    \item Выведите содержимое списка \texttt{fleet}, используя метод \texttt{move} каждого объекта.
+    \item Удалите все объекты класса \texttt{Car} из списка \texttt{fleet}.
+    \item Выведите оставшееся содержимое списка \texttt{fleet}, используя метод \texttt{move} каждого объекта.
+\end{enumerate}
+\item[4]
+Модель библиотеки. Классы \texttt{Book}, \texttt{Magazine} и \texttt{Newspaper} являются производными от класса \texttt{Publication}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Book}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Publication}, который будет базовым классом для классов \texttt{Book}, \texttt{Magazine} и \texttt{Newspaper}. В конструкторе класса \texttt{Publication} задайте параметры \texttt{title}, \texttt{publisher} и \texttt{year}.
+    \item В классе \texttt{Publication} создайте метод \texttt{read}, который будет возвращать строку \texttt{'Читается'}.
+    \item В классе \texttt{Publication} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об издании.
+    \item Создайте класс \texttt{Book}, который будет наследоваться от класса \texttt{Publication}. В конструкторе класса \texttt{Book} задайте параметры \texttt{pages}, \texttt{title}, \texttt{publisher} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Book} переопределите метод \texttt{read}, чтобы он возвращал строку \texttt{'Читается от корки до корки'}.
+    \item Создайте класс \texttt{Magazine}, который будет наследоваться от класса \texttt{Publication}. В конструкторе класса \texttt{Magazine} задайте параметры \texttt{title}, \texttt{publisher} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Magazine} переопределите метод \texttt{read}, чтобы он возвращал строку \texttt{'Листается'}.
+    \item Создайте класс \texttt{Newspaper}, который будет наследоваться от класса \texttt{Publication}. В конструкторе класса \texttt{Newspaper} задайте параметры \texttt{title}, \texttt{publisher} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Newspaper} переопределите метод \texttt{read}, чтобы он возвращал строку \texttt{'Просматривается'}.
+    \item В основной части программы создайте объекты классов \texttt{Book}, \texttt{Magazine} и \texttt{Newspaper} и добавьте их в список \texttt{library}.
+    \item Выведите содержимое списка \texttt{library}, используя метод \texttt{read} каждого объекта.
+    \item Удалите все объекты класса \texttt{Book} из списка \texttt{library}.
+    \item Выведите оставшееся содержимое списка \texttt{library}, используя метод \texttt{read} каждого объекта.
+\end{enumerate}
+\item[5]
+Модель музыкальных инструментов. Классы \texttt{Guitar}, \texttt{Piano} и \texttt{Drums} являются производными от класса \texttt{Instrument}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Guitar}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Instrument}, который будет базовым классом для классов \texttt{Guitar}, \texttt{Piano} и \texttt{Drums}. В конструкторе класса \texttt{Instrument} задайте параметры \texttt{name}, \texttt{maker} и \texttt{year}.
+    \item В классе \texttt{Instrument} создайте метод \texttt{play}, который будет возвращать строку \texttt{'Играет'}.
+    \item В классе \texttt{Instrument} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об инструменте.
+    \item Создайте класс \texttt{Guitar}, который будет наследоваться от класса \texttt{Instrument}. В конструкторе класса \texttt{Guitar} задайте параметры \texttt{strings}, \texttt{name}, \texttt{maker} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Guitar} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Звучит струнами'}.
+    \item Создайте класс \texttt{Piano}, который будет наследоваться от класса \texttt{Instrument}. В конструкторе класса \texttt{Piano} задайте параметры \texttt{name}, \texttt{maker} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Piano} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Играет клавишами'}.
+    \item Создайте класс \texttt{Drums}, который будет наследоваться от класса \texttt{Instrument}. В конструкторе класса \texttt{Drums} задайте параметры \texttt{name}, \texttt{maker} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Drums} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Бьёт в ритме'}.
+    \item В основной части программы создайте объекты классов \texttt{Guitar}, \texttt{Piano} и \texttt{Drums} и добавьте их в список \texttt{band}.
+    \item Выведите содержимое списка \texttt{band}, используя метод \texttt{play} каждого объекта.
+    \item Удалите все объекты класса \texttt{Guitar} из списка \texttt{band}.
+    \item Выведите оставшееся содержимое списка \texttt{band}, используя метод \texttt{play} каждого объекта.
+\end{enumerate}
+\item[6]
+Модель офисной мебели. Классы \texttt{Chair}, \texttt{Desk} и \texttt{Cabinet} являются производными от класса \texttt{Furniture}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Chair}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Furniture}, который будет базовым классом для классов \texttt{Chair}, \texttt{Desk} и \texttt{Cabinet}. В конструкторе класса \texttt{Furniture} задайте параметры \texttt{name}, \texttt{material} и \texttt{year}.
+    \item В классе \texttt{Furniture} создайте метод \texttt{use}, который будет возвращать строку \texttt{'Используется'}.
+    \item В классе \texttt{Furniture} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о мебели.
+    \item Создайте класс \texttt{Chair}, который будет наследоваться от класса \texttt{Furniture}. В конструкторе класса \texttt{Chair} задайте параметры \texttt{wheels}, \texttt{name}, \texttt{material} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Chair} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Сидят на нём'}.
+    \item Создайте класс \texttt{Desk}, который будет наследоваться от класса \texttt{Furniture}. В конструкторе класса \texttt{Desk} задайте параметры \texttt{name}, \texttt{material} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Desk} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Работают за ним'}.
+    \item Создайте класс \texttt{Cabinet}, который будет наследоваться от класса \texttt{Furniture}. В конструкторе класса \texttt{Cabinet} задайте параметры \texttt{name}, \texttt{material} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Cabinet} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Хранят в нём'}.
+    \item В основной части программы создайте объекты классов \texttt{Chair}, \texttt{Desk} и \texttt{Cabinet} и добавьте их в список \texttt{office}.
+    \item Выведите содержимое списка \texttt{office}, используя метод \texttt{use} каждого объекта.
+    \item Удалите все объекты класса \texttt{Chair} из списка \texttt{office}.
+    \item Выведите оставшееся содержимое списка \texttt{office}, используя метод \texttt{use} каждого объекта.
+\end{enumerate}
+\item[7]
+Модель кухонной техники. Классы \texttt{Blender}, \texttt{Toaster} и \texttt{Kettle} являются производными от класса \texttt{Appliance}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Blender}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Appliance}, который будет базовым классом для классов \texttt{Blender}, \texttt{Toaster} и \texttt{Kettle}. В конструкторе класса \texttt{Appliance} задайте параметры \texttt{name}, \texttt{brand} и \texttt{year}.
+    \item В классе \texttt{Appliance} создайте метод \texttt{operate}, который будет возвращать строку \texttt{'Работает'}.
+    \item В классе \texttt{Appliance} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о приборе.
+    \item Создайте класс \texttt{Blender}, который будет наследоваться от класса \texttt{Appliance}. В конструкторе класса \texttt{Blender} задайте параметры \texttt{power}, \texttt{name}, \texttt{brand} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Blender} переопределите метод \texttt{operate}, чтобы он возвращал строку \texttt{'Перемалывает'}.
+    \item Создайте класс \texttt{Toaster}, который будет наследоваться от класса \texttt{Appliance}. В конструкторе класса \texttt{Toaster} задайте параметры \texttt{name}, \texttt{brand} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Toaster} переопределите метод \texttt{operate}, чтобы он возвращал строку \texttt{'Поджаривает'}.
+    \item Создайте класс \texttt{Kettle}, который будет наследоваться от класса \texttt{Appliance}. В конструкторе класса \texttt{Kettle} задайте параметры \texttt{name}, \texttt{brand} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Kettle} переопределите метод \texttt{operate}, чтобы он возвращал строку \texttt{'Кипятит'}.
+    \item В основной части программы создайте объекты классов \texttt{Blender}, \texttt{Toaster} и \texttt{Kettle} и добавьте их в список \texttt{kitchen}.
+    \item Выведите содержимое списка \texttt{kitchen}, используя метод \texttt{operate} каждого объекта.
+    \item Удалите все объекты класса \texttt{Blender} из списка \texttt{kitchen}.
+    \item Выведите оставшееся содержимое списка \texttt{kitchen}, используя метод \texttt{operate} каждого объекта.
+\end{enumerate}
+\item[8]
+Модель спортивного инвентаря. Классы \texttt{Ball}, \texttt{Racket} и \texttt{Skates} являются производными от класса \texttt{SportItem}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Ball}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{SportItem}, который будет базовым классом для классов \texttt{Ball}, \texttt{Racket} и \texttt{Skates}. В конструкторе класса \texttt{SportItem} задайте параметры \texttt{name}, \texttt{sport} и \texttt{year}.
+    \item В классе \texttt{SportItem} создайте метод \texttt{use}, который будет возвращать строку \texttt{'Используется в спорте'}.
+    \item В классе \texttt{SportItem} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об инвентаре.
+    \item Создайте класс \texttt{Ball}, который будет наследоваться от класса \texttt{SportItem}. В конструкторе класса \texttt{Ball} задайте параметры \texttt{material}, \texttt{name}, \texttt{sport} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Ball} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Катится и отскакивает'}.
+    \item Создайте класс \texttt{Racket}, который будет наследоваться от класса \texttt{SportItem}. В конструкторе класса \texttt{Racket} задайте параметры \texttt{name}, \texttt{sport} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Racket} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Бьёт по мячу'}.
+    \item Создайте класс \texttt{Skates}, который будет наследоваться от класса \texttt{SportItem}. В конструкторе класса \texttt{Skates} задайте параметры \texttt{name}, \texttt{sport} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Skates} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Скользит по льду'}.
+    \item В основной части программы создайте объекты классов \texttt{Ball}, \texttt{Racket} и \texttt{Skates} и добавьте их в список \texttt{inventory}.
+    \item Выведите содержимое списка \texttt{inventory}, используя метод \texttt{use} каждого объекта.
+    \item Удалите все объекты класса \texttt{Ball} из списка \texttt{inventory}.
+    \item Выведите оставшееся содержимое списка \texttt{inventory}, используя метод \texttt{use} каждого объекта.
+\end{enumerate}
+\item[9]
+Модель электронных устройств. Классы \texttt{Phone}, \texttt{Tablet} и \texttt{Laptop} являются производными от класса \texttt{Device}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Phone}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Device}, который будет базовым классом для классов \texttt{Phone}, \texttt{Tablet} и \texttt{Laptop}. В конструкторе класса \texttt{Device} задайте параметры \texttt{name}, \texttt{brand} и \texttt{year}.
+    \item В классе \texttt{Device} создайте метод \texttt{function}, который будет возвращать строку \texttt{'Функционирует'}.
+    \item В классе \texttt{Device} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об устройстве.
+    \item Создайте класс \texttt{Phone}, который будет наследоваться от класса \texttt{Device}. В конструкторе класса \texttt{Phone} задайте параметры \texttt{os}, \texttt{name}, \texttt{brand} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Phone} переопределите метод \texttt{function}, чтобы он возвращал строку \texttt{'Звонит и пишет'}.
+    \item Создайте класс \texttt{Tablet}, который будет наследоваться от класса \texttt{Device}. В конструкторе класса \texttt{Tablet} задайте параметры \texttt{name}, \texttt{brand} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Tablet} переопределите метод \texttt{function}, чтобы он возвращал строку \texttt{'Показывает контент'}.
+    \item Создайте класс \texttt{Laptop}, который будет наследоваться от класса \texttt{Device}. В конструкторе класса \texttt{Laptop} задайте параметры \texttt{name}, \texttt{brand} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Laptop} переопределите метод \texttt{function}, чтобы он возвращал строку \texttt{'Работает с программами'}.
+    \item В основной части программы создайте объекты классов \texttt{Phone}, \texttt{Tablet} и \texttt{Laptop} и добавьте их в список \texttt{devices}.
+    \item Выведите содержимое списка \texttt{devices}, используя метод \texttt{function} каждого объекта.
+    \item Удалите все объекты класса \texttt{Phone} из списка \texttt{devices}.
+    \item Выведите оставшееся содержимое списка \texttt{devices}, используя метод \texttt{function} каждого объекта.
+\end{enumerate}
+\item[10]
+Модель школьных принадлежностей. Классы \texttt{Pen}, \texttt{Notebook} и \texttt{Ruler} являются производными от класса \texttt{Stationery}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Pen}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Stationery}, который будет базовым классом для классов \texttt{Pen}, \texttt{Notebook} и \texttt{Ruler}. В конструкторе класса \texttt{Stationery} задайте параметры \texttt{name}, \texttt{brand} и \texttt{color}.
+    \item В классе \texttt{Stationery} создайте метод \texttt{apply}, который будет возвращать строку \texttt{'Применяется'}.
+    \item В классе \texttt{Stationery} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о принадлежности.
+    \item Создайте класс \texttt{Pen}, который будет наследоваться от класса \texttt{Stationery}. В конструкторе класса \texttt{Pen} задайте параметры \texttt{ink\_type}, \texttt{name}, \texttt{brand} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Pen} переопределите метод \texttt{apply}, чтобы он возвращал строку \texttt{'Пишет'}.
+    \item Создайте класс \texttt{Notebook}, который будет наследоваться от класса \texttt{Stationery}. В конструкторе класса \texttt{Notebook} задайте параметры \texttt{name}, \texttt{brand} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Notebook} переопределите метод \texttt{apply}, чтобы он возвращал строку \texttt{'Заполняется'}.
+    \item Создайте класс \texttt{Ruler}, который будет наследоваться от класса \texttt{Stationery}. В конструкторе класса \texttt{Ruler} задайте параметры \texttt{name}, \texttt{brand} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Ruler} переопределите метод \texttt{apply}, чтобы он возвращал строку \texttt{'Измеряет'}.
+    \item В основной части программы создайте объекты классов \texttt{Pen}, \texttt{Notebook} и \texttt{Ruler} и добавьте их в список \texttt{school}.
+    \item Выведите содержимое списка \texttt{school}, используя метод \texttt{apply} каждого объекта.
+    \item Удалите все объекты класса \texttt{Pen} из списка \texttt{school}.
+    \item Выведите оставшееся содержимое списка \texttt{school}, используя метод \texttt{apply} каждого объекта.
+\end{enumerate}
+\item[11]
+Модель строительных материалов. Классы \texttt{Brick}, \texttt{Plank} и \texttt{Tile} являются производными от класса \texttt{Material}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Brick}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Material}, который будет базовым классом для классов \texttt{Brick}, \texttt{Plank} и \texttt{Tile}. В конструкторе класса \texttt{Material} задайте параметры \texttt{name}, \texttt{origin} и \texttt{year}.
+    \item В классе \texttt{Material} создайте метод \texttt{build}, который будет возвращать строку \texttt{'Используется в строительстве'}.
+    \item В классе \texttt{Material} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о материале.
+    \item Создайте класс \texttt{Brick}, который будет наследоваться от класса \texttt{Material}. В конструкторе класса \texttt{Brick} задайте параметры \texttt{strength}, \texttt{name}, \texttt{origin} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Brick} переопределите метод \texttt{build}, чтобы он возвращал строку \texttt{'Кладётся в стену'}.
+    \item Создайте класс \texttt{Plank}, который будет наследоваться от класса \texttt{Material}. В конструкторе класса \texttt{Plank} задайте параметры \texttt{name}, \texttt{origin} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Plank} переопределите метод \texttt{build}, чтобы он возвращал строку \texttt{'Укладывается на пол'}.
+    \item Создайте класс \texttt{Tile}, который будет наследоваться от класса \texttt{Material}. В конструкторе класса \texttt{Tile} задайте параметры \texttt{name}, \texttt{origin} и \texttt{year}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Tile} переопределите метод \texttt{build}, чтобы он возвращал строку \texttt{'Облицовывает поверхность'}.
+    \item В основной части программы создайте объекты классов \texttt{Brick}, \texttt{Plank} и \texttt{Tile} и добавьте их в список \texttt{warehouse}.
+    \item Выведите содержимое списка \texttt{warehouse}, используя метод \texttt{build} каждого объекта.
+    \item Удалите все объекты класса \texttt{Brick} из списка \texttt{warehouse}.
+    \item Выведите оставшееся содержимое списка \texttt{warehouse}, используя метод \texttt{build} каждого объекта.
+\end{enumerate}
+\item[12]
+Модель одежды. Классы \texttt{Jacket}, \texttt{Shirt} и \texttt{Pants} являются производными от класса \texttt{Clothing}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Jacket}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Clothing}, который будет базовым классом для классов \texttt{Jacket}, \texttt{Shirt} и \texttt{Pants}. В конструкторе класса \texttt{Clothing} задайте параметры \texttt{name}, \texttt{brand} и \texttt{season}.
+    \item В классе \texttt{Clothing} создайте метод \texttt{wear}, который будет возвращать строку \texttt{'Носится'}.
+    \item В классе \texttt{Clothing} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об одежде.
+    \item Создайте класс \texttt{Jacket}, который будет наследоваться от класса \texttt{Clothing}. В конструкторе класса \texttt{Jacket} задайте параметры \texttt{insulation}, \texttt{name}, \texttt{brand} и \texttt{season}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Jacket} переопределите метод \texttt{wear}, чтобы он возвращал строку \texttt{'Согревает'}.
+    \item Создайте класс \texttt{Shirt}, который будет наследоваться от класса \texttt{Clothing}. В конструкторе класса \texttt{Shirt} задайте параметры \texttt{name}, \texttt{brand} и \texttt{season}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Shirt} переопределите метод \texttt{wear}, чтобы он возвращал строку \texttt{'Одевается'}.
+    \item Создайте класс \texttt{Pants}, который будет наследоваться от класса \texttt{Clothing}. В конструкторе класса \texttt{Pants} задайте параметры \texttt{name}, \texttt{brand} и \texttt{season}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Pants} переопределите метод \texttt{wear}, чтобы он возвращал строку \texttt{'Надеваются'}.
+    \item В основной части программы создайте объекты классов \texttt{Jacket}, \texttt{Shirt} и \texttt{Pants} и добавьте их в список \texttt{wardrobe}.
+    \item Выведите содержимое списка \texttt{wardrobe}, используя метод \texttt{wear} каждого объекта.
+    \item Удалите все объекты класса \texttt{Jacket} из списка \texttt{wardrobe}.
+    \item Выведите оставшееся содержимое списка \texttt{wardrobe}, используя метод \texttt{wear} каждого объекта.
+\end{enumerate}
+\item[13]
+Модель бытовой химии. Классы \texttt{Detergent}, \texttt{Bleach} и \texttt{Softener} являются производными от класса \texttt{CleaningAgent}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Detergent}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{CleaningAgent}, который будет базовым классом для классов \texttt{Detergent}, \texttt{Bleach} и \texttt{Softener}. В конструкторе класса \texttt{CleaningAgent} задайте параметры \texttt{name}, \texttt{brand} и \texttt{volume}.
+    \item В классе \texttt{CleaningAgent} создайте метод \texttt{clean}, который будет возвращать строку \texttt{'Очищает'}.
+    \item В классе \texttt{CleaningAgent} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о средстве.
+    \item Создайте класс \texttt{Detergent}, который будет наследоваться от класса \texttt{CleaningAgent}. В конструкторе класса \texttt{Detergent} задайте параметры \texttt{scent}, \texttt{name}, \texttt{brand} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Detergent} переопределите метод \texttt{clean}, чтобы он возвращал строку \texttt{'Стирает грязь'}.
+    \item Создайте класс \texttt{Bleach}, который будет наследоваться от класса \texttt{CleaningAgent}. В конструкторе класса \texttt{Bleach} задайте параметры \texttt{name}, \texttt{brand} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bleach} переопределите метод \texttt{clean}, чтобы он возвращал строку \texttt{'Отбеливает'}.
+    \item Создайте класс \texttt{Softener}, который будет наследоваться от класса \texttt{CleaningAgent}. В конструкторе класса \texttt{Softener} задайте параметры \texttt{name}, \texttt{brand} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Softener} переопределите метод \texttt{clean}, чтобы он возвращал строку \texttt{'Смягчает ткань'}.
+    \item В основной части программы создайте объекты классов \texttt{Detergent}, \texttt{Bleach} и \texttt{Softener} и добавьте их в список \texttt{shelf}.
+    \item Выведите содержимое списка \texttt{shelf}, используя метод \texttt{clean} каждого объекта.
+    \item Удалите все объекты класса \texttt{Detergent} из списка \texttt{shelf}.
+    \item Выведите оставшееся содержимое списка \texttt{shelf}, используя метод \texttt{clean} каждого объекта.
+\end{enumerate}
+\item[14]
+Модель инструментов. Классы \texttt{Hammer}, \texttt{Screwdriver} и \texttt{Wrench} являются производными от класса \texttt{Tool}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Hammer}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Tool}, который будет базовым классом для классов \texttt{Hammer}, \texttt{Screwdriver} и \texttt{Wrench}. В конструкторе класса \texttt{Tool} задайте параметры \texttt{name}, \texttt{material} и \texttt{weight}.
+    \item В классе \texttt{Tool} создайте метод \texttt{work}, который будет возвращать строку \texttt{'Работает'}.
+    \item В классе \texttt{Tool} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об инструменте.
+    \item Создайте класс \texttt{Hammer}, который будет наследоваться от класса \texttt{Tool}. В конструкторе класса \texttt{Hammer} задайте параметры \texttt{head\_type}, \texttt{name}, \texttt{material} и \texttt{weight}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Hammer} переопределите метод \texttt{work}, чтобы он возвращал строку \texttt{'Забивает гвозди'}.
+    \item Создайте класс \texttt{Screwdriver}, который будет наследоваться от класса \texttt{Tool}. В конструкторе класса \texttt{Screwdriver} задайте параметры \texttt{name}, \texttt{material} и \texttt{weight}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Screwdriver} переопределите метод \texttt{work}, чтобы он возвращал строку \texttt{'Закручивает винты'}.
+    \item Создайте класс \texttt{Wrench}, который будет наследоваться от класса \texttt{Tool}. В конструкторе класса \texttt{Wrench} задайте параметры \texttt{name}, \texttt{material} и \texttt{weight}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Wrench} переопределите метод \texttt{work}, чтобы он возвращал строку \texttt{'Откручивает гайки'}.
+    \item В основной части программы создайте объекты классов \texttt{Hammer}, \texttt{Screwdriver} и \texttt{Wrench} и добавьте их в список \texttt{toolbox}.
+    \item Выведите содержимое списка \texttt{toolbox}, используя метод \texttt{work} каждого объекта.
+    \item Удалите все объекты класса \texttt{Hammer} из списка \texttt{toolbox}.
+    \item Выведите оставшееся содержимое списка \texttt{toolbox}, используя метод \texttt{work} каждого объекта.
+\end{enumerate}
+\item[15]
+Модель напитков. Классы \texttt{Coffee}, \texttt{Tea} и \texttt{Juice} являются производными от класса \texttt{Beverage}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Coffee}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Beverage}, который будет базовым классом для классов \texttt{Coffee}, \texttt{Tea} и \texttt{Juice}. В конструкторе класса \texttt{Beverage} задайте параметры \texttt{name}, \texttt{brand} и \texttt{temperature}.
+    \item В классе \texttt{Beverage} создайте метод \texttt{consume}, который будет возвращать строку \texttt{'Пьётся'}.
+    \item В классе \texttt{Beverage} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о напитке.
+    \item Создайте класс \texttt{Coffee}, который будет наследоваться от класса \texttt{Beverage}. В конструкторе класса \texttt{Coffee} задайте параметры \texttt{roast}, \texttt{name}, \texttt{brand} и \texttt{temperature}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Coffee} переопределите метод \texttt{consume}, чтобы он возвращал строку \texttt{'Бодрит'}.
+    \item Создайте класс \texttt{Tea}, который будет наследоваться от класса \texttt{Beverage}. В конструкторе класса \texttt{Tea} задайте параметры \texttt{name}, \texttt{brand} и \texttt{temperature}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Tea} переопределите метод \texttt{consume}, чтобы он возвращал строку \texttt{'Успокаивает'}.
+    \item Создайте класс \texttt{Juice}, который будет наследоваться от класса \texttt{Beverage}. В конструкторе класса \texttt{Juice} задайте параметры \texttt{name}, \texttt{brand} и \texttt{temperature}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Juice} переопределите метод \texttt{consume}, чтобы он возвращал строку \texttt{'Освежает'}.
+    \item В основной части программы создайте объекты классов \texttt{Coffee}, \texttt{Tea} и \texttt{Juice} и добавьте их в список \texttt{bar}.
+    \item Выведите содержимое списка \texttt{bar}, используя метод \texttt{consume} каждого объекта.
+    \item Удалите все объекты класса \texttt{Coffee} из списка \texttt{bar}.
+    \item Выведите оставшееся содержимое списка \texttt{bar}, используя метод \texttt{consume} каждого объекта.
+\end{enumerate}
+\item[16]
+Модель растений. Классы \texttt{Tree}, \texttt{Flower} и \texttt{Grass} являются производными от класса \texttt{Plant}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Tree}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Plant}, который будет базовым классом для классов \texttt{Tree}, \texttt{Flower} и \texttt{Grass}. В конструкторе класса \texttt{Plant} задайте параметры \texttt{name}, \texttt{family} и \texttt{height}.
+    \item В классе \texttt{Plant} создайте метод \texttt{grow}, который будет возвращать строку \texttt{'Растёт'}.
+    \item В классе \texttt{Plant} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о растении.
+    \item Создайте класс \texttt{Tree}, который будет наследоваться от класса \texttt{Plant}. В конструкторе класса \texttt{Tree} задайте параметры \texttt{wood\_type}, \texttt{name}, \texttt{family} и \texttt{height}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Tree} переопределите метод \texttt{grow}, чтобы он возвращал строку \texttt{'Тянется к солнцу'}.
+    \item Создайте класс \texttt{Flower}, который будет наследоваться от класса \texttt{Plant}. В конструкторе класса \texttt{Flower} задайте параметры \texttt{name}, \texttt{family} и \texttt{height}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Flower} переопределите метод \texttt{grow}, чтобы он возвращал строку \texttt{'Цветёт'}.
+    \item Создайте класс \texttt{Grass}, который будет наследоваться от класса \texttt{Plant}. В конструкторе класса \texttt{Grass} задайте параметры \texttt{name}, \texttt{family} и \texttt{height}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Grass} переопределите метод \texttt{grow}, чтобы он возвращал строку \texttt{'Покрывает землю'}.
+    \item В основной части программы создайте объекты классов \texttt{Tree}, \texttt{Flower} и \texttt{Grass} и добавьте их в список \texttt{garden}.
+    \item Выведите содержимое списка \texttt{garden}, используя метод \texttt{grow} каждого объекта.
+    \item Удалите все объекты класса \texttt{Tree} из списка \texttt{garden}.
+    \item Выведите оставшееся содержимое списка \texttt{garden}, используя метод \texttt{grow} каждого объекта.
+\end{enumerate}
+\item[17]
+Модель игрушек. Классы \texttt{Doll}, \texttt{CarToy} и \texttt{Puzzle} являются производными от класса \texttt{Toy}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Doll}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Toy}, который будет базовым классом для классов \texttt{Doll}, \texttt{CarToy} и \texttt{Puzzle}. В конструкторе класса \texttt{Toy} задайте параметры \texttt{name}, \texttt{brand} и \texttt{age\_group}.
+    \item В классе \texttt{Toy} создайте метод \texttt{play}, который будет возвращать строку \texttt{'Играют'}.
+    \item В классе \texttt{Toy} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об игрушке.
+    \item Создайте класс \texttt{Doll}, который будет наследоваться от класса \texttt{Toy}. В конструкторе класса \texttt{Doll} задайте параметры \texttt{hair\_color}, \texttt{name}, \texttt{brand} и \texttt{age\_group}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Doll} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Одевают и укладывают'}.
+    \item Создайте класс \texttt{CarToy}, который будет наследоваться от класса \texttt{Toy}. В конструкторе класса \texttt{CarToy} задайте параметры \texttt{name}, \texttt{brand} и \texttt{age\_group}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{CarToy} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Катают'}.
+    \item Создайте класс \texttt{Puzzle}, который будет наследоваться от класса \texttt{Toy}. В конструкторе класса \texttt{Puzzle} задайте параметры \texttt{name}, \texttt{brand} и \texttt{age\_group}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Puzzle} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Собирают'}.
+    \item В основной части программы создайте объекты классов \texttt{Doll}, \texttt{CarToy} и \texttt{Puzzle} и добавьте их в список \texttt{toys}.
+    \item Выведите содержимое списка \texttt{toys}, используя метод \texttt{play} каждого объекта.
+    \item Удалите все объекты класса \texttt{Doll} из списка \texttt{toys}.
+    \item Выведите оставшееся содержимое списка \texttt{toys}, используя метод \texttt{play} каждого объекта.
+\end{enumerate}
+\item[18]
+Модель обуви. Классы \texttt{Sneakers}, \texttt{Boots} и \texttt{Sandals} являются производными от класса \texttt{Footwear}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Sneakers}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Footwear}, который будет базовым классом для классов \texttt{Sneakers}, \texttt{Boots} и \texttt{Sandals}. В конструкторе класса \texttt{Footwear} задайте параметры \texttt{name}, \texttt{brand} и \texttt{size}.
+    \item В классе \texttt{Footwear} создайте метод \texttt{walk}, который будет возвращать строку \texttt{'Носится'}.
+    \item В классе \texttt{Footwear} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об обуви.
+    \item Создайте класс \texttt{Sneakers}, который будет наследоваться от класса \texttt{Footwear}. В конструкторе класса \texttt{Sneakers} задайте параметры \texttt{sole\_type}, \texttt{name}, \texttt{brand} и \texttt{size}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Sneakers} переопределите метод \texttt{walk}, чтобы он возвращал строку \texttt{'Бегает'}.
+    \item Создайте класс \texttt{Boots}, который будет наследоваться от класса \texttt{Footwear}. В конструкторе класса \texttt{Boots} задайте параметры \texttt{name}, \texttt{brand} и \texttt{size}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Boots} переопределите метод \texttt{walk}, чтобы он возвращал строку \texttt{'Шагает по снегу'}.
+    \item Создайте класс \texttt{Sandals}, который будет наследоваться от класса \texttt{Footwear}. В конструкторе класса \texttt{Sandals} задайте параметры \texttt{name}, \texttt{brand} и \texttt{size}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Sandals} переопределите метод \texttt{walk}, чтобы он возвращал строку \texttt{'Гуляет по пляжу'}.
+    \item В основной части программы создайте объекты классов \texttt{Sneakers}, \texttt{Boots} и \texttt{Sandals} и добавьте их в список \texttt{shoes}.
+    \item Выведите содержимое списка \texttt{shoes}, используя метод \texttt{walk} каждого объекта.
+    \item Удалите все объекты класса \texttt{Sneakers} из списка \texttt{shoes}.
+    \item Выведите оставшееся содержимое списка \texttt{shoes}, используя метод \texttt{walk} каждого объекта.
+\end{enumerate}
+\item[19]
+Модель посуды. Классы \texttt{Plate}, \texttt{Cup} и \texttt{Bowl} являются производными от класса \texttt{Dishware}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Plate}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Dishware}, который будет базовым классом для классов \texttt{Plate}, \texttt{Cup} и \texttt{Bowl}. В конструкторе класса \texttt{Dishware} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}.
+    \item В классе \texttt{Dishware} создайте метод \texttt{serve}, который будет возвращать строку \texttt{'Используется'}.
+    \item В классе \texttt{Dishware} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о посуде.
+    \item Создайте класс \texttt{Plate}, который будет наследоваться от класса \texttt{Dishware}. В конструкторе класса \texttt{Plate} задайте параметры \texttt{diameter}, \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Plate} переопределите метод \texttt{serve}, чтобы он возвращал строку \texttt{'Подаёт еду'}.
+    \item Создайте класс \texttt{Cup}, который будет наследоваться от класса \texttt{Dishware}. В конструкторе класса \texttt{Cup} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Cup} переопределите метод \texttt{serve}, чтобы он возвращал строку \texttt{'Наливают напиток'}.
+    \item Создайте класс \texttt{Bowl}, который будет наследоваться от класса \texttt{Dishware}. В конструкторе класса \texttt{Bowl} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bowl} переопределите метод \texttt{serve}, чтобы он возвращал строку \texttt{'Содержит суп'}.
+    \item В основной части программы создайте объекты классов \texttt{Plate}, \texttt{Cup} и \texttt{Bowl} и добавьте их в список \texttt{dishes}.
+    \item Выведите содержимое списка \texttt{dishes}, используя метод \texttt{serve} каждого объекта.
+    \item Удалите все объекты класса \texttt{Plate} из списка \texttt{dishes}.
+    \item Выведите оставшееся содержимое списка \texttt{dishes}, используя метод \texttt{serve} каждого объекта.
+\end{enumerate}
+\item[20]
+Модель мебели для сада. Классы \texttt{Bench}, \texttt{Table} и \texttt{Umbrella} являются производными от класса \texttt{GardenFurniture}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Bench}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{GardenFurniture}, который будет базовым классом для классов \texttt{Bench}, \texttt{Table} и \texttt{Umbrella}. В конструкторе класса \texttt{GardenFurniture} задайте параметры \texttt{name}, \texttt{material} и \texttt{weather\_resistant}.
+    \item В классе \texttt{GardenFurniture} создайте метод \texttt{use}, который будет возвращать строку \texttt{'Используется на улице'}.
+    \item В классе \texttt{GardenFurniture} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о мебели.
+    \item Создайте класс \texttt{Bench}, который будет наследоваться от класса \texttt{GardenFurniture}. В конструкторе класса \texttt{Bench} задайте параметры \texttt{seats}, \texttt{name}, \texttt{material} и \texttt{weather\_resistant}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bench} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Сидят на ней'}.
+    \item Создайте класс \texttt{Table}, который будет наследоваться от класса \texttt{GardenFurniture}. В конструкторе класса \texttt{Table} задайте параметры \texttt{name}, \texttt{material} и \texttt{weather\_resistant}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Table} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Ставят на неё еду'}.
+    \item Создайте класс \texttt{Umbrella}, который будет наследоваться от класса \texttt{GardenFurniture}. В конструкторе класса \texttt{Umbrella} задайте параметры \texttt{name}, \texttt{material} и \texttt{weather\_resistant}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Umbrella} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Даёт тень'}.
+    \item В основной части программы создайте объекты классов \texttt{Bench}, \texttt{Table} и \texttt{Umbrella} и добавьте их в список \texttt{garden}.
+    \item Выведите содержимое списка \texttt{garden}, используя метод \texttt{use} каждого объекта.
+    \item Удалите все объекты класса \texttt{Bench} из списка \texttt{garden}.
+    \item Выведите оставшееся содержимое списка \texttt{garden}, используя метод \texttt{use} каждого объекта.
+\end{enumerate}
+\item[21]
+Модель упаковки. Классы \texttt{Box}, \texttt{Bag} и \texttt{Envelope} являются производными от класса \texttt{Package}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Box}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Package}, который будет базовым классом для классов \texttt{Box}, \texttt{Bag} и \texttt{Envelope}. В конструкторе класса \texttt{Package} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}.
+    \item В классе \texttt{Package} создайте метод \texttt{contain}, который будет возвращать строку \texttt{'Содержит'}.
+    \item В классе \texttt{Package} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об упаковке.
+    \item Создайте класс \texttt{Box}, который будет наследоваться от класса \texttt{Package}. В конструкторе класса \texttt{Box} задайте параметры \texttt{dimensions}, \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Box} переопределите метод \texttt{contain}, чтобы он возвращал строку \texttt{'Хранит предметы'}.
+    \item Создайте класс \texttt{Bag}, который будет наследоваться от класса \texttt{Package}. В конструкторе класса \texttt{Bag} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bag} переопределите метод \texttt{contain}, чтобы он возвращал строку \texttt{'Носит вещи'}.
+    \item Создайте класс \texttt{Envelope}, который будет наследоваться от класса \texttt{Package}. В конструкторе класса \texttt{Envelope} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Envelope} переопределите метод \texttt{contain}, чтобы он возвращал строку \texttt{'Передаёт письма'}.
+    \item В основной части программы создайте объекты классов \texttt{Box}, \texttt{Bag} и \texttt{Envelope} и добавьте их в список \texttt{storage}.
+    \item Выведите содержимое списка \texttt{storage}, используя метод \texttt{contain} каждого объекта.
+    \item Удалите все объекты класса \texttt{Box} из списка \texttt{storage}.
+    \item Выведите оставшееся содержимое списка \texttt{storage}, используя метод \texttt{contain} каждого объекта.
+\end{enumerate}
+\item[22]
+Модель косметики. Классы \texttt{Cream}, \texttt{Shampoo} и \texttt{Lipstick} являются производными от класса \texttt{Cosmetic}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Cream}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Cosmetic}, который будет базовым классом для классов \texttt{Cream}, \texttt{Shampoo} и \texttt{Lipstick}. В конструкторе класса \texttt{Cosmetic} задайте параметры \texttt{name}, \texttt{brand} и \texttt{volume}.
+    \item В классе \texttt{Cosmetic} создайте метод \texttt{apply}, который будет возвращать строку \texttt{'Наносится'}.
+    \item В классе \texttt{Cosmetic} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о косметике.
+    \item Создайте класс \texttt{Cream}, который будет наследоваться от класса \texttt{Cosmetic}. В конструкторе класса \texttt{Cream} задайте параметры \texttt{skin\_type}, \texttt{name}, \texttt{brand} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Cream} переопределите метод \texttt{apply}, чтобы он возвращал строку \texttt{'Увлажняет кожу'}.
+    \item Создайте класс \texttt{Shampoo}, который будет наследоваться от класса \texttt{Cosmetic}. В конструкторе класса \texttt{Shampoo} задайте параметры \texttt{name}, \texttt{brand} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Shampoo} переопределите метод \texttt{apply}, чтобы он возвращал строку \texttt{'Моет волосы'}.
+    \item Создайте класс \texttt{Lipstick}, который будет наследоваться от класса \texttt{Cosmetic}. В конструкторе класса \texttt{Lipstick} задайте параметры \texttt{name}, \texttt{brand} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Lipstick} переопределите метод \texttt{apply}, чтобы он возвращал строку \texttt{'Красит губы'}.
+    \item В основной части программы создайте объекты классов \texttt{Cream}, \texttt{Shampoo} и \texttt{Lipstick} и добавьте их в список \texttt{beauty}.
+    \item Выведите содержимое списка \texttt{beauty}, используя метод \texttt{apply} каждого объекта.
+    \item Удалите все объекты класса \texttt{Cream} из списка \texttt{beauty}.
+    \item Выведите оставшееся содержимое списка \texttt{beauty}, используя метод \texttt{apply} каждого объекта.
+\end{enumerate}
+\item[23]
+Модель канцелярских принадлежностей. Классы \texttt{Marker}, \texttt{Eraser} и \texttt{Stapler} являются производными от класса \texttt{OfficeSupply}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Marker}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{OfficeSupply}, который будет базовым классом для классов \texttt{Marker}, \texttt{Eraser} и \texttt{Stapler}. В конструкторе класса \texttt{OfficeSupply} задайте параметры \texttt{name}, \texttt{brand} и \texttt{color}.
+    \item В классе \texttt{OfficeSupply} создайте метод \texttt{use}, который будет возвращать строку \texttt{'Используется'}.
+    \item В классе \texttt{OfficeSupply} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о принадлежности.
+    \item Создайте класс \texttt{Marker}, который будет наследоваться от класса \texttt{OfficeSupply}. В конструкторе класса \texttt{Marker} задайте параметры \texttt{tip\_type}, \texttt{name}, \texttt{brand} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Marker} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Рисует'}.
+    \item Создайте класс \texttt{Eraser}, который будет наследоваться от класса \texttt{OfficeSupply}. В конструкторе класса \texttt{Eraser} задайте параметры \texttt{name}, \texttt{brand} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Eraser} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Стирает'}.
+    \item Создайте класс \texttt{Stapler}, который будет наследоваться от класса \texttt{OfficeSupply}. В конструкторе класса \texttt{Stapler} задайте параметры \texttt{name}, \texttt{brand} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Stapler} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Скрепляет'}.
+    \item В основной части программы создайте объекты классов \texttt{Marker}, \texttt{Eraser} и \texttt{Stapler} и добавьте их в список \texttt{supplies}.
+    \item Выведите содержимое списка \texttt{supplies}, используя метод \texttt{use} каждого объекта.
+    \item Удалите все объекты класса \texttt{Marker} из списка \texttt{supplies}.
+    \item Выведите оставшееся содержимое списка \texttt{supplies}, используя метод \texttt{use} каждого объекта.
+\end{enumerate}
+\item[24]
+Модель транспортных средств для доставки. Классы \texttt{Bike}, \texttt{Van} и \texttt{Drone} являются производными от класса \texttt{DeliveryVehicle}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Bike}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{DeliveryVehicle}, который будет базовым классом для классов \texttt{Bike}, \texttt{Van} и \texttt{Drone}. В конструкторе класса \texttt{DeliveryVehicle} задайте параметры \texttt{name}, \texttt{brand} и \texttt{max\_load}.
+    \item В классе \texttt{DeliveryVehicle} создайте метод \texttt{deliver}, который будет возвращать строку \texttt{'Доставляет'}.
+    \item В классе \texttt{DeliveryVehicle} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о транспорте.
+    \item Создайте класс \texttt{Bike}, который будет наследоваться от класса \texttt{DeliveryVehicle}. В конструкторе класса \texttt{Bike} задайте параметры \texttt{electric}, \texttt{name}, \texttt{brand} и \texttt{max\_load}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bike} переопределите метод \texttt{deliver}, чтобы он возвращал строку \texttt{'Едет по городу'}.
+    \item Создайте класс \texttt{Van}, который будет наследоваться от класса \texttt{DeliveryVehicle}. В конструкторе класса \texttt{Van} задайте параметры \texttt{name}, \texttt{brand} и \texttt{max\_load}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Van} переопределите метод \texttt{deliver}, чтобы он возвращал строку \texttt{'Везёт посылки'}.
+    \item Создайте класс \texttt{Drone}, который будет наследоваться от класса \texttt{DeliveryVehicle}. В конструкторе класса \texttt{Drone} задайте параметры \texttt{name}, \texttt{brand} и \texttt{max\_load}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Drone} переопределите метод \texttt{deliver}, чтобы он возвращал строку \texttt{'Летит с грузом'}.
+    \item В основной части программы создайте объекты классов \texttt{Bike}, \texttt{Van} и \texttt{Drone} и добавьте их в список \texttt{delivery}.
+    \item Выведите содержимое списка \texttt{delivery}, используя метод \texttt{deliver} каждого объекта.
+    \item Удалите все объекты класса \texttt{Bike} из списка \texttt{delivery}.
+    \item Выведите оставшееся содержимое списка \texttt{delivery}, используя метод \texttt{deliver} каждого объекта.
+\end{enumerate}
+\item[25]
+Модель электронных компонентов. Классы \texttt{Resistor}, \texttt{Capacitor} и \texttt{Diode} являются производными от класса \texttt{Component}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Resistor}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Component}, который будет базовым классом для классов \texttt{Resistor}, \texttt{Capacitor} и \texttt{Diode}. В конструкторе класса \texttt{Component} задайте параметры \texttt{name}, \texttt{manufacturer} и \texttt{value}.
+    \item В классе \texttt{Component} создайте метод \texttt{function}, который будет возвращать строку \texttt{'Работает в цепи'}.
+    \item В классе \texttt{Component} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о компоненте.
+    \item Создайте класс \texttt{Resistor}, который будет наследоваться от класса \texttt{Component}. В конструкторе класса \texttt{Resistor} задайте параметры \texttt{tolerance}, \texttt{name}, \texttt{manufacturer} и \texttt{value}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Resistor} переопределите метод \texttt{function}, чтобы он возвращал строку \texttt{'Ограничивает ток'}.
+    \item Создайте класс \texttt{Capacitor}, который будет наследоваться от класса \texttt{Component}. В конструкторе класса \texttt{Capacitor} задайте параметры \texttt{name}, \texttt{manufacturer} и \texttt{value}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Capacitor} переопределите метод \texttt{function}, чтобы он возвращал строку \texttt{'Накапливает заряд'}.
+    \item Создайте класс \texttt{Diode}, который будет наследоваться от класса \texttt{Component}. В конструкторе класса \texttt{Diode} задайте параметры \texttt{name}, \texttt{manufacturer} и \texttt{value}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Diode} переопределите метод \texttt{function}, чтобы он возвращал строку \texttt{'Пропускает ток в одну сторону'}.
+    \item В основной части программы создайте объекты классов \texttt{Resistor}, \texttt{Capacitor} и \texttt{Diode} и добавьте их в список \texttt{circuit}.
+    \item Выведите содержимое списка \texttt{circuit}, используя метод \texttt{function} каждого объекта.
+    \item Удалите все объекты класса \texttt{Resistor} из списка \texttt{circuit}.
+    \item Выведите оставшееся содержимое списка \texttt{circuit}, используя метод \texttt{function} каждого объекта.
+\end{enumerate}
+\item[26]
+Модель продуктов питания. Классы \texttt{Bread}, \texttt{Cheese} и \texttt{Apple} являются производными от класса \texttt{Food}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Bread}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Food}, который будет базовым классом для классов \texttt{Bread}, \texttt{Cheese} и \texttt{Apple}. В конструкторе класса \texttt{Food} задайте параметры \texttt{name}, \texttt{brand} и \texttt{calories}.
+    \item В классе \texttt{Food} создайте метод \texttt{eat}, который будет возвращать строку \texttt{'Едят'}.
+    \item В классе \texttt{Food} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о продукте.
+    \item Создайте класс \texttt{Bread}, который будет наследоваться от класса \texttt{Food}. В конструкторе класса \texttt{Bread} задайте параметры \texttt{type}, \texttt{name}, \texttt{brand} и \texttt{calories}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bread} переопределите метод \texttt{eat}, чтобы он возвращал строку \texttt{'Намазывают маслом'}.
+    \item Создайте класс \texttt{Cheese}, который будет наследоваться от класса \texttt{Food}. В конструкторе класса \texttt{Cheese} задайте параметры \texttt{name}, \texttt{brand} и \texttt{calories}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Cheese} переопределите метод \texttt{eat}, чтобы он возвращал строку \texttt{'Кладут на бутерброд'}.
+    \item Создайте класс \texttt{Apple}, который будет наследоваться от класса \texttt{Food}. В конструкторе класса \texttt{Apple} задайте параметры \texttt{name}, \texttt{brand} и \texttt{calories}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Apple} переопределите метод \texttt{eat}, чтобы он возвращал строку \texttt{'Грызут'}.
+    \item В основной части программы создайте объекты классов \texttt{Bread}, \texttt{Cheese} и \texttt{Apple} и добавьте их в список \texttt{fridge}.
+    \item Выведите содержимое списка \texttt{fridge}, используя метод \texttt{eat} каждого объекта.
+    \item Удалите все объекты класса \texttt{Bread} из списка \texttt{fridge}.
+    \item Выведите оставшееся содержимое списка \texttt{fridge}, используя метод \texttt{eat} каждого объекта.
+\end{enumerate}
+\item[27]
+Модель аксессуаров для телефона. Классы \texttt{Case}, \texttt{Charger} и \texttt{Headphones} являются производными от класса \texttt{Accessory}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Case}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Accessory}, который будет базовым классом для классов \texttt{Case}, \texttt{Charger} и \texttt{Headphones}. В конструкторе класса \texttt{Accessory} задайте параметры \texttt{name}, \texttt{brand} и \texttt{compatibility}.
+    \item В классе \texttt{Accessory} создайте метод \texttt{use}, который будет возвращать строку \texttt{'Используется'}.
+    \item В классе \texttt{Accessory} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об аксессуаре.
+    \item Создайте класс \texttt{Case}, который будет наследоваться от класса \texttt{Accessory}. В конструкторе класса \texttt{Case} задайте параметры \texttt{material}, \texttt{name}, \texttt{brand} и \texttt{compatibility}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Case} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Защищает телефон'}.
+    \item Создайте класс \texttt{Charger}, который будет наследоваться от класса \texttt{Accessory}. В конструкторе класса \texttt{Charger} задайте параметры \texttt{name}, \texttt{brand} и \texttt{compatibility}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Charger} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Заряжает'}.
+    \item Создайте класс \texttt{Headphones}, который будет наследоваться от класса \texttt{Accessory}. В конструкторе класса \texttt{Headphones} задайте параметры \texttt{name}, \texttt{brand} и \texttt{compatibility}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Headphones} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Воспроизводит звук'}.
+    \item В основной части программы создайте объекты классов \texttt{Case}, \texttt{Charger} и \texttt{Headphones} и добавьте их в список \texttt{gadgets}.
+    \item Выведите содержимое списка \texttt{gadgets}, используя метод \texttt{use} каждого объекта.
+    \item Удалите все объекты класса \texttt{Case} из списка \texttt{gadgets}.
+    \item Выведите оставшееся содержимое списка \texttt{gadgets}, используя метод \texttt{use} каждого объекта.
+\end{enumerate}
+\item[28]
+Модель музыкальных жанров. Классы \texttt{Rock}, \texttt{Jazz} и \texttt{Pop} являются производными от класса \texttt{Genre}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Rock}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Genre}, который будет базовым классом для классов \texttt{Rock}, \texttt{Jazz} и \texttt{Pop}. В конструкторе класса \texttt{Genre} задайте параметры \texttt{name}, \texttt{origin} и \texttt{decade}.
+    \item В классе \texttt{Genre} создайте метод \texttt{perform}, который будет возвращать строку \texttt{'Исполняется'}.
+    \item В классе \texttt{Genre} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о жанре.
+    \item Создайте класс \texttt{Rock}, который будет наследоваться от класса \texttt{Genre}. В конструкторе класса \texttt{Rock} задайте параметры \texttt{subgenre}, \texttt{name}, \texttt{origin} и \texttt{decade}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Rock} переопределите метод \texttt{perform}, чтобы он возвращал строку \texttt{'Гремит'}.
+    \item Создайте класс \texttt{Jazz}, который будет наследоваться от класса \texttt{Genre}. В конструкторе класса \texttt{Jazz} задайте параметры \texttt{name}, \texttt{origin} и \texttt{decade}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Jazz} переопределите метод \texttt{perform}, чтобы он возвращал строку \texttt{'Импровизирует'}.
+    \item Создайте класс \texttt{Pop}, который будет наследоваться от класса \texttt{Genre}. В конструкторе класса \texttt{Pop} задайте параметры \texttt{name}, \texttt{origin} и \texttt{decade}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Pop} переопределите метод \texttt{perform}, чтобы он возвращал строку \texttt{'Звучит на радио'}.
+    \item В основной части программы создайте объекты классов \texttt{Rock}, \texttt{Jazz} и \texttt{Pop} и добавьте их в список \texttt{music}.
+    \item Выведите содержимое списка \texttt{music}, используя метод \texttt{perform} каждого объекта.
+    \item Удалите все объекты класса \texttt{Rock} из списка \texttt{music}.
+    \item Выведите оставшееся содержимое списка \texttt{music}, используя метод \texttt{perform} каждого объекта.
+\end{enumerate}
+\item[29]
+Модель видов спорта. Классы \texttt{Football}, \texttt{Swimming} и \texttt{Chess} являются производными от класса \texttt{Sport}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Football}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Sport}, который будет базовым классом для классов \texttt{Football}, \texttt{Swimming} и \texttt{Chess}. В конструкторе класса \texttt{Sport} задайте параметры \texttt{name}, \texttt{type} и \texttt{players}.
+    \item В классе \texttt{Sport} создайте метод \texttt{play}, который будет возвращать строку \texttt{'Практикуется'}.
+    \item В классе \texttt{Sport} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о виде спорта.
+    \item Создайте класс \texttt{Football}, который будет наследоваться от класса \texttt{Sport}. В конструкторе класса \texttt{Football} задайте параметры \texttt{field\_type}, \texttt{name}, \texttt{type} и \texttt{players}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Football} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Играют на поле'}.
+    \item Создайте класс \texttt{Swimming}, который будет наследоваться от класса \texttt{Sport}. В конструкторе класса \texttt{Swimming} задайте параметры \texttt{name}, \texttt{type} и \texttt{players}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Swimming} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Плавают'}.
+    \item Создайте класс \texttt{Chess}, который будет наследоваться от класса \texttt{Sport}. В конструкторе класса \texttt{Chess} задайте параметры \texttt{name}, \texttt{type} и \texttt{players}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Chess} переопределите метод \texttt{play}, чтобы он возвращал строку \texttt{'Думают'}.
+    \item В основной части программы создайте объекты классов \texttt{Football}, \texttt{Swimming} и \texttt{Chess} и добавьте их в список \texttt{sports}.
+    \item Выведите содержимое списка \texttt{sports}, используя метод \texttt{play} каждого объекта.
+    \item Удалите все объекты класса \texttt{Football} из списка \texttt{sports}.
+    \item Выведите оставшееся содержимое списка \texttt{sports}, используя метод \texttt{play} каждого объекта.
+\end{enumerate}
+\item[30]
+Модель видов транспорта. Классы \texttt{Airplane}, \texttt{Ship} и \texttt{Train} являются производными от класса \texttt{Transport}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Airplane}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Transport}, который будет базовым классом для классов \texttt{Airplane}, \texttt{Ship} и \texttt{Train}. В конструкторе класса \texttt{Transport} задайте параметры \texttt{name}, \texttt{capacity} и \texttt{speed}.
+    \item В классе \texttt{Transport} создайте метод \texttt{move}, который будет возвращать строку \texttt{'Перемещается'}.
+    \item В классе \texttt{Transport} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о транспорте.
+    \item Создайте класс \texttt{Airplane}, который будет наследоваться от класса \texttt{Transport}. В конструкторе класса \texttt{Airplane} задайте параметры \texttt{range}, \texttt{name}, \texttt{capacity} и \texttt{speed}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Airplane} переопределите метод \texttt{move}, чтобы он возвращал строку \texttt{'Летит'}.
+    \item Создайте класс \texttt{Ship}, который будет наследоваться от класса \texttt{Transport}. В конструкторе класса \texttt{Ship} задайте параметры \texttt{name}, \texttt{capacity} и \texttt{speed}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Ship} переопределите метод \texttt{move}, чтобы он возвращал строку \texttt{'Плывёт'}.
+    \item Создайте класс \texttt{Train}, который будет наследоваться от класса \texttt{Transport}. В конструкторе класса \texttt{Train} задайте параметры \texttt{name}, \texttt{capacity} и \texttt{speed}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Train} переопределите метод \texttt{move}, чтобы он возвращал строку \texttt{'Едет по рельсам'}.
+    \item В основной части программы создайте объекты классов \texttt{Airplane}, \texttt{Ship} и \texttt{Train} и добавьте их в список \texttt{transports}.
+    \item Выведите содержимое списка \texttt{transports}, используя метод \texttt{move} каждого объекта.
+    \item Удалите все объекты класса \texttt{Airplane} из списка \texttt{transports}.
+    \item Выведите оставшееся содержимое списка \texttt{transports}, используя метод \texttt{move} каждого объекта.
+\end{enumerate}
+\item[31]
+Модель видов освещения. Классы \texttt{Lamp}, \texttt{Flashlight} и \texttt{Neon} являются производными от класса \texttt{Light}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Lamp}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Light}, который будет базовым классом для классов \texttt{Lamp}, \texttt{Flashlight} и \texttt{Neon}. В конструкторе класса \texttt{Light} задайте параметры \texttt{name}, \texttt{power} и \texttt{color}.
+    \item В классе \texttt{Light} создайте метод \texttt{illuminate}, который будет возвращать строку \texttt{'Освещает'}.
+    \item В классе \texttt{Light} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией об источнике света.
+    \item Создайте класс \texttt{Lamp}, который будет наследоваться от класса \texttt{Light}. В конструкторе класса \texttt{Lamp} задайте параметры \texttt{type}, \texttt{name}, \texttt{power} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Lamp} переопределите метод \texttt{illuminate}, чтобы он возвращал строку \texttt{'Светит в комнате'}.
+    \item Создайте класс \texttt{Flashlight}, который будет наследоваться от класса \texttt{Light}. В конструкторе класса \texttt{Flashlight} задайте параметры \texttt{name}, \texttt{power} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Flashlight} переопределите метод \texttt{illuminate}, чтобы он возвращал строку \texttt{'Светит в темноте'}.
+    \item Создайте класс \texttt{Neon}, который будет наследоваться от класса \texttt{Light}. В конструкторе класса \texttt{Neon} задайте параметры \texttt{name}, \texttt{power} и \texttt{color}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Neon} переопределите метод \texttt{illuminate}, чтобы он возвращал строку \texttt{'Мигает на вывеске'}.
+    \item В основной части программы создайте объекты классов \texttt{Lamp}, \texttt{Flashlight} и \texttt{Neon} и добавьте их в список \texttt{lights}.
+    \item Выведите содержимое списка \texttt{lights}, используя метод \texttt{illuminate} каждого объекта.
+    \item Удалите все объекты класса \texttt{Lamp} из списка \texttt{lights}.
+    \item Выведите оставшееся содержимое списка \texttt{lights}, используя метод \texttt{illuminate} каждого объекта.
+\end{enumerate}
+\item[32]
+Модель видов бумаги. Классы \texttt{PrinterPaper}, \texttt{NotebookPaper} и \texttt{WrappingPaper} являются производными от класса \texttt{Paper}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{PrinterPaper}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Paper}, который будет базовым классом для классов \texttt{PrinterPaper}, \texttt{NotebookPaper} и \texttt{WrappingPaper}. В конструкторе класса \texttt{Paper} задайте параметры \texttt{name}, \texttt{brand} и \texttt{density}.
+    \item В классе \texttt{Paper} создайте метод \texttt{use}, который будет возвращать строку \texttt{'Используется'}.
+    \item В классе \texttt{Paper} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о бумаге.
+    \item Создайте класс \texttt{PrinterPaper}, который будет наследоваться от класса \texttt{Paper}. В конструкторе класса \texttt{PrinterPaper} задайте параметры \texttt{format}, \texttt{name}, \texttt{brand} и \texttt{density}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{PrinterPaper} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Печатается'}.
+    \item Создайте класс \texttt{NotebookPaper}, который будет наследоваться от класса \texttt{Paper}. В конструкторе класса \texttt{NotebookPaper} задайте параметры \texttt{name}, \texttt{brand} и \texttt{density}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{NotebookPaper} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Пишут на нём'}.
+    \item Создайте класс \texttt{WrappingPaper}, который будет наследоваться от класса \texttt{Paper}. В конструкторе класса \texttt{WrappingPaper} задайте параметры \texttt{name}, \texttt{brand} и \texttt{density}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{WrappingPaper} переопределите метод \texttt{use}, чтобы он возвращал строку \texttt{'Оборачивают подарки'}.
+    \item В основной части программы создайте объекты классов \texttt{PrinterPaper}, \texttt{NotebookPaper} и \texttt{WrappingPaper} и добавьте их в список \texttt{papers}.
+    \item Выведите содержимое списка \texttt{papers}, используя метод \texttt{use} каждого объекта.
+    \item Удалите все объекты класса \texttt{PrinterPaper} из списка \texttt{papers}.
+    \item Выведите оставшееся содержимое списка \texttt{papers}, используя метод \texttt{use} каждого объекта.
+\end{enumerate}
+\item[33]
+Модель видов сумок. Классы \texttt{Backpack}, \texttt{Briefcase} и \texttt{Tote} являются производными от класса \texttt{Bag}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Backpack}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Bag}, который будет базовым классом для классов \texttt{Backpack}, \texttt{Briefcase} и \texttt{Tote}. В конструкторе класса \texttt{Bag} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}.
+    \item В классе \texttt{Bag} создайте метод \texttt{carry}, который будет возвращать строку \texttt{'Носится'}.
+    \item В классе \texttt{Bag} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о сумке.
+    \item Создайте класс \texttt{Backpack}, который будет наследоваться от класса \texttt{Bag}. В конструкторе класса \texttt{Backpack} задайте параметры \texttt{compartments}, \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Backpack} переопределите метод \texttt{carry}, чтобы он возвращал строку \texttt{'Носится за спиной'}.
+    \item Создайте класс \texttt{Briefcase}, который будет наследоваться от класса \texttt{Bag}. В конструкторе класса \texttt{Briefcase} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Briefcase} переопределите метод \texttt{carry}, чтобы он возвращал строку \texttt{'Носится в руке'}.
+    \item Создайте класс \texttt{Tote}, который будет наследоваться от класса \texttt{Bag}. В конструкторе класса \texttt{Tote} задайте параметры \texttt{name}, \texttt{material} и \texttt{capacity}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Tote} переопределите метод \texttt{carry}, чтобы он возвращал строку \texttt{'Носится на плече'}.
+    \item В основной части программы создайте объекты классов \texttt{Backpack}, \texttt{Briefcase} и \texttt{Tote} и добавьте их в список \texttt{bags}.
+    \item Выведите содержимое списка \texttt{bags}, используя метод \texttt{carry} каждого объекта.
+    \item Удалите все объекты класса \texttt{Backpack} из списка \texttt{bags}.
+    \item Выведите оставшееся содержимое списка \texttt{bags}, используя метод \texttt{carry} каждого объекта.
+\end{enumerate}
+\item[34]
+Модель видов часов. Классы \texttt{Wristwatch}, \texttt{WallClock} и \texttt{AlarmClock} являются производными от класса \texttt{Clock}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Wristwatch}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Clock}, который будет базовым классом для классов \texttt{Wristwatch}, \texttt{WallClock} и \texttt{AlarmClock}. В конструкторе класса \texttt{Clock} задайте параметры \texttt{name}, \texttt{brand} и \texttt{power\_source}.
+    \item В классе \texttt{Clock} создайте метод \texttt{show\_time}, который будет возвращать строку \texttt{'Показывает время'}.
+    \item В классе \texttt{Clock} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о часах.
+    \item Создайте класс \texttt{Wristwatch}, который будет наследоваться от класса \texttt{Clock}. В конструкторе класса \texttt{Wristwatch} задайте параметры \texttt{strap\_material}, \texttt{name}, \texttt{brand} и \texttt{power\_source}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Wristwatch} переопределите метод \texttt{show\_time}, чтобы он возвращал строку \texttt{'На запястье'}.
+    \item Создайте класс \texttt{WallClock}, который будет наследоваться от класса \texttt{Clock}. В конструкторе класса \texttt{WallClock} задайте параметры \texttt{name}, \texttt{brand} и \texttt{power\_source}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{WallClock} переопределите метод \texttt{show\_time}, чтобы он возвращал строку \texttt{'На стене'}.
+    \item Создайте класс \texttt{AlarmClock}, который будет наследоваться от класса \texttt{Clock}. В конструкторе класса \texttt{AlarmClock} задайте параметры \texttt{name}, \texttt{brand} и \texttt{power\_source}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{AlarmClock} переопределите метод \texttt{show\_time}, чтобы он возвращал строку \texttt{'Будит утром'}.
+    \item В основной части программы создайте объекты классов \texttt{Wristwatch}, \texttt{WallClock} и \texttt{AlarmClock} и добавьте их в список \texttt{clocks}.
+    \item Выведите содержимое списка \texttt{clocks}, используя метод \texttt{show\_time} каждого объекта.
+    \item Удалите все объекты класса \texttt{Wristwatch} из списка \texttt{clocks}.
+    \item Выведите оставшееся содержимое списка \texttt{clocks}, используя метод \texttt{show\_time} каждого объекта.
+\end{enumerate}
+\item[35]
+Модель видов контейнеров. Классы \texttt{Jar}, \texttt{Can} и \texttt{Bottle} являются производными от класса \texttt{Container}. Метод \texttt{\_\_str\_\_()} перегружен только в классе \texttt{Jar}, для остальных используется метод из базового класса.
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Container}, который будет базовым классом для классов \texttt{Jar}, \texttt{Can} и \texttt{Bottle}. В конструкторе класса \texttt{Container} задайте параметры \texttt{name}, \texttt{material} и \texttt{volume}.
+    \item В классе \texttt{Container} создайте метод \texttt{hold}, который будет возвращать строку \texttt{'Содержит'}.
+    \item В классе \texttt{Container} создайте метод \texttt{\_\_str\_\_}, который будет возвращать строку с информацией о контейнере.
+    \item Создайте класс \texttt{Jar}, который будет наследоваться от класса \texttt{Container}. В конструкторе класса \texttt{Jar} задайте параметры \texttt{lid\_type}, \texttt{name}, \texttt{material} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Jar} переопределите метод \texttt{hold}, чтобы он возвращал строку \texttt{'Хранит варенье'}.
+    \item Создайте класс \texttt{Can}, который будет наследоваться от класса \texttt{Container}. В конструкторе класса \texttt{Can} задайте параметры \texttt{name}, \texttt{material} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Can} переопределите метод \texttt{hold}, чтобы он возвращал строку \texttt{'Содержит газировку'}.
+    \item Создайте класс \texttt{Bottle}, который будет наследоваться от класса \texttt{Container}. В конструкторе класса \texttt{Bottle} задайте параметры \texttt{name}, \texttt{material} и \texttt{volume}. Используйте метод \texttt{super().\_\_init\_\_(\ldots)}.
+    \item В классе \texttt{Bottle} переопределите метод \texttt{hold}, чтобы он возвращал строку \texttt{'Наливают воду'}.
+    \item В основной части программы создайте объекты классов \texttt{Jar}, \texttt{Can} и \texttt{Bottle} и добавьте их в список \texttt{containers}.
+    \item Выведите содержимое списка \texttt{containers}, используя метод \texttt{hold} каждого объекта.
+    \item Удалите все объекты класса \texttt{Jar} из списка \texttt{containers}.
+    \item Выведите оставшееся содержимое списка \texttt{containers}, используя метод \texttt{hold} каждого объекта.
+\end{enumerate}
+\end{enumerate}
+
+
+\subsubsection{Задача 3.}  
+\begin{enumerate}
+    \item[1]
+Создайте при помощи наследования ООП-модель команды ресторана по приготовлению, например, пиццы. Опишите наиболее универсальный класс \texttt{Employee}, который предоставляет общее поведение, такое как повышение зарплаты (\texttt{giveRaise}) и строковое представление объекта (\texttt{\_\_repr\_\_}). В команде два работника, поэтому должно быть два подкласса \texttt{Employee} — \texttt{Chef} (шеф-повар) и \texttt{Server} (официант). В обоих подклассах переопределяется метод \texttt{work}, чтобы выводить специфические сообщения. Также в команде должен быть робот по приготовлению пиццы, который моделируется более специфическим классом — \texttt{PizzaRobot} представляет собой разновидность класса \texttt{Chef}, который, в свою очередь, является видом \texttt{Employee}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Employee}, который будет базовым классом для всех остальных классов. В конструкторе класса \texttt{Employee} задайте параметры \texttt{name} и \texttt{salary}.
+    \item В классе \texttt{Employee} создайте метод \texttt{giveRaise}, который будет увеличивать зарплату на заданный процент.
+    \item В классе \texttt{Employee} создайте метод \texttt{work}, который будет выводить сообщение о том, что сотрудник работает.
+    \item В классе \texttt{Employee} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строку с информацией о сотруднике.
+    \item Создайте класс \texttt{Chef}, который будет наследоваться от класса \texttt{Employee}. В конструкторе класса \texttt{Chef} задайте начальную зарплату.
+    \item В классе \texttt{Chef} переопределите метод \texttt{work}, чтобы он выводил сообщение о том, что повар готовит еду.
+    \item Создайте класс \texttt{Server}, который будет наследоваться от класса \texttt{Employee}. В конструкторе класса \texttt{Server} задайте начальную зарплату.
+    \item В классе \texttt{Server} переопределите метод \texttt{work}, чтобы он выводил сообщение о том, что официант обслуживает клиентов.
+    \item Создайте класс \texttt{PizzaRobot}, который будет наследоваться от класса \texttt{Chef}. В конструкторе класса \texttt{PizzaRobot} задайте начальную зарплату.
+    \item В классе \texttt{PizzaRobot} переопределите метод \texttt{work}, чтобы он выводил сообщение о том, что робот готовит пиццу.
+    \item В основной части программы создайте объект \texttt{bob} класса \texttt{PizzaRobot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Для каждого класса \texttt{Employee}, \texttt{Chef}, \texttt{Server} и \texttt{PizzaRobot} создайте объект и вызовите его метод \texttt{work}.
+\end{enumerate}
+
+    \item[2]
+Создайте иерархию классов для моделирования команды ветеринарной клиники. Базовый класс \texttt{Staff} должен содержать общие атрибуты и методы для всех сотрудников. От него наследуются два подкласса: \texttt{Veterinarian} (ветеринар) и \texttt{Receptionist} (администратор). Также в клинике используется робот-ассистент для базовой диагностики животных — \texttt{DiagRobot}, который является подклассом \texttt{Veterinarian}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Staff} с параметрами \texttt{name} и \texttt{salary} в конструкторе.
+    \item Реализуйте в \texttt{Staff} метод \texttt{giveRaise}, увеличивающий зарплату на заданный процент.
+    \item Добавьте метод \texttt{work}, выводящий общее сообщение о работе.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}, возвращающий строку с именем и должностью.
+    \item Создайте класс \texttt{Veterinarian}, наследующий \texttt{Staff}, с фиксированной начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Veterinarian}, чтобы он выводил сообщение о лечении животных.
+    \item Создайте класс \texttt{Receptionist}, наследующий \texttt{Staff}, с собственной начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Receptionist}, чтобы он выводил сообщение о приёме звонков и записи клиентов.
+    \item Создайте класс \texttt{DiagRobot}, наследующий \texttt{Veterinarian}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{DiagRobot}, чтобы он выводил сообщение о проведении базовой диагностики.
+    \item Создайте объект \texttt{robo} класса \texttt{DiagRobot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[3]
+Разработайте ООП-модель для команды автосервиса. Базовый класс \texttt{Worker} описывает общие свойства и поведение персонала. От него наследуются \texttt{Mechanic} (механик) и \texttt{Cashier} (кассир). Кроме того, в сервисе работает робот-мойщик — \texttt{WashRobot}, который является подклассом \texttt{Mechanic}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{Worker} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise} для увеличения зарплаты на процент.
+    \item Добавьте метод \texttt{work}, выводящий общее сообщение о работе.
+    \item Реализуйте метод \texttt{\_\_repr\_\_} для строкового представления объекта.
+    \item Создайте класс \texttt{Mechanic}, наследующий \texttt{Worker}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Mechanic}, чтобы он выводил сообщение о ремонте автомобилей.
+    \item Создайте класс \texttt{Cashier}, наследующий \texttt{Worker}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Cashier}, чтобы он выводил сообщение о приёме платежей.
+    \item Создайте класс \texttt{WashRobot}, наследующий \texttt{Mechanic}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{WashRobot}, чтобы он выводил сообщение о мойке машин.
+    \item Создайте объект \texttt{cleanbot} класса \texttt{WashRobot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[4]
+Создайте иерархию классов для моделирования команды библиотеки. Базовый класс \texttt{LibStaff} описывает общие черты сотрудников. От него наследуются \texttt{Librarian} (библиотекарь) и \texttt{Security} (охранник). Также в библиотеке используется робот-сортировщик книг — \texttt{SortRobot}, который является подклассом \texttt{Librarian}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{LibStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise} для увеличения зарплаты.
+    \item Добавьте метод \texttt{work}, выводящий общее сообщение.
+    \item Реализуйте метод \texttt{\_\_repr\_\_} для строкового представления.
+    \item Создайте класс \texttt{Librarian}, наследующий \texttt{LibStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Librarian}, чтобы он выводил сообщение о выдаче книг.
+    \item Создайте класс \texttt{Security}, наследующий \texttt{LibStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Security}, чтобы он выводил сообщение о патрулировании.
+    \item Создайте класс \texttt{SortRobot}, наследующий \texttt{Librarian}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{SortRobot}, чтобы он выводил сообщение о сортировке книг.
+    \item Создайте объект \texttt{bookbot} класса \texttt{SortRobot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[5]
+Создайте модель команды аптеки с использованием наследования. Базовый класс \texttt{PharmStaff} описывает общие свойства. От него наследуются \texttt{Pharmacist} (фармацевт) и \texttt{Cashier} (кассир). Также в аптеке есть робот-упаковщик — \texttt{PackRobot}, подкласс \texttt{Pharmacist}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{PharmStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Pharmacist}, наследующий \texttt{PharmStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Pharmacist}, чтобы он выводил сообщение о выдаче лекарств.
+    \item Создайте класс \texttt{Cashier}, наследующий \texttt{PharmStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Cashier}, чтобы он выводил сообщение о приёме оплаты.
+    \item Создайте класс \texttt{PackRobot}, наследующий \texttt{Pharmacist}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{PackRobot}, чтобы он выводил сообщение об упаковке заказов.
+    \item Создайте объект \texttt{packy} класса \texttt{PackRobot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[6]
+Разработайте иерархию классов для команды зоопарка. Базовый класс \texttt{ZooStaff} описывает общие черты. От него наследуются \texttt{Keeper} (смотритель) и \texttt{TicketSeller} (продавец билетов). Также в зоопарке работает робот-кормушка — \texttt{FeedRobot}, подкласс \texttt{Keeper}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{ZooStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Keeper}, наследующий \texttt{ZooStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Keeper}, чтобы он выводил сообщение о кормлении животных.
+    \item Создайте класс \texttt{TicketSeller}, наследующий \texttt{ZooStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TicketSeller}, чтобы он выводил сообщение о продаже билетов.
+    \item Создайте класс \texttt{FeedRobot}, наследующий \texttt{Keeper}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{FeedRobot}, чтобы он выводил сообщение о автоматической подаче корма.
+    \item Создайте объект \texttt{feedy} класса \texttt{FeedRobot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[7]
+Создайте ООП-модель для команды кинотеатра. Базовый класс \texttt{CinemaStaff} описывает общие свойства. От него наследуются \texttt{Projectionist} (оператор) и \texttt{Usher} (расклейщик/проводник). Также в кинотеатре есть робот-уборщик — \texttt{CleanRobot}, подкласс \texttt{Usher}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{CinemaStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Projectionist}, наследующий \texttt{CinemaStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Projectionist}, чтобы он выводил сообщение о запуске фильма.
+    \item Создайте класс \texttt{Usher}, наследующий \texttt{CinemaStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Usher}, чтобы он выводил сообщение о раздаче попкорна и указании мест.
+    \item Создайте класс \texttt{CleanRobot}, наследующий \texttt{Usher}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{CleanRobot}, чтобы он выводил сообщение об уборке зала после сеанса.
+    \item Создайте объект \texttt{cleany} класса \texttt{CleanRobot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[8]
+Разработайте модель команды почтового отделения. Базовый класс \texttt{PostStaff} описывает общие черты. От него наследуются \texttt{Clerk} (почтальон) и \texttt{Manager} (менеджер). Также в отделении работает робот-сортировщик писем — \texttt{SortBot}, подкласс \texttt{Clerk}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{PostStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Clerk}, наследующий \texttt{PostStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Clerk}, чтобы он выводил сообщение о разносе почты.
+    \item Создайте класс \texttt{Manager}, наследующий \texttt{PostStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Manager}, чтобы он выводил сообщение о координации работы.
+    \item Создайте класс \texttt{SortBot}, наследующий \texttt{Clerk}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{SortBot}, чтобы он выводил сообщение о сортировке корреспонденции.
+    \item Создайте объект \texttt{sorty} класса \texttt{SortBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[9]
+Создайте иерархию классов для команды кафе. Базовый класс \texttt{CafeStaff} описывает общие свойства. От него наследуются \texttt{Barista} (бариста) и \texttt{Host} (хост). Также в кафе работает робот-мытарь чашек — \texttt{WashBot}, подкласс \texttt{Barista}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{CafeStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Barista}, наследующий \texttt{CafeStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Barista}, чтобы он выводил сообщение о приготовлении кофе.
+    \item Создайте класс \texttt{Host}, наследующий \texttt{CafeStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Host}, чтобы он выводил сообщение о встрече гостей.
+    \item Создайте класс \texttt{WashBot}, наследующий \texttt{Barista}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{WashBot}, чтобы он выводил сообщение о мытье посуды.
+    \item Создайте объект \texttt{washy} класса \texttt{WashBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[10]
+Разработайте модель команды автозаправки. Базовый класс \texttt{GasStaff} описывает общие черты. От него наследуются \texttt{Attendant} (оператор АЗС) и \texttt{ShopKeeper} (продавец в магазине при АЗС). Также работает робот-мойщик окон — \texttt{WindowBot}, подкласс \texttt{Attendant}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{GasStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Attendant}, наследующий \texttt{GasStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Attendant}, чтобы он выводил сообщение о заправке автомобилей.
+    \item Создайте класс \texttt{ShopKeeper}, наследующий \texttt{GasStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{ShopKeeper}, чтобы он выводил сообщение о продаже товаров.
+    \item Создайте класс \texttt{WindowBot}, наследующий \texttt{Attendant}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{WindowBot}, чтобы он выводил сообщение о мытье лобовых стёкол.
+    \item Создайте объект \texttt{windowy} класса \texttt{WindowBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[11]
+Создайте модель команды парикмахерской. Базовый класс \texttt{SalonStaff} описывает общие свойства. От него наследуются \texttt{Stylist} (стилист) и \texttt{Receptionist} (администратор). Также работает робот-массажист шеи — \texttt{NeckBot}, подкласс \texttt{Stylist}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{SalonStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Stylist}, наследующий \texttt{SalonStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Stylist}, чтобы он выводил сообщение о стрижке клиентов.
+    \item Создайте класс \texttt{Receptionist}, наследующий \texttt{SalonStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Receptionist}, чтобы он выводил сообщение о записи клиентов.
+    \item Создайте класс \texttt{NeckBot}, наследующий \texttt{Stylist}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{NeckBot}, чтобы он выводил сообщение о массаже шеи.
+    \item Создайте объект \texttt{necko} класса \texttt{NeckBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[12]
+Разработайте модель команды фитнес-клуба. Базовый класс \texttt{GymStaff} описывает общие черты. От него наследуются \texttt{Trainer} (тренер) и \texttt{FrontDesk} (администратор стойки). Также работает робот-раздатчик полотенец — \texttt{TowelBot}, подкласс \texttt{FrontDesk}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{GymStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Trainer}, наследующий \texttt{GymStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Trainer}, чтобы он выводил сообщение о проведении тренировки.
+    \item Создайте класс \texttt{FrontDesk}, наследующий \texttt{GymStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{FrontDesk}, чтобы он выводил сообщение о выдаче ключей и полотенец.
+    \item Создайте класс \texttt{TowelBot}, наследующий \texttt{FrontDesk}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TowelBot}, чтобы он выводил сообщение о выдаче полотенец.
+    \item Создайте объект \texttt{towely} класса \texttt{TowelBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[13]
+Создайте модель команды музея. Базовый класс \texttt{MuseumStaff} описывает общие свойства. От него наследуются \texttt{Guide} (экскурсовод) и \texttt{TicketSeller} (кассир). Также работает робот-информатор — \texttt{InfoBot}, подкласс \texttt{Guide}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{MuseumStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Guide}, наследующий \texttt{MuseumStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Guide}, чтобы он выводил сообщение о проведении экскурсии.
+    \item Создайте класс \texttt{TicketSeller}, наследующий \texttt{MuseumStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TicketSeller}, чтобы он выводил сообщение о продаже билетов.
+    \item Создайте класс \texttt{InfoBot}, наследующий \texttt{Guide}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{InfoBot}, чтобы он выводил сообщение о предоставлении информации.
+    \item Создайте объект \texttt{infob} класса \texttt{InfoBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[14]
+Разработайте модель команды отеля. Базовый класс \texttt{HotelStaff} описывает общие черты. От него наследуются \texttt{Housekeeper} (горничная) и \texttt{Concierge} (консьерж). Также работает робот-уборщик номеров — \texttt{RoomBot}, подкласс \texttt{Housekeeper}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{HotelStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Housekeeper}, наследующий \texttt{HotelStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Housekeeper}, чтобы он выводил сообщение об уборке номеров.
+    \item Создайте класс \texttt{Concierge}, наследующий \texttt{HotelStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Concierge}, чтобы он выводил сообщение о помощи гостям.
+    \item Создайте класс \texttt{RoomBot}, наследующий \texttt{Housekeeper}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{RoomBot}, чтобы он выводил сообщение об автоматической уборке.
+    \item Создайте объект \texttt{roomb} класса \texttt{RoomBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[15]
+Создайте модель команды пекарни. Базовый класс \texttt{BakeryStaff} описывает общие свойства. От него наследуются \texttt{Baker} (пекарь) и \texttt{Salesperson} (продавец). Также работает робот-упаковщик булочек — \texttt{PackBot}, подкласс \texttt{Baker}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{BakeryStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Baker}, наследующий \texttt{BakeryStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Baker}, чтобы он выводил сообщение о выпечке хлеба.
+    \item Создайте класс \texttt{Salesperson}, наследующий \texttt{BakeryStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Salesperson}, чтобы он выводил сообщение о продаже выпечки.
+    \item Создайте класс \texttt{PackBot}, наследующий \texttt{Baker}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{PackBot}, чтобы он выводил сообщение об упаковке изделий.
+    \item Создайте объект \texttt{packb} класса \texttt{PackBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[16]
+Разработайте модель команды автомойки. Базовый класс \texttt{WashStaff} описывает общие черты. От него наследуются \texttt{Operator} (оператор) и \texttt{Cashier} (кассир). Также работает робот-полировщик — \texttt{PolishBot}, подкласс \texttt{Operator}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{WashStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Operator}, наследующий \texttt{WashStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Operator}, чтобы он выводил сообщение об управлении мойкой.
+    \item Создайте класс \texttt{Cashier}, наследующий \texttt{WashStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Cashier}, чтобы он выводил сообщение о приёме оплаты.
+    \item Создайте класс \texttt{PolishBot}, наследующий \texttt{Operator}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{PolishBot}, чтобы он выводил сообщение о полировке кузова.
+    \item Создайте объект \texttt{polishb} класса \texttt{PolishBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[17]
+Создайте модель команды фермерского рынка. Базовый класс \texttt{MarketStaff} описывает общие свойства. От него наследуются \texttt{Farmer} (фермер) и \texttt{Cashier} (кассир). Также работает робот-сортировщик овощей — \texttt{SortVegBot}, подкласс \texttt{Farmer}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{MarketStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Farmer}, наследующий \texttt{MarketStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Farmer}, чтобы он выводил сообщение о сборе урожая.
+    \item Создайте класс \texttt{Cashier}, наследующий \texttt{MarketStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Cashier}, чтобы он выводил сообщение о расчёте с покупателями.
+    \item Создайте класс \texttt{SortVegBot}, наследующий \texttt{Farmer}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{SortVegBot}, чтобы он выводил сообщение о сортировке овощей.
+    \item Создайте объект \texttt{sortveg} класса \texttt{SortVegBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[18]
+Разработайте модель команды цирка. Базовый класс \texttt{CircusStaff} описывает общие черты. От него наследуются \texttt{Performer} (артист) и \texttt{TicketSeller} (кассир). Также работает робот-дрессировщик — \texttt{TrainBot}, подкласс \texttt{Performer}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{CircusStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Performer}, наследующий \texttt{CircusStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Performer}, чтобы он выводил сообщение о выступлении.
+    \item Создайте класс \texttt{TicketSeller}, наследующий \texttt{CircusStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TicketSeller}, чтобы он выводил сообщение о продаже билетов.
+    \item Создайте класс \texttt{TrainBot}, наследующий \texttt{Performer}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TrainBot}, чтобы он выводил сообщение о дрессировке животных.
+    \item Создайте объект \texttt{trainb} класса \texttt{TrainBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[19]
+Создайте модель команды театра. Базовый класс \texttt{TheaterStaff} описывает общие свойства. От него наследуются \texttt{Actor} (актёр) и \texttt{Stagehand} (рабочий сцены). Также работает робот-осветитель — \texttt{LightBot}, подкласс \texttt{Stagehand}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{TheaterStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Actor}, наследующий \texttt{TheaterStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Actor}, чтобы он выводил сообщение об игре на сцене.
+    \item Создайте класс \texttt{Stagehand}, наследующий \texttt{TheaterStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Stagehand}, чтобы он выводил сообщение о подготовке реквизита.
+    \item Создайте класс \texttt{LightBot}, наследующий \texttt{Stagehand}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{LightBot}, чтобы он выводил сообщение об управлении освещением.
+    \item Создайте объект \texttt{lightb} класса \texttt{LightBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[20]
+Разработайте модель команды лаборатории. Базовый класс \texttt{LabStaff} описывает общие черты. От него наследуются \texttt{Scientist} (учёный) и \texttt{Admin} (администратор). Также работает робот-анализатор проб — \texttt{AnalyzeBot}, подкласс \texttt{Scientist}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{LabStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Scientist}, наследующий \texttt{LabStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Scientist}, чтобы он выводил сообщение о проведении экспериментов.
+    \item Создайте класс \texttt{Admin}, наследующий \texttt{LabStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Admin}, чтобы он выводил сообщение о ведении документации.
+    \item Создайте класс \texttt{AnalyzeBot}, наследующий \texttt{Scientist}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{AnalyzeBot}, чтобы он выводил сообщение об анализе проб.
+    \item Создайте объект \texttt{analyze} класса \texttt{AnalyzeBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[21]
+Создайте модель команды аэропорта. Базовый класс \texttt{AirportStaff} описывает общие свойства. От него наследуются \texttt{Pilot} (пилот) и \texttt{CheckInAgent} (агент регистрации). Также работает робот-грузчик багажа — \texttt{LoadBot}, подкласс \texttt{CheckInAgent}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{AirportStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Pilot}, наследующий \texttt{AirportStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Pilot}, чтобы он выводил сообщение об управлении самолётом.
+    \item Создайте класс \texttt{CheckInAgent}, наследующий \texttt{AirportStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{CheckInAgent}, чтобы он выводил сообщение о регистрации пассажиров.
+    \item Создайте класс \texttt{LoadBot}, наследующий \texttt{CheckInAgent}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{LoadBot}, чтобы он выводил сообщение о погрузке багажа.
+    \item Создайте объект \texttt{loadb} класса \texttt{LoadBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[22]
+Разработайте модель команды школы. Базовый класс \texttt{SchoolStaff} описывает общие черты. От него наследуются \texttt{Teacher} (учитель) и \texttt{Janitor} (дворник). Также работает робот-уборщик классов — \texttt{CleanClassBot}, подкласс \texttt{Janitor}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{SchoolStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Teacher}, наследующий \texttt{SchoolStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Teacher}, чтобы он выводил сообщение о проведении урока.
+    \item Создайте класс \texttt{Janitor}, наследующий \texttt{SchoolStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Janitor}, чтобы он выводил сообщение об уборке помещений.
+    \item Создайте класс \texttt{CleanClassBot}, наследующий \texttt{Janitor}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{CleanClassBot}, чтобы он выводил сообщение об автоматической уборке классов.
+    \item Создайте объект \texttt{cleanc} класса \texttt{CleanClassBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[23]
+Создайте модель команды больницы. Базовый класс \texttt{HospitalStaff} описывает общие свойства. От него наследуются \texttt{Doctor} (врач) и \texttt{Nurse} (медсестра). Также работает робот-разносчик лекарств — \texttt{MedBot}, подкласс \texttt{Nurse}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{HospitalStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Doctor}, наследующий \texttt{HospitalStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Doctor}, чтобы он выводил сообщение о приёме пациентов.
+    \item Создайте класс \texttt{Nurse}, наследующий \texttt{HospitalStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Nurse}, чтобы он выводил сообщение об уходе за больными.
+    \item Создайте класс \texttt{MedBot}, наследующий \texttt{Nurse}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{MedBot}, чтобы он выводил сообщение о доставке лекарств.
+    \item Создайте объект \texttt{medb} класса \texttt{MedBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[24]
+Разработайте модель команды студии звукозаписи. Базовый класс \texttt{StudioStaff} описывает общие черты. От него наследуются \texttt{SoundEngineer} (звукорежиссёр) и \texttt{Receptionist} (администратор). Также работает робот-микшер — \texttt{MixBot}, подкласс \texttt{SoundEngineer}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{StudioStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{SoundEngineer}, наследующий \texttt{StudioStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{SoundEngineer}, чтобы он выводил сообщение о настройке звука.
+    \item Создайте класс \texttt{Receptionist}, наследующий \texttt{StudioStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Receptionist}, чтобы он выводил сообщение о приёме артистов.
+    \item Создайте класс \texttt{MixBot}, наследующий \texttt{SoundEngineer}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{MixBot}, чтобы он выводил сообщение о микшировании треков.
+    \item Создайте объект \texttt{mixb} класса \texttt{MixBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[25]
+Создайте модель команды кондитерской. Базовый класс \texttt{ConfectionStaff} описывает общие свойства. От него наследуются \texttt{PastryChef} (кондитер) и \texttt{Cashier} (кассир). Также работает робот-украшатель тортов — \texttt{DecorBot}, подкласс \texttt{PastryChef}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{ConfectionStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{PastryChef}, наследующий \texttt{ConfectionStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{PastryChef}, чтобы он выводил сообщение о приготовлении тортов.
+    \item Создайте класс \texttt{Cashier}, наследующий \texttt{ConfectionStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Cashier}, чтобы он выводил сообщение о продаже изделий.
+    \item Создайте класс \texttt{DecorBot}, наследующий \texttt{PastryChef}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{DecorBot}, чтобы он выводил сообщение об украшении тортов.
+    \item Создайте объект \texttt{decorb} класса \texttt{DecorBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[26]
+Разработайте модель команды автобусного парка. Базовый класс \texttt{BusStaff} описывает общие черты. От него наследуются \texttt{Driver} (водитель) и \texttt{Dispatcher} (диспетчер). Также работает робот-контролёр билетов — \texttt{TicketBot}, подкласс \texttt{Dispatcher}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{BusStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Driver}, наследующий \texttt{BusStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Driver}, чтобы он выводил сообщение о вождении автобуса.
+    \item Создайте класс \texttt{Dispatcher}, наследующий \texttt{BusStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Dispatcher}, чтобы он выводил сообщение о координации рейсов.
+    \item Создайте класс \texttt{TicketBot}, наследующий \texttt{Dispatcher}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TicketBot}, чтобы он выводил сообщение о проверке билетов.
+    \item Создайте объект \texttt{ticketb} класса \texttt{TicketBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[27]
+Создайте модель команды спортивного магазина. Базовый класс \texttt{SportStaff} описывает общие свойства. От него наследуются \texttt{SalesRep} (продавец) и \texttt{RepairTech} (техник по ремонту). Также работает робот-упаковщик заказов — \texttt{PackOrderBot}, подкласс \texttt{SalesRep}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{SportStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{SalesRep}, наследующий \texttt{SportStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{SalesRep}, чтобы он выводил сообщение о консультировании клиентов.
+    \item Создайте класс \texttt{RepairTech}, наследующий \texttt{SportStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{RepairTech}, чтобы он выводил сообщение о ремонте инвентаря.
+    \item Создайте класс \texttt{PackOrderBot}, наследующий \texttt{SalesRep}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{PackOrderBot}, чтобы он выводил сообщение об упаковке онлайн-заказов.
+    \item Создайте объект \texttt{packord} класса \texttt{PackOrderBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[28]
+Разработайте модель команды кинопроката. Базовый класс \texttt{RentalStaff} описывает общие черты. От него наследуются \texttt{Clerk} (клерк) и \texttt{Cleaner} (уборщик). Также работает робот-сортировщик дисков — \texttt{DiscSortBot}, подкласс \texttt{Clerk}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{RentalStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Clerk}, наследующий \texttt{RentalStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Clerk}, чтобы он выводил сообщение о выдаче фильмов.
+    \item Создайте класс \texttt{Cleaner}, наследующий \texttt{RentalStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Cleaner}, чтобы он выводил сообщение об уборке помещения.
+    \item Создайте класс \texttt{DiscSortBot}, наследующий \texttt{Clerk}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{DiscSortBot}, чтобы он выводил сообщение о сортировке дисков.
+    \item Создайте объект \texttt{discsort} класса \texttt{DiscSortBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[29]
+Создайте модель команды прачечной. Базовый класс \texttt{LaundryStaff} описывает общие свойства. От него наследуются \texttt{Washer} (стиральщик) и \texttt{FoldingAgent} (упаковщик). Также работает робот-гладильщик — \texttt{IronBot}, подкласс \texttt{FoldingAgent}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{LaundryStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Washer}, наследующий \texttt{LaundryStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Washer}, чтобы он выводил сообщение о стирке белья.
+    \item Создайте класс \texttt{FoldingAgent}, наследующий \texttt{LaundryStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{FoldingAgent}, чтобы он выводил сообщение о складывании одежды.
+    \item Создайте класс \texttt{IronBot}, наследующий \texttt{FoldingAgent}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{IronBot}, чтобы он выводил сообщение о глажке рубашек.
+    \item Создайте объект \texttt{ironb} класса \texttt{IronBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[30]
+Разработайте модель команды фотостудии. Базовый класс \texttt{PhotoStaff} описывает общие черты. От него наследуются \texttt{Photographer} (фотограф) и \texttt{Retoucher} (ретушёр). Также работает робот-сортировщик фото — \texttt{SortPhotoBot}, подкласс \texttt{Retoucher}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{PhotoStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Photographer}, наследующий \texttt{PhotoStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Photographer}, чтобы он выводил сообщение о съёмке клиентов.
+    \item Создайте класс \texttt{Retoucher}, наследующий \texttt{PhotoStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Retoucher}, чтобы он выводил сообщение о ретуши снимков.
+    \item Создайте класс \texttt{SortPhotoBot}, наследующий \texttt{Retoucher}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{SortPhotoBot}, чтобы он выводил сообщение о сортировке фотографий.
+    \item Создайте объект \texttt{sortphoto} класса \texttt{SortPhotoBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[31]
+Создайте модель команды рыбного рынка. Базовый класс \texttt{FishMarketStaff} описывает общие свойства. От него наследуются \texttt{Fisherman} (рыбак) и \texttt{Seller} (продавец). Также работает робот-чистильщик рыбы — \texttt{CleanFishBot}, подкласс \texttt{Fisherman}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{FishMarketStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Fisherman}, наследующий \texttt{FishMarketStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Fisherman}, чтобы он выводил сообщение о ловле рыбы.
+    \item Создайте класс \texttt{Seller}, наследующий \texttt{FishMarketStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Seller}, чтобы он выводил сообщение о продаже рыбы.
+    \item Создайте класс \texttt{CleanFishBot}, наследующий \texttt{Fisherman}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{CleanFishBot}, чтобы он выводил сообщение о чистке рыбы.
+    \item Создайте объект \texttt{cleanfish} класса \texttt{CleanFishBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[32]
+Разработайте модель команды цветочного магазина. Базовый класс \texttt{FlowerStaff} описывает общие черты. От него наследуются \texttt{Florist} (флорист) и \texttt{Cashier} (кассир). Также работает робот-поливальщик — \texttt{WaterBot}, подкласс \texttt{Florist}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{FlowerStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Florist}, наследующий \texttt{FlowerStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Florist}, чтобы он выводил сообщение о составлении букетов.
+    \item Создайте класс \texttt{Cashier}, наследующий \texttt{FlowerStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Cashier}, чтобы он выводил сообщение о расчёте с клиентами.
+    \item Создайте класс \texttt{WaterBot}, наследующий \texttt{Florist}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{WaterBot}, чтобы он выводил сообщение о поливе растений.
+    \item Создайте объект \texttt{waterb} класса \texttt{WaterBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[33]
+Создайте модель команды туристического агентства. Базовый класс \texttt{TravelStaff} описывает общие свойства. От него наследуются \texttt{Agent} (агент) и \texttt{Guide} (гид). Также работает робот-переводчик — \texttt{TransBot}, подкласс \texttt{Guide}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{TravelStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Agent}, наследующий \texttt{TravelStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Agent}, чтобы он выводил сообщение о подборе туров.
+    \item Создайте класс \texttt{Guide}, наследующий \texttt{TravelStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Guide}, чтобы он выводил сообщение о сопровождении групп.
+    \item Создайте класс \texttt{TransBot}, наследующий \texttt{Guide}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TransBot}, чтобы он выводил сообщение о переводе речи.
+    \item Создайте объект \texttt{transb} класса \texttt{TransBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[34]
+Разработайте модель команды компьютерного магазина. Базовый класс \texttt{CompStoreStaff} описывает общие черты. От него наследуются \texttt{Salesperson} (продавец) и \texttt{Technician} (техник). Также работает робот-тестировщик — \texttt{TestBot}, подкласс \texttt{Technician}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{CompStoreStaff} с параметрами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Salesperson}, наследующий \texttt{CompStoreStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Salesperson}, чтобы он выводил сообщение о консультировании покупателей.
+    \item Создайте класс \texttt{Technician}, наследующий \texttt{CompStoreStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Technician}, чтобы он выводил сообщение о ремонте техники.
+    \item Создайте класс \texttt{TestBot}, наследующий \texttt{Technician}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{TestBot}, чтобы он выводил сообщение о тестировании устройств.
+    \item Создайте объект \texttt{testb} класса \texttt{TestBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+
+    \item[35]
+Создайте модель команды книжного магазина. Базовый класс \texttt{BookStoreStaff} описывает общие свойства. От него наследуются \texttt{Bookseller} (продавец книг) и \texttt{StockClerk} (кладовщик). Также работает робот-рекомендатель — \texttt{RecBot}, подкласс \texttt{Bookseller}.
+
+\textbf{Инструкция:}
+\begin{enumerate}
+    \item Создайте класс \texttt{BookStoreStaff} с атрибутами \texttt{name} и \texttt{salary}.
+    \item Реализуйте метод \texttt{giveRaise}.
+    \item Добавьте метод \texttt{work} с общим сообщением.
+    \item Реализуйте метод \texttt{\_\_repr\_\_}.
+    \item Создайте класс \texttt{Bookseller}, наследующий \texttt{BookStoreStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{Bookseller}, чтобы он выводил сообщение о рекомендации книг.
+    \item Создайте класс \texttt{StockClerk}, наследующий \texttt{BookStoreStaff}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{StockClerk}, чтобы он выводил сообщение о пополнении запасов.
+    \item Создайте класс \texttt{RecBot}, наследующий \texttt{Bookseller}, с начальной зарплатой.
+    \item Переопределите \texttt{work} в \texttt{RecBot}, чтобы он выводил сообщение о подборе книг по вкусу.
+    \item Создайте объект \texttt{recb} класса \texttt{RecBot} и вызовите его методы \texttt{work} и \texttt{giveRaise}.
+    \item Создайте по одному экземпляру каждого класса и вызовите у каждого метод \texttt{work}.
+\end{enumerate}
+\end{enumerate}
