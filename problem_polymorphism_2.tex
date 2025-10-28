@@ -1,7 +1,7 @@
 \subsubsection{Полиморфизм с наследованием (полное переопределение методов родительского класса)}
 \begin{enumerate}
 \item[1]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Vehicle}, который будет базовым для классов \texttt{Car} и \texttt{Bike}. В конструкторе класса \texttt{Vehicle} задайте параметры \texttt{name}, \texttt{color}, \texttt{price}, \texttt{travel\_time}, \texttt{distance} и \texttt{speed}.
     \item В классе \texttt{Vehicle} создайте метод \texttt{show}, который будет выводить информацию о транспортном средстве (например, с помощью функции \texttt{print}).
     \item В классе \texttt{Vehicle} создайте метод \texttt{max\_speed}, который будет выводить максимальную скорость транспортного средства.
@@ -19,7 +19,7 @@
     \item В основной части программы создайте список, содержащий объекты разных классов (\texttt{Vehicle}, \texttt{Car}, \texttt{Bike}), и организуйте цикл по этой коллекции, в котором вызываются все общие методы (\texttt{show}, \texttt{max\_speed}, \texttt{change\_gear}, \texttt{calculate}) для каждого объекта — демонстрируя полиморфное поведение.
 \end{enumerate}
 \item[2]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Animal}, который будет базовым для классов \texttt{Dog} и \texttt{Cat}. В конструкторе класса \texttt{Animal} задайте параметры \texttt{name}, \texttt{age}, \texttt{weight}, \texttt{food\_per\_day}, \texttt{activity\_hours} и \texttt{calories\_per\_hour}.
     \item В классе \texttt{Animal} создайте метод \texttt{info}, который будет выводить информацию о животном.
     \item В классе \texttt{Animal} создайте метод \texttt{max\_speed}, который будет выводить максимальную скорость передвижения животного.
@@ -37,7 +37,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[3]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Employee}, который будет базовым для классов \texttt{Manager} и \texttt{Developer}. В конструкторе задайте параметры \texttt{name}, \texttt{department}, \texttt{base\_salary}, \texttt{bonus\_percent}, \texttt{hours\_worked}, \texttt{hourly\_rate}.
     \item В классе \texttt{Employee} создайте метод \texttt{display}, который выводит информацию о сотруднике.
     \item В классе \texttt{Employee} создайте метод \texttt{get\_role}, который выводит должность.
@@ -55,7 +55,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[4]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Appliance}, который будет базовым для классов \texttt{Fridge} и \texttt{Microwave}. В конструкторе задайте параметры \texttt{brand}, \texttt{model}, \texttt{price}, \texttt{power}, \texttt{usage\_hours}, \texttt{efficiency}.
     \item В классе \texttt{Appliance} создайте метод \texttt{details}, который выводит информацию об устройстве.
     \item В классе \texttt{Appliance} создайте метод \texttt{energy\_class}, который выводит класс энергоэффективности.
@@ -73,7 +73,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[5]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Shape}, который будет базовым для классов \texttt{Circle} и \texttt{Rectangle}. В конструкторе задайте параметры \texttt{color}, \texttt{border\_width}, \texttt{area}, \texttt{perimeter}, \texttt{dimension1} (по умолчанию \texttt{None}), \texttt{dimension2} (по умолчанию \texttt{None}).
     \item В классе \texttt{Shape} создайте метод \texttt{draw}, который выводит информацию о фигуре.
     \item В классе \texttt{Shape} создайте метод \texttt{get\_type}, который выводит тип фигуры.
@@ -91,7 +91,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[6]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Book}, который будет базовым для классов \texttt{Fiction} и \texttt{Textbook}. В конструкторе задайте параметры \texttt{title}, \texttt{author}, \texttt{price}, \texttt{pages}, \texttt{reading\_time}, \texttt{complexity}.
     \item В классе \texttt{Book} создайте метод \texttt{info}, который выводит информацию о книге.
     \item В классе \texttt{Book} создайте метод \texttt{genre}, который выводит жанр.
@@ -109,7 +109,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[7]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Instrument}, который будет базовым для классов \texttt{Guitar} и \texttt{Piano}. В конструкторе задайте параметры \texttt{name}, \texttt{brand}, \texttt{price}, \texttt{strings}, \texttt{keys}, \texttt{volume}.
     \item В классе \texttt{Instrument} создайте метод \texttt{describe}, который выводит описание инструмента.
     \item В классе \texttt{Instrument} создайте метод \texttt{play\_style}, который выводит способ игры.
@@ -127,7 +127,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[8]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Drink}, который будет базовым для классов \texttt{Coffee} и \texttt{Tea}. В конструкторе задайте параметры \texttt{name}, \texttt{temperature}, \texttt{volume}, \texttt{caffeine}, \texttt{brew\_time}, \texttt{price}.
     \item В классе \texttt{Drink} создайте метод \texttt{info}, который выводит информацию о напитке.
     \item В классе \texttt{Drink} создайте метод \texttt{origin}, который выводит страну происхождения.
@@ -145,7 +145,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[9]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Plant}, который будет базовым для классов \texttt{Flower} и \texttt{Tree}. В конструкторе задайте параметры \texttt{species}, \texttt{height}, \texttt{age}, \texttt{water\_per\_week}, \texttt{sunlight\_hours}, \texttt{blooming\_season}.
     \item В классе \texttt{Plant} создайте метод \texttt{describe}, который выводит описание растения.
     \item В классе \texttt{Plant} создайте метод \texttt{type}, который выводит тип растения.
@@ -163,7 +163,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[10]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Account}, который будет базовым для классов \texttt{Savings} и \texttt{Checking}. В конструкторе задайте параметры \texttt{owner}, \texttt{balance}, \texttt{interest\_rate}, \texttt{monthly\_fee}, \texttt{transactions}, \texttt{limit}.
     \item В классе \texttt{Account} создайте метод \texttt{info}, который выводит информацию о счёте.
     \item В классе \texttt{Account} создайте метод \texttt{account\_type}, который выводит тип счёта.
@@ -181,7 +181,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[11]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Building}, который будет базовым для классов \texttt{House} и \texttt{Office}. В конструкторе задайте параметры \texttt{name}, \texttt{floors}, \texttt{area}, \texttt{rooms}, \texttt{occupants}, \texttt{construction\_year}.
     \item В классе \texttt{Building} создайте метод \texttt{overview}, который выводит информацию о здании.
     \item В классе \texttt{Building} создайте метод \texttt{purpose}, который выводит назначение здания.
@@ -199,7 +199,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[12]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Game}, который будет базовым для классов \texttt{RPG} и \texttt{Puzzle}. В конструкторе задайте параметры \texttt{title}, \texttt{genre}, \texttt{price}, \texttt{playtime}, \texttt{difficulty}, \texttt{rating}.
     \item В классе \texttt{Game} создайте метод \texttt{summary}, который выводит краткое описание игры.
     \item В классе \texttt{Game} создайте метод \texttt{platform}, который выводит платформу.
@@ -217,7 +217,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[13]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Clothing}, который будет базовым для классов \texttt{TShirt} и \texttt{Jacket}. В конструкторе задайте параметры \texttt{brand}, \texttt{size}, \texttt{color}, \texttt{price}, \texttt{material}, \texttt{season}.
     \item В классе \texttt{Clothing} создайте метод \texttt{label}, который выводит информацию об одежде.
     \item В классе \texttt{Clothing} создайте метод \texttt{type}, который выводит тип изделия.
@@ -235,7 +235,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[14]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Electronics}, который будет базовым для классов \texttt{Phone} и \texttt{Laptop}. В конструкторе задайте параметры \texttt{model}, \texttt{brand}, \texttt{price}, \texttt{battery\_life}, \texttt{weight}, \texttt{warranty}.
     \item В классе \texttt{Electronics} создайте метод \texttt{spec}, который выводит характеристики устройства.
     \item В классе \texttt{Electronics} создайте метод \texttt{category}, который выводит категорию.
@@ -253,7 +253,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[15]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Food}, который будет базовым для классов \texttt{Pizza} и \texttt{Salad}. В конструкторе задайте параметры \texttt{name}, \texttt{calories}, \texttt{price}, \texttt{weight}, \texttt{cooking\_time}, \texttt{ingredients}.
     \item В классе \texttt{Food} создайте метод \texttt{nutrition}, который выводит пищевую ценность.
     \item В классе \texttt{Food} создайте метод \texttt{type}, который выводит тип блюда.
@@ -271,7 +271,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[16]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Sport}, который будет базовым для классов \texttt{Football} и \texttt{Swimming}. В конструкторе задайте параметры \texttt{name}, \texttt{players}, \texttt{duration}, \texttt{equipment}, \texttt{intensity}, \texttt{calories\_per\_hour}.
     \item В классе \texttt{Sport} создайте метод \texttt{rules}, который выводит основные правила.
     \item В классе \texttt{Sport} создайте метод \texttt{venue}, который выводит место проведения.
@@ -289,7 +289,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[17]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Transport}, который будет базовым для классов \texttt{Train} и \texttt{Airplane}. В конструкторе задайте параметры \texttt{name}, \texttt{capacity}, \texttt{speed}, \texttt{fuel\_consumption}, \texttt{range}, \texttt{ticket\_price}.
     \item В классе \texttt{Transport} создайте метод \texttt{info}, который выводит информацию о транспорте.
     \item В классе \texttt{Transport} создайте метод \texttt{type}, который выводит тип транспорта.
@@ -307,7 +307,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[18]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Pet}, который будет базовым для классов \texttt{Parrot} и \texttt{Hamster}. В конструкторе задайте параметры \texttt{name}, \texttt{age}, \texttt{weight}, \texttt{food\_per\_day}, \texttt{lifespan}, \texttt{noise\_level}.
     \item В классе \texttt{Pet} создайте метод \texttt{profile}, который выводит профиль питомца.
     \item В классе \texttt{Pet} создайте метод \texttt{habitat}, который выводит среду обитания.
@@ -325,7 +325,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[19]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Furniture}, который будет базовым для классов \texttt{Chair} и \texttt{Table}. В конструкторе задайте параметры \texttt{material}, \texttt{color}, \texttt{price}, \texttt{weight}, \texttt{height}, \texttt{assembly\_time}.
     \item В классе \texttt{Furniture} создайте метод \texttt{spec}, который выводит спецификацию мебели.
     \item В классе \texttt{Furniture} создайте метод \texttt{category}, который выводит категорию мебели.
@@ -343,7 +343,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[20]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Media}, который будет базовым для классов \texttt{Movie} и \texttt{Album}. В конструкторе задайте параметры \texttt{title}, \texttt{creator}, \texttt{year}, \texttt{rating}, \texttt{duration}, \texttt{genre}.
     \item В классе \texttt{Media} создайте метод \texttt{details}, который выводит детали медиа.
     \item В классе \texttt{Media} создайте метод \texttt{format}, который выводит формат.
@@ -361,7 +361,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[21]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Tool}, который будет базовым для классов \texttt{Hammer} и \texttt{Screwdriver}. В конструкторе задайте параметры \texttt{name}, \texttt{material}, \texttt{price}, \texttt{weight}, \texttt{length}, \texttt{uses}.
     \item В классе \texttt{Tool} создайте метод \texttt{description}, который выводит описание инструмента.
     \item В классе \texttt{Tool} создайте метод \texttt{purpose}, который выводит назначение.
@@ -379,7 +379,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[22]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Course}, который будет базовым для классов \texttt{Programming} и \texttt{Design}. В конструкторе задайте параметры \texttt{title}, \texttt{instructor}, \texttt{duration\_weeks}, \texttt{price}, \texttt{students}, \texttt{difficulty}.
     \item В классе \texttt{Course} создайте метод \texttt{outline}, который выводит программу курса.
     \item В классе \texttt{Course} создайте метод \texttt{category}, который выводит категорию.
@@ -397,7 +397,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[23]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Weather}, который будет базовым для классов \texttt{Rainy} и \texttt{Sunny}. В конструкторе задайте параметры \texttt{location}, \texttt{temperature}, \texttt{humidity}, \texttt{wind\_speed}, \texttt{precipitation}, \texttt{uv\_index}.
     \item В классе \texttt{Weather} создайте метод \texttt{forecast}, который выводит прогноз погоды.
     \item В классе \texttt{Weather} создайте метод \texttt{type}, который выводит тип погоды.
@@ -415,7 +415,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[24]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Event}, который будет базовым для классов \texttt{Concert} и \texttt{Exhibition}. В конструкторе задайте параметры \texttt{name}, \texttt{date}, \texttt{location}, \texttt{price}, \texttt{duration\_hours}, \texttt{capacity}.
     \item В классе \texttt{Event} создайте метод \texttt{info}, который выводит информацию о событии.
     \item В классе \texttt{Event} создайте метод \texttt{category}, который выводит категорию события.
@@ -433,7 +433,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[25]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Currency}, который будет базовым для классов \texttt{Dollar} и \texttt{Euro}. В конструкторе задайте параметры \texttt{code}, \texttt{name}, \texttt{rate\_to\_rub}, \texttt{symbol}, \texttt{fractional\_unit}, \texttt{issuing\_country}.
     \item В классе \texttt{Currency} создайте метод \texttt{info}, который выводит информацию о валюте.
     \item В классе \texttt{Currency} создайте метод \texttt{region}, который выводит регион обращения.
@@ -451,7 +451,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[26]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Language}, который будет базовым для классов \texttt{Python} и \texttt{JavaScript}. В конструкторе задайте параметры \texttt{name}, \texttt{year\_created}, \texttt{paradigm}, \texttt{popularity\_rank}, \texttt{typing}, \texttt{runtime}.
     \item В классе \texttt{Language} создайте метод \texttt{overview}, который выводит обзор языка.
     \item В классе \texttt{Language} создайте метод \texttt{domain}, который выводит основную сферу применения.
@@ -469,7 +469,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[27]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Vehicle2}, который будет базовым для классов \texttt{Truck} и \texttt{Motorcycle}. В конструкторе задайте параметры \texttt{brand}, \texttt{model}, \texttt{year}, \texttt{max\_load}, \texttt{fuel\_tank}, \texttt{engine\_power}.
     \item В классе \texttt{Vehicle2} создайте метод \texttt{spec}, который выводит спецификацию транспорта.
     \item В классе \texttt{Vehicle2} создайте метод \texttt{vehicle\_class}, который выводит класс транспорта.
@@ -487,7 +487,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[28]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Dish}, который будет базовым для классов \texttt{Soup} и \texttt{Dessert}. В конструкторе задайте параметры \texttt{name}, \texttt{temperature}, \texttt{calories}, \texttt{cooking\_time}, \texttt{main\_ingredient}, \texttt{cuisine}.
     \item В классе \texttt{Dish} создайте метод \texttt{recipe}, который выводит краткий рецепт.
     \item В классе \texttt{Dish} создайте метод \texttt{meal\_time}, который выводит время подачи.
@@ -505,7 +505,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[29]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Device}, который будет базовым для классов \texttt{Smartwatch} и \texttt{Headphones}. В конструкторе задайте параметры \texttt{brand}, \texttt{model}, \texttt{price}, \texttt{battery\_life}, \texttt{weight}, \texttt{connectivity}.
     \item В классе \texttt{Device} создайте метод \texttt{specs}, который выводит характеристики устройства.
     \item В классе \texttt{Device} создайте метод \texttt{category}, который выводит категорию устройства.
@@ -523,7 +523,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[30]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Document}, который будет базовым для классов \texttt{Invoice} и \texttt{Contract}. В конструкторе задайте параметры \texttt{doc\_id}, \texttt{date}, \texttt{author}, \texttt{pages}, \texttt{status}, \texttt{total\_amount}.
     \item В классе \texttt{Document} создайте метод \texttt{summary}, который выводит краткое содержание.
     \item В классе \texttt{Document} создайте метод \texttt{type}, который выводит тип документа.
@@ -541,7 +541,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[31]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Animal2}, который будет базовым для классов \texttt{Bird} и \texttt{Fish}. В конструкторе задайте параметры \texttt{species}, \texttt{habitat}, \texttt{lifespan}, \texttt{diet}, \texttt{speed}, \texttt{reproduction}.
     \item В классе \texttt{Animal2} создайте метод \texttt{bio}, который выводит биологическое описание.
     \item В классе \texttt{Animal2} создайте метод \texttt{locomotion}, который выводит способ передвижения.
@@ -559,7 +559,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[32]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Subscription}, который будет базовым для классов \texttt{Streaming} и \texttt{Gym}. В конструкторе задайте параметры \texttt{name}, \texttt{monthly\_fee}, \texttt{duration\_months}, \texttt{features}, \texttt{auto\_renew}, \texttt{discount}.
     \item В классе \texttt{Subscription} создайте метод \texttt{details}, который выводит детали подписки.
     \item В классе \texttt{Subscription} создайте метод \texttt{category}, который выводит категорию подписки.
@@ -577,7 +577,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[33]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Ticket}, который будет базовым для классов \texttt{Flight} и \texttt{Concert2}. В конструкторе задайте параметры \texttt{event\_name}, \texttt{price}, \texttt{date}, \texttt{seat}, \texttt{class\_type}, \texttt{refundable}.
     \item В классе \texttt{Ticket} создайте метод \texttt{info}, который выводит информацию о билете.
     \item В классе \texttt{Ticket} создайте метод \texttt{type}, который выводит тип билета.
@@ -595,7 +595,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[34]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Product}, который будет базовым для классов \texttt{Book2} и \texttt{Gadget}. В конструкторе задайте параметры \texttt{title}, \texttt{price}, \texttt{weight}, \texttt{manufacturer}, \texttt{warranty\_months}, \texttt{in\_stock}.
     \item В классе \texttt{Product} создайте метод \texttt{description}, который выводит описание товара.
     \item В классе \texttt{Product} создайте метод \texttt{category}, который выводит категорию товара.
@@ -613,7 +613,7 @@
     \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
 \end{enumerate}
 \item[35]
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
     \item Создайте класс \texttt{Person}, который будет базовым для классов \texttt{Student} и \texttt{Teacher}. В конструкторе задайте параметры \texttt{name}, \texttt{age}, \texttt{email}, \texttt{schedule}, \texttt{workload}, \texttt{specialization}.
     \item В классе \texttt{Person} создайте метод \texttt{profile}, который выводит профиль человека.
     \item В классе \texttt{Person} создайте метод \texttt{role}, который выводит роль.
