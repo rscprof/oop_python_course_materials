@@ -79,11 +79,11 @@
     \item В классе \texttt{Shape} создайте метод \texttt{get\_type}, который выводит тип фигуры.
     \item В классе \texttt{Shape} создайте метод \texttt{get\_symmetry}, который выводит наличие симметрии.
     \item В классе \texttt{Shape} создайте метод \texttt{calculate}, который вычисляет площадь как \( \text{area} = \text{dimension1} \times \text{dimension2} \) (если оба заданы).
-    \item Создайте класс \texttt{Circle}, наследующийся от \texttt{Shape}. В конструкторе задайте \texttt{color}, \texttt{border\_width}, \texttt{radius}. При вызове \texttt{super().__init__()} передайте \texttt{dimension1=radius}, \texttt{dimension2=radius}.
+    \item Создайте класс \texttt{Circle}, наследующийся от \texttt{Shape}. В конструкторе задайте \texttt{color}, \texttt{border\_width}, \texttt{radius}. При вызове \texttt{super().\_init\_\_()} передайте \texttt{dimension1=radius}, \texttt{dimension2=radius}.
     \item В классе \texttt{Circle} полностью переопределите метод \texttt{get\_type} (например, «Окружность»).
     \item В классе \texttt{Circle} полностью переопределите метод \texttt{get\_symmetry} (например, «Осевая и центральная»).
     \item В классе \texttt{Circle} полностью переопределите метод \texttt{calculate}, чтобы он вычислял площадь как \( \pi \times r^2 \).
-    \item Создайте класс \texttt{Rectangle}, наследующийся от \texttt{Shape}. В конструкторе задайте \texttt{color}, \texttt{border\_width}, \texttt{width}, \texttt{height}. При вызове \texttt{super().__init__()} передайте \texttt{dimension1=width}, \texttt{dimension2=height}.
+    \item Создайте класс \texttt{Rectangle}, наследующийся от \texttt{Shape}. В конструкторе задайте \texttt{color}, \texttt{border\_width}, \texttt{width}, \texttt{height}. При вызове \texttt{super().\_\_init\_\_()} передайте \texttt{dimension1=width}, \texttt{dimension2=height}.
     \item В классе \texttt{Rectangle} полностью переопределите метод \texttt{get\_type} (например, «Прямоугольник»).
     \item В классе \texttt{Rectangle} полностью переопределите метод \texttt{get\_symmetry} (например, «Осевая по двум осям»).
     \item В классе \texttt{Rectangle} полностью переопределите метод \texttt{calculate}, чтобы он вычислял периметр: \( 2 \times (\text{width} + \text{height}) \).
@@ -329,7 +329,7 @@
     \item Создайте класс \texttt{Furniture}, который будет базовым для классов \texttt{Chair} и \texttt{Table}. В конструкторе задайте параметры \texttt{material}, \texttt{color}, \texttt{price}, \texttt{weight}, \texttt{height}, \texttt{assembly\_time}.
     \item В классе \texttt{Furniture} создайте метод \texttt{spec}, который выводит спецификацию мебели.
     \item В классе \texttt{Furniture} создайте метод \texttt{category}, который выводит категорию мебели.
-    \item В классе \texttt{Furniture} создайте метод \texttt{indoor\_use}, который выводит, предназначена ли мебель для室内.
+    \item В классе \texttt{Furniture} создайте метод \texttt{indoor\_use}, который выводит, предназначена ли мебель для использования внутри помещения.
     \item В классе \texttt{Furniture} создайте метод \texttt{calculate}, который вычисляет соотношение цены к весу: \( \frac{\text{price}}{\text{weight}} \).
     \item Создайте класс \texttt{Chair}, наследующийся от \texttt{Furniture}. В конструкторе задайте \texttt{material}, \texttt{color}, \texttt{price}.
     \item В классе \texttt{Chair} полностью переопределите метод \texttt{category} (например, «Сидячая мебель»).

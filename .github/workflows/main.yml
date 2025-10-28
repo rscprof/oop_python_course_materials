@@ -1,47 +1,42 @@
-name: Build LaTeX document
-on: [push]
+name: Build and Deploy LaTeX Document
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v2
-      - name: Compile LaTeX document
-        uses: dante-ev/latex-action@latest
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Cyrillic LaTeX environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-lang-cyrillic \
+            latexmk
+
+      - name: Build LaTeX document
+        run: |
+          latexmk -pdf -interaction=nonstopmode -file-line-error problems.tex
+
+      - name: Prepare dist directory
+        run: |
+          mkdir -p dist
+          cp problems.pdf dist/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          root_file: problems.tex
-          compiler: pdflatex
-      - name: Compile LaTeX document #2
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: problems.tex
-          compiler: pdflatex
-      - name: Compile LaTeX document #3
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: problems.tex
-          compiler: pdflatex
-      - name: create directory
-        shell: bash
-        run: mkdir dist &&  cp problems.pdf dist
-#      - name: create list of questions latex document
-#        shell: bash
-#        run: cd exam && python3 generate_list.py
-#      - name: create document with questions
-#        uses: dante-ev/latex-action@latest
-#        with:
-#          root_file: exam/exam_document.tex
-#          compiler: pdflatex
-#      - name: create list of questions latex document
-#        shell: bash
-#        run: ls -la 
-#      - name: copy questions
-#        shell: bash
-#        run: cp exam_document.pdf dist/${{ steps.extract_branch.outputs.branch }}
-      - name: Publish generated content to GitHub Pages
-        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
-        with:
-          dir: dist
-          branch: pages
-          token: ${{ secrets.ACCESS_TOKEN }}
-          
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          publish_branch: pages
+          keep_files: true
