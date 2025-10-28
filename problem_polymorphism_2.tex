@@ -1,0 +1,633 @@
+\subsubsection{Полиморфизм с наследованием (полное переопределение методов родительского класса)}
+\begin{enumerate}
+\item[1]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Vehicle}, который будет базовым для классов \texttt{Car} и \texttt{Bike}. В конструкторе класса \texttt{Vehicle} задайте параметры \texttt{name}, \texttt{color}, \texttt{price}, \texttt{travel\_time}, \texttt{distance} и \texttt{speed}.
+    \item В классе \texttt{Vehicle} создайте метод \texttt{show}, который будет выводить информацию о транспортном средстве (например, с помощью функции \texttt{print}).
+    \item В классе \texttt{Vehicle} создайте метод \texttt{max\_speed}, который будет выводить максимальную скорость транспортного средства.
+    \item В классе \texttt{Vehicle} создайте метод \texttt{change\_gear}, который будет выводить количество передач транспортного средства.
+    \item В классе \texttt{Vehicle} создайте метод \texttt{calculate}, который будет рассчитывать время движения до пункта назначения по формуле \( \text{time} = \frac{\text{distance}}{\text{speed}} \).
+    \item Создайте класс \texttt{Car}, наследующийся от класса \texttt{Vehicle}. В конструкторе класса \texttt{Car} задайте параметры \texttt{name}, \texttt{color} и \texttt{price} (остальные атрибуты, такие как \texttt{travel\_time}, \texttt{distance}, \texttt{speed}, могут быть установлены по умолчанию или заданы при необходимости).
+    \item В классе \texttt{Car} полностью переопределите метод \texttt{max\_speed}, чтобы он выводил максимальную скорость автомобиля (например, 180 км/ч).
+    \item В классе \texttt{Car} полностью переопределите метод \texttt{change\_gear}, чтобы он выводил количество передач автомобиля (например, 6).
+    \item В классе \texttt{Car} полностью переопределите метод \texttt{calculate}, чтобы он рассчитывал пройденное расстояние по формуле \( \text{distance} = \text{speed} \times \text{travel\_time} \).
+    \item Создайте класс \texttt{Bike}, наследующийся от класса \texttt{Vehicle}. В конструкторе класса \texttt{Bike} задайте параметры \texttt{name}, \texttt{color} и \texttt{price} (остальные атрибуты могут быть заданы по умолчанию).
+    \item В классе \texttt{Bike} полностью переопределите метод \texttt{max\_speed}, чтобы он выводил максимальную скорость мотоцикла (например, 120 км/ч).
+    \item В классе \texttt{Bike} полностью переопределите метод \texttt{change\_gear}, чтобы он выводил количество передач мотоцикла (например, 5).
+    \item В классе \texttt{Bike} полностью переопределите метод \texttt{calculate}, чтобы он рассчитывал среднюю скорость по формуле \( \text{speed} = \frac{\text{distance}}{\text{travel\_time}} \).
+    \item В основной части программы создайте объекты классов \texttt{Vehicle}, \texttt{Car} и \texttt{Bike} и вызовите их методы.
+    \item В основной части программы создайте список, содержащий объекты разных классов (\texttt{Vehicle}, \texttt{Car}, \texttt{Bike}), и организуйте цикл по этой коллекции, в котором вызываются все общие методы (\texttt{show}, \texttt{max\_speed}, \texttt{change\_gear}, \texttt{calculate}) для каждого объекта — демонстрируя полиморфное поведение.
+\end{enumerate}
+\item[2]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Animal}, который будет базовым для классов \texttt{Dog} и \texttt{Cat}. В конструкторе класса \texttt{Animal} задайте параметры \texttt{name}, \texttt{age}, \texttt{weight}, \texttt{food\_per\_day}, \texttt{activity\_hours} и \texttt{calories\_per\_hour}.
+    \item В классе \texttt{Animal} создайте метод \texttt{info}, который будет выводить информацию о животном.
+    \item В классе \texttt{Animal} создайте метод \texttt{max\_speed}, который будет выводить максимальную скорость передвижения животного.
+    \item В классе \texttt{Animal} создайте метод \texttt{sound}, который будет выводить звук, издаваемый животным.
+    \item В классе \texttt{Animal} создайте метод \texttt{calculate}, который будет рассчитывать суточную калорийность по формуле \( \text{calories} = \text{calories\_per\_hour} \times \text{activity\_hours} \).
+    \item Создайте класс \texttt{Dog}, наследующийся от \texttt{Animal}. В конструкторе задайте \texttt{name}, \texttt{age}, \texttt{weight}.
+    \item В классе \texttt{Dog} полностью переопределите метод \texttt{max\_speed} (например, 40 км/ч).
+    \item В классе \texttt{Dog} полностью переопределите метод \texttt{sound} (например, «Гав!»).
+    \item В классе \texttt{Dog} полностью переопределите метод \texttt{calculate}, чтобы он вычислял количество еды по формуле \( \text{food\_per\_day} = \text{weight} \times 0.03 \).
+    \item Создайте класс \texttt{Cat}, наследующийся от \texttt{Animal}. В конструкторе задайте \texttt{name}, \texttt{age}, \texttt{weight}.
+    \item В классе \texttt{Cat} полностью переопределите метод \texttt{max\_speed} (например, 30 км/ч).
+    \item В классе \texttt{Cat} полностью переопределите метод \texttt{sound} (например, «Мяу!»).
+    \item В классе \texttt{Cat} полностью переопределите метод \texttt{calculate}, чтобы он вычислял активные часы по формуле \( \text{activity\_hours} = \frac{\text{food\_per\_day}}{0.02} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[3]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Employee}, который будет базовым для классов \texttt{Manager} и \texttt{Developer}. В конструкторе задайте параметры \texttt{name}, \texttt{department}, \texttt{base\_salary}, \texttt{bonus\_percent}, \texttt{hours\_worked}, \texttt{hourly\_rate}.
+    \item В классе \texttt{Employee} создайте метод \texttt{display}, который выводит информацию о сотруднике.
+    \item В классе \texttt{Employee} создайте метод \texttt{get\_role}, который выводит должность.
+    \item В классе \texttt{Employee} создайте метод \texttt{get\_tools}, который выводит основные инструменты работы.
+    \item В классе \texttt{Employee} создайте метод \texttt{calculate}, который вычисляет итоговую зарплату по формуле \( \text{total} = \text{base\_salary} + \text{base\_salary} \times \frac{\text{bonus\_percent}}{100} \).
+    \item Создайте класс \texttt{Manager}, наследующийся от \texttt{Employee}. В конструкторе задайте \texttt{name}, \texttt{department}, \texttt{base\_salary}.
+    \item В классе \texttt{Manager} полностью переопределите метод \texttt{get\_role} (например, «Руководитель проекта»).
+    \item В классе \texttt{Manager} полностью переопределите метод \texttt{get\_tools} (например, «Диаграммы Ганта, Jira»).
+    \item В классе \texttt{Manager} полностью переопределите метод \texttt{calculate}, чтобы он вычислял бонус как \( \text{bonus} = \text{hours\_worked} \times 500 \).
+    \item Создайте класс \texttt{Developer}, наследующийся от \texttt{Employee}. В конструкторе задайте \texttt{name}, \texttt{department}, \texttt{base\_salary}.
+    \item В классе \texttt{Developer} полностью переопределите метод \texttt{get\_role} (например, «Программист»).
+    \item В классе \texttt{Developer} полностью переопределите метод \texttt{get\_tools} (например, «VS Code, Git»).
+    \item В классе \texttt{Developer} полностью переопределите метод \texttt{calculate}, чтобы он вычислял зарплату по формуле \( \text{total} = \text{hours\_worked} \times \text{hourly\_rate} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[4]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Appliance}, который будет базовым для классов \texttt{Fridge} и \texttt{Microwave}. В конструкторе задайте параметры \texttt{brand}, \texttt{model}, \texttt{price}, \texttt{power}, \texttt{usage\_hours}, \texttt{efficiency}.
+    \item В классе \texttt{Appliance} создайте метод \texttt{details}, который выводит информацию об устройстве.
+    \item В классе \texttt{Appliance} создайте метод \texttt{energy\_class}, который выводит класс энергоэффективности.
+    \item В классе \texttt{Appliance} создайте метод \texttt{functionality}, который выводит основную функцию устройства.
+    \item В классе \texttt{Appliance} создайте метод \texttt{calculate}, который вычисляет месячное энергопотребление: \( \text{consumption} = \text{power} \times \text{usage\_hours} \times 30 / 1000 \).
+    \item Создайте класс \texttt{Fridge}, наследующийся от \texttt{Appliance}. В конструкторе задайте \texttt{brand}, \texttt{model}, \texttt{price}.
+    \item В классе \texttt{Fridge} полностью переопределите метод \texttt{energy\_class} (например, «A++»).
+    \item В классе \texttt{Fridge} полностью переопределите метод \texttt{functionality} (например, «Охлаждение и хранение продуктов»).
+    \item В классе \texttt{Fridge} полностью переопределите метод \texttt{calculate}, чтобы он вычислял годовую стоимость: \( \text{cost} = \text{consumption} \times 12 \times 6 \).
+    \item Создайте класс \texttt{Microwave}, наследующийся от \texttt{Appliance}. В конструкторе задайте \texttt{brand}, \texttt{model}, \texttt{price}.
+    \item В классе \texttt{Microwave} полностью переопределите метод \texttt{energy\_class} (например, «A»).
+    \item В классе \texttt{Microwave} полностью переопределите метод \texttt{functionality} (например, «Разогрев и разморозка»).
+    \item В классе \texttt{Microwave} полностью переопределите метод \texttt{calculate}, чтобы он вычислял эффективность: \( \text{efficiency} = \frac{\text{power}}{\text{usage\_hours} + 1} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[5]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Shape}, который будет базовым для классов \texttt{Circle} и \texttt{Rectangle}. В конструкторе задайте параметры \texttt{color}, \texttt{border\_width}, \texttt{area}, \texttt{perimeter}, \texttt{dimension1} (по умолчанию \texttt{None}), \texttt{dimension2} (по умолчанию \texttt{None}).
+    \item В классе \texttt{Shape} создайте метод \texttt{draw}, который выводит информацию о фигуре.
+    \item В классе \texttt{Shape} создайте метод \texttt{get\_type}, который выводит тип фигуры.
+    \item В классе \texttt{Shape} создайте метод \texttt{get\_symmetry}, который выводит наличие симметрии.
+    \item В классе \texttt{Shape} создайте метод \texttt{calculate}, который вычисляет площадь как \( \text{area} = \text{dimension1} \times \text{dimension2} \) (если оба заданы).
+    \item Создайте класс \texttt{Circle}, наследующийся от \texttt{Shape}. В конструкторе задайте \texttt{color}, \texttt{border\_width}, \texttt{radius}. При вызове \texttt{super().__init__()} передайте \texttt{dimension1=radius}, \texttt{dimension2=radius}.
+    \item В классе \texttt{Circle} полностью переопределите метод \texttt{get\_type} (например, «Окружность»).
+    \item В классе \texttt{Circle} полностью переопределите метод \texttt{get\_symmetry} (например, «Осевая и центральная»).
+    \item В классе \texttt{Circle} полностью переопределите метод \texttt{calculate}, чтобы он вычислял площадь как \( \pi \times r^2 \).
+    \item Создайте класс \texttt{Rectangle}, наследующийся от \texttt{Shape}. В конструкторе задайте \texttt{color}, \texttt{border\_width}, \texttt{width}, \texttt{height}. При вызове \texttt{super().__init__()} передайте \texttt{dimension1=width}, \texttt{dimension2=height}.
+    \item В классе \texttt{Rectangle} полностью переопределите метод \texttt{get\_type} (например, «Прямоугольник»).
+    \item В классе \texttt{Rectangle} полностью переопределите метод \texttt{get\_symmetry} (например, «Осевая по двум осям»).
+    \item В классе \texttt{Rectangle} полностью переопределите метод \texttt{calculate}, чтобы он вычислял периметр: \( 2 \times (\text{width} + \text{height}) \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[6]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Book}, который будет базовым для классов \texttt{Fiction} и \texttt{Textbook}. В конструкторе задайте параметры \texttt{title}, \texttt{author}, \texttt{price}, \texttt{pages}, \texttt{reading\_time}, \texttt{complexity}.
+    \item В классе \texttt{Book} создайте метод \texttt{info}, который выводит информацию о книге.
+    \item В классе \texttt{Book} создайте метод \texttt{genre}, который выводит жанр.
+    \item В классе \texttt{Book} создайте метод \texttt{audience}, который выводит целевую аудиторию.
+    \item В классе \texttt{Book} создайте метод \texttt{calculate}, который вычисляет среднюю скорость чтения: \( \text{speed} = \frac{\text{pages}}{\text{reading\_time}} \).
+    \item Создайте класс \texttt{Fiction}, наследующийся от \texttt{Book}. В конструкторе задайте \texttt{title}, \texttt{author}, \texttt{price}.
+    \item В классе \texttt{Fiction} полностью переопределите метод \texttt{genre} (например, «Художественная литература»).
+    \item В классе \texttt{Fiction} полностью переопределите метод \texttt{audience} (например, «Все возрасты»).
+    \item В классе \texttt{Fiction} полностью переопределите метод \texttt{calculate}, чтобы он вычислял стоимость за страницу: \( \frac{\text{price}}{\text{pages}} \).
+    \item Создайте класс \texttt{Textbook}, наследующийся от \texttt{Book}. В конструкторе задайте \texttt{title}, \texttt{author}, \texttt{price}.
+    \item В классе \texttt{Textbook} полностью переопределите метод \texttt{genre} (например, «Учебная литература»).
+    \item В классе \texttt{Textbook} полностью переопределите метод \texttt{audience} (например, «Студенты»).
+    \item В классе \texttt{Textbook} полностью переопределите метод \texttt{calculate}, чтобы он вычислял сложность: \( \text{complexity} = \frac{\text{pages}}{\text{reading\_time} \times 2} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[7]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Instrument}, который будет базовым для классов \texttt{Guitar} и \texttt{Piano}. В конструкторе задайте параметры \texttt{name}, \texttt{brand}, \texttt{price}, \texttt{strings}, \texttt{keys}, \texttt{volume}.
+    \item В классе \texttt{Instrument} создайте метод \texttt{describe}, который выводит описание инструмента.
+    \item В классе \texttt{Instrument} создайте метод \texttt{play\_style}, который выводит способ игры.
+    \item В классе \texttt{Instrument} создайте метод \texttt{material}, который выводит основной материал.
+    \item В классе \texttt{Instrument} создайте метод \texttt{calculate}, который вычисляет громкость: \( \text{volume} = \text{strings} + \text{keys} \).
+    \item Создайте класс \texttt{Guitar}, наследующийся от \texttt{Instrument}. В конструкторе задайте \texttt{name}, \texttt{brand}, \texttt{price}.
+    \item В классе \texttt{Guitar} полностью переопределите метод \texttt{play\_style} (например, «Перебор или боем»).
+    \item В классе \texttt{Guitar} полностью переопределите метод \texttt{material} (например, «Дерево»).
+    \item В классе \texttt{Guitar} полностью переопределите метод \texttt{calculate}, чтобы он вычислял цену за струну: \( \frac{\text{price}}{\text{strings}} \).
+    \item Создайте класс \texttt{Piano}, наследующийся от \texttt{Instrument}. В конструкторе задайте \texttt{name}, \texttt{brand}, \texttt{price}.
+    \item В классе \texttt{Piano} полностью переопределите метод \texttt{play\_style} (например, «Клавиши»).
+    \item В классе \texttt{Piano} полностью переопределите метод \texttt{material} (например, «Металл и дерево»).
+    \item В классе \texttt{Piano} полностью переопределите метод \texttt{calculate}, чтобы он вычислял количество октав: \( \frac{\text{keys}}{12} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[8]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Drink}, который будет базовым для классов \texttt{Coffee} и \texttt{Tea}. В конструкторе задайте параметры \texttt{name}, \texttt{temperature}, \texttt{volume}, \texttt{caffeine}, \texttt{brew\_time}, \texttt{price}.
+    \item В классе \texttt{Drink} создайте метод \texttt{info}, который выводит информацию о напитке.
+    \item В классе \texttt{Drink} создайте метод \texttt{origin}, который выводит страну происхождения.
+    \item В классе \texttt{Drink} создайте метод \texttt{serving}, который выводит способ подачи.
+    \item В классе \texttt{Drink} создайте метод \texttt{calculate}, который вычисляет концентрацию кофеина: \( \frac{\text{caffeine}}{\text{volume}} \).
+    \item Создайте класс \texttt{Coffee}, наследующийся от \texttt{Drink}. В конструкторе задайте \texttt{name}, \texttt{temperature}, \texttt{price}.
+    \item В классе \texttt{Coffee} полностью переопределите метод \texttt{origin} (например, «Эфиопия»).
+    \item В классе \texttt{Coffee} полностью переопределите метод \texttt{serving} (например, «В чашке с блюдцем»).
+    \item В классе \texttt{Coffee} полностью переопределите метод \texttt{calculate}, чтобы он вычислял время заваривания: \( \text{brew\_time} = \frac{\text{volume}}{30} \).
+    \item Создайте класс \texttt{Tea}, наследующийся от \texttt{Drink}. В конструкторе задайте \texttt{name}, \texttt{temperature}, \texttt{price}.
+    \item В классе \texttt{Tea} полностью переопределите метод \texttt{origin} (например, «Китай»).
+    \item В классе \texttt{Tea} полностью переопределите метод \texttt{serving} (например, «В пиале или стеклянном стакане»).
+    \item В классе \texttt{Tea} полностью переопределите метод \texttt{calculate}, чтобы он вычислял объём: \( \text{volume} = \text{brew\_time} \times 25 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[9]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Plant}, который будет базовым для классов \texttt{Flower} и \texttt{Tree}. В конструкторе задайте параметры \texttt{species}, \texttt{height}, \texttt{age}, \texttt{water\_per\_week}, \texttt{sunlight\_hours}, \texttt{blooming\_season}.
+    \item В классе \texttt{Plant} создайте метод \texttt{describe}, который выводит описание растения.
+    \item В классе \texttt{Plant} создайте метод \texttt{type}, который выводит тип растения.
+    \item В классе \texttt{Plant} создайте метод \texttt{care\_level}, который выводит уровень ухода.
+    \item В классе \texttt{Plant} создайте метод \texttt{calculate}, который вычисляет потребление воды в месяц: \( \text{water\_per\_week} \times 4 \).
+    \item Создайте класс \texttt{Flower}, наследующийся от \texttt{Plant}. В конструкторе задайте \texttt{species}, \texttt{height}, \texttt{age}.
+    \item В классе \texttt{Flower} полностью переопределите метод \texttt{type} (например, «Цветковое»).
+    \item В классе \texttt{Flower} полностью переопределите метод \texttt{care\_level} (например, «Высокий»).
+    \item В классе \texttt{Flower} полностью переопределите метод \texttt{calculate}, чтобы он вычислял сезон цветения: \( \text{blooming\_season} = \text{age} \% 4 + 1 \).
+    \item Создайте класс \texttt{Tree}, наследующийся от \texttt{Plant}. В конструкторе задайте \texttt{species}, \texttt{height}, \texttt{age}.
+    \item В классе \texttt{Tree} полностью переопределите метод \texttt{type} (например, «Древесное»).
+    \item В классе \texttt{Tree} полностью переопределите метод \texttt{care\_level} (например, «Низкий»).
+    \item В классе \texttt{Tree} полностью переопределите метод \texttt{calculate}, чтобы он вычислял высоту: \( \text{height} = \text{age} \times 0.5 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[10]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Account}, который будет базовым для классов \texttt{Savings} и \texttt{Checking}. В конструкторе задайте параметры \texttt{owner}, \texttt{balance}, \texttt{interest\_rate}, \texttt{monthly\_fee}, \texttt{transactions}, \texttt{limit}.
+    \item В классе \texttt{Account} создайте метод \texttt{info}, который выводит информацию о счёте.
+    \item В классе \texttt{Account} создайте метод \texttt{account\_type}, который выводит тип счёта.
+    \item В классе \texttt{Account} создайте метод \texttt{features}, который выводит особенности счёта.
+    \item В классе \texttt{Account} создайте метод \texttt{calculate}, который вычисляет годовой доход от процентов: \( \text{balance} \times \frac{\text{interest\_rate}}{100} \).
+    \item Создайте класс \texttt{Savings}, наследующийся от \texttt{Account}. В конструкторе задайте \texttt{owner}, \texttt{balance}, \texttt{interest\_rate}.
+    \item В классе \texttt{Savings} полностью переопределите метод \texttt{account\_type} (например, «Сберегательный»).
+    \item В классе \texttt{Savings} полностью переопределите метод \texttt{features} (например, «Высокая ставка, ограничение на снятие»).
+    \item В классе \texttt{Savings} полностью переопределите метод \texttt{calculate}, чтобы он вычислял лимит снятия: \( \text{limit} = \text{balance} \times 0.2 \).
+    \item Создайте класс \texttt{Checking}, наследующийся от \texttt{Account}. В конструкторе задайте \texttt{owner}, \texttt{balance}, \texttt{monthly\_fee}.
+    \item В классе \texttt{Checking} полностью переопределите метод \texttt{account\_type} (например, «Текущий»).
+    \item В классе \texttt{Checking} полностью переопределите метод \texttt{features} (например, «Бесплатные переводы, дебетовая карта»).
+    \item В классе \texttt{Checking} полностью переопределите метод \texttt{calculate}, чтобы он вычислял чистый баланс: \( \text{balance} - \text{monthly\_fee} \times 12 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[11]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Building}, который будет базовым для классов \texttt{House} и \texttt{Office}. В конструкторе задайте параметры \texttt{name}, \texttt{floors}, \texttt{area}, \texttt{rooms}, \texttt{occupants}, \texttt{construction\_year}.
+    \item В классе \texttt{Building} создайте метод \texttt{overview}, который выводит информацию о здании.
+    \item В классе \texttt{Building} создайте метод \texttt{purpose}, который выводит назначение здания.
+    \item В классе \texttt{Building} создайте метод \texttt{facilities}, который выводит доступные удобства.
+    \item В классе \texttt{Building} создайте метод \texttt{calculate}, который вычисляет плотность заселения: \( \frac{\text{occupants}}{\text{area}} \).
+    \item Создайте класс \texttt{House}, наследующийся от \texttt{Building}. В конструкторе задайте \texttt{name}, \texttt{floors}, \texttt{area}.
+    \item В классе \texttt{House} полностью переопределите метод \texttt{purpose} (например, «Жилое»).
+    \item В классе \texttt{House} полностью переопределите метод \texttt{facilities} (например, «Сад, гараж»).
+    \item В классе \texttt{House} полностью переопределите метод \texttt{calculate}, чтобы он вычислял количество комнат: \( \text{rooms} = \text{floors} \times 3 \).
+    \item Создайте класс \texttt{Office}, наследующийся от \texttt{Building}. В конструкторе задайте \texttt{name}, \texttt{floors}, \texttt{area}.
+    \item В классе \texttt{Office} полностью переопределите метод \texttt{purpose} (например, «Коммерческое»).
+    \item В классе \texttt{Office} полностью переопределите метод \texttt{facilities} (например, «Конференц-зал, лифт»).
+    \item В классе \texttt{Office} полностью переопределите метод \texttt{calculate}, чтобы он вычислял год постройки: \( \text{construction\_year} = 2025 - \text{floors} \times 2 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[12]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Game}, который будет базовым для классов \texttt{RPG} и \texttt{Puzzle}. В конструкторе задайте параметры \texttt{title}, \texttt{genre}, \texttt{price}, \texttt{playtime}, \texttt{difficulty}, \texttt{rating}.
+    \item В классе \texttt{Game} создайте метод \texttt{summary}, который выводит краткое описание игры.
+    \item В классе \texttt{Game} создайте метод \texttt{platform}, который выводит платформу.
+    \item В классе \texttt{Game} создайте метод \texttt{audience}, который выводит целевую аудиторию.
+    \item В классе \texttt{Game} создайте метод \texttt{calculate}, который вычисляет средний рейтинг: \( \frac{\text{rating} + \text{difficulty}}{2} \).
+    \item Создайте класс \texttt{RPG}, наследующийся от \texttt{Game}. В конструкторе задайте \texttt{title}, \texttt{price}, \texttt{playtime}.
+    \item В классе \texttt{RPG} полностью переопределите метод \texttt{platform} (например, «PC, консоли»).
+    \item В классе \texttt{RPG} полностью переопределите метод \texttt{audience} (например, «Подростки и взрослые»).
+    \item В классе \texttt{RPG} полностью переопределите метод \texttt{calculate}, чтобы он вычислял сложность: \( \text{difficulty} = \frac{\text{playtime}}{10} \).
+    \item Создайте класс \texttt{Puzzle}, наследующийся от \texttt{Game}. В конструкторе задайте \texttt{title}, \texttt{price}, \texttt{playtime}.
+    \item В классе \texttt{Puzzle} полностью переопределите метод \texttt{platform} (например, «Мобильные устройства»).
+    \item В классе \texttt{Puzzle} полностью переопределите метод \texttt{audience} (например, «Все возрасты»).
+    \item В классе \texttt{Puzzle} полностью переопределите метод \texttt{calculate}, чтобы он вычислял рейтинг: \( \text{rating} = 10 - \frac{\text{difficulty}}{2} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[13]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Clothing}, который будет базовым для классов \texttt{TShirt} и \texttt{Jacket}. В конструкторе задайте параметры \texttt{brand}, \texttt{size}, \texttt{color}, \texttt{price}, \texttt{material}, \texttt{season}.
+    \item В классе \texttt{Clothing} создайте метод \texttt{label}, который выводит информацию об одежде.
+    \item В классе \texttt{Clothing} создайте метод \texttt{type}, который выводит тип изделия.
+    \item В классе \texttt{Clothing} создайте метод \texttt{care\_instructions}, который выводит рекомендации по уходу.
+    \item В классе \texttt{Clothing} создайте метод \texttt{calculate}, который вычисляет соотношение цены к размеру: \( \frac{\text{price}}{\text{size}} \).
+    \item Создайте класс \texttt{TShirt}, наследующийся от \texttt{Clothing}. В конструкторе задайте \texttt{brand}, \texttt{size}, \texttt{color}.
+    \item В классе \texttt{TShirt} полностью переопределите метод \texttt{type} (например, «Футболка»).
+    \item В классе \texttt{TShirt} полностью переопределите метод \texttt{care\_instructions} (например, «Стирка при 30°C»).
+    \item В классе \texttt{TShirt} полностью переопределите метод \texttt{calculate}, чтобы он вычислял сезон: \( \text{season} = \text{size} \% 4 + 1 \).
+    \item Создайте класс \texttt{Jacket}, наследующийся от \texttt{Clothing}. В конструкторе задайте \texttt{brand}, \texttt{size}, \texttt{color}.
+    \item В классе \texttt{Jacket} полностью переопределите метод \texttt{type} (например, «Куртка»).
+    \item В классе \texttt{Jacket} полностью переопределите метод \texttt{care\_instructions} (например, «Химчистка»).
+    \item В классе \texttt{Jacket} полностью переопределите метод \texttt{calculate}, чтобы он вычислял материал: \( \text{material} = \text{«Нейлон»} \text{ если } \text{price} > 5000, \text{ иначе } \text{«Хлопок»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[14]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Electronics}, который будет базовым для классов \texttt{Phone} и \texttt{Laptop}. В конструкторе задайте параметры \texttt{model}, \texttt{brand}, \texttt{price}, \texttt{battery\_life}, \texttt{weight}, \texttt{warranty}.
+    \item В классе \texttt{Electronics} создайте метод \texttt{spec}, который выводит характеристики устройства.
+    \item В классе \texttt{Electronics} создайте метод \texttt{category}, который выводит категорию.
+    \item В классе \texttt{Electronics} создайте метод \texttt{connectivity}, который выводит типы подключения.
+    \item В классе \texttt{Electronics} создайте метод \texttt{calculate}, который вычисляет стоимость гарантии: \( \text{warranty} \times 500 \).
+    \item Создайте класс \texttt{Phone}, наследующийся от \texttt{Electronics}. В конструкторе задайте \texttt{model}, \texttt{brand}, \texttt{price}.
+    \item В классе \texttt{Phone} полностью переопределите метод \texttt{category} (например, «Смартфон»).
+    \item В классе \texttt{Phone} полностью переопределите метод \texttt{connectivity} (например, «5G, Wi-Fi, Bluetooth»).
+    \item В классе \texttt{Phone} полностью переопределите метод \texttt{calculate}, чтобы он вычислял время работы: \( \text{battery\_life} = \text{price} / 1000 \).
+    \item Создайте класс \texttt{Laptop}, наследующийся от \texttt{Electronics}. В конструкторе задайте \texttt{model}, \texttt{brand}, \texttt{price}.
+    \item В классе \texttt{Laptop} полностью переопределите метод \texttt{category} (например, «Ноутбук»).
+    \item В классе \texttt{Laptop} полностью переопределите метод \texttt{connectivity} (например, «Wi-Fi, Ethernet, HDMI»).
+    \item В классе \texttt{Laptop} полностью переопределите метод \texttt{calculate}, чтобы он вычислял вес: \( \text{weight} = \text{price} / 20000 + 1 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[15]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Food}, который будет базовым для классов \texttt{Pizza} и \texttt{Salad}. В конструкторе задайте параметры \texttt{name}, \texttt{calories}, \texttt{price}, \texttt{weight}, \texttt{cooking\_time}, \texttt{ingredients}.
+    \item В классе \texttt{Food} создайте метод \texttt{nutrition}, который выводит пищевую ценность.
+    \item В классе \texttt{Food} создайте метод \texttt{type}, который выводит тип блюда.
+    \item В классе \texttt{Food} создайте метод \texttt{diet\_suitable}, который выводит, подходит ли блюдо для диет.
+    \item В классе \texttt{Food} создайте метод \texttt{calculate}, который вычисляет калорийность на 100 г: \( \frac{\text{calories}}{\text{weight}} \times 100 \).
+    \item Создайте класс \texttt{Pizza}, наследующийся от \texttt{Food}. В конструкторе задайте \texttt{name}, \texttt{price}, \texttt{weight}.
+    \item В классе \texttt{Pizza} полностью переопределите метод \texttt{type} (например, «Горячее»).
+    \item В классе \texttt{Pizza} полностью переопределите метод \texttt{diet\_suitable} (например, «Нет»).
+    \item В классе \texttt{Pizza} полностью переопределите метод \texttt{calculate}, чтобы он вычислял время готовки: \( \text{cooking\_time} = \text{weight} / 100 \times 3 \).
+    \item Создайте класс \texttt{Salad}, наследующийся от \texttt{Food}. В конструкторе задайте \texttt{name}, \texttt{price}, \texttt{weight}.
+    \item В классе \texttt{Salad} полностью переопределите метод \texttt{type} (например, «Холодное»).
+    \item В классе \texttt{Salad} полностью переопределите метод \texttt{diet\_suitable} (например, «Да»).
+    \item В классе \texttt{Salad} полностью переопределите метод \texttt{calculate}, чтобы он вычислял ингредиенты: \( \text{ingredients} = \text{weight} / 50 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[16]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Sport}, который будет базовым для классов \texttt{Football} и \texttt{Swimming}. В конструкторе задайте параметры \texttt{name}, \texttt{players}, \texttt{duration}, \texttt{equipment}, \texttt{intensity}, \texttt{calories\_per\_hour}.
+    \item В классе \texttt{Sport} создайте метод \texttt{rules}, который выводит основные правила.
+    \item В классе \texttt{Sport} создайте метод \texttt{venue}, который выводит место проведения.
+    \item В классе \texttt{Sport} создайте метод \texttt{team\_based}, который выводит, командный ли вид спорта.
+    \item В классе \texttt{Sport} создайте метод \texttt{calculate}, который вычисляет общие калории: \( \text{calories\_per\_hour} \times \frac{\text{duration}}{60} \).
+    \item Создайте класс \texttt{Football}, наследующийся от \texttt{Sport}. В конструкторе задайте \texttt{name}, \texttt{duration}, \texttt{intensity}.
+    \item В классе \texttt{Football} полностью переопределите метод \texttt{venue} (например, «Стадион»).
+    \item В классе \texttt{Football} полностью переопределите метод \texttt{team\_based} (например, «Да»).
+    \item В классе \texttt{Football} полностью переопределите метод \texttt{calculate}, чтобы он вычислял количество игроков: \( \text{players} = 11 \).
+    \item Создайте класс \texttt{Swimming}, наследующийся от \texttt{Sport}. В конструкторе задайте \texttt{name}, \texttt{duration}, \texttt{intensity}.
+    \item В классе \texttt{Swimming} полностью переопределите метод \texttt{venue} (например, «Бассейн»).
+    \item В классе \texttt{Swimming} полностью переопределите метод \texttt{team\_based} (например, «Нет»).
+    \item В классе \texttt{Swimming} полностью переопределите метод \texttt{calculate}, чтобы он вычислял оборудование: \( \text{equipment} = \text{«Купальник, очки»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[17]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Transport}, который будет базовым для классов \texttt{Train} и \texttt{Airplane}. В конструкторе задайте параметры \texttt{name}, \texttt{capacity}, \texttt{speed}, \texttt{fuel\_consumption}, \texttt{range}, \texttt{ticket\_price}.
+    \item В классе \texttt{Transport} создайте метод \texttt{info}, который выводит информацию о транспорте.
+    \item В классе \texttt{Transport} создайте метод \texttt{type}, который выводит тип транспорта.
+    \item В классе \texttt{Transport} создайте метод \texttt{environmental\_impact}, который выводит уровень воздействия на окружающую среду.
+    \item В классе \texttt{Transport} создайте метод \texttt{calculate}, который вычисляет стоимость на пассажира: \( \frac{\text{ticket\_price} \times \text{capacity}}{\text{range}} \).
+    \item Создайте класс \texttt{Train}, наследующийся от \texttt{Transport}. В конструкторе задайте \texttt{name}, \texttt{capacity}, \texttt{speed}.
+    \item В классе \texttt{Train} полностью переопределите метод \texttt{type} (например, «Железнодорожный»).
+    \item В классе \texttt{Train} полностью переопределите метод \texttt{environmental\_impact} (например, «Низкий»).
+    \item В классе \texttt{Train} полностью переопределите метод \texttt{calculate}, чтобы он вычислял дальность: \( \text{range} = \text{speed} \times 10 \).
+    \item Создайте класс \texttt{Airplane}, наследующийся от \texttt{Transport}. В конструкторе задайте \texttt{name}, \texttt{capacity}, \texttt{speed}.
+    \item В классе \texttt{Airplane} полностью переопределите метод \texttt{type} (например, «Воздушный»).
+    \item В классе \texttt{Airplane} полностью переопределите метод \texttt{environmental\_impact} (например, «Высокий»).
+    \item В классе \texttt{Airplane} полностью переопределите метод \texttt{calculate}, чтобы он вычислял расход топлива: \( \text{fuel\_consumption} = \text{speed} \times 0.1 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[18]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Pet}, который будет базовым для классов \texttt{Parrot} и \texttt{Hamster}. В конструкторе задайте параметры \texttt{name}, \texttt{age}, \texttt{weight}, \texttt{food\_per\_day}, \texttt{lifespan}, \texttt{noise\_level}.
+    \item В классе \texttt{Pet} создайте метод \texttt{profile}, который выводит профиль питомца.
+    \item В классе \texttt{Pet} создайте метод \texttt{habitat}, который выводит среду обитания.
+    \item В классе \texttt{Pet} создайте метод \texttt{trainable}, который выводит, обучаем ли питомец.
+    \item В классе \texttt{Pet} создайте метод \texttt{calculate}, который вычисляет ожидаемую продолжительность жизни: \( \text{lifespan} - \text{age} \).
+    \item Создайте класс \texttt{Parrot}, наследующийся от \texttt{Pet}. В конструкторе задайте \texttt{name}, \texttt{age}, \texttt{weight}.
+    \item В классе \texttt{Parrot} полностью переопределите метод \texttt{habitat} (например, «Клетка с игрушками»).
+    \item В классе \texttt{Parrot} полностью переопределите метод \texttt{trainable} (например, «Да»).
+    \item В классе \texttt{Parrot} полностью переопределите метод \texttt{calculate}, чтобы он вычислял уровень шума: \( \text{noise\_level} = 10 - \text{age} \).
+    \item Создайте класс \texttt{Hamster}, наследующийся от \texttt{Pet}. В конструкторе задайте \texttt{name}, \texttt{age}, \texttt{weight}.
+    \item В классе \texttt{Hamster} полностью переопределите метод \texttt{habitat} (например, «Клетка с колесом»).
+    \item В классе \texttt{Hamster} полностью переопределите метод \texttt{trainable} (например, «Нет»).
+    \item В классе \texttt{Hamster} полностью переопределите метод \texttt{calculate}, чтобы он вычислял еду в день: \( \text{food\_per\_day} = \text{weight} \times 0.05 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[19]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Furniture}, который будет базовым для классов \texttt{Chair} и \texttt{Table}. В конструкторе задайте параметры \texttt{material}, \texttt{color}, \texttt{price}, \texttt{weight}, \texttt{height}, \texttt{assembly\_time}.
+    \item В классе \texttt{Furniture} создайте метод \texttt{spec}, который выводит спецификацию мебели.
+    \item В классе \texttt{Furniture} создайте метод \texttt{category}, который выводит категорию мебели.
+    \item В классе \texttt{Furniture} создайте метод \texttt{indoor\_use}, который выводит, предназначена ли мебель для室内.
+    \item В классе \texttt{Furniture} создайте метод \texttt{calculate}, который вычисляет соотношение цены к весу: \( \frac{\text{price}}{\text{weight}} \).
+    \item Создайте класс \texttt{Chair}, наследующийся от \texttt{Furniture}. В конструкторе задайте \texttt{material}, \texttt{color}, \texttt{price}.
+    \item В классе \texttt{Chair} полностью переопределите метод \texttt{category} (например, «Сидячая мебель»).
+    \item В классе \texttt{Chair} полностью переопределите метод \texttt{indoor\_use} (например, «Да»).
+    \item В классе \texttt{Chair} полностью переопределите метод \texttt{calculate}, чтобы он вычислял высоту: \( \text{height} = \text{price} / 500 \).
+    \item Создайте класс \texttt{Table}, наследующийся от \texttt{Furniture}. В конструкторе задайте \texttt{material}, \texttt{color}, \texttt{price}.
+    \item В классе \texttt{Table} полностью переопределите метод \texttt{category} (например, «Поверхность»).
+    \item В классе \texttt{Table} полностью переопределите метод \texttt{indoor\_use} (например, «Да»).
+    \item В классе \texttt{Table} полностью переопределите метод \texttt{calculate}, чтобы он вычислял время сборки: \( \text{assembly\_time} = \text{weight} / 2 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[20]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Media}, который будет базовым для классов \texttt{Movie} и \texttt{Album}. В конструкторе задайте параметры \texttt{title}, \texttt{creator}, \texttt{year}, \texttt{rating}, \texttt{duration}, \texttt{genre}.
+    \item В классе \texttt{Media} создайте метод \texttt{details}, который выводит детали медиа.
+    \item В классе \texttt{Media} создайте метод \texttt{format}, который выводит формат.
+    \item В классе \texttt{Media} создайте метод \texttt{audience\_rating}, который выводит возрастной рейтинг.
+    \item В классе \texttt{Media} создайте метод \texttt{calculate}, который вычисляет среднюю оценку: \( \frac{\text{rating} + \text{year} \% 10}{2} \).
+    \item Создайте класс \texttt{Movie}, наследующийся от \texttt{Media}. В конструкторе задайте \texttt{title}, \texttt{creator}, \texttt{year}.
+    \item В классе \texttt{Movie} полностью переопределите метод \texttt{format} (например, «Видео»).
+    \item В классе \texttt{Movie} полностью переопределите метод \texttt{audience\_rating} (например, «12+»).
+    \item В классе \texttt{Movie} полностью переопределите метод \texttt{calculate}, чтобы он вычислял продолжительность: \( \text{duration} = 90 + \text{rating} \times 5 \).
+    \item Создайте класс \texttt{Album}, наследующийся от \texttt{Media}. В конструкторе задайте \texttt{title}, \texttt{creator}, \texttt{year}.
+    \item В классе \texttt{Album} полностью переопределите метод \texttt{format} (например, «Аудио»).
+    \item В классе \texttt{Album} полностью переопределите метод \texttt{audience\_rating} (например, «0+»).
+    \item В классе \texttt{Album} полностью переопределите метод \texttt{calculate}, чтобы он вычислял жанр: \( \text{genre} = \text{«Рок»} \text{ если } \text{year} \% 5 == 0, \text{ иначе } \text{«Поп»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[21]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Tool}, который будет базовым для классов \texttt{Hammer} и \texttt{Screwdriver}. В конструкторе задайте параметры \texttt{name}, \texttt{material}, \texttt{price}, \texttt{weight}, \texttt{length}, \texttt{uses}.
+    \item В классе \texttt{Tool} создайте метод \texttt{description}, который выводит описание инструмента.
+    \item В классе \texttt{Tool} создайте метод \texttt{purpose}, который выводит назначение.
+    \item В классе \texttt{Tool} создайте метод \texttt{durability}, который выводит долговечность.
+    \item В классе \texttt{Tool} создайте метод \texttt{calculate}, который вычисляет соотношение длины к весу: \( \frac{\text{length}}{\text{weight}} \).
+    \item Создайте класс \texttt{Hammer}, наследующийся от \texttt{Tool}. В конструкторе задайте \texttt{name}, \texttt{material}, \texttt{price}.
+    \item В классе \texttt{Hammer} полностью переопределите метод \texttt{purpose} (например, «Забивание гвоздей»).
+    \item В классе \texttt{Hammer} полностью переопределите метод \texttt{durability} (например, «Высокая»).
+    \item В классе \texttt{Hammer} полностью переопределите метод \texttt{calculate}, чтобы он вычислял длину: \( \text{length} = \text{price} / 100 \).
+    \item Создайте класс \texttt{Screwdriver}, наследующийся от \texttt{Tool}. В конструкторе задайте \texttt{name}, \texttt{material}, \texttt{price}.
+    \item В классе \texttt{Screwdriver} полностью переопределите метод \texttt{purpose} (например, «Закручивание винтов»).
+    \item В классе \texttt{Screwdriver} полностью переопределите метод \texttt{durability} (например, «Средняя»).
+    \item В классе \texttt{Screwdriver} полностью переопределите метод \texttt{calculate}, чтобы он вычислял количество применений: \( \text{uses} = \text{price} \times 2 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[22]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Course}, который будет базовым для классов \texttt{Programming} и \texttt{Design}. В конструкторе задайте параметры \texttt{title}, \texttt{instructor}, \texttt{duration\_weeks}, \texttt{price}, \texttt{students}, \texttt{difficulty}.
+    \item В классе \texttt{Course} создайте метод \texttt{outline}, который выводит программу курса.
+    \item В классе \texttt{Course} создайте метод \texttt{category}, который выводит категорию.
+    \item В классе \texttt{Course} создайте метод \texttt{certification}, который выводит наличие сертификата.
+    \item В классе \texttt{Course} создайте метод \texttt{calculate}, который вычисляет стоимость за неделю: \( \frac{\text{price}}{\text{duration\_weeks}} \).
+    \item Создайте класс \texttt{Programming}, наследующийся от \texttt{Course}. В конструкторе задайте \texttt{title}, \texttt{instructor}, \texttt{price}.
+    \item В классе \texttt{Programming} полностью переопределите метод \texttt{category} (например, «IT»).
+    \item В классе \texttt{Programming} полностью переопределите метод \texttt{certification} (например, «Да»).
+    \item В классе \texttt{Programming} полностью переопределите метод \texttt{calculate}, чтобы он вычислял сложность: \( \text{difficulty} = \text{duration\_weeks} / 2 \).
+    \item Создайте класс \texttt{Design}, наследующийся от \texttt{Course}. В конструкторе задайте \texttt{title}, \texttt{instructor}, \texttt{price}.
+    \item В классе \texttt{Design} полностью переопределите метод \texttt{category} (например, «Творчество»).
+    \item В классе \texttt{Design} полностью переопределите метод \texttt{certification} (например, «Нет»).
+    \item В классе \texttt{Design} полностью переопределите метод \texttt{calculate}, чтобы он вычислял количество студентов: \( \text{students} = \text{price} / 1000 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[23]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Weather}, который будет базовым для классов \texttt{Rainy} и \texttt{Sunny}. В конструкторе задайте параметры \texttt{location}, \texttt{temperature}, \texttt{humidity}, \texttt{wind\_speed}, \texttt{precipitation}, \texttt{uv\_index}.
+    \item В классе \texttt{Weather} создайте метод \texttt{forecast}, который выводит прогноз погоды.
+    \item В классе \texttt{Weather} создайте метод \texttt{type}, который выводит тип погоды.
+    \item В классе \texttt{Weather} создайте метод \texttt{advice}, который выводит рекомендации.
+    \item В классе \texttt{Weather} создайте метод \texttt{calculate}, который вычисляет индекс комфорта: \( \text{temperature} - 0.55 \times (1 - \frac{\text{humidity}}{100}) \times (\text{temperature} - 14.5) \).
+    \item Создайте класс \texttt{Rainy}, наследующийся от \texttt{Weather}. В конструкторе задайте \texttt{location}, \texttt{temperature}, \texttt{humidity}.
+    \item В классе \texttt{Rainy} полностью переопределите метод \texttt{type} (например, «Дождливая»).
+    \item В классе \texttt{Rainy} полностью переопределите метод \texttt{advice} (например, «Возьмите зонт»).
+    \item В классе \texttt{Rainy} полностью переопределите метод \texttt{calculate}, чтобы он вычислял осадки: \( \text{precipitation} = \text{humidity} / 10 \).
+    \item Создайте класс \texttt{Sunny}, наследующийся от \texttt{Weather}. В конструкторе задайте \texttt{location}, \texttt{temperature}, \texttt{humidity}.
+    \item В классе \texttt{Sunny} полностью переопределите метод \texttt{type} (например, «Солнечная»).
+    \item В классе \texttt{Sunny} полностью переопределите метод \texttt{advice} (например, «Используйте солнцезащитный крем»).
+    \item В классе \texttt{Sunny} полностью переопределите метод \texttt{calculate}, чтобы он вычислял УФ-индекс: \( \text{uv\_index} = \text{temperature} / 5 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[24]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Event}, который будет базовым для классов \texttt{Concert} и \texttt{Exhibition}. В конструкторе задайте параметры \texttt{name}, \texttt{date}, \texttt{location}, \texttt{price}, \texttt{duration\_hours}, \texttt{capacity}.
+    \item В классе \texttt{Event} создайте метод \texttt{info}, который выводит информацию о событии.
+    \item В классе \texttt{Event} создайте метод \texttt{category}, который выводит категорию события.
+    \item В классе \texttt{Event} создайте метод \texttt{dress\_code}, который выводит дресс-код.
+    \item В классе \texttt{Event} создайте метод \texttt{calculate}, который вычисляет доход при полной загрузке: \( \text{price} \times \text{capacity} \).
+    \item Создайте класс \texttt{Concert}, наследующийся от \texttt{Event}. В конструкторе задайте \texttt{name}, \texttt{date}, \texttt{location}.
+    \item В классе \texttt{Concert} полностью переопределите метод \texttt{category} (например, «Музыка»).
+    \item В классе \texttt{Concert} полностью переопределите метод \texttt{dress\_code} (например, «Casual»).
+    \item В классе \texttt{Concert} полностью переопределите метод \texttt{calculate}, чтобы он вычислял продолжительность: \( \text{duration\_hours} = 2 + \text{price} / 1000 \).
+    \item Создайте класс \texttt{Exhibition}, наследующийся от \texttt{Event}. В конструкторе задайте \texttt{name}, \texttt{date}, \texttt{location}.
+    \item В классе \texttt{Exhibition} полностью переопределите метод \texttt{category} (например, «Искусство»).
+    \item В классе \texttt{Exhibition} полностью переопределите метод \texttt{dress\_code} (например, «Smart casual»).
+    \item В классе \texttt{Exhibition} полностью переопределите метод \texttt{calculate}, чтобы он вычислял вместимость: \( \text{capacity} = \text{price} \times 2 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[25]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Currency}, который будет базовым для классов \texttt{Dollar} и \texttt{Euro}. В конструкторе задайте параметры \texttt{code}, \texttt{name}, \texttt{rate\_to\_rub}, \texttt{symbol}, \texttt{fractional\_unit}, \texttt{issuing\_country}.
+    \item В классе \texttt{Currency} создайте метод \texttt{info}, который выводит информацию о валюте.
+    \item В классе \texttt{Currency} создайте метод \texttt{region}, который выводит регион обращения.
+    \item В классе \texttt{Currency} создайте метод \texttt{stability}, который выводит уровень стабильности.
+    \item В классе \texttt{Currency} создайте метод \texttt{calculate}, который принимает параметр \texttt{amount} и вычисляет эквивалент в рублях: \( \text{amount} \times \text{rate\_to\_rub} \).
+    \item Создайте класс \texttt{Dollar}, наследующийся от \texttt{Currency}. В конструкторе задайте \texttt{code}, \texttt{name}, \texttt{rate\_to\_rub}.
+    \item В классе \texttt{Dollar} полностью переопределите метод \texttt{region} (например, «США, Канада»).
+    \item В классе \texttt{Dollar} полностью переопределите метод \texttt{stability} (например, «Высокая»).
+    \item В классе \texttt{Dollar} полностью переопределите метод \texttt{calculate}, чтобы он вычислял дробную единицу: \( \text{fractional\_unit} = \text{«Цент»} \).
+    \item Создайте класс \texttt{Euro}, наследующийся от \texttt{Currency}. В конструкторе задайте \texttt{code}, \texttt{name}, \texttt{rate\_to\_rub}.
+    \item В классе \texttt{Euro} полностью переопределите метод \texttt{region} (например, «Еврозона»).
+    \item В классе \texttt{Euro} полностью переопределите метод \texttt{stability} (например, «Высокая»).
+    \item В классе \texttt{Euro} полностью переопределите метод \texttt{calculate}, чтобы он вычислял страну-эмитента: \( \text{issuing\_country} = \text{«ЕЦБ»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[26]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Language}, который будет базовым для классов \texttt{Python} и \texttt{JavaScript}. В конструкторе задайте параметры \texttt{name}, \texttt{year\_created}, \texttt{paradigm}, \texttt{popularity\_rank}, \texttt{typing}, \texttt{runtime}.
+    \item В классе \texttt{Language} создайте метод \texttt{overview}, который выводит обзор языка.
+    \item В классе \texttt{Language} создайте метод \texttt{domain}, который выводит основную сферу применения.
+    \item В классе \texttt{Language} создайте метод \texttt{learning\_curve}, который выводит сложность изучения.
+    \item В классе \texttt{Language} создайте метод \texttt{calculate}, который вычисляет возраст языка: \( 2025 - \text{year\_created} \).
+    \item Создайте класс \texttt{Python}, наследующийся от \texttt{Language}. В конструкторе задайте \texttt{name}, \texttt{year\_created}, \texttt{popularity\_rank}.
+    \item В классе \texttt{Python} полностью переопределите метод \texttt{domain} (например, «Data Science, Backend»).
+    \item В классе \texttt{Python} полностью переопределите метод \texttt{learning\_curve} (например, «Низкая»).
+    \item В классе \texttt{Python} полностью переопределите метод \texttt{calculate}, чтобы он вычислял типизацию: \( \text{typing} = \text{«Динамическая»} \).
+    \item Создайте класс \texttt{JavaScript}, наследующийся от \texttt{Language}. В конструкторе задайте \texttt{name}, \texttt{year\_created}, \texttt{popularity\_rank}.
+    \item В классе \texttt{JavaScript} полностью переопределите метод \texttt{domain} (например, «Frontend, Web»).
+    \item В классе \texttt{JavaScript} полностью переопределите метод \texttt{learning\_curve} (например, «Средняя»).
+    \item В классе \texttt{JavaScript} полностью переопределите метод \texttt{calculate}, чтобы он вычислял среду выполнения: \( \text{runtime} = \text{«V8, SpiderMonkey»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[27]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Vehicle2}, который будет базовым для классов \texttt{Truck} и \texttt{Motorcycle}. В конструкторе задайте параметры \texttt{brand}, \texttt{model}, \texttt{year}, \texttt{max\_load}, \texttt{fuel\_tank}, \texttt{engine\_power}.
+    \item В классе \texttt{Vehicle2} создайте метод \texttt{spec}, который выводит спецификацию транспорта.
+    \item В классе \texttt{Vehicle2} создайте метод \texttt{vehicle\_class}, который выводит класс транспорта.
+    \item В классе \texttt{Vehicle2} создайте метод \texttt{license\_required}, который выводит тип водительских прав.
+    \item В классе \texttt{Vehicle2} создайте метод \texttt{calculate}, который вычисляет пробег на полном баке: \( \text{fuel\_tank} \times 10 \).
+    \item Создайте класс \texttt{Truck}, наследующийся от \texttt{Vehicle2}. В конструкторе задайте \texttt{brand}, \texttt{model}, \texttt{year}.
+    \item В классе \texttt{Truck} полностью переопределите метод \texttt{vehicle\_class} (например, «Грузовой»).
+    \item В классе \texttt{Truck} полностью переопределите метод \texttt{license\_required} (например, «Категория C»).
+    \item В классе \texttt{Truck} полностью переопределите метод \texttt{calculate}, чтобы он вычислял грузоподъёмность: \( \text{max\_load} = \text{engine\_power} \times 10 \).
+    \item Создайте класс \texttt{Motorcycle}, наследующийся от \texttt{Vehicle2}. В конструкторе задайте \texttt{brand}, \texttt{model}, \texttt{year}.
+    \item В классе \texttt{Motorcycle} полностью переопределите метод \texttt{vehicle\_class} (например, «Мотоцикл»).
+    \item В классе \texttt{Motorcycle} полностью переопределите метод \texttt{license\_required} (например, «Категория A»).
+    \item В классе \texttt{Motorcycle} полностью переопределите метод \texttt{calculate}, чтобы он вычислял объём бака: \( \text{fuel\_tank} = \text{engine\_power} / 5 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[28]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Dish}, который будет базовым для классов \texttt{Soup} и \texttt{Dessert}. В конструкторе задайте параметры \texttt{name}, \texttt{temperature}, \texttt{calories}, \texttt{cooking\_time}, \texttt{main\_ingredient}, \texttt{cuisine}.
+    \item В классе \texttt{Dish} создайте метод \texttt{recipe}, который выводит краткий рецепт.
+    \item В классе \texttt{Dish} создайте метод \texttt{meal\_time}, который выводит время подачи.
+    \item В классе \texttt{Dish} создайте метод \texttt{allergens}, который выводит возможные аллергены.
+    \item В классе \texttt{Dish} создайте метод \texttt{calculate}, который вычисляет калорийность в минуту готовки: \( \frac{\text{calories}}{\text{cooking\_time}} \).
+    \item Создайте класс \texttt{Soup}, наследующийся от \texttt{Dish}. В конструкторе задайте \texttt{name}, \texttt{temperature}, \texttt{calories}. Инициализируйте \texttt{main\_ingredient} и \texttt{cuisine} как \texttt{None}.
+    \item В классе \texttt{Soup} полностью переопределите метод \texttt{meal\_time} (например, «Обед»).
+    \item В классе \texttt{Soup} полностью переопределите метод \texttt{allergens} (например, «Глютен»).
+    \item В классе \texttt{Soup} полностью переопределите метод \texttt{calculate}, чтобы он вычислял основной ингредиент: \( \text{main\_ingredient} = \text{«Овощи»} \).
+    \item Создайте класс \texttt{Dessert}, наследующийся от \texttt{Dish}. В конструкторе задайте \texttt{name}, \texttt{temperature}, \texttt{calories}. Инициализируйте \texttt{main\_ingredient} и \texttt{cuisine} как \texttt{None}.
+    \item В классе \texttt{Dessert} полностью переопределите метод \texttt{meal\_time} (например, «После обеда»).
+    \item В классе \texttt{Dessert} полностью переопределите метод \texttt{allergens} (например, «Молоко, орехи»).
+    \item В классе \texttt{Dessert} полностью переопределите метод \texttt{calculate}, чтобы он вычислял кухню: \( \text{cuisine} = \text{«Французская»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[29]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Device}, который будет базовым для классов \texttt{Smartwatch} и \texttt{Headphones}. В конструкторе задайте параметры \texttt{brand}, \texttt{model}, \texttt{price}, \texttt{battery\_life}, \texttt{weight}, \texttt{connectivity}.
+    \item В классе \texttt{Device} создайте метод \texttt{specs}, который выводит характеристики устройства.
+    \item В классе \texttt{Device} создайте метод \texttt{category}, который выводит категорию устройства.
+    \item В классе \texttt{Device} создайте метод \texttt{water\_resistant}, который выводит уровень защиты от воды.
+    \item В классе \texttt{Device} создайте метод \texttt{calculate}, который вычисляет соотношение цены к времени работы: \( \frac{\text{price}}{\text{battery\_life}} \).
+    \item Создайте класс \texttt{Smartwatch}, наследующийся от \texttt{Device}. В конструкторе задайте \texttt{brand}, \texttt{model}, \texttt{price}.
+    \item В классе \texttt{Smartwatch} полностью переопределите метод \texttt{category} (например, «Носимая электроника»).
+    \item В классе \texttt{Smartwatch} полностью переопределите метод \texttt{water\_resistant} (например, «IP68»).
+    \item В классе \texttt{Smartwatch} полностью переопределите метод \texttt{calculate}, чтобы он вычислял вес: \( \text{weight} = \text{price} / 1000 \).
+    \item Создайте класс \texttt{Headphones}, наследующийся от \texttt{Device}. В конструкторе задайте \texttt{brand}, \texttt{model}, \texttt{price}.
+    \item В классе \texttt{Headphones} полностью переопределите метод \texttt{category} (например, «Аудиотехника»).
+    \item В классе \texttt{Headphones} полностью переопределите метод \texttt{water\_resistant} (например, «Нет»).
+    \item В классе \texttt{Headphones} полностью переопределите метод \texttt{calculate}, чтобы он вычислял тип подключения: \( \text{connectivity} = \text{«Bluetooth 5.0»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[30]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Document}, который будет базовым для классов \texttt{Invoice} и \texttt{Contract}. В конструкторе задайте параметры \texttt{doc\_id}, \texttt{date}, \texttt{author}, \texttt{pages}, \texttt{status}, \texttt{total\_amount}.
+    \item В классе \texttt{Document} создайте метод \texttt{summary}, который выводит краткое содержание.
+    \item В классе \texttt{Document} создайте метод \texttt{type}, который выводит тип документа.
+    \item В классе \texttt{Document} создайте метод \texttt{validity}, который выводит срок действия.
+    \item В классе \texttt{Document} создайте метод \texttt{calculate}, который вычисляет среднюю стоимость страницы: \( \frac{\text{total\_amount}}{\text{pages}} \).
+    \item Создайте класс \texttt{Invoice}, наследующийся от \texttt{Document}. В конструкторе задайте \texttt{doc\_id}, \texttt{date}, \texttt{author}.
+    \item В классе \texttt{Invoice} полностью переопределите метод \texttt{type} (например, «Счёт»).
+    \item В классе \texttt{Invoice} полностью переопределите метод \texttt{validity} (например, «30 дней»).
+    \item В классе \texttt{Invoice} полностью переопределите метод \texttt{calculate}, чтобы он вычислял итоговую сумму: \( \text{total\_amount} = \text{pages} \times 500 \).
+    \item Создайте класс \texttt{Contract}, наследующийся от \texttt{Document}. В конструкторе задайте \texttt{doc\_id}, \texttt{date}, \texttt{author}.
+    \item В классе \texttt{Contract} полностью переопределите метод \texttt{type} (например, «Договор»).
+    \item В классе \texttt{Contract} полностью переопределите метод \texttt{validity} (например, «1 год»).
+    \item В классе \texttt{Contract} полностью переопределите метод \texttt{calculate}, чтобы он вычислял статус: \( \text{status} = \text{«Подписан»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[31]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Animal2}, который будет базовым для классов \texttt{Bird} и \texttt{Fish}. В конструкторе задайте параметры \texttt{species}, \texttt{habitat}, \texttt{lifespan}, \texttt{diet}, \texttt{speed}, \texttt{reproduction}.
+    \item В классе \texttt{Animal2} создайте метод \texttt{bio}, который выводит биологическое описание.
+    \item В классе \texttt{Animal2} создайте метод \texttt{locomotion}, который выводит способ передвижения.
+    \item В классе \texttt{Animal2} создайте метод \texttt{conservation\_status}, который выводит статус сохранения.
+    \item В классе \texttt{Animal2} создайте метод \texttt{calculate}, который вычисляет продолжительность жизни в captivity: \( \text{lifespan} \times 1.2 \).
+    \item Создайте класс \texttt{Bird}, наследующийся от \texttt{Animal2}. В конструкторе задайте \texttt{species}, \texttt{habitat}, \texttt{diet}.
+    \item В классе \texttt{Bird} полностью переопределите метод \texttt{locomotion} (например, «Полёт»).
+    \item В классе \texttt{Bird} полностью переопределите метод \texttt{conservation\_status} (например, «Зависит от вида»).
+    \item В классе \texttt{Bird} полностью переопределите метод \texttt{calculate}, чтобы он вычислял скорость: \( \text{speed} = 50 + \text{lifespan} \).
+    \item Создайте класс \texttt{Fish}, наследующийся от \texttt{Animal2}. В конструкторе задайте \texttt{species}, \texttt{habitat}, \texttt{diet}.
+    \item В классе \texttt{Fish} полностью переопределите метод \texttt{locomotion} (например, «Плавание»).
+    \item В классе \texttt{Fish} полностью переопределите метод \texttt{conservation\_status} (например, «Уязвимый»).
+    \item В классе \texttt{Fish} полностью переопределите метод \texttt{calculate}, чтобы он вычислял размножение: \( \text{reproduction} = \text{«Икрометание»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[32]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Subscription}, который будет базовым для классов \texttt{Streaming} и \texttt{Gym}. В конструкторе задайте параметры \texttt{name}, \texttt{monthly\_fee}, \texttt{duration\_months}, \texttt{features}, \texttt{auto\_renew}, \texttt{discount}.
+    \item В классе \texttt{Subscription} создайте метод \texttt{details}, который выводит детали подписки.
+    \item В классе \texttt{Subscription} создайте метод \texttt{category}, который выводит категорию подписки.
+    \item В классе \texttt{Subscription} создайте метод \texttt{cancellation\_policy}, который выводит политику отмены.
+    \item В классе \texttt{Subscription} создайте метод \texttt{calculate}, который вычисляет общую стоимость: \( \text{monthly\_fee} \times \text{duration\_months} \times (1 - \frac{\text{discount}}{100}) \).
+    \item Создайте класс \texttt{Streaming}, наследующийся от \texttt{Subscription}. В конструкторе задайте \texttt{name}, \texttt{monthly\_fee}, \texttt{duration\_months}.
+    \item В классе \texttt{Streaming} полностью переопределите метод \texttt{category} (например, «Развлечения»).
+    \item В классе \texttt{Streaming} полностью переопределите метод \texttt{cancellation\_policy} (например, «В любое время»).
+    \item В классе \texttt{Streaming} полностью переопределите метод \texttt{calculate}, чтобы он вычислял функции: \( \text{features} = \text{«4K, многопользовательский»} \).
+    \item Создайте класс \texttt{Gym}, наследующийся от \texttt{Subscription}. В конструкторе задайте \texttt{name}, \texttt{monthly\_fee}, \texttt{duration\_months}.
+    \item В классе \texttt{Gym} полностью переопределите метод \texttt{category} (например, «Фитнес»).
+    \item В классе \texttt{Gym} полностью переопределите метод \texttt{cancellation\_policy} (например, «За 14 дней»).
+    \item В классе \texttt{Gym} полностью переопределите метод \texttt{calculate}, чтобы он вычислял автопродление: \( \text{auto\_renew} = \text{True} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[33]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Ticket}, который будет базовым для классов \texttt{Flight} и \texttt{Concert2}. В конструкторе задайте параметры \texttt{event\_name}, \texttt{price}, \texttt{date}, \texttt{seat}, \texttt{class\_type}, \texttt{refundable}.
+    \item В классе \texttt{Ticket} создайте метод \texttt{info}, который выводит информацию о билете.
+    \item В классе \texttt{Ticket} создайте метод \texttt{type}, который выводит тип билета.
+    \item В классе \texttt{Ticket} создайте метод \texttt{restrictions}, который выводит ограничения.
+    \item В классе \texttt{Ticket} создайте метод \texttt{calculate}, который вычисляет налог: \( \text{price} \times 0.13 \).
+    \item Создайте класс \texttt{Flight}, наследующийся от \texttt{Ticket}. В конструкторе задайте \texttt{event\_name}, \texttt{price}, \texttt{date}.
+    \item В классе \texttt{Flight} полностью переопределите метод \texttt{type} (например, «Авиабилет»).
+    \item В классе \texttt{Flight} полностью переопределите метод \texttt{restrictions} (например, «Паспорт, регистрация»).
+    \item В классе \texttt{Flight} полностью переопределите метод \texttt{calculate}, чтобы он вычислял класс: \( \text{class\_type} = \text{«Эконом»} \).
+    \item Создайте класс \texttt{Concert2}, наследующийся от \texttt{Ticket}. В конструкторе задайте \texttt{event\_name}, \texttt{price}, \texttt{date}.
+    \item В классе \texttt{Concert2} полностью переопределите метод \texttt{type} (например, «Концерт»).
+    \item В классе \texttt{Concert2} полностью переопределите метод \texttt{restrictions} (например, «18+»).
+    \item В классе \texttt{Concert2} полностью переопределите метод \texttt{calculate}, чтобы он вычислял возврат: \( \text{refundable} = \text{False} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[34]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Product}, который будет базовым для классов \texttt{Book2} и \texttt{Gadget}. В конструкторе задайте параметры \texttt{title}, \texttt{price}, \texttt{weight}, \texttt{manufacturer}, \texttt{warranty\_months}, \texttt{in\_stock}.
+    \item В классе \texttt{Product} создайте метод \texttt{description}, который выводит описание товара.
+    \item В классе \texttt{Product} создайте метод \texttt{category}, который выводит категорию товара.
+    \item В классе \texttt{Product} создайте метод \texttt{delivery\_time}, который выводит срок доставки.
+    \item В классе \texttt{Product} создайте метод \texttt{calculate}, который вычисляет стоимость доставки: \( \text{weight} \times 50 \).
+    \item Создайте класс \texttt{Book2}, наследующийся от \texttt{Product}. В конструкторе задайте \texttt{title}, \texttt{price}, \texttt{weight}.
+    \item В классе \texttt{Book2} полностью переопределите метод \texttt{category} (например, «Книги»).
+    \item В классе \texttt{Book2} полностью переопределите метод \texttt{delivery\_time} (например, «1–3 дня»).
+    \item В классе \texttt{Book2} полностью переопределите метод \texttt{calculate}, чтобы он вычислял наличие: \( \text{in\_stock} = \text{True} \).
+    \item Создайте класс \texttt{Gadget}, наследующийся от \texttt{Product}. В конструкторе задайте \texttt{title}, \texttt{price}, \texttt{weight}.
+    \item В классе \texttt{Gadget} полностью переопределите метод \texttt{category} (например, «Электроника»).
+    \item В классе \texttt{Gadget} полностью переопределите метод \texttt{delivery\_time} (например, «3–7 дней»).
+    \item В классе \texttt{Gadget} полностью переопределите метод \texttt{calculate}, чтобы он вычислял гарантию: \( \text{warranty\_months} = 12 \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\item[35]
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Person}, который будет базовым для классов \texttt{Student} и \texttt{Teacher}. В конструкторе задайте параметры \texttt{name}, \texttt{age}, \texttt{email}, \texttt{schedule}, \texttt{workload}, \texttt{specialization}.
+    \item В классе \texttt{Person} создайте метод \texttt{profile}, который выводит профиль человека.
+    \item В классе \texttt{Person} создайте метод \texttt{role}, который выводит роль.
+    \item В классе \texttt{Person} создайте метод \texttt{availability}, который выводит доступность.
+    \item В классе \texttt{Person} создайте метод \texttt{calculate}, который вычисляет нагрузку в часах: \( \text{workload} \times 5 \).
+    \item Создайте класс \texttt{Student}, наследующийся от \texttt{Person}. В конструкторе задайте \texttt{name}, \texttt{age}, \texttt{email}.
+    \item В классе \texttt{Student} полностью переопределите метод \texttt{role} (например, «Учащийся»).
+    \item В классе \texttt{Student} полностью переопределите метод \texttt{availability} (например, «Пн–Пт, 9–18»).
+    \item В классе \texttt{Student} полностью переопределите метод \texttt{calculate}, чтобы он вычислял расписание: \( \text{schedule} = \text{«Лекции, практики»} \).
+    \item Создайте класс \texttt{Teacher}, наследующийся от \texttt{Person}. В конструкторе задайте \texttt{name}, \texttt{age}, \texttt{email}.
+    \item В классе \texttt{Teacher} полностью переопределите метод \texttt{role} (например, «Преподаватель»).
+    \item В классе \texttt{Teacher} полностью переопределите метод \texttt{availability} (например, «По расписанию»).
+    \item В классе \texttt{Teacher} полностью переопределите метод \texttt{calculate}, чтобы он вычислял специализацию: \( \text{specialization} = \text{«Программирование»} \).
+    \item Создайте объекты всех трёх классов и вызовите их методы.
+    \item Создайте список из объектов разных классов и в цикле вызовите все общие методы, демонстрируя полиморфизм.
+\end{enumerate}
+\end{enumerate}

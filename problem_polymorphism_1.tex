@@ -1,0 +1,667 @@
+\subsubsection{Полиморфизм с наследованием (частичная модификация метода родительского класса)}
+\begin{enumerate}
+\item[1] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Person}, который будет базовым для класса \texttt{Manager}. В конструкторе класса \texttt{Person} задайте параметры \texttt{name}, \texttt{job} и \texttt{pay}.
+    
+    \item В классе \texttt{Person} создайте метод \texttt{last\_name}, который будет возвращать фамилию человека (предполагается, что фамилия — это последнее слово в значении атрибута \texttt{name}).
+    
+    \item В классе \texttt{Person} создайте метод \texttt{give\_rise}, который будет увеличивать значение атрибута \texttt{pay} на заданный процент (например, при вызове \texttt{give\_rise(10)} зарплата должна увеличиться на 10\,\%).
+    
+    \item В классе \texttt{Person} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта с информацией о человеке.
+    
+    \item Создайте класс \texttt{Manager}, наследующийся от класса \texttt{Person}. В конструкторе класса \texttt{Manager} задайте параметры \texttt{name}, \texttt{job} и \texttt{pay} (можно вызвать конструктор родительского класса).
+    
+    \item В классе \texttt{Manager} переопределите метод \texttt{give\_rise} родительского класса с использованием функции \texttt{super()}, чтобы он увеличивал зарплату менеджера на заданный процент плюс дополнительный бонус (например, +10\,\% к указанному проценту).
+    
+    \item В основной части программы создайте объекты классов \texttt{Person} и \texttt{Manager} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте (например, с помощью функции \texttt{print}, которая автоматически вызовет \texttt{\_\_repr\_\_}).
+\end{enumerate}
+
+\item[2] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Employee}, который будет базовым для класса \texttt{TeamLead}. В конструкторе класса \texttt{Employee} задайте параметры \texttt{name}, \texttt{position} и \texttt{salary}.
+    
+    \item В классе \texttt{Employee} создайте метод \texttt{get\_initials}, который будет возвращать инициалы сотрудника (первые буквы имени и фамилии, разделённые точкой).
+    
+    \item В классе \texttt{Employee} создайте метод \texttt{apply\_bonus}, который будет увеличивать значение атрибута \texttt{salary} на заданный процент.
+    
+    \item В классе \texttt{Employee} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта с информацией о сотруднике.
+    
+    \item Создайте класс \texttt{TeamLead}, наследующийся от класса \texttt{Employee}. В конструкторе класса \texttt{TeamLead} задайте параметры \texttt{name}, \texttt{position} и \texttt{salary}.
+    
+    \item В классе \texttt{TeamLead} переопределите метод \texttt{apply\_bonus} с использованием \texttt{super()}, чтобы он увеличивал зарплату лидера на заданный процент плюс дополнительные 7\,\%.
+    
+    \item В основной части программы создайте объекты классов \texttt{Employee} и \texttt{TeamLead} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[3] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Animal}, который будет базовым для класса \texttt{Dog}. В конструкторе класса \texttt{Animal} задайте параметры \texttt{name}, \texttt{species} и \texttt{age}.
+    
+    \item В классе \texttt{Animal} создайте метод \texttt{get\_species}, который будет возвращать вид животного.
+    
+    \item В классе \texttt{Animal} создайте метод \texttt{age\_up}, который будет увеличивать возраст на заданное количество лет.
+    
+    \item В классе \texttt{Animal} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Dog}, наследующийся от класса \texttt{Animal}. В конструкторе класса \texttt{Dog} задайте параметры \texttt{name}, \texttt{species} и \texttt{age}.
+    
+    \item В классе \texttt{Dog} переопределите метод \texttt{age\_up} с использованием \texttt{super()}, чтобы возраст увеличивался на указанное количество лет плюс дополнительный год (например, при вызове \texttt{age\_up(2)} возраст увеличится на 3 года).
+    
+    \item В основной части программы создайте объекты классов \texttt{Animal} и \texttt{Dog} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[4] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Vehicle}, который будет базовым для класса \texttt{Truck}. В конструкторе класса \texttt{Vehicle} задайте параметры \texttt{brand}, \texttt{model} и \texttt{fuel\_level}.
+    
+    \item В классе \texttt{Vehicle} создайте метод \texttt{refuel}, который будет увеличивать уровень топлива на заданное количество литров.
+    
+    \item В классе \texttt{Vehicle} создайте метод \texttt{get\_model\_year}, который будет возвращать год выпуска (предположим, что он закодирован в названии модели, например, последние 4 цифры).
+    
+    \item В классе \texttt{Vehicle} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Truck}, наследующийся от класса \texttt{Vehicle}. В конструкторе класса \texttt{Truck} задайте параметры \texttt{brand}, \texttt{model} и \texttt{fuel\_level}.
+    
+    \item В классе \texttt{Truck} переопределите метод \texttt{refuel} с использованием \texttt{super()}, чтобы добавлялось указанное количество литров плюс бонус в 10 литров.
+    
+    \item В основной части программы создайте объекты классов \texttt{Vehicle} и \texttt{Truck} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[5] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Book}, который будет базовым для класса \texttt{Textbook}. В конструкторе класса \texttt{Book} задайте параметры \texttt{title}, \texttt{author} и \texttt{pages}.
+    
+    \item В классе \texttt{Book} создайте метод \texttt{get\_author\_last\_name}, который будет возвращать фамилию автора (последнее слово в строке \texttt{author}).
+    
+    \item В классе \texttt{Book} создайте метод \texttt{add\_pages}, который будет увеличивать количество страниц на заданное число.
+    
+    \item В классе \texttt{Book} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Textbook}, наследующийся от класса \texttt{Book}. В конструкторе класса \texttt{Textbook} задайте параметры \texttt{title}, \texttt{author} и \texttt{pages}.
+    
+    \item В классе \texttt{Textbook} переопределите метод \texttt{add\_pages} с использованием \texttt{super()}, чтобы добавлялось указанное число страниц плюс дополнительные 20 страниц (например, для приложений).
+    
+    \item В основной части программы создайте объекты классов \texttt{Book} и \texttt{Textbook} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[6] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Student}, который будет базовым для класса \texttt{GraduateStudent}. В конструкторе класса \texttt{Student} задайте параметры \texttt{name}, \texttt{major} и \texttt{gpa}.
+    
+    \item В классе \texttt{Student} создайте метод \texttt{get\_initials}, который будет возвращать инициалы студента.
+    
+    \item В классе \texttt{Student} создайте метод \texttt{improve\_gpa}, который будет увеличивать средний балл на заданное значение (например, \texttt{improve\_gpa(0.2)}).
+    
+    \item В классе \texttt{Student} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{GraduateStudent}, наследующийся от класса \texttt{Student}. В конструкторе класса \texttt{GraduateStudent} задайте параметры \texttt{name}, \texttt{major} и \texttt{gpa}.
+    
+    \item В классе \texttt{GraduateStudent} переопределите метод \texttt{improve\_gpa} с использованием \texttt{super()}, чтобы повышение составляло указанное значение плюс дополнительные 0.1 балла.
+    
+    \item В основной части программы создайте объекты классов \texttt{Student} и \texttt{GraduateStudent} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[7] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Product}, который будет базовым для класса \texttt{PremiumProduct}. В конструкторе класса \texttt{Product} задайте параметры \texttt{name}, \texttt{category} и \texttt{price}.
+    
+    \item В классе \texttt{Product} создайте метод \texttt{apply\_discount}, который будет уменьшать цену на заданный процент.
+    
+    \item В классе \texttt{Product} создайте метод \texttt{get\_category\_initial}, который будет возвращать первую букву категории.
+    
+    \item В классе \texttt{Product} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{PremiumProduct}, наследующийся от класса \texttt{Product}. В конструкторе класса \texttt{PremiumProduct} задайте параметры \texttt{name}, \texttt{category} и \texttt{price}.
+    
+    \item В классе \texttt{PremiumProduct} переопределите метод \texttt{apply\_discount} с использованием \texttt{super()}, чтобы скидка уменьшалась на 5\,\% от указанного значения (например, при запросе скидки 20\,\% применяется только 15\,\%).
+    
+    \item В основной части программы создайте объекты классов \texttt{Product} и \texttt{PremiumProduct} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[8] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Account}, который будет базовым для класса \texttt{SavingsAccount}. В конструкторе класса \texttt{Account} задайте параметры \texttt{owner}, \texttt{account\_type} и \texttt{balance}.
+    
+    \item В классе \texttt{Account} создайте метод \texttt{deposit}, который будет увеличивать баланс на заданную сумму.
+    
+    \item В классе \texttt{Account} создайте метод \texttt{get\_owner\_last\_name}, который будет возвращать фамилию владельца.
+    
+    \item В классе \texttt{Account} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{SavingsAccount}, наследующийся от класса \texttt{Account}. В конструкторе класса \texttt{SavingsAccount} задайте параметры \texttt{owner}, \texttt{account\_type} и \texttt{balance}.
+    
+    \item В классе \texttt{SavingsAccount} переопределите метод \texttt{deposit} с использованием \texttt{super()}, чтобы при пополнении добавлялась указанная сумма плюс бонус в 1\,\% от неё.
+    
+    \item В основной части программы создайте объекты классов \texttt{Account} и \texttt{SavingsAccount} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[9] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{GameCharacter}, который будет базовым для класса \texttt{Hero}. В конструкторе класса \texttt{GameCharacter} задайте параметры \texttt{name}, \texttt{class\_type} и \texttt{health}.
+    
+    \item В классе \texttt{GameCharacter} создайте метод \texttt{heal}, который будет увеличивать здоровье на заданное количество единиц.
+    
+    \item В классе \texttt{GameCharacter} создайте метод \texttt{get\_class\_initial}, который будет возвращать первую букву класса персонажа.
+    
+    \item В классе \texttt{GameCharacter} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Hero}, наследующийся от класса \texttt{GameCharacter}. В конструкторе класса \texttt{Hero} задайте параметры \texttt{name}, \texttt{class\_type} и \texttt{health}.
+    
+    \item В классе \texttt{Hero} переопределите метод \texttt{heal} с использованием \texttt{super()}, чтобы восстанавливалось указанное количество здоровья плюс дополнительные 10 единиц.
+    
+    \item В основной части программы создайте объекты классов \texttt{GameCharacter} и \texttt{Hero} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[10] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Device}, который будет базовым для класса \texttt{Smartphone}. В конструкторе класса \texttt{Device} задайте параметры \texttt{brand}, \texttt{model} и \texttt{battery\_level}.
+    
+    \item В классе \texttt{Device} создайте метод \texttt{charge}, который будет увеличивать уровень заряда на заданное количество процентов.
+    
+    \item В классе \texttt{Device} создайте метод \texttt{get\_brand\_initial}, который будет возвращать первую букву бренда.
+    
+    \item В классе \texttt{Device} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Smartphone}, наследующийся от класса \texttt{Device}. В конструкторе класса \texttt{Smartphone} задайте параметры \texttt{brand}, \texttt{model} и \texttt{battery\_level}.
+    
+    \item В классе \texttt{Smartphone} переопределите метод \texttt{charge} с использованием \texttt{super()}, чтобы заряд увеличивался на указанное значение плюс дополнительные 5\,\%.
+    
+    \item В основной части программы создайте объекты классов \texttt{Device} и \texttt{Smartphone} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[11] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Plant}, который будет базовым для класса \texttt{FloweringPlant}. В конструкторе класса \texttt{Plant} задайте параметры \texttt{name}, \texttt{species} и \texttt{height}.
+    
+    \item В классе \texttt{Plant} создайте метод \texttt{grow}, который будет увеличивать высоту растения на заданное количество сантиметров.
+    
+    \item В классе \texttt{Plant} создайте метод \texttt{get\_species\_initial}, который будет возвращать первую букву вида.
+    
+    \item В классе \texttt{Plant} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{FloweringPlant}, наследующийся от класса \texttt{Plant}. В конструкторе класса \texttt{FloweringPlant} задайте параметры \texttt{name}, \texttt{species} и \texttt{height}.
+    
+    \item В классе \texttt{FloweringPlant} переопределите метод \texttt{grow} с использованием \texttt{super()}, чтобы высота увеличивалась на указанное значение плюс дополнительные 2 см (для цветков).
+    
+    \item В основной части программы создайте объекты классов \texttt{Plant} и \texttt{FloweringPlant} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[12] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Musician}, который будет базовым для класса \texttt{Soloist}. В конструкторе класса \texttt{Musician} задайте параметры \texttt{name}, \texttt{instrument} и \texttt{experience}.
+    
+    \item В классе \texttt{Musician} создайте метод \texttt{practice}, который будет увеличивать опыт на заданное количество лет.
+    
+    \item В классе \texttt{Musician} создайте метод \texttt{get\_instrument\_initial}, который будет возвращать первую букву инструмента.
+    
+    \item В классе \texttt{Musician} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Soloist}, наследующийся от класса \texttt{Musician}. В конструкторе класса \texttt{Soloist} задайте параметры \texttt{name}, \texttt{instrument} и \texttt{experience}.
+    
+    \item В классе \texttt{Soloist} переопределите метод \texttt{practice} с использованием \texttt{super()}, чтобы опыт увеличивался на указанное значение плюс дополнительный год.
+    
+    \item В основной части программы создайте объекты классов \texttt{Musician} и \texttt{Soloist} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[13] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{House}, который будет базовым для класса \texttt{Mansion}. В конструкторе класса \texttt{House} задайте параметры \texttt{address}, \texttt{rooms} и \texttt{area}.
+    
+    \item В классе \texttt{House} создайте метод \texttt{expand}, который будет увеличивать площадь на заданное количество квадратных метров.
+    
+    \item В классе \texttt{House} создайте метод \texttt{get\_city\_initial}, который будет возвращать первую букву города из адреса.
+    
+    \item В классе \texttt{House} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Mansion}, наследующийся от класса \texttt{House}. В конструкторе класса \texttt{Mansion} задайте параметры \texttt{address}, \texttt{rooms} и \texttt{area}.
+    
+    \item В классе \texttt{Mansion} переопределите метод \texttt{expand} с использованием \texttt{super()}, чтобы площадь увеличивалась на указанное значение плюс дополнительные 50 м².
+    
+    \item В основной части программы создайте объекты классов \texttt{House} и \texttt{Mansion} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[14] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Writer}, который будет базовым для класса \texttt{Novelist}. В конструкторе класса \texttt{Writer} задайте параметры \texttt{name}, \texttt{genre} и \texttt{books\_written}.
+    
+    \item В классе \texttt{Writer} создайте метод \texttt{publish\_book}, который будет увеличивать количество написанных книг на 1.
+    
+    \item В классе \texttt{Writer} создайте метод \texttt{get\_genre\_initial}, который будет возвращать первую букву жанра.
+    
+    \item В классе \texttt{Writer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Novelist}, наследующийся от класса \texttt{Writer}. В конструкторе класса \texttt{Novelist} задайте параметры \texttt{name}, \texttt{genre} и \texttt{books\_written}.
+    
+    \item В классе \texttt{Novelist} переопределите метод \texttt{publish\_book} с использованием \texttt{super()}, чтобы при публикации увеличивалось количество книг на 1 плюс бонус в 0.5 (для совместных работ).
+    
+    \item В основной части программы создайте объекты классов \texttt{Writer} и \texttt{Novelist} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[15] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{BankClient}, который будет базовым для класса \texttt{VIPClient}. В конструкторе класса \texttt{BankClient} задайте параметры \texttt{name}, \texttt{client\_type} и \texttt{balance}.
+    
+    \item В классе \texttt{BankClient} создайте метод \texttt{withdraw}, который будет уменьшать баланс на заданную сумму.
+    
+    \item В классе \texttt{BankClient} создайте метод \texttt{get\_name\_initial}, который будет возвращать первую букву имени.
+    
+    \item В классе \texttt{BankClient} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{VIPClient}, наследующийся от класса \texttt{BankClient}. В конструкторе класса \texttt{VIPClient} задайте параметры \texttt{name}, \texttt{client\_type} и \texttt{balance}.
+    
+    \item В классе \texttt{VIPClient} переопределите метод \texttt{withdraw} с использованием \texttt{super()}, чтобы при снятии уменьшалась сумма на 5\,\% меньше указанной (комиссия ниже).
+    
+    \item В основной части программы создайте объекты классов \texttt{BankClient} и \texttt{VIPClient} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[16] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Athlete}, который будет базовым для класса \texttt{Olympian}. В конструкторе класса \texttt{Athlete} задайте параметры \texttt{name}, \texttt{sport} и \texttt{medals}.
+    
+    \item В классе \texttt{Athlete} создайте метод \texttt{win\_medal}, который будет увеличивать количество медалей на 1.
+    
+    \item В классе \texttt{Athlete} создайте метод \texttt{get\_sport\_initial}, который будет возвращать первую букву вида спорта.
+    
+    \item В классе \texttt{Athlete} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Olympian}, наследующийся от класса \texttt{Athlete}. В конструкторе класса \texttt{Olympian} задайте параметры \texttt{name}, \texttt{sport} и \texttt{medals}.
+    
+    \item В классе \texttt{Olympian} переопределите метод \texttt{win\_medal} с использованием \texttt{super()}, чтобы при победе увеличивалось количество медалей на 1 плюс бонус в 0.2 (для командных медалей).
+    
+    \item В основной части программы создайте объекты классов \texttt{Athlete} и \texttt{Olympian} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[17] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Computer}, который будет базовым для класса \texttt{GamingPC}. В конструкторе класса \texttt{Computer} задайте параметры \texttt{brand}, \texttt{model} и \texttt{ram\_gb}.
+    
+    \item В классе \texttt{Computer} создайте метод \texttt{upgrade\_ram}, который будет увеличивать объём ОЗУ на заданное количество гигабайт.
+    
+    \item В классе \texttt{Computer} создайте метод \texttt{get\_brand\_initial}, который будет возвращать первую букву бренда.
+    
+    \item В классе \texttt{Computer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{GamingPC}, наследующийся от класса \texttt{Computer}. В конструкторе класса \texttt{GamingPC} задайте параметры \texttt{brand}, \texttt{model} и \texttt{ram\_gb}.
+    
+    \item В классе \texttt{GamingPC} переопределите метод \texttt{upgrade\_ram} с использованием \texttt{super()}, чтобы объём ОЗУ увеличивался на указанное значение плюс дополнительные 2 ГБ.
+    
+    \item В основной части программы создайте объекты классов \texttt{Computer} и \texttt{GamingPC} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[18] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Teacher}, который будет базовым для класса \texttt{Professor}. В конструкторе класса \texttt{Teacher} задайте параметры \texttt{name}, \texttt{subject} и \texttt{experience}.
+    
+    \item В классе \texttt{Teacher} создайте метод \texttt{teach\_more}, который будет увеличивать опыт на заданное количество лет.
+    
+    \item В классе \texttt{Teacher} создайте метод \texttt{get\_subject\_initial}, который будет возвращать первую букву предмета.
+    
+    \item В классе \texttt{Teacher} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Professor}, наследующийся от класса \texttt{Teacher}. В конструкторе класса \texttt{Professor} задайте параметры \texttt{name}, \texttt{subject} и \texttt{experience}.
+    
+    \item В классе \texttt{Professor} переопределите метод \texttt{teach\_more} с использованием \texttt{super()}, чтобы опыт увеличивался на указанное значение плюс дополнительный год.
+    
+    \item В основной части программы создайте объекты классов \texttt{Teacher} и \texttt{Professor} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[19] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Robot}, который будет базовым для класса \texttt{ServiceRobot}. В конструкторе класса \texttt{Robot} задайте параметры \texttt{model}, \texttt{type} и \texttt{battery\_life}.
+    
+    \item В классе \texttt{Robot} создайте метод \texttt{recharge}, который будет увеличивать время работы от батареи на заданное количество часов.
+    
+    \item В классе \texttt{Robot} создайте метод \texttt{get\_type\_initial}, который будет возвращать первую букву типа.
+    
+    \item В классе \texttt{Robot} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{ServiceRobot}, наследующийся от класса \texttt{Robot}. В конструкторе класса \texttt{ServiceRobot} задайте параметры \texttt{model}, \texttt{type} и \texttt{battery\_life}.
+    
+    \item В классе \texttt{ServiceRobot} переопределите метод \texttt{recharge} с использованием \texttt{super()}, чтобы время работы увеличивалось на указанное значение плюс дополнительные 0.5 часа.
+    
+    \item В основной части программы создайте объекты классов \texttt{Robot} и \texttt{ServiceRobot} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[20] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Painter}, который будет базовым для класса \texttt{MasterPainter}. В конструкторе класса \texttt{Painter} задайте параметры \texttt{name}, \texttt{style} и \texttt{paintings}.
+    
+    \item В классе \texttt{Painter} создайте метод \texttt{create\_painting}, который будет увеличивать количество картин на 1.
+    
+    \item В классе \texttt{Painter} создайте метод \texttt{get\_style\_initial}, который будет возвращать первую букву стиля.
+    
+    \item В классе \texttt{Painter} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{MasterPainter}, наследующийся от класса \texttt{Painter}. В конструкторе класса \texttt{MasterPainter} задайте параметры \texttt{name}, \texttt{style} и \texttt{paintings}.
+    
+    \item В классе \texttt{MasterPainter} переопределите метод \texttt{create\_painting} с использованием \texttt{super()}, чтобы количество картин увеличивалось на 1 плюс бонус в 0.3 (для серии работ).
+    
+    \item В основной части программы создайте объекты классов \texttt{Painter} и \texttt{MasterPainter} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[21] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Chef}, который будет базовым для класса \texttt{HeadChef}. В конструкторе класса \texttt{Chef} задайте параметры \texttt{name}, \texttt{cuisine} и \texttt{dishes\_created}.
+    
+    \item В классе \texttt{Chef} создайте метод \texttt{invent\_dish}, который будет увеличивать количество созданных блюд на 1.
+    
+    \item В классе \texttt{Chef} создайте метод \texttt{get\_cuisine\_initial}, который будет возвращать первую букву кухни.
+    
+    \item В классе \texttt{Chef} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{HeadChef}, наследующийся от класса \texttt{Chef}. В конструкторе класса \texttt{HeadChef} задайте параметры \texttt{name}, \texttt{cuisine} и \texttt{dishes\_created}.
+    
+    \item В классе \texttt{HeadChef} переопределите метод \texttt{invent\_dish} с использованием \texttt{super()}, чтобы количество блюд увеличивалось на 1 плюс бонус в 0.4 (для командных разработок).
+    
+    \item В основной части программы создайте объекты классов \texttt{Chef} и \texttt{HeadChef} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[22] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Photographer}, который будет базовым для класса \texttt{ProPhotographer}. В конструкторе класса \texttt{Photographer} задайте параметры \texttt{name}, \texttt{specialty} и \texttt{photos\_taken}.
+    
+    \item В классе \texttt{Photographer} создайте метод \texttt{take\_photo}, который будет увеличивать количество фотографий на 1.
+    
+    \item В классе \texttt{Photographer} создайте метод \texttt{get\_specialty\_initial}, который будет возвращать первую букву специализации.
+    
+    \item В классе \texttt{Photographer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{ProPhotographer}, наследующийся от класса \texttt{Photographer}. В конструкторе класса \texttt{ProPhotographer} задайте параметры \texttt{name}, \texttt{specialty} и \texttt{photos\_taken}.
+    
+    \item В классе \texttt{ProPhotographer} переопределите метод \texttt{take\_photo} с использованием \texttt{super()}, чтобы количество фотографий увеличивалось на 1 плюс бонус в 0.25 (для серийных съёмок).
+    
+    \item В основной части программы создайте объекты классов \texttt{Photographer} и \texttt{ProPhotographer} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[23] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Scientist}, который будет базовым для класса \texttt{LeadScientist}. В конструкторе класса \texttt{Scientist} задайте параметры \texttt{name}, \texttt{field} и \texttt{papers\_published}.
+    
+    \item В классе \texttt{Scientist} создайте метод \texttt{publish\_paper}, который будет увеличивать количество публикаций на 1.
+    
+    \item В классе \texttt{Scientist} создайте метод \texttt{get\_field\_initial}, который будет возвращать первую букву области науки.
+    
+    \item В классе \texttt{Scientist} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{LeadScientist}, наследующийся от класса \texttt{Scientist}. В конструкторе класса \texttt{LeadScientist} задайте параметры \texttt{name}, \texttt{field} и \texttt{papers\_published}.
+    
+    \item В классе \texttt{LeadScientist} переопределите метод \texttt{publish\_paper} с использованием \texttt{super()}, чтобы количество публикаций увеличивалось на 1 плюс бонус в 0.6 (для руководства проектами).
+    
+    \item В основной части программы создайте объекты классов \texttt{Scientist} и \texttt{LeadScientist} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[24] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Car}, который будет базовым для класса \texttt{ElectricCar}. В конструкторе класса \texttt{Car} задайте параметры \texttt{make}, \texttt{model} и \texttt{mileage}.
+    
+    \item В классе \texttt{Car} создайте метод \texttt{drive}, который будет увеличивать пробег на заданное количество километров.
+    
+    \item В классе \texttt{Car} создайте метод \texttt{get\_make\_initial}, который будет возвращать первую букву марки.
+    
+    \item В классе \texttt{Car} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{ElectricCar}, наследующийся от класса \texttt{Car}. В конструкторе класса \texttt{ElectricCar} задайте параметры \texttt{make}, \texttt{model} и \texttt{mileage}.
+    
+    \item В классе \texttt{ElectricCar} переопределите метод \texttt{drive} с использованием \texttt{super()}, чтобы пробег увеличивался на указанное значение плюс дополнительные 5 км (для учёта регенеративного торможения).
+    
+    \item В основной части программы создайте объекты классов \texttt{Car} и \texttt{ElectricCar} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[25] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Artist}, который будет базовым для класса \texttt{DigitalArtist}. В конструкторе класса \texttt{Artist} задайте параметры \texttt{name}, \texttt{medium} и \texttt{artworks}.
+    
+    \item В классе \texttt{Artist} создайте метод \texttt{create\_artwork}, который будет увеличивать количество работ на 1.
+    
+    \item В классе \texttt{Artist} создайте метод \texttt{get\_medium\_initial}, который будет возвращать первую букву носителя.
+    
+    \item В классе \texttt{Artist} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{DigitalArtist}, наследующийся от класса \texttt{Artist}. В конструкторе класса \texttt{DigitalArtist} задайте параметры \texttt{name}, \texttt{medium} и \texttt{artworks}.
+    
+    \item В классе \texttt{DigitalArtist} переопределите метод \texttt{create\_artwork} с использованием \texttt{super()}, чтобы количество работ увеличивалось на 1 плюс бонус в 0.35 (для цифровых серий).
+    
+    \item В основной части программы создайте объекты классов \texttt{Artist} и \texttt{DigitalArtist} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[26] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Farmer}, который будет базовым для класса \texttt{OrganicFarmer}. В конструкторе класса \texttt{Farmer} задайте параметры \texttt{name}, \texttt{crop} и \texttt{harvest\_tons}.
+    
+    \item В классе \texttt{Farmer} создайте метод \texttt{harvest}, который будет увеличивать урожай на заданное количество тонн.
+    
+    \item В классе \texttt{Farmer} создайте метод \texttt{get\_crop\_initial}, который будет возвращать первую букву культуры.
+    
+    \item В классе \texttt{Farmer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{OrganicFarmer}, наследующийся от класса \texttt{Farmer}. В конструкторе класса \texttt{OrganicFarmer} задайте параметры \texttt{name}, \texttt{crop} и \texttt{harvest\_tons}.
+    
+    \item В классе \texttt{OrganicFarmer} переопределите метод \texttt{harvest} с использованием \texttt{super()}, чтобы урожай увеличивался на указанное значение плюс дополнительные 0.8 тонны.
+    
+    \item В основной части программы создайте объекты классов \texttt{Farmer} и \texttt{OrganicFarmer} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[27] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Singer}, который будет базовым для класса \texttt{LeadSinger}. В конструкторе класса \texttt{Singer} задайте параметры \texttt{name}, \texttt{genre} и \texttt{albums}.
+    
+    \item В классе \texttt{Singer} создайте метод \texttt{release\_album}, который будет увеличивать количество альбомов на 1.
+    
+    \item В классе \texttt{Singer} создайте метод \texttt{get\_genre\_initial}, который будет возвращать первую букву жанра.
+    
+    \item В классе \texttt{Singer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{LeadSinger}, наследующийся от класса \texttt{Singer}. В конструкторе класса \texttt{LeadSinger} задайте параметры \texttt{name}, \texttt{genre} и \texttt{albums}.
+    
+    \item В классе \texttt{LeadSinger} переопределите метод \texttt{release\_album} с использованием \texttt{super()}, чтобы количество альбомов увеличивалось на 1 плюс бонус в 0.2 (для совместных релизов).
+    
+    \item В основной части программы создайте объекты классов \texttt{Singer} и \texttt{LeadSinger} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[28] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Builder}, который будет базовым для класса \texttt{MasterBuilder}. В конструкторе класса \texttt{Builder} задайте параметры \texttt{name}, \texttt{specialty} и \texttt{buildings}.
+    
+    \item В классе \texttt{Builder} создайте метод \texttt{build}, который будет увеличивать количество построенных зданий на 1.
+    
+    \item В классе \texttt{Builder} создайте метод \texttt{get\_specialty\_initial}, который будет возвращать первую букву специализации.
+    
+    \item В классе \texttt{Builder} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{MasterBuilder}, наследующийся от класса \texttt{Builder}. В конструкторе класса \texttt{MasterBuilder} задайте параметры \texttt{name}, \texttt{specialty} и \texttt{buildings}.
+    
+    \item В классе \texttt{MasterBuilder} переопределите метод \texttt{build} с использованием \texttt{super()}, чтобы количество зданий увеличивалось на 1 плюс бонус в 0.5 (для комплексных проектов).
+    
+    \item В основной части программы создайте объекты классов \texttt{Builder} и \texttt{MasterBuilder} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[29] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Pilot}, который будет базовым для класса \texttt{Captain}. В конструкторе класса \texttt{Pilot} задайте параметры \texttt{name}, \texttt{airline} и \texttt{flight\_hours}.
+    
+    \item В классе \texttt{Pilot} создайте метод \texttt{fly}, который будет увеличивать налёт на заданное количество часов.
+    
+    \item В классе \texttt{Pilot} создайте метод \texttt{get\_airline\_initial}, который будет возвращать первую букву авиакомпании.
+    
+    \item В классе \texttt{Pilot} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{Captain}, наследующийся от класса \texttt{Pilot}. В конструкторе класса \texttt{Captain} задайте параметры \texttt{name}, \texttt{airline} и \texttt{flight\_hours}.
+    
+    \item В классе \texttt{Captain} переопределите метод \texttt{fly} с использованием \texttt{super()}, чтобы налёт увеличивался на указанное значение плюс дополнительные 0.75 часа (для подготовки экипажа).
+    
+    \item В основной части программы создайте объекты классов \texttt{Pilot} и \texttt{Captain} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[30] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Designer}, который будет базовым для класса \texttt{CreativeDirector}. В конструкторе класса \texttt{Designer} задайте параметры \texttt{name}, \texttt{field} и \texttt{projects}.
+    
+    \item В классе \texttt{Designer} создайте метод \texttt{complete\_project}, который будет увеличивать количество проектов на 1.
+    
+    \item В классе \texttt{Designer} создайте метод \texttt{get\_field\_initial}, который будет возвращать первую букву области дизайна.
+    
+    \item В классе \texttt{Designer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{CreativeDirector}, наследующийся от класса \texttt{Designer}. В конструкторе класса \texttt{CreativeDirector} задайте параметры \texttt{name}, \texttt{field} и \texttt{projects}.
+    
+    \item В классе \texttt{CreativeDirector} переопределите метод \texttt{complete\_project} с использованием \texttt{super()}, чтобы количество проектов увеличивалось на 1 плюс бонус в 0.4 (для курируемых проектов).
+    
+    \item В основной части программы создайте объекты классов \texttt{Designer} и \texttt{CreativeDirector} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[31] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Engineer}, который будет базовым для класса \texttt{ChiefEngineer}. В конструкторе класса \texttt{Engineer} задайте параметры \texttt{name}, \texttt{discipline} и \texttt{projects\_led}.
+    
+    \item В классе \texttt{Engineer} создайте метод \texttt{lead\_project}, который будет увеличивать количество возглавленных проектов на 1.
+    
+    \item В классе \texttt{Engineer} создайте метод \texttt{get\_discipline\_initial}, который будет возвращать первую букву инженерной дисциплины.
+    
+    \item В классе \texttt{Engineer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{ChiefEngineer}, наследующийся от класса \texttt{Engineer}. В конструкторе класса \texttt{ChiefEngineer} задайте параметры \texttt{name}, \texttt{discipline} и \texttt{projects\_led}.
+    
+    \item В классе \texttt{ChiefEngineer} переопределите метод \texttt{lead\_project} с использованием \texttt{super()}, чтобы количество проектов увеличивалось на 1 плюс бонус в 0.6 (для стратегических инициатив).
+    
+    \item В основной части программы создайте объекты классов \texttt{Engineer} и \texttt{ChiefEngineer} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[32] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Actor}, который будет базовым для класса \texttt{LeadActor}. В конструкторе класса \texttt{Actor} задайте параметры \texttt{name}, \texttt{genre} и \texttt{roles}.
+    
+    \item В классе \texttt{Actor} создайте метод \texttt{take\_role}, который будет увеличивать количество ролей на 1.
+    
+    \item В классе \texttt{Actor} создайте метод \texttt{get\_genre\_initial}, который будет возвращать первую букву жанра.
+    
+    \item В классе \texttt{Actor} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{LeadActor}, наследующийся от класса \texttt{Actor}. В конструкторе класса \texttt{LeadActor} задайте параметры \texttt{name}, \texttt{genre} и \texttt{roles}.
+    
+    \item В классе \texttt{LeadActor} переопределите метод \texttt{take\_role} с использованием \texttt{super()}, чтобы количество ролей увеличивалось на 1 плюс бонус в 0.3 (для главных ролей в ансамблях).
+    
+    \item В основной части программы создайте объекты классов \texttt{Actor} и \texttt{LeadActor} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[33] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Dancer}, который будет базовым для класса \texttt{PrincipalDancer}. В конструкторе класса \texttt{Dancer} задайте параметры \texttt{name}, \texttt{style} и \texttt{performances}.
+    
+    \item В классе \texttt{Dancer} создайте метод \texttt{perform}, который будет увеличивать количество выступлений на 1.
+    
+    \item В классе \texttt{Dancer} создайте метод \texttt{get\_style\_initial}, который будет возвращать первую букву стиля танца.
+    
+    \item В классе \texttt{Dancer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{PrincipalDancer}, наследующийся от класса \texttt{Dancer}. В конструкторе класса \texttt{PrincipalDancer} задайте параметры \texttt{name}, \texttt{style} и \texttt{performances}.
+    
+    \item В классе \texttt{PrincipalDancer} переопределите метод \texttt{perform} с использованием \texttt{super()}, чтобы количество выступлений увеличивалось на 1 плюс бонус в 0.4 (для сольных номеров).
+    
+    \item В основной части программы создайте объекты классов \texttt{Dancer} и \texttt{PrincipalDancer} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[34] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Explorer}, который будет базовым для класса \texttt{LeadExplorer}. В конструкторе класса \texttt{Explorer} задайте параметры \texttt{name}, \texttt{region} и \texttt{expeditions}.
+    
+    \item В классе \texttt{Explorer} создайте метод \texttt{go\_on\_expedition}, который будет увеличивать количество экспедиций на 1.
+    
+    \item В классе \texttt{Explorer} создайте метод \texttt{get\_region\_initial}, который будет возвращать первую букву региона.
+    
+    \item В классе \texttt{Explorer} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{LeadExplorer}, наследующийся от класса \texttt{Explorer}. В конструкторе класса \texttt{LeadExplorer} задайте параметры \texttt{name}, \texttt{region} и \texttt{expeditions}.
+    
+    \item В классе \texttt{LeadExplorer} переопределите метод \texttt{go\_on\_expedition} с использованием \texttt{super()}, чтобы количество экспедиций увеличивалось на 1 плюс бонус в 0.5 (для руководства группой).
+    
+    \item В основной части программы создайте объекты классов \texttt{Explorer} и \texttt{LeadExplorer} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+
+\item[35] 
+\begin{enumerate}[leftmargin=*]
+    \item Создайте класс \texttt{Researcher}, который будет базовым для класса \texttt{SeniorResearcher}. В конструкторе класса \texttt{Researcher} задайте параметры \texttt{name}, \texttt{domain} и \texttt{studies\_conducted}.
+    
+    \item В классе \texttt{Researcher} создайте метод \texttt{conduct\_study}, который будет увеличивать количество проведённых исследований на 1.
+    
+    \item В классе \texttt{Researcher} создайте метод \texttt{get\_domain\_initial}, который будет возвращать первую букву области исследования.
+    
+    \item В классе \texttt{Researcher} создайте метод \texttt{\_\_repr\_\_}, который будет возвращать строковое представление объекта.
+    
+    \item Создайте класс \texttt{SeniorResearcher}, наследующийся от класса \texttt{Researcher}. В конструкторе класса \texttt{SeniorResearcher} задайте параметры \texttt{name}, \texttt{domain} и \texttt{studies\_conducted}.
+    
+    \item В классе \texttt{SeniorResearcher} переопределите метод \texttt{conduct\_study} с использованием \texttt{super()}, чтобы количество исследований увеличивалось на 1 плюс бонус в 0.7 (для междисциплинарных проектов).
+    
+    \item В основной части программы создайте объекты классов \texttt{Researcher} и \texttt{SeniorResearcher} и вызовите их методы.
+    
+    \item Выведите информацию о каждом объекте с помощью функции \texttt{print}.
+\end{enumerate}
+\end{enumerate}
