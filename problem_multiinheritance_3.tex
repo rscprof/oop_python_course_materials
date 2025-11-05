@@ -1,0 +1,808 @@
+\subsubsection{Задача 3}
+
+\begin{enumerate}
+    \item[1]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Sedan} для автомобилей типа седан. Определите атрибуты \texttt{doors} и \texttt{engine\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки — геттеры и сеттеры. Также определите методы \texttt{start\_engine()} и \texttt{accelerate()}.
+    
+    \item Создайте класс \texttt{SUV} для автомобилей типа внедорожник. Определите атрибуты \texttt{doors}, \texttt{engine\_type} и \texttt{cargo\_space}, а также методы-свойства для их получения и установки. Также определите методы \texttt{start\_engine()}, \texttt{accelerate()} и \texttt{brake()}.
+    
+    \item Создайте класс \texttt{Hatchback} для автомобилей типа хэтчбэк. Определите атрибуты \texttt{doors}, \texttt{engine\_type}, \texttt{cargo\_space} и \texttt{transmission}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{start\_transmission()}.
+    
+    \item Создайте класс \texttt{Car} как общий класс автомобиля, который наследуется от всех трёх классов (\texttt{Sedan}, \texttt{SUV}, \texttt{Hatchback}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{Car} определите метод \texttt{drive()}, который будет последовательно вызывать все методы родительских классов, связанные с управлением автомобилем: запуск двигателя, включение трансмиссии, ускорение и торможение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{Car} и вызовите его методы, которые выводят состояние автомобиля и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[2]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{ElectricCar} для электромобилей. Определите атрибуты \texttt{battery\_capacity} и \texttt{motor\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{charge\_battery()} и \texttt{drive\_electric()}.
+    
+    \item Создайте класс \texttt{HybridCar} для гибридных автомобилей. Определите атрибуты \texttt{battery\_capacity}, \texttt{engine\_type} и \texttt{fuel\_tank\_size}, а также методы-свойства для их получения и установки. Также определите методы \texttt{switch\_mode()}, \texttt{refuel()} и \texttt{drive\_hybrid()}.
+    
+    \item Создайте класс \texttt{FuelCellCar} для автомобилей с топливными элементами. Определите атрибуты \texttt{hydrogen\_tank}, \texttt{motor\_type}, \texttt{range\_km} и \texttt{refuel\_time}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{refill\_hydrogen()}.
+    
+    \item Создайте класс \texttt{GreenCar} как общий класс экологичного автомобиля, который наследуется от всех трёх классов (\texttt{ElectricCar}, \texttt{HybridCar}, \texttt{FuelCellCar}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{GreenCar} определите метод \texttt{go\_eco()}, который будет последовательно вызывать все методы родительских классов, связанные с использованием энергии: зарядка, заправка, переключение режимов и движение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{GreenCar} и вызовите его методы, которые выводят состояние автомобиля и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[3]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Van} для фургонов. Определите атрибуты \texttt{cargo\_volume} и \texttt{engine\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{load\_cargo()} и \texttt{start\_engine()}.
+    
+    \item Создайте класс \texttt{Pickup} для пикапов. Определите атрибуты \texttt{cargo\_bed\_size}, \texttt{engine\_type} и \texttt{towing\_capacity}, а также методы-свойства для их получения и установки. Также определите методы \texttt{hitch\_trailer()}, \texttt{start\_engine()} и \texttt{unload\_cargo()}.
+    
+    \item Создайте класс \texttt{Minivan} для минивэнов. Определите атрибуты \texttt{seats}, \texttt{engine\_type}, \texttt{cargo\_space} и \texttt{ac\_system}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{activate\_climate\_control()}.
+    
+    \item Создайте класс \texttt{UtilityVehicle} как общий класс коммерческого транспорта, который наследуется от всех трёх классов (\texttt{Van}, \texttt{Pickup}, \texttt{Minivan}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{UtilityVehicle} определите метод \texttt{operate()}, который будет последовательно вызывать все методы родительских классов, связанные с эксплуатацией: загрузка, запуск двигателя, прицепка прицепа, активация климат-контроля и разгрузка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{UtilityVehicle} и вызовите его методы, которые выводят состояние автомобиля и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[4]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{SportsCar} для спортивных автомобилей. Определите атрибуты \texttt{max\_speed} и \texttt{engine\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{launch\_control()} и \texttt{shift\_gear()}.
+    
+    \item Создайте класс \texttt{Coupe} для купе. Определите атрибуты \texttt{doors}, \texttt{engine\_type} и \texttt{aerodynamics}, а также методы-свойства для их получения и установки. Также определите методы \texttt{activate\_aero()}, \texttt{shift\_gear()} и \texttt{cruise()}.
+    
+    \item Создайте класс \texttt{Convertible} для кабриолетов. Определите атрибуты \texttt{roof\_type}, \texttt{engine\_type}, \texttt{wind\_noise} и \texttt{top\_operation\_time}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{toggle\_roof()}.
+    
+    \item Создайте класс \texttt{PerformanceCar} как общий класс спортивного автомобиля, который наследуется от всех трёх классов (\texttt{SportsCar}, \texttt{Coupe}, \texttt{Convertible}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{PerformanceCar} определите метод \texttt{race\_mode()}, который будет последовательно вызывать все методы родительских классов, связанные с производительностью: запуск старта, активация аэродинамики, переключение передач и открытие/закрытие крыши.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{PerformanceCar} и вызовите его методы, которые выводят состояние автомобиля и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[5]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Scooter} для электроскутеров. Определите атрибуты \texttt{battery\_life} и \texttt{max\_speed}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{power\_on()} и \texttt{throttle()}.
+    
+    \item Создайте класс \texttt{Motorcycle} для мотоциклов. Определите атрибуты \texttt{engine\_displacement}, \texttt{fuel\_type} и \texttt{seat\_height}, а также методы-свойства для их получения и установки. Также определите методы \texttt{ignite()}, \texttt{throttle()} и \texttt{brake()}.
+    
+    \item Создайте класс \texttt{Moped} для мопедов. Определите атрибуты \texttt{pedal\_assist}, \texttt{engine\_type}, \texttt{top\_speed} и \texttt{fuel\_efficiency}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{engage\_pedals()}.
+    
+    \item Создайте класс \texttt{TwoWheeler} как общий класс двухколёсного транспорта, который наследуется от всех трёх классов (\texttt{Scooter}, \texttt{Motorcycle}, \texttt{Moped}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{TwoWheeler} определите метод \texttt{ride()}, который будет последовательно вызывать все методы родительских классов, связанные с управлением: включение питания, розжиг двигателя, нажатие педалей, дроссель и торможение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{TwoWheeler} и вызовите его методы, которые выводят состояние транспорта и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[6]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Bicycle} для обычных велосипедов. Определите атрибуты \texttt{frame\_size} и \texttt{gear\_count}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{pedal()} и \texttt{brake()}.
+    
+    \item Создайте класс \texttt{Ebike} для электровелосипедов. Определите атрибуты \texttt{battery\_capacity}, \texttt{motor\_power} и \texttt{range\_km}, а также методы-свойства для их получения и установки. Также определите методы \texttt{turn\_on\_motor()}, \texttt{pedal()} и \texttt{recharge()}.
+    
+    \item Создайте класс \texttt{Tandem} для тандемных велосипедов. Определите атрибуты \texttt{rider\_count}, \texttt{frame\_material}, \texttt{gear\_count} и \texttt{weight}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{coordinate\_pedaling()}.
+    
+    \item Создайте класс \texttt{Cycle} как общий класс велосипедов, который наследуется от всех трёх классов (\texttt{Bicycle}, \texttt{Ebike}, \texttt{Tandem}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{Cycle} определите метод \texttt{ride\_together()}, который будет последовательно вызывать все методы родительских классов, связанные с движением: педалирование, координация, включение мотора и торможение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{Cycle} и вызовите его методы, которые выводят состояние велосипеда и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[7]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Drone} для дронов. Определите атрибуты \texttt{flight\_time} и \texttt{camera\_resolution}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{take\_off()} и \texttt{hover()}.
+    
+    \item Создайте класс \texttt{Helicopter} для вертолётов. Определите атрибуты \texttt{rotor\_diameter}, \texttt{fuel\_capacity} и \texttt{max\_altitude}, а также методы-свойства для их получения и установки. Также определите методы \texttt{start\_rotors()}, \texttt{hover()} и \texttt{land()}.
+    
+    \item Создайте класс \texttt{Gyrocopter} для гирокоптеров. Определите атрибуты \texttt{engine\_power}, \texttt{rotor\_type}, \texttt{takeoff\_distance} и \texttt{empty\_weight}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{spin\_rotor()}.
+    
+    \item Создайте класс \texttt{Rotorcraft} как общий класс летательного аппарата с несущим винтом, который наследуется от всех трёх классов (\texttt{Drone}, \texttt{Helicopter}, \texttt{Gyrocopter}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{Rotorcraft} определите метод \texttt{fly\_vertical()}, который будет последовательно вызывать все методы родительских классов, связанные с полётом: запуск двигателей, вращение роторов, взлёт, зависание и посадка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{Rotorcraft} и вызовите его методы, которые выводят состояние аппарата и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[8]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Airplane} для самолётов. Определите атрибуты \texttt{wingspan} и \texttt{cruise\_speed}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{taxi()} и \texttt{take\_off()}.
+    
+    \item Создайте класс \texttt{Jet} для реактивных самолётов. Определите атрибуты \texttt{engine\_thrust}, \texttt{fuel\_type} и \texttt{max\_mach}, а также методы-свойства для их получения и установки. Также определите методы \texttt{ignite\_afterburner()}, \texttt{take\_off()} и \texttt{land()}.
+    
+    \item Создайте класс \texttt{Glider} для планёров. Определите атрибуты \texttt{aspect\_ratio}, \texttt{empty\_weight}, \texttt{glide\_ratio} и \texttt{tow\_release\_altitude}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{release\_tow()}.
+    
+    \item Создайте класс \texttt{FixedWing} как общий класс самолёта с неподвижным крылом, который наследуется от всех трёх классов (\texttt{Airplane}, \texttt{Jet}, \texttt{Glider}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{FixedWing} определите метод \texttt{soar()}, который будет последовательно вызывать все методы родительских классов, связанные с полётом: руление, взлёт, включение форсажа, отцепка от буксировки и посадка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{FixedWing} и вызовите его методы, которые выводят состояние самолёта и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[9]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Cruiser} для круизных судов. Определите атрибуты \texttt{passenger\_capacity} и \texttt{engine\_power}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{depart()} и \texttt{sail()}.
+    
+    \item Создайте класс \texttt{Ferry} для паромов. Определите атрибуты \texttt{vehicle\_deck\_size}, \texttt{engine\_type} и \texttt{crossing\_time}, а также методы-свойства для их получения и установки. Также определите методы \texttt{dock()}, \texttt{sail()} и \texttt{load\_vehicles()}.
+    
+    \item Создайте класс \texttt{Yacht} для яхт. Определите атрибуты \texttt{mast\_height}, \texttt{engine\_power}, \texttt{cabin\_count} и \texttt{luxury\_level}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{hoist\_sail()}.
+    
+    \item Создайте класс \texttt{Vessel} как общий класс водного транспорта, который наследуется от всех трёх классов (\texttt{Cruiser}, \texttt{Ferry}, \texttt{Yacht}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{Vessel} определите метод \texttt{navigate()}, который будет последовательно вызывать все методы родительских классов, связанные с мореплаванием: отплытие, подъём парусов, перевозка транспорта, плавание и причаливание.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{Vessel} и вызовите его методы, которые выводят состояние судна и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[10]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Submarine} для подводных лодок. Определите атрибуты \texttt{depth\_rating} и \texttt{ballast\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{submerge()} и \texttt{navigate\_underwater()}.
+    
+    \item Создайте класс \texttt{Hovercraft} для судов на воздушной подушке. Определите атрибуты \texttt{skirt\_material}, \texttt{engine\_power} и \texttt{terrain\_type}, а также методы-свойства для их получения и установки. Также определите методы \texttt{inflate\_skirt()}, \texttt{navigate\_underwater()} и \texttt{deflate()}.
+    
+    \item Создайте класс \texttt{AmphibiousVehicle} для амфибий. Определите атрибуты \texttt{wheel\_type}, \texttt{propeller\_count}, \texttt{land\_speed} и \texttt{water\_speed}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{switch\_mode()}.
+    
+    \item Создайте класс \texttt{AmphibiousCraft} как общий класс транспорта, способного передвигаться по воде и суше, который наследуется от всех трёх классов (\texttt{Submarine}, \texttt{Hovercraft}, \texttt{AmphibiousVehicle}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{AmphibiousCraft} определите метод \texttt{traverse()}, который будет последовательно вызывать все методы родительских классов, связанные с переходом между средами: погружение, надувание юбки, переключение режимов и подводная навигация.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{AmphibiousCraft} и вызовите его методы, которые выводят состояние транспорта и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[11]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Tractor} для тракторов. Определите атрибуты \texttt{engine\_hp} и \texttt{pto\_speed}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{plow()} и \texttt{start\_engine()}.
+    
+    \item Создайте класс \texttt{Combine} для комбайнов. Определите атрибуты \texttt{grain\_tank\_size}, \texttt{engine\_type} и \texttt{header\_width}, а также методы-свойства для их получения и установки. Также определите методы \texttt{harvest()}, \texttt{start\_engine()} и \texttt{unload\_grain()}.
+    
+    \item Создайте класс \texttt{Sprayer} для опрыскивателей. Определите атрибуты \texttt{tank\_capacity}, \texttt{boom\_width}, \texttt{pump\_pressure} и \texttt{nozzle\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{activate\_nozzles()}.
+    
+    \item Создайте класс \texttt{AgriculturalMachine} как общий класс сельскохозяйственной техники, который наследуется от всех трёх классов (\texttt{Tractor}, \texttt{Combine}, \texttt{Sprayer}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{AgriculturalMachine} определите метод \texttt{work\_field()}, который будет последовательно вызывать все методы родительских классов, связанные с полевыми работами: запуск двигателя, вспашка, уборка урожая, активация форсунок и разгрузка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{AgriculturalMachine} и вызовите его методы, которые выводят состояние техники и значения её атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[12]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Excavator} для экскаваторов. Определите атрибуты \texttt{bucket\_capacity} и \texttt{arm\_reach}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{dig()} и \texttt{start\_engine()}.
+    
+    \item Создайте класс \texttt{Bulldozer} для бульдозеров. Определите атрибуты \texttt{blade\_width}, \texttt{engine\_power} и \texttt{ground\_pressure}, а также методы-свойства для их получения и установки. Также определите методы \texttt{push\_soil()}, \texttt{start\_engine()} и \texttt{level\_ground()}.
+    
+    \item Создайте класс \texttt{Crane} для кранов. Определите атрибуты \texttt{max\_load}, \texttt{boom\_length}, \texttt{rotation\_speed} и \texttt{counterweight}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{lift\_load()}.
+    
+    \item Создайте класс \texttt{ConstructionEquipment} как общий класс строительной техники, который наследуется от всех трёх классов (\texttt{Excavator}, \texttt{Bulldozer}, \texttt{Crane}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{ConstructionEquipment} определите метод \texttt{build\_site()}, который будет последовательно вызывать все методы родительских классов, связанные со строительством: запуск двигателя, копка, выравнивание, подъём груза и перемещение материалов.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{ConstructionEquipment} и вызовите его методы, которые выводят состояние техники и значения её атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[13]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Ambulance} для машин скорой помощи. Определите атрибуты \texttt{medical\_kit} и \texttt{siren\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{activate\_siren()} и \texttt{load\_patient()}.
+    
+    \item Создайте класс \texttt{FireTruck} для пожарных машин. Определите атрибуты \texttt{water\_tank}, \texttt{pump\_power} и \texttt{ladder\_length}, а также методы-свойства для их получения и установки. Также определите методы \texttt{deploy\_ladder()}, \texttt{activate\_siren()} и \texttt{extinguish()}.
+    
+    \item Создайте класс \texttt{PoliceCar} для полицейских автомобилей. Определите атрибуты \texttt{radio\_type}, \texttt{siren\_type}, \texttt{cruiser\_model} и \texttt{cage\_installed}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{initiate\_pursuit()}.
+    
+    \item Создайте класс \texttt{EmergencyVehicle} как общий класс служебного транспорта, который наследуется от всех трёх классов (\texttt{Ambulance}, \texttt{FireTruck}, \texttt{PoliceCar}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{EmergencyVehicle} определите метод \texttt{respond()}, который будет последовательно вызывать все методы родительских классов, связанные с экстренным реагированием: включение сирены, загрузка пациента, развертывание лестницы, погоня и тушение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{EmergencyVehicle} и вызовите его методы, которые выводят состояние транспорта и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[14]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Taxi} для такси. Определите атрибуты \texttt{passenger\_seats} и \texttt{meter\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{pick\_up()} и \texttt{drop\_off()}.
+    
+    \item Создайте класс \texttt{RideShare} для каршеринговых автомобилей. Определите атрибуты \texttt{app\_integration}, \texttt{fuel\_level} и \texttt{unlock\_method}, а также методы-свойства для их получения и установки. Также определите методы \texttt{unlock\_car()}, \texttt{drop\_off()} и \texttt{report\_issue()}.
+    
+    \item Создайте класс \texttt{Limousine} для лимузинов. Определите атрибуты \texttt{interior\_luxury}, \texttt{bar\_installed}, \texttt{passenger\_capacity} и \texttt{chauffeur\_name}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{serve\_champagne()}.
+    
+    \item Создайте класс \texttt{PassengerVehicle} как общий класс пассажирского транспорта, который наследуется от всех трёх классов (\texttt{Taxi}, \texttt{RideShare}, \texttt{Limousine}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{PassengerVehicle} определите метод \texttt{transport\_client()}, который будет последовательно вызывать все методы родительских классов, связанные с перевозкой: подбор клиента, открытие автомобиля, обслуживание и высадка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{PassengerVehicle} и вызовите его методы, которые выводят состояние транспорта и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[15]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{SchoolBus} для школьных автобусов. Определите атрибуты \texttt{seat\_belts} и \texttt{stop\_sign}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{load\_children()} и \texttt{activate\_sign()}.
+    
+    \item Создайте класс \texttt{Coach} для туристических автобусов. Определите атрибуты \texttt{toilet\_installed}, \texttt{wifi\_available} и \texttt{reclining\_seats}, а также методы-свойства для их получения и установки. Также определите методы \texttt{depart\_tour()}, \texttt{activate\_sign()} и \texttt{play\_audio()}.
+    
+    \item Создайте класс \texttt{Minibus} для микроавтобусов. Определите атрибуты \texttt{door\_type}, \texttt{ac\_system}, \texttt{wheelchair\_access} и \texttt{max\_occupancy}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{open\_door()}.
+    
+    \item Создайте класс \texttt{Bus} как общий класс автобуса, который наследуется от всех трёх классов (\texttt{SchoolBus}, \texttt{Coach}, \texttt{Minibus}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{Bus} определите метод \texttt{commute()}, который будет последовательно вызывать все методы родительских классов, связанные с перевозкой: загрузка пассажиров, активация знака, открытие дверей, аудиоинформирование и отправление в путь.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{Bus} и вызовите его методы, которые выводят состояние автобуса и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[16]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Truck} для грузовиков. Определите атрибуты \texttt{payload\_capacity} и \texttt{axle\_count}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{load\_freight()} и \texttt{start\_engine()}.
+    
+    \item Создайте класс \texttt{Semi} для седельных тягачей. Определите атрибуты \texttt{fifth\_wheel}, \texttt{engine\_torque} и \texttt{trailer\_type}, а также методы-свойства для их получения и установки. Также определите методы \texttt{hook\_trailer()}, \texttt{start\_engine()} и \texttt{unhook\_trailer()}.
+    
+    \item Создайте класс \texttt{DumpTruck} для самосвалов. Определите атрибуты \texttt{bed\_angle}, \texttt{hydraulic\_pressure}, \texttt{dump\_time} и \texttt{material\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{tip\_bed()}.
+    
+    \item Создайте класс \texttt{FreightVehicle} как общий класс грузового транспорта, который наследуется от всех трёх классов (\texttt{Truck}, \texttt{Semi}, \texttt{DumpTruck}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{FreightVehicle} определите метод \texttt{haul()}, который будет последовательно вызывать все методы родительских классов, связанные с перевозкой груза: запуск двигателя, погрузка, прицепка прицепа, подъём кузова и разгрузка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{FreightVehicle} и вызовите его методы, которые выводят состояние транспорта и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[17]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Rocket} для ракет. Определите атрибуты \texttt{stage\_count} и \texttt{fuel\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{ignite()} и \texttt{ascend()}.
+    
+    \item Создайте класс \texttt{Spaceplane} для космопланов. Определите атрибуты \texttt{reentry\_shield}, \texttt{orbital\_speed} и \texttt{landing\_gear}, а также методы-свойства для их получения и установки. Также определите методы \texttt{reenter\_atmosphere()}, \texttt{ascend()} и \texttt{land()}.
+    
+    \item Создайте класс \texttt{Lander} для посадочных модулей. Определите атрибуты \texttt{thruster\_count}, \texttt{landing\_legs}, \texttt{surface\_type} и \texttt{cargo\_mass}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{touch\_down()}.
+    
+    \item Создайте класс \texttt{Spacecraft} как общий класс космического аппарата, который наследуется от всех трёх классов (\texttt{Rocket}, \texttt{Spaceplane}, \texttt{Lander}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{Spacecraft} определите метод \texttt{mission()}, который будет последовательно вызывать все методы родительских классов, связанные с космической миссией: запуск, выход на орбиту, вход в атмосферу, посадка и выгрузка груза.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{Spacecraft} и вызовите его методы, которые выводят состояние аппарата и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[18]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Smartwatch} для умных часов. Определите атрибуты \texttt{battery\_life} и \texttt{os\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{notify()} и \texttt{track\_steps()}.
+    
+    \item Создайте класс \texttt{FitnessTracker} для фитнес-трекеров. Определите атрибуты \texttt{heart\_rate\_sensor}, \texttt{water\_resistance} и \texttt{sleep\_analysis}, а также методы-свойства для их получения и установки. Также определите методы \texttt{monitor\_hr()}, \texttt{track\_steps()} и \texttt{sync\_data()}.
+    
+    \item Создайте класс \texttt{AR\_Glasses} для очков дополненной реальности. Определите атрибуты \texttt{display\_resolution}, \texttt{processor\_type}, \texttt{fov\_degrees} и \texttt{weight}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{render\_overlay()}.
+    
+    \item Создайте класс \texttt{WearableDevice} как общий класс носимой электроники, который наследуется от всех трёх классов (\texttt{Smartwatch}, \texttt{FitnessTracker}, \texttt{AR\_Glasses}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{WearableDevice} определите метод \texttt{operate\_daily()}, который будет последовательно вызывать все методы родительских классов, связанные с использованием: уведомления, мониторинг ЧСС, синхронизация данных и отображение оверлея.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{WearableDevice} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[19]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Smartphone} для смартфонов. Определите атрибуты \texttt{screen\_size} и \texttt{camera\_mp}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{call()} и \texttt{take\_photo()}.
+    
+    \item Создайте класс \texttt{Tablet} для планшетов. Определите атрибуты \texttt{stylus\_support}, \texttt{battery\_capacity} и \texttt{speaker\_type}, а также методы-свойства для их получения и установки. Также определите методы \texttt{draw()}, \texttt{take\_photo()} и \texttt{play\_video()}.
+    
+    \item Создайте класс \texttt{Ereader} для электронных книг. Определите атрибуты \texttt{front\_light}, \texttt{storage\_gb}, \texttt{page\_turn\_time} и \texttt{glare\_free}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{open\_book()}.
+    
+    \item Создайте класс \texttt{MobileDevice} как общий класс портативного устройства, который наследуется от всех трёх классов (\texttt{Smartphone}, \texttt{Tablet}, \texttt{Ereader}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{MobileDevice} определите метод \texttt{use\_device()}, который будет последовательно вызывать все методы родительских классов, связанные с использованием: звонок, съёмка фото, рисование, открытие книги и воспроизведение видео.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{MobileDevice} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[20]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Laptop} для ноутбуков. Определите атрибуты \texttt{ram\_gb} и \texttt{ssd\_gb}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{boot\_os()} и \texttt{run\_app()}.
+    
+    \item Создайте класс \texttt{Desktop} для настольных ПК. Определите атрибуты \texttt{gpu\_model}, \texttt{psu\_wattage} и \texttt{case\_type}, а также методы-свойства для их получения и установки. Также определите методы \texttt{power\_on()}, \texttt{run\_app()} и \texttt{shutdown()}.
+    
+    \item Создайте класс \texttt{Workstation} для рабочих станций. Определите атрибуты \texttt{cpu\_cores}, \texttt{ecc\_ram}, \texttt{raid\_config} и \texttt{cooling\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{render\_scene()}.
+    
+    \item Создайте класс \texttt{Computer} как общий класс вычислительного устройства, который наследуется от всех трёх классов (\texttt{Laptop}, \texttt{Desktop}, \texttt{Workstation}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{Computer} определите метод \texttt{compute()}, который будет последовательно вызывать все методы родительских классов, связанные с работой: запуск ОС, включение питания, выполнение приложения, рендеринг сцены и выключение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{Computer} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[21]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Router} для маршрутизаторов. Определите атрибуты \texttt{lan\_ports} и \texttt{wifi\_standard}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{connect\_device()} и \texttt{broadcast\_ssid()}.
+    
+    \item Создайте класс \texttt{Switch} для сетевых коммутаторов. Определите атрибуты \texttt{port\_speed}, \texttt{vlan\_support} и \texttt{managed}, а также методы-свойства для их получения и установки. Также определите методы \texttt{forward\_packet()}, \texttt{broadcast\_ssid()} и \texttt{configure\_vlan()}.
+    
+    \item Создайте класс \texttt{Firewall} для сетевых экранов. Определите атрибуты \texttt{rules\_count}, \texttt{inspection\_type}, \texttt{throughput\_mbps} и \texttt{log\_traffic}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{block\_intrusion()}.
+    
+    \item Создайте класс \texttt{NetworkDevice} как общий класс сетевого оборудования, который наследуется от всех трёх классов (\texttt{Router}, \texttt{Switch}, \texttt{Firewall}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{NetworkDevice} определите метод \texttt{handle\_traffic()}, который будет последовательно вызывать все методы родительских классов, связанные с обработкой трафика: подключение устройств, передача пакетов, трансляция SSID, настройка VLAN и блокировка угроз.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{NetworkDevice} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[22]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Printer} для принтеров. Определите атрибуты \texttt{ink\_type} и \texttt{dpi\_resolution}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{load\_paper()} и \texttt{print\_document()}.
+    
+    \item Создайте класс \texttt{Scanner} для сканеров. Определите атрибуты \texttt{color\_depth}, \texttt{scan\_speed} и \texttt{adf\_installed}, а также методы-свойства для их получения и установки. Также определите методы \texttt{scan\_page()}, \texttt{print\_document()} и \texttt{save\_pdf()}.
+    
+    \item Создайте класс \texttt{Copier} для копировальных аппаратов. Определите атрибуты \texttt{duplex}, \texttt{tray\_capacity}, \texttt{warmup\_time} и \texttt{copy\_quality}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{make\_copies()}.
+    
+    \item Создайте класс \texttt{OfficeDevice} как общий класс офисной техники, который наследуется от всех трёх классов (\texttt{Printer}, \texttt{Scanner}, \texttt{Copier}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{OfficeDevice} определите метод \texttt{process\_document()}, который будет последовательно вызывать все методы родительских классов, связанные с обработкой документов: загрузка бумаги, сканирование, печать, сохранение PDF и копирование.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{OfficeDevice} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[23]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Camera} для цифровых фотоаппаратов. Определите атрибуты \texttt{sensor\_size} и \texttt{lens\_mount}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{focus()} и \texttt{capture()}.
+    
+    \item Создайте класс \texttt{Camcorder} для видеокамер. Определите атрибуты \texttt{video\_format}, \texttt{zoom\_range} и \texttt{mic\_input}, а также методы-свойства для их получения и установки. Также определите методы \texttt{record\_video()}, \texttt{capture()} и \texttt{stop\_recording()}.
+    
+    \item Создайте класс \texttt{DroneCam} для камер дронов. Определите атрибуты \texttt{gimbal\_axes}, \texttt{live\_feed}, \texttt{bitrate\_mbps} и \texttt{stabilization}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{stream\_video()}.
+    
+    \item Создайте класс \texttt{ImagingDevice} как общий класс устройства захвата изображения, который наследуется от всех трёх классов (\texttt{Camera}, \texttt{Camcorder}, \texttt{DroneCam}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{ImagingDevice} определите метод \texttt{shoot()}, который будет последовательно вызывать все методы родительских классов, связанные с записью: фокусировка, съёмка фото, запись и остановка видео, трансляция потока.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{ImagingDevice} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[24]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Microwave} для микроволновых печей. Определите атрибуты \texttt{power\_watt} и \texttt{turntable}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{set\_timer()} и \texttt{start\_heating()}.
+    
+    \item Создайте класс \texttt{Oven} для духовых шкафов. Определите атрибуты \texttt{convection}, \texttt{max\_temp} и \texttt{self\_clean}, а также методы-свойства для их получения и установки. Также определите методы \texttt{preheat()}, \texttt{start\_heating()} и \texttt{turn\_off()}.
+    
+    \item Создайте класс \texttt{AirFryer} для аэрогрилей. Определите атрибуты \texttt{basket\_size}, \texttt{temp\_range}, \texttt{digital\_panel} и \texttt{auto\_shutoff}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{cook\_crispy()}.
+    
+    \item Создайте класс \texttt{CookingAppliance} как общий класс кухонной техники, который наследуется от всех трёх классов (\texttt{Microwave}, \texttt{Oven}, \texttt{AirFryer}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{CookingAppliance} определите метод \texttt{prepare\_meal()}, который будет последовательно вызывать все методы родительских классов, связанные с приготовлением: установка таймера, предварительный нагрев, хрустящая готовка и отключение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{CookingAppliance} и вызовите его методы, которые выводят состояние прибора и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[25]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Refrigerator} для холодильников. Определите атрибуты \texttt{capacity\_liters} и \texttt{freezer\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{cool\_down()} и \texttt{store\_food()}.
+    
+    \item Создайте класс \texttt{Freezer} для морозильных камер. Определите атрибуты \texttt{temp\_min}, \texttt{defrost\_type} и \texttt{energy\_class}, а также методы-свойства для их получения и установки. Также определите методы \texttt{freeze\_items()}, \texttt{store\_food()} и \texttt{alarm\_temp()}.
+    
+    \item Создайте класс \texttt{MiniFridge} для мини-холодильников. Определите атрибуты \texttt{door\_type}, \texttt{noise\_level}, \texttt{portable} и \texttt{can\_holder}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{chill\_beverage()}.
+    
+    \item Создайте класс \texttt{CoolingAppliance} как общий класс охлаждающей техники, который наследуется от всех трёх классов (\texttt{Refrigerator}, \texttt{Freezer}, \texttt{MiniFridge}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{CoolingAppliance} определите метод \texttt{preserve()}, который будет последовательно вызывать все методы родительских классов, связанные с хранением: охлаждение, заморозка, сигнализация, охлаждение напитков и размещение продуктов.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{CoolingAppliance} и вызовите его методы, которые выводят состояние прибора и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[26]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{WashingMachine} для стиральных машин. Определите атрибуты \texttt{drum\_size} и \texttt{spin\_rpm}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{load\_laundry()} и \texttt{start\_cycle()}.
+    
+    \item Создайте класс \texttt{Dryer} для сушилок. Определите атрибуты \texttt{heat\_type}, \texttt{capacity\_kg} и \texttt{sensor\_dry}, а также методы-свойства для их получения и установки. Также определите методы \texttt{dry\_clothes()}, \texttt{start\_cycle()} и \texttt{cool\_down()}.
+    
+    \item Создайте класс \texttt{Iron} для утюгов. Определите атрибуты \texttt{steam\_output}, \texttt{soleplate\_material}, \texttt{auto\_off} и \texttt{vertical\_steam}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{press\_fabric()}.
+    
+    \item Создайте класс \texttt{LaundryAppliance} как общий класс техники для стирки, который наследуется от всех трёх классов (\texttt{WashingMachine}, \texttt{Dryer}, \texttt{Iron}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{LaundryAppliance} определите метод \texttt{clean\_clothes()}, который будет последовательно вызывать все методы родительских классов, связанные с уходом за одеждой: загрузка белья, стирка, сушка, глажка и остывание.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{LaundryAppliance} и вызовите его методы, которые выводят состояние прибора и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[27]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Vacuum} для пылесосов. Определите атрибуты \texttt{suction\_power} и \texttt{filter\_type}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{start\_suction()} и \texttt{empty\_bin()}.
+    
+    \item Создайте класс \texttt{MopRobot} для роботов-мойщиков. Определите атрибуты \texttt{water\_tank}, \texttt{navigation\_type} и \texttt{pad\_material}, а также методы-свойства для их получения и установки. Также определите методы \texttt{mop\_floor()}, \texttt{empty\_bin()} и \texttt{recharge()}.
+    
+    \item Создайте класс \texttt{SteamCleaner} для пароочистителей. Определите атрибуты \texttt{pressure\_bar}, \texttt{steam\_time}, \texttt{nozzle\_types} и \texttt{tank\_material}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{generate\_steam()}.
+    
+    \item Создайте класс \texttt{CleaningDevice} как общий класс уборочной техники, который наследуется от всех трёх классов (\texttt{Vacuum}, \texttt{MopRobot}, \texttt{SteamCleaner}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{CleaningDevice} определите метод \texttt{sanitize()}, который будет последовательно вызывать все методы родительских классов, связанные с уборкой: всасывание, мойка пола, паровая очистка, опорожнение контейнера и подзарядка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{CleaningDevice} и вызовите его методы, которые выводят состояние прибора и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[28]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{Thermostat} для термостатов. Определите атрибуты \texttt{temp\_range} и \texttt{wifi\_enabled}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{set\_target()} и \texttt{read\_current()}.
+    
+    \item Создайте класс \texttt{Humidifier} для увлажнителей. Определите атрибуты \texttt{tank\_liters}, \texttt{mist\_type} и \texttt{auto\_shutoff}, а также методы-свойства для их получения и установки. Также определите методы \texttt{emit\_mist()}, \texttt{read\_current()} и \texttt{refill\_tank()}.
+    
+    \item Создайте класс \texttt{AirPurifier} для очистителей воздуха. Определите атрибуты \texttt{filter\_hepa}, \texttt{cadr\_rating}, \texttt{noise\_db} и \texttt{timer\_hours}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{filter\_air()}.
+    
+    \item Создайте класс \texttt{ClimateDevice} как общий класс климатической техники, который наследуется от всех трёх классов (\texttt{Thermostat}, \texttt{Humidifier}, \texttt{AirPurifier}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{ClimateDevice} определите метод \texttt{adjust\_indoor()}, который будет последовательно вызывать все методы родительских классов, связанные с микроклиматом: установка температуры, увлажнение, очистка воздуха, считывание параметров и пополнение резервуаров.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{ClimateDevice} и вызовите его методы, которые выводят состояние прибора и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[29]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{SmartLock} для умных замков. Определите атрибуты \texttt{unlock\_method} и \texttt{battery\_life}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{lock\_door()} и \texttt{grant\_access()}.
+    
+    \item Создайте класс \texttt{SecurityCamera} для камер видеонаблюдения. Определите атрибуты \texttt{night\_vision}, \texttt{motion\_detect} и \texttt{cloud\_storage}, а также методы-свойства для их получения и установки. Также определите методы \texttt{record\_footage()}, \texttt{grant\_access()} и \texttt{send\_alert()}.
+    
+    \item Создайте класс \texttt{AlarmSystem} для сигнализаций. Определите атрибуты \texttt{siren\_db}, \texttt{zone\_count}, \texttt{panic\_button} и \texttt{armed\_modes}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{trigger\_alarm()}.
+    
+    \item Создайте класс \texttt{SecurityDevice} как общий класс системы безопасности, который наследуется от всех трёх классов (\texttt{SmartLock}, \texttt{SecurityCamera}, \texttt{AlarmSystem}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{SecurityDevice} определите метод \texttt{protect\_home()}, который будет последовательно вызывать все методы родительских классов, связанные с безопасностью: блокировка двери, предоставление доступа, запись видео, отправка оповещений и активация сирены.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{SecurityDevice} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[30]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{SmartBulb} для умных ламп. Определите атрибуты \texttt{color\_temp} и \texttt{lumens}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{turn\_on()} и \texttt{set\_color()}.
+    
+    \item Создайте класс \texttt{SmartPlug} для умных розеток. Определите атрибуты \texttt{max\_wattage}, \texttt{energy\_monitor} и \texttt{scheduling}, а также методы-свойства для их получения и установки. Также определите методы \texttt{power\_device()}, \texttt{set\_color()} и \texttt{log\_usage()}.
+    
+    \item Создайте класс \texttt{LightStrip} для светодиодных лент. Определите атрибуты \texttt{length\_m}, \texttt{led\_density}, \texttt{music\_sync} и \texttt{waterproof}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{animate\_pattern()}.
+    
+    \item Создайте класс \texttt{LightingSystem} как общий класс осветительного оборудования, который наследуется от всех трёх классов (\texttt{SmartBulb}, \texttt{SmartPlug}, \texttt{LightStrip}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{LightingSystem} определите метод \texttt{illuminate()}, который будет последовательно вызывать все методы родительских классов, связанные с освещением: включение, установка цвета, анимация, подача питания и учёт потребления.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{LightingSystem} и вызовите его методы, которые выводят состояние системы и значения её атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[31]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{GameConsole} для игровых приставок. Определите атрибуты \texttt{gpu\_tflops} и \texttt{storage\_tb}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{boot\_system()} и \texttt{launch\_game()}.
+    
+    \item Создайте класс \texttt{Handheld} для портативных консолей. Определите атрибуты \texttt{screen\_refresh}, \texttt{battery\_hours} и \texttt{cartridge\_slot}, а также методы-свойства для их получения и установки. Также определите методы \texttt{play\_portable()}, \texttt{launch\_game()} и \texttt{sleep\_mode()}.
+    
+    \item Создайте класс \texttt{VR\_Headset} для VR-шлемов. Определите атрибуты \texttt{fov\_degrees}, \texttt{resolution\_per\_eye}, \texttt{refresh\_rate} и \texttt{inside\_out\_tracking}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{enter\_vr()}.
+    
+    \item Создайте класс \texttt{GamingDevice} как общий класс игрового оборудования, который наследуется от всех трёх классов (\texttt{GameConsole}, \texttt{Handheld}, \texttt{VR\_Headset}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{GamingDevice} определите метод \texttt{play()}, который будет последовательно вызывать все методы родительских классов, связанные с игрой: загрузка системы, запуск игры, вход в VR, портативная сессия и переход в спящий режим.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{GamingDevice} и вызовите его методы, которые выводят состояние устройства и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[32]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{ElectricGuitar} для электрогитар. Определите атрибуты \texttt{pickup\_type} и \texttt{body\_wood}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{tune\_strings()} и \texttt{strum()}.
+    
+    \item Создайте класс \texttt{Synthesizer} для синтезаторов. Определите атрибуты \texttt{polyphony}, \texttt{oscillator\_count} и \texttt{patch\_memory}, а также методы-свойства для их получения и установки. Также определите методы \texttt{select\_preset()}, \texttt{strum()} и \texttt{modulate()}.
+    
+    \item Создайте класс \texttt{DrumMachine} для драм-машин. Определите атрибуты \texttt{sample\_quality}, \texttt{step\_sequencer}, \texttt{pad\_sensitivity} и \texttt{midi\_out}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{program\_beat()}.
+    
+    \item Создайте класс \texttt{ElectronicInstrument} как общий класс электронных музыкальных инструментов, который наследуется от всех трёх классов (\texttt{ElectricGuitar}, \texttt{Synthesizer}, \texttt{DrumMachine}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{ElectronicInstrument} определите метод \texttt{perform()}, который будет последовательно вызывать все методы родительских классов, связанные с исполнением: настройка струн, выбор пресета, программирование бита, модуляция и игра.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{ElectronicInstrument} и вызовите его методы, которые выводят состояние инструмента и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[33]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{SmartThermostat} для умных термостатов. Определите атрибуты \texttt{learning\_mode} и \texttt{geofencing}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{learn\_schedule()} и \texttt{adjust\_temp()}.
+    
+    \item Создайте класс \texttt{SmartBlinds} для умных жалюзи. Определите атрибуты \texttt{motor\_type}, \texttt{solar\_powered} и \texttt{app\_control}, а также методы-свойства для их получения и установки. Также определите методы \texttt{open\_blinds()}, \texttt{adjust\_temp()} и \texttt{sync\_sun()}.
+    
+    \item Создайте класс \texttt{SmartSprinkler} для умных поливальных систем. Определите атрибуты \texttt{zone\_count}, \texttt{weather\_sensor}, \texttt{water\_usage} и \texttt{soil\_moisture}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{water\_lawn()}.
+    
+    \item Создайте класс \texttt{SmartHomeSystem} как общий класс системы умного дома, который наследуется от всех трёх классов (\texttt{SmartThermostat}, \texttt{SmartBlinds}, \texttt{SmartSprinkler}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{SmartHomeSystem} определите метод \texttt{automate\_house()}, который будет последовательно вызывать все методы родительских классов, связанные с автоматизацией: обучение расписанию, открытие жалюзи, синхронизация с солнцем, полив газона и регулировка температуры.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{SmartHomeSystem} и вызовите его методы, которые выводят состояние системы и значения её атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[34]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{ElectricScooter} для электросамокатов. Определите атрибуты \texttt{max\_speed} и \texttt{foldable}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{unlock\_ride()} и \texttt{accelerate()}.
+    
+    \item Создайте класс \texttt{Segway} для сигвеев. Определите атрибуты \texttt{balance\_type}, \texttt{battery\_life} и \texttt{led\_lights}, а также методы-свойства для их получения и установки. Также определите методы \texttt{self\_balance()}, \texttt{accelerate()} и \texttt{park\_mode()}.
+    
+    \item Создайте класс \texttt{Hoverboard} для ховербордов. Определите атрибуты \texttt{wheel\_size}, \texttt{max\_incline}, \texttt{bluetooth\_speaker} и \texttt{auto\_shutdown}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{activate\_music()}.
+    
+    \item Создайте класс \texttt{PersonalTransport} как общий класс персонального электротранспорта, который наследуется от всех трёх классов (\texttt{ElectricScooter}, \texttt{Segway}, \texttt{Hoverboard}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{PersonalTransport} определите метод \texttt{commute\_short()}, который будет последовательно вызывать все методы родительских классов, связанные с поездкой: разблокировка, балансировка, ускорение, включение музыки и парковка.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{PersonalTransport} и вызовите его методы, которые выводят состояние транспорта и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+
+    \item[35]
+\begin{enumerate}
+    \item Создайте новый файл с расширением \texttt{.py}.
+    
+    \item Создайте класс \texttt{CoffeeMachine} для кофемашин. Определите атрибуты \texttt{bean\_type} и \texttt{milk\_frother}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите методы \texttt{grind\_beans()} и \texttt{brew\_coffee()}.
+    
+    \item Создайте класс \texttt{Teapot} для электрочайников. Определите атрибуты \texttt{temp\_control}, \texttt{keep\_warm} и \texttt{material}, а также методы-свойства для их получения и установки. Также определите методы \texttt{boil\_water()}, \texttt{brew\_coffee()} и \texttt{auto\_shutoff()}.
+    
+    \item Создайте класс \texttt{Juicer} для соковыжималок. Определите атрибуты \texttt{rpm\_speed}, \texttt{pulp\_control}, \texttt{feed\_chute\_size} и \texttt{dual\_blade}, а также методы-свойства (\texttt{@property}) для их получения и установки. Также определите метод \texttt{extract\_juice()}.
+    
+    \item Создайте класс \texttt{BeverageAppliance} как общий класс техники для напитков, который наследуется от всех трёх классов (\texttt{CoffeeMachine}, \texttt{Teapot}, \texttt{Juicer}). Определите метод \texttt{\_\_init\_\_()}, который корректно вызывает конструкторы родительских классов.
+    
+    \item В классе \texttt{BeverageAppliance} определите метод \texttt{prepare\_drink()}, который будет последовательно вызывать все методы родительских классов, связанные с приготовлением напитков: помол зёрен, кипячение воды, экстракция сока, заваривание кофе и автоматическое отключение.
+    
+    \item В конце файла добавьте блок
+    \begin{verbatim}
+if __name__ == "__main__":
+    \end{verbatim}
+    чтобы протестировать ваш код. В этом блоке создайте экземпляр класса \texttt{BeverageAppliance} и вызовите его методы, которые выводят состояние прибора и значения его атрибутов.
+    
+    \item Сохраните файл и запустите его в IDE, чтобы проверить его работу.
+\end{enumerate}
+\end{enumerate}

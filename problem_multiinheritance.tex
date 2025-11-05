@@ -1,0 +1,60 @@
+\subsection{Семинар <<Множественное наследование>> (2 часа)}
+
+\begin{figure}[htbp]
+\begin{tikzpicture}[
+    class/.style={rectangle, draw, align=center, minimum width=2cm, minimum height=1cm},
+    inheritance/.style={-{Triangle[open, width=4mm, length=4mm]}, thick}
+]
+
+% Классы
+\node[class] (A) at (0,0) {Класс A};
+\node[class] (B) [below left=1cm and 1cm of A] {Класс B};
+\node[class] (C) [below right=1cm and 1cm of A] {Класс C};
+\node[class] (D) [below=2cm of A] {Класс D};
+
+% Наследование
+\draw[inheritance] (B) -- (A);
+\draw[inheritance] (C) -- (A);
+\draw[inheritance] (D) -- (B);
+\draw[inheritance] (D) -- (C);
+
+% Подписи проблем
+\end{tikzpicture}
+\caption{Проблема ромбовидного наследования}
+\end{figure}
+
+Вопросы для защиты:
+
+\begin{itemize}
+    \item Как решают проблему повторного вызова инициализатора при ромбовидном
+     наследовании авторы языка Python?
+    \item Опишите, что такое ромбовидное наследование
+    \item Сравните способы вызова \texttt{\_\_init\_\_} родительских классов
+    \item Что будет, если не вызывать методы \texttt{\_\_init\_\_} родительских классов и 
+    в каких случаях это полезно?
+\end{itemize}
+
+\input{problem_multiinheritance_1}
+
+\subsubsection{Задача 2}
+
+Реализовать задачу 1 без использования функции \texttt{super().\_\_init\_\_}. Сравнить 
+результаты выполнения программ задач 1 и 2, описать, в чем преимущества 
+использования функции \texttt{super().\_\_init\_\_} в решении данной задачи
+
+\subsubsection{Задача 3}
+
+\input{problem_multiinheritance_3}
+
+\subsubsection{Задача 4}
+
+Измените код программы по задаче 3 так, чтобы в дочернем классе \texttt{Car} вызов 
+инициализаторов всех трёх наследуемых классов производиться через одну 
+функцию \texttt{super().\_\_init\_\_}.
+
+\subsubsection{Задача 5}
+
+Измените код программы по задаче 4 так, чтобы программа реализовывала 
+ромбовидную структуру множественного наследования (как в задаче 1) и в 
+дочернем классе \texttt{Car} вызов инициализаторов всех трёх наследуемых классов 
+производиться через одну функцию \texttt{super().\_\_init\_\_}.

@@ -1,0 +1,1191 @@
+\subsubsection{Задача 1}
+\begin{enumerate}
+    \item[1]
+Создать классы, которые будут выполнять различные функции, такие как разделение текста на слова, подсчёт количества слов и нахождение уникальных символов, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{SeparateText} должен разделять текст на слова. Класс \texttt{CountWords} — подсчитывать количество слов. Класс \texttt{Unique} — находить уникальные символы. Класс \texttt{Describer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{SeparateText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента, разделяющий его на слова и сохраняющий список слов в атрибуте \texttt{splitword}.
+    
+    \item Создайте класс \texttt{CountWords}, который наследуется от \texttt{SeparateText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов и сохраняющий это значение в атрибуте \texttt{word\_count}.
+    
+    \item Создайте класс \texttt{Unique}, который также наследуется от \texttt{SeparateText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий уникальные символы и сохраняющий их во множестве \texttt{unic}.
+    
+    \item Создайте класс \texttt{Describer}, который наследуется от \texttt{CountWords} и \texttt{Unique}. Класс \texttt{Describer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о количестве слов и уникальных символах.
+    
+    \item Создайте экземпляр класса \texttt{Describer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{Describer}, включая список слов (\texttt{splitword}), множество уникальных символов (\texttt{unic}) и количество слов (\texttt{word\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{Describer} должен содержать атрибуты \texttt{splitword}, \texttt{unic} и \texttt{word\_count}, унаследованные от соответствующих базовых классов, которые будут содержать соответственно список слов, множество уникальных символов и количество слов в исходном тексте. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{Describer}. Пример вывода:
+
+\begin{verbatim}
+Start SeparateText.__init__
+End SeparateText.__init__
+Start CountWords.__init__
+End CountWords.__init__
+Start Unique.__init__
+End Unique.__init__
+Start Describer.__init__
+End Describer.__init__
+\end{verbatim}
+
+    \item[2]
+Создать классы, которые будут выполнять различные функции, такие как извлечение чисел из строки, подсчёт их количества и нахождение уникальных чисел, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{ExtractNumbers} должен извлекать все целые числа из строки. Класс \texttt{CountNumbers} — подсчитывать количество извлечённых чисел. Класс \texttt{UniqueNumbers} — находить уникальные числа. Класс \texttt{Analyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{ExtractNumbers}, который содержит метод \texttt{\_\_init\_\_}, принимающий строку в качестве аргумента, извлекающий из неё все целые числа и сохраняющий список чисел в атрибуте \texttt{numbers}.
+    
+    \item Создайте класс \texttt{CountNumbers}, который наследуется от \texttt{ExtractNumbers}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество чисел и сохраняющий это значение в атрибуте \texttt{num\_count}.
+    
+    \item Создайте класс \texttt{UniqueNumbers}, который также наследуется от \texttt{ExtractNumbers}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий уникальные числа и сохраняющий их во множестве \texttt{unique\_nums}.
+    
+    \item Создайте класс \texttt{Analyzer}, который наследуется от \texttt{CountNumbers} и \texttt{UniqueNumbers}. Класс \texttt{Analyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о количестве чисел и уникальных числах.
+    
+    \item Создайте экземпляр класса \texttt{Analyzer} и передайте ему строку для обработки.
+    
+    \item Выведите результаты работы класса \texttt{Analyzer}, включая список чисел (\texttt{numbers}), множество уникальных чисел (\texttt{unique\_nums}) и количество чисел (\texttt{num\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{Analyzer} должен содержать атрибуты \texttt{numbers}, \texttt{unique\_nums} и \texttt{num\_count}, унаследованные от соответствующих базовых классов, которые будут содержать соответственно список чисел, множество уникальных чисел и количество чисел в исходной строке. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{Analyzer}. Пример вывода:
+
+\begin{verbatim}
+Start ExtractNumbers.__init__
+End ExtractNumbers.__init__
+Start CountNumbers.__init__
+End CountNumbers.__init__
+Start UniqueNumbers.__init__
+End UniqueNumbers.__init__
+Start Analyzer.__init__
+End Analyzer.__init__
+\end{verbatim}
+
+    \item[3]
+Создать классы, которые будут выполнять различные функции, такие как извлечение гласных из текста, подсчёт их количества и нахождение уникальных гласных букв, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{ExtractVowels} должен извлекать все гласные буквы из текста. Класс \texttt{CountVowels} — подсчитывать их количество. Класс \texttt{UniqueVowels} — находить уникальные гласные. Класс \texttt{VowelAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{ExtractVowels}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента, извлекающий из него все гласные буквы (в нижнем регистре) и сохраняющий список гласных в атрибуте \texttt{vowels}.
+    
+    \item Создайте класс \texttt{CountVowels}, который наследуется от \texttt{ExtractVowels}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество гласных и сохраняющий это значение в атрибуте \texttt{vowel\_count}.
+    
+    \item Создайте класс \texttt{UniqueVowels}, который также наследуется от \texttt{ExtractVowels}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий уникальные гласные и сохраняющий их во множестве \texttt{unique\_vowels}.
+    
+    \item Создайте класс \texttt{VowelAnalyzer}, который наследуется от \texttt{CountVowels} и \texttt{UniqueVowels}. Класс \texttt{VowelAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о количестве гласных и уникальных гласных.
+    
+    \item Создайте экземпляр класса \texttt{VowelAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{VowelAnalyzer}, включая список гласных (\texttt{vowels}), множество уникальных гласных (\texttt{unique\_vowels}) и количество гласных (\texttt{vowel\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{VowelAnalyzer} должен содержать атрибуты \texttt{vowels}, \texttt{unique\_vowels} и \texttt{vowel\_count}, унаследованные от соответствующих базовых классов, которые будут содержать соответственно список гласных, множество уникальных гласных и количество гласных в исходном тексте. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{VowelAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start ExtractVowels.__init__
+End ExtractVowels.__init__
+Start CountVowels.__init__
+End CountVowels.__init__
+Start UniqueVowels.__init__
+End UniqueVowels.__init__
+Start VowelAnalyzer.__init__
+End VowelAnalyzer.__init__
+\end{verbatim}
+
+    \item[4]
+Создать классы, которые будут выполнять различные функции, такие как подсчёт частоты каждого символа в тексте, определение наиболее часто встречающегося символа и вывод этих данных, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{CharFrequency} должен подсчитывать частоту каждого символа в тексте. Класс \texttt{MostFrequent} — находить наиболее часто встречающийся символ. Класс \texttt{FrequencyCounter} объединяет функциональность обоих классов.
+    
+    Создайте класс \texttt{CharFrequency}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий частоты символов в виде словаря в атрибуте \texttt{freq\_dict}.
+    
+    \item Создайте класс \texttt{MostFrequent}, который наследуется от \texttt{CharFrequency}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий наиболее часто встречающийся символ и сохраняющий его в атрибуте \texttt{most\_common}.
+    
+    \item Создайте класс \texttt{FrequencyCounter}, который наследуется от \texttt{CharFrequency} и \texttt{MostFrequent} (в порядке, гарантирующем корректную инициализацию). Класс \texttt{FrequencyCounter} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о частотах и наиболее частом символе.
+    
+    \item Создайте экземпляр класса \texttt{FrequencyCounter} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{FrequencyCounter}, включая словарь частот (\texttt{freq\_dict}) и наиболее частый символ (\texttt{most\_common}).
+    
+    \item Убедитесь, что все родительские инициализаторы вызываются ровно один раз при создании объекта.
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{FrequencyCounter} должен содержать атрибуты \texttt{freq\_dict} и \texttt{most\_common}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{FrequencyCounter}. Пример вывода:
+
+\begin{verbatim}
+Start CharFrequency.__init__
+End CharFrequency.__init__
+Start MostFrequent.__init__
+End MostFrequent.__init__
+Start FrequencyCounter.__init__
+End FrequencyCounter.__init__
+\end{verbatim}
+
+    \item[5]
+Создать классы, которые будут выполнять различные функции, такие как извлечение слов длиной более трёх символов, подсчёт их количества и нахождение уникальных длин извлечённых слов, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{FilterLongWords} должен извлекать из текста только слова длиной более трёх символов. Класс \texttt{CountLongWords} — подсчитывать их количество. Класс \texttt{UniqueLengths} — находить уникальные длины этих слов. Класс \texttt{LongWordAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{FilterLongWords}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента, фильтрующий слова по длине и сохраняющий список подходящих слов в атрибуте \texttt{long\_words}.
+    
+    \item Создайте класс \texttt{CountLongWords}, который наследуется от \texttt{FilterLongWords}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов и сохраняющий это значение в атрибуте \texttt{long\_count}.
+    
+    \item Создайте класс \texttt{UniqueLengths}, который также наследуется от \texttt{FilterLongWords}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий уникальные длины слов и сохраняющий их во множестве \texttt{lengths}.
+    
+    \item Создайте класс \texttt{LongWordAnalyzer}, который наследуется от \texttt{CountLongWords} и \texttt{UniqueLengths}. Класс \texttt{LongWordAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о количестве слов и уникальных длинах.
+    
+    \item Создайте экземпляр класса \texttt{LongWordAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{LongWordAnalyzer}, включая список слов (\texttt{long\_words}), множество уникальных длин (\texttt{lengths}) и количество слов (\texttt{long\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{LongWordAnalyzer} должен содержать атрибуты \texttt{long\_words}, \texttt{lengths} и \texttt{long\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{LongWordAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start FilterLongWords.__init__
+End FilterLongWords.__init__
+Start CountLongWords.__init__
+End CountLongWords.__init__
+Start UniqueLengths.__init__
+End UniqueLengths.__init__
+Start LongWordAnalyzer.__init__
+End LongWordAnalyzer.__init__
+\end{verbatim}
+
+    \item[6]
+Создать классы, которые будут выполнять различные функции, такие как преобразование всех букв текста в верхний регистр, подсчёт количества гласных и определение количества согласных, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{ToUpperCase} должен преобразовывать текст в верхний регистр. Класс \texttt{VowelCounter} — подсчитывать количество гласных. Класс \texttt{ConsonantCounter} — подсчитывать количество согласных. Класс \texttt{CaseAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{ToUpperCase}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента, преобразующий его в верхний регистр и сохраняющий результат в атрибуте \texttt{upper\_text}.
+    
+    \item Создайте класс \texttt{VowelCounter}, который наследуется от \texttt{ToUpperCase}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество гласных и сохраняющий это значение в атрибуте \texttt{vowel\_num}.
+    
+    \item Создайте класс \texttt{ConsonantCounter}, который также наследуется от \texttt{ToUpperCase}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество согласных и сохраняющий это значение в атрибуте \texttt{consonant\_num}.
+    
+    \item Создайте класс \texttt{CaseAnalyzer}, который наследуется от \texttt{VowelCounter} и \texttt{ConsonantCounter}. Класс \texttt{CaseAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о гласных, согласных и преобразованном тексте.
+    
+    \item Создайте экземпляр класса \texttt{CaseAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{CaseAnalyzer}, включая текст в верхнем регистре (\texttt{upper\_text}), количество гласных (\texttt{vowel\_num}) и количество согласных (\texttt{consonant\_num}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{CaseAnalyzer} должен содержать атрибуты \texttt{upper\_text}, \texttt{vowel\_num} и \texttt{consonant\_num}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{CaseAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start ToUpperCase.__init__
+End ToUpperCase.__init__
+Start VowelCounter.__init__
+End VowelCounter.__init__
+Start ConsonantCounter.__init__
+End ConsonantCounter.__init__
+Start CaseAnalyzer.__init__
+End CaseAnalyzer.__init__
+\end{verbatim}
+
+    \item[7]
+Создать классы, которые будут выполнять различные функции, такие как удаление всех знаков препинания из текста, подсчёт количества оставшихся слов и определение количества уникальных слов, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{RemovePunctuation} должен удалять все знаки препинания из текста. Класс \texttt{WordCounter} — подсчитывать количество слов. Класс \texttt{UniqueWords} — находить уникальные слова. Класс \texttt{TextCleaner} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{RemovePunctuation}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента, удаляющий из него знаки препинания и сохраняющий очищенный текст в атрибуте \texttt{clean\_text}.
+    
+    \item Создайте класс \texttt{WordCounter}, который наследуется от \texttt{RemovePunctuation}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем разделяющий текст на слова и подсчитывающий их количество, сохраняя результат в атрибуте \texttt{word\_count}.
+    
+    \item Создайте класс \texttt{UniqueWords}, который также наследуется от \texttt{RemovePunctuation}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий уникальные слова и сохраняющий их во множестве \texttt{unique\_words}.
+    
+    \item Создайте класс \texttt{TextCleaner}, который наследуется от \texttt{WordCounter} и \texttt{UniqueWords}. Класс \texttt{TextCleaner} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о количестве слов и уникальных словах.
+    
+    \item Создайте экземпляр класса \texttt{TextCleaner} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{TextCleaner}, включая очищенный текст (\texttt{clean\_text}), количество слов (\texttt{word\_count}) и множество уникальных слов (\texttt{unique\_words}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{TextCleaner} должен содержать атрибуты \texttt{clean\_text}, \texttt{word\_count} и \texttt{unique\_words}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{TextCleaner}. Пример вывода:
+
+\begin{verbatim}
+Start RemovePunctuation.__init__
+End RemovePunctuation.__init__
+Start WordCounter.__init__
+End WordCounter.__init__
+Start UniqueWords.__init__
+End UniqueWords.__init__
+Start TextCleaner.__init__
+End TextCleaner.__init__
+\end{verbatim}
+
+    \item[8]
+Создать классы, которые будут выполнять различные функции, такие как инвертирование порядка слов в тексте, подсчёт количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{OriginalText} должен сохранять исходный текст. Класс \texttt{InvertWords} — инвертировать порядок слов. Класс \texttt{InvertedWordCounter} — подсчитывать количество слов в инвертированном тексте. Класс \texttt{Inverter} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{OriginalText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{original}.
+    
+    \item Создайте класс \texttt{InvertWords}, который наследуется от \texttt{OriginalText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем инвертирующий порядок слов и сохраняющий результат в атрибуте \texttt{inverted}.
+    
+    \item Создайте класс \texttt{InvertedWordCounter}, который также наследуется от \texttt{InvertWords}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов в инвертированном тексте и сохраняющий это значение в атрибуте \texttt{word\_count}.
+    
+    \item Создайте класс \texttt{Inverter}, который наследуется от \texttt{InvertedWordCounter}. Класс \texttt{Inverter} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о исходном тексте, инвертированном тексте и количестве слов.
+    
+    \item Создайте экземпляр класса \texttt{Inverter} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{Inverter}, включая исходный текст (\texttt{original}), инвертированный текст (\texttt{inverted}) и количество слов (\texttt{word\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{Inverter} должен содержать атрибуты \texttt{original}, \texttt{inverted} и \texttt{word\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{Inverter}. Пример вывода:
+
+\begin{verbatim}
+Start OriginalText.__init__
+End OriginalText.__init__
+Start InvertWords.__init__
+End InvertWords.__init__
+Start InvertedWordCounter.__init__
+End InvertedWordCounter.__init__
+Start Inverter.__init__
+End Inverter.__init__
+\end{verbatim}
+
+    \item[9]
+Создать классы, которые будут выполнять различные функции, такие как определение длины каждого слова в тексте, подсчёт количества слов и нахождение максимальной длины слова, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{WordLengths} должен определять длину каждого слова в тексте. Класс \texttt{TotalWordCounter} — подсчитывать общее количество слов. Класс \texttt{MaxLengthFinder} — находить максимальную длину слова. Класс \texttt{LengthAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{WordLengths}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента, разделяющий его на слова и сохраняющий список длин слов в атрибуте \texttt{lengths}.
+    
+    \item Создайте класс \texttt{TotalWordCounter}, который наследуется от \texttt{WordLengths}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов и сохраняющий это значение в атрибуте \texttt{word\_count}.
+    
+    \item Создайте класс \texttt{MaxLengthFinder}, который также наследуется от \texttt{WordLengths}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий максимальную длину и сохраняющий её в атрибуте \texttt{max\_len}.
+    
+    \item Создайте класс \texttt{LengthAnalyzer}, который наследуется от \texttt{TotalWordCounter} и \texttt{MaxLengthFinder}. Класс \texttt{LengthAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о количестве слов, длинах и максимальной длине.
+    
+    \item Создайте экземпляр класса \texttt{LengthAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{LengthAnalyzer}, включая список длин (\texttt{lengths}), количество слов (\texttt{word\_count}) и максимальную длину (\texttt{max\_len}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{LengthAnalyzer} должен содержать атрибуты \texttt{lengths}, \texttt{word\_count} и \texttt{max\_len}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{LengthAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start WordLengths.__init__
+End WordLengths.__init__
+Start TotalWordCounter.__init__
+End TotalWordCounter.__init__
+Start MaxLengthFinder.__init__
+End MaxLengthFinder.__init__
+Start LengthAnalyzer.__init__
+End LengthAnalyzer.__init__
+\end{verbatim}
+
+    \item[10]
+Создать классы, которые будут выполнять различные функции, такие как определение, является ли каждое слово палиндромом, подсчёт количества палиндромов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{StoreText} должен сохранять исходный текст. Класс \texttt{PalindromeChecker} — определять, какие слова являются палиндромами. Класс \texttt{PalindromeCounter} — подсчитывать их количество. Класс \texttt{PalindromeAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{StoreText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{text}.
+    
+    \item Создайте класс \texttt{PalindromeChecker}, который наследуется от \texttt{StoreText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем определяющий список палиндромов и сохраняющий его в атрибуте \texttt{palindromes}.
+    
+    \item Создайте класс \texttt{PalindromeCounter}, который также наследуется от \texttt{PalindromeChecker}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество палиндромов и сохраняющий это значение в атрибуте \texttt{count}.
+    
+    \item Создайте класс \texttt{PalindromeAnalyzer}, который наследуется от \texttt{PalindromeCounter}. Класс \texttt{PalindromeAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о палиндромах и их количестве.
+    
+    \item Создайте экземпляр класса \texttt{PalindromeAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{PalindromeAnalyzer}, включая исходный текст (\texttt{text}), список палиндромов (\texttt{palindromes}) и их количество (\texttt{count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{PalindromeAnalyzer} должен содержать атрибуты \texttt{text}, \texttt{palindromes} и \texttt{count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{PalindromeAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start StoreText.__init__
+End StoreText.__init__
+Start PalindromeChecker.__init__
+End PalindromeChecker.__init__
+Start PalindromeCounter.__init__
+End PalindromeCounter.__init__
+Start PalindromeAnalyzer.__init__
+End PalindromeAnalyzer.__init__
+\end{verbatim}
+
+    \item[11]
+Создать классы, которые будут выполнять различные функции, такие как преобразование текста в список символов, подсчёт количества символов и нахождение уникальных символов, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{CharLister} должен преобразовывать текст в список символов. Класс \texttt{CharCounter} — подсчитывать количество символов. Класс \texttt{UniqueCharFinder} — находить уникальные символы. Класс \texttt{CharacterAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{CharLister}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий список всех символов (включая пробелы и знаки препинания) в атрибуте \texttt{char\_list}.
+    
+    \item Создайте класс \texttt{CharCounter}, который наследуется от \texttt{CharLister}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество символов и сохраняющий это значение в атрибуте \texttt{total\_chars}.
+    
+    \item Создайте класс \texttt{UniqueCharFinder}, который также наследуется от \texttt{CharLister}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий уникальные символы и сохраняющий их во множестве \texttt{unique\_chars}.
+    
+    \item Создайте класс \texttt{CharacterAnalyzer}, который наследуется от \texttt{CharCounter} и \texttt{UniqueCharFinder}. Класс \texttt{CharacterAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о символах.
+    
+    \item Создайте экземпляр класса \texttt{CharacterAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{CharacterAnalyzer}, включая список символов (\texttt{char\_list}), количество символов (\texttt{total\_chars}) и множество уникальных символов (\texttt{unique\_chars}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{CharacterAnalyzer} должен содержать атрибуты \texttt{char\_list}, \texttt{total\_chars} и \texttt{unique\_chars}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{CharacterAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start CharLister.__init__
+End CharLister.__init__
+Start CharCounter.__init__
+End CharCounter.__init__
+Start UniqueCharFinder.__init__
+End UniqueCharFinder.__init__
+Start CharacterAnalyzer.__init__
+End CharacterAnalyzer.__init__
+\end{verbatim}
+
+    \item[12]
+Создать классы, которые будут выполнять различные функции, такие как извлечение всех заглавных букв из текста, подсчёт их количества и нахождение уникальных заглавных букв, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{ExtractUppercase} должен извлекать все заглавные буквы из текста. Класс \texttt{UppercaseCounter} — подсчитывать их количество. Класс \texttt{UniqueUppercaseFinder} — находить уникальные заглавные буквы. Класс \texttt{UppercaseAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{ExtractUppercase}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента, извлекающий из него все заглавные буквы и сохраняющий список в атрибуте \texttt{upper\_letters}.
+    
+    \item Создайте класс \texttt{UppercaseCounter}, который наследуется от \texttt{ExtractUppercase}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество заглавных букв и сохраняющий это значение в атрибуте \texttt{upper\_count}.
+    
+    \item Создайте класс \texttt{UniqueUppercaseFinder}, который также наследуется от \texttt{ExtractUppercase}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий уникальные заглавные буквы и сохраняющий их во множестве \texttt{unique\_uppers}.
+    
+    \item Создайте класс \texttt{UppercaseAnalyzer}, который наследуется от \texttt{UppercaseCounter} и \texttt{UniqueUppercaseFinder}. Класс \texttt{UppercaseAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о заглавных буквах.
+    
+    \item Создайте экземпляр класса \texttt{UppercaseAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{UppercaseAnalyzer}, включая список заглавных букв (\texttt{upper\_letters}), количество (\texttt{upper\_count}) и множество уникальных заглавных букв (\texttt{unique\_uppers}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{UppercaseAnalyzer} должен содержать атрибуты \texttt{upper\_letters}, \texttt{upper\_count} и \texttt{unique\_uppers}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{UppercaseAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start ExtractUppercase.__init__
+End ExtractUppercase.__init__
+Start UppercaseCounter.__init__
+End UppercaseCounter.__init__
+Start UniqueUppercaseFinder.__init__
+End UniqueUppercaseFinder.__init__
+Start UppercaseAnalyzer.__init__
+End UppercaseAnalyzer.__init__
+\end{verbatim}
+
+    \item[13]
+Создать классы, которые будут выполнять различные функции, такие как замена всех цифр в тексте на символ «*», подсчёт количества заменённых цифр и сохранение преобразованного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{OriginalString} должен сохранять исходную строку. Класс \texttt{DigitReplacer} — заменять все цифры на «*». Класс \texttt{DigitCounter} — подсчитывать количество заменённых цифр. Класс \texttt{DigitMasker} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{OriginalString}, который содержит метод \texttt{\_\_init\_\_}, принимающий строку в качестве аргумента и сохраняющий её в атрибуте \texttt{original}.
+    
+    \item Создайте класс \texttt{DigitReplacer}, который наследуется от \texttt{OriginalString}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем заменяющий все цифры на «*» и сохраняющий результат в атрибуте \texttt{masked}.
+    
+    \item Создайте класс \texttt{DigitCounter}, который также наследуется от \texttt{DigitReplacer}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество цифр в исходной строке и сохраняющий это значение в атрибуте \texttt{digit\_count}.
+    
+    \item Создайте класс \texttt{DigitMasker}, который наследуется от \texttt{DigitCounter}. Класс \texttt{DigitMasker} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о замаскированной строке и количестве цифр.
+    
+    \item Создайте экземпляр класса \texttt{DigitMasker} и передайте ему строку для обработки.
+    
+    \item Выведите результаты работы класса \texttt{DigitMasker}, включая исходную строку (\texttt{original}), замаскированную строку (\texttt{masked}) и количество цифр (\texttt{digit\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{DigitMasker} должен содержать атрибуты \texttt{original}, \texttt{masked} и \texttt{digit\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{DigitMasker}. Пример вывода:
+
+\begin{verbatim}
+Start OriginalString.__init__
+End OriginalString.__init__
+Start DigitReplacer.__init__
+End DigitReplacer.__init__
+Start DigitCounter.__init__
+End DigitCounter.__init__
+Start DigitMasker.__init__
+End DigitMasker.__init__
+\end{verbatim}
+
+    \item[14]
+Создать классы, которые будут выполнять различные функции, такие как определение количества предложений в тексте, подсчёт количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{TextSaver} должен сохранять исходный текст. Класс \texttt{SentenceCounter} — подсчитывать количество предложений. Класс \texttt{WordCounter} — подсчитывать количество слов. Класс \texttt{TextStats} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{TextSaver}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{text}.
+    
+    \item Создайте класс \texttt{SentenceCounter}, который наследуется от \texttt{TextSaver}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество предложений (разделённых '.', '!', '?') и сохраняющий это значение в атрибуте \texttt{sentences}.
+    
+    \item Создайте класс \texttt{WordCounter}, который также наследуется от \texttt{TextSaver}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов и сохраняющий это значение в атрибуте \texttt{words}.
+    
+    \item Создайте класс \texttt{TextStats}, который наследуется от \texttt{SentenceCounter} и \texttt{WordCounter}. Класс \texttt{TextStats} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о тексте.
+    
+    \item Создайте экземпляр класса \texttt{TextStats} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{TextStats}, включая исходный текст (\texttt{text}), количество предложений (\texttt{sentences}) и количество слов (\texttt{words}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{TextStats} должен содержать атрибуты \texttt{text}, \texttt{sentences} и \texttt{words}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{TextStats}. Пример вывода:
+
+\begin{verbatim}
+Start TextSaver.__init__
+End TextSaver.__init__
+Start SentenceCounter.__init__
+End SentenceCounter.__init__
+Start WordCounter.__init__
+End WordCounter.__init__
+Start TextStats.__init__
+End TextStats.__init__
+\end{verbatim}
+
+    \item[15]
+Создать классы, которые будут выполнять различные функции, такие как удаление всех цифр из текста, подсчёт количества удалённых цифр и сохранение очищенного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{RawText} должен сохранять исходный текст. Класс \texttt{DigitRemover} — удалять все цифры. Класс \texttt{RemovedDigitCounter} — подсчитывать количество удалённых цифр. Класс \texttt{CleanTextProcessor} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{RawText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{raw}.
+    
+    \item Создайте класс \texttt{DigitRemover}, который наследуется от \texttt{RawText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем удаляющий все цифры и сохраняющий очищенный текст в атрибуте \texttt{clean}.
+    
+    \item Создайте класс \texttt{RemovedDigitCounter}, который также наследуется от \texttt{DigitRemover}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество удалённых цифр и сохраняющий это значение в атрибуте \texttt{removed\_count}.
+    
+    \item Создайте класс \texttt{CleanTextProcessor}, который наследуется от \texttt{RemovedDigitCounter}. Класс \texttt{CleanTextProcessor} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию об очистке текста.
+    
+    \item Создайте экземпляр класса \texttt{CleanTextProcessor} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{CleanTextProcessor}, включая исходный текст (\texttt{raw}), очищенный текст (\texttt{clean}) и количество удалённых цифр (\texttt{removed\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{CleanTextProcessor} должен содержать атрибуты \texttt{raw}, \texttt{clean} и \texttt{removed\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{CleanTextProcessor}. Пример вывода:
+
+\begin{verbatim}
+Start RawText.__init__
+End RawText.__init__
+Start DigitRemover.__init__
+End DigitRemover.__init__
+Start RemovedDigitCounter.__init__
+End RemovedDigitCounter.__init__
+Start CleanTextProcessor.__init__
+End CleanTextProcessor.__init__
+\end{verbatim}
+
+    \item[16]
+Создать классы, которые будут выполнять различные функции, такие как определение количества пробелов в тексте, подсчёт количества непробельных символов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{InputText} должен сохранять исходный текст. Класс \texttt{SpaceCounter} — подсчитывать количество пробелов. Класс \texttt{NonSpaceCounter} — подсчитывать количество непробельных символов. Класс \texttt{WhitespaceAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{InputText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{input\_str}.
+    
+    \item Создайте класс \texttt{SpaceCounter}, который наследуется от \texttt{InputText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество пробелов и сохраняющий это значение в атрибуте \texttt{spaces}.
+    
+    \item Создайте класс \texttt{NonSpaceCounter}, который также наследуется от \texttt{InputText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество непробельных символов и сохраняющий это значение в атрибуте \texttt{non\_spaces}.
+    
+    \item Создайте класс \texttt{WhitespaceAnalyzer}, который наследуется от \texttt{SpaceCounter} и \texttt{NonSpaceCounter}. Класс \texttt{WhitespaceAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о пробелах и непробельных символах.
+    
+    \item Создайте экземпляр класса \texttt{WhitespaceAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{WhitespaceAnalyzer}, включая исходный текст (\texttt{input\_str}), количество пробелов (\texttt{spaces}) и количество непробельных символов (\texttt{non\_spaces}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{WhitespaceAnalyzer} должен содержать атрибуты \texttt{input\_str}, \texttt{spaces} и \texttt{non\_spaces}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{WhitespaceAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start InputText.__init__
+End InputText.__init__
+Start SpaceCounter.__init__
+End SpaceCounter.__init__
+Start NonSpaceCounter.__init__
+End NonSpaceCounter.__init__
+Start WhitespaceAnalyzer.__init__
+End WhitespaceAnalyzer.__init__
+\end{verbatim}
+
+    \item[17]
+Создать классы, которые будут выполнять различные функции, такие как извлечение всех цифр из строки, подсчёт их суммы и нахождение максимальной цифры, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{DigitExtractor} должен извлекать все цифры из строки. Класс \texttt{DigitSumCalculator} — подсчитывать их сумму. Класс \texttt{MaxDigitFinder} — находить максимальную цифру. Класс \texttt{DigitStats} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{DigitExtractor}, который содержит метод \texttt{\_\_init\_\_}, принимающий строку в качестве аргумента, извлекающий из неё все цифры и сохраняющий список цифр (как целые числа) в атрибуте \texttt{digits}.
+    
+    \item Создайте класс \texttt{DigitSumCalculator}, который наследуется от \texttt{DigitExtractor}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем вычисляющий сумму цифр и сохраняющий это значение в атрибуте \texttt{digit\_sum}.
+    
+    \item Создайте класс \texttt{MaxDigitFinder}, который также наследуется от \texttt{DigitExtractor}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем находящий максимальную цифру и сохраняющий её в атрибуте \texttt{max\_digit}.
+    
+    \item Создайте класс \texttt{DigitStats}, который наследуется от \texttt{DigitSumCalculator} и \texttt{MaxDigitFinder}. Класс \texttt{DigitStats} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о цифрах.
+    
+    \item Создайте экземпляр класса \texttt{DigitStats} и передайте ему строку для обработки.
+    
+    \item Выведите результаты работы класса \texttt{DigitStats}, включая список цифр (\texttt{digits}), сумму (\texttt{digit\_sum}) и максимальную цифру (\texttt{max\_digit}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{DigitStats} должен содержать атрибуты \texttt{digits}, \texttt{digit\_sum} и \texttt{max\_digit}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{DigitStats}. Пример вывода:
+
+\begin{verbatim}
+Start DigitExtractor.__init__
+End DigitExtractor.__init__
+Start DigitSumCalculator.__init__
+End DigitSumCalculator.__init__
+Start MaxDigitFinder.__init__
+End MaxDigitFinder.__init__
+Start DigitStats.__init__
+End DigitStats.__init__
+\end{verbatim}
+
+    \item[18]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, начинающихся с заглавной буквы, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{SourceText} должен сохранять исходный текст. Класс \texttt{CapitalizedWordCounter} — подсчитывать количество слов с заглавной буквы. Класс \texttt{TotalWordCounter} — подсчитывать общее количество слов. Класс \texttt{CapitalizationAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{SourceText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{source}.
+    
+    \item Создайте класс \texttt{CapitalizedWordCounter}, который наследуется от \texttt{SourceText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, начинающихся с заглавной буквы, и сохраняющий это значение в атрибуте \texttt{capitalized}.
+    
+    \item Создайте класс \texttt{TotalWordCounter}, который также наследуется от \texttt{SourceText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total}.
+    
+    \item Создайте класс \texttt{CapitalizationAnalyzer}, который наследуется от \texttt{CapitalizedWordCounter} и \texttt{TotalWordCounter}. Класс \texttt{CapitalizationAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о словах.
+    
+    \item Создайте экземпляр класса \texttt{CapitalizationAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{CapitalizationAnalyzer}, включая исходный текст (\texttt{source}), количество слов с заглавной буквы (\texttt{capitalized}) и общее количество слов (\texttt{total}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{CapitalizationAnalyzer} должен содержать атрибуты \texttt{source}, \texttt{capitalized} и \texttt{total}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{CapitalizationAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start SourceText.__init__
+End SourceText.__init__
+Start CapitalizedWordCounter.__init__
+End CapitalizedWordCounter.__init__
+Start TotalWordCounter.__init__
+End TotalWordCounter.__init__
+Start CapitalizationAnalyzer.__init__
+End CapitalizationAnalyzer.__init__
+\end{verbatim}
+
+    \item[19]
+Создать классы, которые будут выполнять различные функции, такие как удаление всех гласных из текста, подсчёт количества удалённых гласных и сохранение результата, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{InitialText} должен сохранять исходный текст. Класс \texttt{VowelRemover} — удалять все гласные. Класс \texttt{VowelDeletionCounter} — подсчитывать количество удалённых гласных. Класс \texttt{ConsonantOnlyText} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{InitialText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{initial}.
+    
+    \item Создайте класс \texttt{VowelRemover}, который наследуется от \texttt{InitialText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем удаляющий все гласные (в любом регистре) и сохраняющий результат в атрибуте \texttt{consonants\_only}.
+    
+    \item Создайте класс \texttt{VowelDeletionCounter}, который также наследуется от \texttt{VowelRemover}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество удалённых гласных и сохраняющий это значение в атрибуте \texttt{deleted\_vowels}.
+    
+    \item Создайте класс \texttt{ConsonantOnlyText}, который наследуется от \texttt{VowelDeletionCounter}. Класс \texttt{ConsonantOnlyText} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию об удалении гласных.
+    
+    \item Создайте экземпляр класса \texttt{ConsonantOnlyText} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{ConsonantOnlyText}, включая исходный текст (\texttt{initial}), текст без гласных (\texttt{consonants\_only}) и количество удалённых гласных (\texttt{deleted\_vowels}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{ConsonantOnlyText} должен содержать атрибуты \texttt{initial}, \texttt{consonants\_only} и \texttt{deleted\_vowels}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{ConsonantOnlyText}. Пример вывода:
+
+\begin{verbatim}
+Start InitialText.__init__
+End InitialText.__init__
+Start VowelRemover.__init__
+End VowelRemover.__init__
+Start VowelDeletionCounter.__init__
+End VowelDeletionCounter.__init__
+Start ConsonantOnlyText.__init__
+End ConsonantOnlyText.__init__
+\end{verbatim}
+
+    \item[20]
+Создать классы, которые будут выполнять различные функции, такие как определение длины текста, подсчёт количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{BaseText} должен сохранять исходный текст. Класс \texttt{TextLengthCalculator} — определять длину текста. Класс \texttt{WordCountCalculator} — подсчитывать количество слов. Класс \texttt{TextMetrics} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{BaseText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{base}.
+    
+    \item Создайте класс \texttt{TextLengthCalculator}, который наследуется от \texttt{BaseText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем определяющий длину текста и сохраняющий это значение в атрибуте \texttt{text\_len}.
+    
+    \item Создайте класс \texttt{WordCountCalculator}, который также наследуется от \texttt{BaseText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов и сохраняющий это значение в атрибуте \texttt{word\_num}.
+    
+    \item Создайте класс \texttt{TextMetrics}, который наследуется от \texttt{TextLengthCalculator} и \texttt{WordCountCalculator}. Класс \texttt{TextMetrics} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о тексте.
+    
+    \item Создайте экземпляр класса \texttt{TextMetrics} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{TextMetrics}, включая исходный текст (\texttt{base}), длину текста (\texttt{text\_len}) и количество слов (\texttt{word\_num}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{TextMetrics} должен содержать атрибуты \texttt{base}, \texttt{text\_len} и \texttt{word\_num}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{TextMetrics}. Пример вывода:
+
+\begin{verbatim}
+Start BaseText.__init__
+End BaseText.__init__
+Start TextLengthCalculator.__init__
+End TextLengthCalculator.__init__
+Start WordCountCalculator.__init__
+End WordCountCalculator.__init__
+Start TextMetrics.__init__
+End TextMetrics.__init__
+\end{verbatim}
+
+    \item[21]
+Создать классы, которые будут выполнять различные функции, такие как определение количества уникальных слов в тексте, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{InputString} должен сохранять исходный текст. Класс \texttt{UniqueWordCounter} — подсчитывать количество уникальных слов. Класс \texttt{TotalWordCounter} — подсчитывать общее количество слов. Класс \texttt{VocabularyAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{InputString}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{input\_str}.
+    
+    \item Создайте класс \texttt{UniqueWordCounter}, который наследуется от \texttt{InputString}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем определяющий количество уникальных слов и сохраняющий это значение в атрибуте \texttt{unique\_count}.
+    
+    \item Создайте класс \texttt{TotalWordCounter}, который также наследуется от \texttt{InputString}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total\_count}.
+    
+    \item Создайте класс \texttt{VocabularyAnalyzer}, который наследуется от \texttt{UniqueWordCounter} и \texttt{TotalWordCounter}. Класс \texttt{VocabularyAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о словарном запасе текста.
+    
+    \item Создайте экземпляр класса \texttt{VocabularyAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{VocabularyAnalyzer}, включая исходный текст (\texttt{input\_str}), количество уникальных слов (\texttt{unique\_count}) и общее количество слов (\texttt{total\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{VocabularyAnalyzer} должен содержать атрибуты \texttt{input\_str}, \texttt{unique\_count} и \texttt{total\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{VocabularyAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start InputString.__init__
+End InputString.__init__
+Start UniqueWordCounter.__init__
+End UniqueWordCounter.__init__
+Start TotalWordCounter.__init__
+End TotalWordCounter.__init__
+Start VocabularyAnalyzer.__init__
+End VocabularyAnalyzer.__init__
+\end{verbatim}
+
+    \item[22]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов длиной ровно 5 символов, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{OriginalInput} должен сохранять исходный текст. Класс \texttt{FiveLetterWordCounter} — подсчитывать количество слов длиной 5. Класс \texttt{WordTotaler} — подсчитывать общее количество слов. Класс \texttt{FiveLetterAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{OriginalInput}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{original}.
+    
+    \item Создайте класс \texttt{FiveLetterWordCounter}, который наследуется от \texttt{OriginalInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов длиной ровно 5 символов и сохраняющий это значение в атрибуте \texttt{five\_count}.
+    
+    \item Создайте класс \texttt{WordTotaler}, который также наследуется от \texttt{OriginalInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total\_words}.
+    
+    \item Создайте класс \texttt{FiveLetterAnalyzer}, который наследуется от \texttt{FiveLetterWordCounter} и \texttt{WordTotaler}. Класс \texttt{FiveLetterAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о пятибуквенных словах.
+    
+    \item Создайте экземпляр класса \texttt{FiveLetterAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{FiveLetterAnalyzer}, включая исходный текст (\texttt{original}), количество пятибуквенных слов (\texttt{five\_count}) и общее количество слов (\texttt{total\_words}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{FiveLetterAnalyzer} должен содержать атрибуты \texttt{original}, \texttt{five\_count} и \texttt{total\_words}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{FiveLetterAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start OriginalInput.__init__
+End OriginalInput.__init__
+Start FiveLetterWordCounter.__init__
+End FiveLetterWordCounter.__init__
+Start WordTotaler.__init__
+End WordTotaler.__init__
+Start FiveLetterAnalyzer.__init__
+End FiveLetterAnalyzer.__init__
+\end{verbatim}
+
+    \item[23]
+Создать классы, которые будут выполнять различные функции, такие как определение количества строчных букв в тексте, подсчёт количества заглавных букв и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{GivenText} должен сохранять исходный текст. Класс \texttt{LowercaseCounter} — подсчитывать количество строчных букв. Класс \texttt{UppercaseCounter} — подсчитывать количество заглавных букв. Класс \texttt{CaseAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{GivenText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{given}.
+    
+    \item Создайте класс \texttt{LowercaseCounter}, который наследуется от \texttt{GivenText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество строчных букв и сохраняющий это значение в атрибуте \texttt{lower\_count}.
+    
+    \item Создайте класс \texttt{UppercaseCounter}, который также наследуется от \texttt{GivenText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество заглавных букв и сохраняющий это значение в атрибуте \texttt{upper\_count}.
+    
+    \item Создайте класс \texttt{CaseAnalyzer}, который наследуется от \texttt{LowercaseCounter} и \texttt{UppercaseCounter}. Класс \texttt{CaseAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о регистрах.
+    
+    \item Создайте экземпляр класса \texttt{CaseAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{CaseAnalyzer}, включая исходный текст (\texttt{given}), количество строчных букв (\texttt{lower\_count}) и количество заглавных букв (\texttt{upper\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{CaseAnalyzer} должен содержать атрибуты \texttt{given}, \texttt{lower\_count} и \texttt{upper\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{CaseAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start GivenText.__init__
+End GivenText.__init__
+Start LowercaseCounter.__init__
+End LowercaseCounter.__init__
+Start UppercaseCounter.__init__
+End UppercaseCounter.__init__
+Start CaseAnalyzer.__init__
+End CaseAnalyzer.__init__
+\end{verbatim}
+
+    \item[24]
+Создать классы, которые будут выполнять различные функции, такие как определение количества цифр в тексте, подсчёт количества букв и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{RawInput} должен сохранять исходный текст. Класс \texttt{DigitCounter} — подсчитывать количество цифр. Класс \texttt{LetterCounter} — подсчитывать количество букв. Класс \texttt{AlphaNumericAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{RawInput}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{raw}.
+    
+    \item Создайте класс \texttt{DigitCounter}, который наследуется от \texttt{RawInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество цифр и сохраняющий это значение в атрибуте \texttt{digit\_num}.
+    
+    \item Создайте класс \texttt{LetterCounter}, который также наследуется от \texttt{RawInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество букв и сохраняющий это значение в атрибуте \texttt{letter\_num}.
+    
+    \item Создайте класс \texttt{AlphaNumericAnalyzer}, который наследуется от \texttt{DigitCounter} и \texttt{LetterCounter}. Класс \texttt{AlphaNumericAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о цифрах и буквах.
+    
+    \item Создайте экземпляр класса \texttt{AlphaNumericAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{AlphaNumericAnalyzer}, включая исходный текст (\texttt{raw}), количество цифр (\texttt{digit\_num}) и количество букв (\texttt{letter\_num}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{AlphaNumericAnalyzer} должен содержать атрибуты \texttt{raw}, \texttt{digit\_num} и \texttt{letter\_num}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{AlphaNumericAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start RawInput.__init__
+End RawInput.__init__
+Start DigitCounter.__init__
+End DigitCounter.__init__
+Start LetterCounter.__init__
+End LetterCounter.__init__
+Start AlphaNumericAnalyzer.__init__
+End AlphaNumericAnalyzer.__init__
+\end{verbatim}
+
+    \item[25]
+Создать классы, которые будут выполнять различные функции, такие как удаление всех пробелов из текста, подсчёт количества удалённых пробелов и сохранение результата, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{InitialString} должен сохранять исходный текст. Класс \texttt{SpaceRemover} — удалять все пробелы. Класс \texttt{RemovedSpaceCounter} — подсчитывать количество удалённых пробелов. Класс \texttt{CompactText} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{InitialString}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{initial}.
+    
+    \item Создайте класс \texttt{SpaceRemover}, который наследуется от \texttt{InitialString}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем удаляющий все пробелы и сохраняющий результат в атрибуте \texttt{compact}.
+    
+    \item Создайте класс \texttt{RemovedSpaceCounter}, который также наследуется от \texttt{SpaceRemover}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество удалённых пробелов и сохраняющий это значение в атрибуте \texttt{removed\_spaces}.
+    
+    \item Создайте класс \texttt{CompactText}, который наследуется от \texttt{RemovedSpaceCounter}. Класс \texttt{CompactText} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию об удалении пробелов.
+    
+    \item Создайте экземпляр класса \texttt{CompactText} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{CompactText}, включая исходный текст (\texttt{initial}), текст без пробелов (\texttt{compact}) и количество удалённых пробелов (\texttt{removed\_spaces}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{CompactText} должен содержать атрибуты \texttt{initial}, \texttt{compact} и \texttt{removed\_spaces}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{CompactText}. Пример вывода:
+
+\begin{verbatim}
+Start InitialString.__init__
+End InitialString.__init__
+Start SpaceRemover.__init__
+End SpaceRemover.__init__
+Start RemovedSpaceCounter.__init__
+End RemovedSpaceCounter.__init__
+Start CompactText.__init__
+End CompactText.__init__
+\end{verbatim}
+
+    \item[26]
+Создать классы, которые будут выполнять различные функции, такие как определение количества знаков препинания в тексте, подсчёт количества букв и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{StartText} должен сохранять исходный текст. Класс \texttt{PunctuationCounter} — подсчитывать количество знаков препинания. Класс \texttt{AlphabeticCounter} — подсчитывать количество букв. Класс \texttt{TextComposition} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{StartText}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{start}.
+    
+    \item Создайте класс \texttt{PunctuationCounter}, который наследуется от \texttt{StartText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество знаков препинания и сохраняющий это значение в атрибуте \texttt{punct\_count}.
+    
+    \item Создайте класс \texttt{AlphabeticCounter}, который также наследуется от \texttt{StartText}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество букв и сохраняющий это значение в атрибуте \texttt{alpha\_count}.
+    
+    \item Создайте класс \texttt{TextComposition}, который наследуется от \texttt{PunctuationCounter} и \texttt{AlphabeticCounter}. Класс \texttt{TextComposition} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о составе текста.
+    
+    \item Создайте экземпляр класса \texttt{TextComposition} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{TextComposition}, включая исходный текст (\texttt{start}), количество знаков препинания (\texttt{punct\_count}) и количество букв (\texttt{alpha\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{TextComposition} должен содержать атрибуты \texttt{start}, \texttt{punct\_count} и \texttt{alpha\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{TextComposition}. Пример вывода:
+
+\begin{verbatim}
+Start StartText.__init__
+End StartText.__init__
+Start PunctuationCounter.__init__
+End PunctuationCounter.__init__
+Start AlphabeticCounter.__init__
+End AlphabeticCounter.__init__
+Start TextComposition.__init__
+End TextComposition.__init__
+\end{verbatim}
+
+    \item[27]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, состоящих только из цифр, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{OriginalStringInput} должен сохранять исходный текст. Класс \texttt{NumericWordCounter} — подсчитывать количество слов, состоящих только из цифр. Класс \texttt{TotalWordCounter} — подсчитывать общее количество слов. Класс \texttt{NumericWordAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{OriginalStringInput}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{original}.
+    
+    \item Создайте класс \texttt{NumericWordCounter}, который наследуется от \texttt{OriginalStringInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, состоящих только из цифр, и сохраняющий это значение в атрибуте \texttt{numeric\_words}.
+    
+    \item Создайте класс \texttt{TotalWordCounter}, который также наследуется от \texttt{OriginalStringInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total\_words}.
+    
+    \item Создайте класс \texttt{NumericWordAnalyzer}, который наследуется от \texttt{NumericWordCounter} и \texttt{TotalWordCounter}. Класс \texttt{NumericWordAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о числовых словах.
+    
+    \item Создайте экземпляр класса \texttt{NumericWordAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{NumericWordAnalyzer}, включая исходный текст (\texttt{original}), количество числовых слов (\texttt{numeric\_words}) и общее количество слов (\texttt{total\_words}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{NumericWordAnalyzer} должен содержать атрибуты \texttt{original}, \texttt{numeric\_words} и \texttt{total\_words}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{NumericWordAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start OriginalStringInput.__init__
+End OriginalStringInput.__init__
+Start NumericWordCounter.__init__
+End NumericWordCounter.__init__
+Start TotalWordCounter.__init__
+End TotalWordCounter.__init__
+Start NumericWordAnalyzer.__init__
+End NumericWordAnalyzer.__init__
+\end{verbatim}
+
+    \item[28]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, содержащих букву «а», подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{BaseInput} должен сохранять исходный текст. Класс \texttt{WordsWithA} — подсчитывать количество слов, содержащих букву «а» (в любом регистре). Класс \texttt{TotalWords} — подсчитывать общее количество слов. Класс \texttt{LetterAAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{BaseInput}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{base}.
+    
+    \item Создайте класс \texttt{WordsWithA}, который наследуется от \texttt{BaseInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, содержащих букву «а», и сохраняющий это значение в атрибуте \texttt{words\_with\_a}.
+    
+    \item Создайте класс \texttt{TotalWords}, который также наследуется от \texttt{BaseInput}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total}.
+    
+    \item Создайте класс \texttt{LetterAAnalyzer}, который наследуется от \texttt{WordsWithA} и \texttt{TotalWords}. Класс \texttt{LetterAAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о словах с буквой «а».
+    
+    \item Создайте экземпляр класса \texttt{LetterAAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{LetterAAnalyzer}, включая исходный текст (\texttt{base}), количество слов с «а» (\texttt{words\_with\_a}) и общее количество слов (\texttt{total}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{LetterAAnalyzer} должен содержать атрибуты \texttt{base}, \texttt{words\_with\_a} и \texttt{total}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{LetterAAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start BaseInput.__init__
+End BaseInput.__init__
+Start WordsWithA.__init__
+End WordsWithA.__init__
+Start TotalWords.__init__
+End TotalWords.__init__
+Start LetterAAnalyzer.__init__
+End LetterAAnalyzer.__init__
+\end{verbatim}
+
+    \item[29]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, длина которых кратна 3, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{InputData} должен сохранять исходный текст. Класс \texttt{WordsDivisibleByThree} — подсчитывать количество слов, длина которых кратна 3. Класс \texttt{SimpleWordCounter} — подсчитывать общее количество слов. Класс \texttt{LengthDivisibilityAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{InputData}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{input\_data}.
+    
+    \item Создайте класс \texttt{WordsDivisibleByThree}, который наследуется от \texttt{InputData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, длина которых делится на 3 без остатка, и сохраняющий это значение в атрибуте \texttt{div\_by\_3}.
+    
+    \item Создайте класс \texttt{SimpleWordCounter}, который также наследуется от \texttt{InputData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total}.
+    
+    \item Создайте класс \texttt{LengthDivisibilityAnalyzer}, который наследуется от \texttt{WordsDivisibleByThree} и \texttt{SimpleWordCounter}. Класс \texttt{LengthDivisibilityAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о делимости длин слов.
+    
+    \item Создайте экземпляр класса \texttt{LengthDivisibilityAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{LengthDivisibilityAnalyzer}, включая исходный текст (\texttt{input\_data}), количество слов с длиной, кратной 3 (\texttt{div\_by\_3}), и общее количество слов (\texttt{total}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{LengthDivisibilityAnalyzer} должен содержать атрибуты \texttt{input\_data}, \texttt{div\_by\_3} и \texttt{total}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{LengthDivisibilityAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start InputData.__init__
+End InputData.__init__
+Start WordsDivisibleByThree.__init__
+End WordsDivisibleByThree.__init__
+Start SimpleWordCounter.__init__
+End SimpleWordCounter.__init__
+Start LengthDivisibilityAnalyzer.__init__
+End LengthDivisibilityAnalyzer.__init__
+\end{verbatim}
+
+    \item[30]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, начинающихся с гласной, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{TextContainer} должен сохранять исходный текст. Класс \texttt{VowelStartCounter} — подсчитывать количество слов, начинающихся с гласной. Класс \texttt{OverallWordCounter} — подсчитывать общее количество слов. Класс \texttt{VowelStartAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{TextContainer}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{text\_container}.
+    
+    \item Создайте класс \texttt{VowelStartCounter}, который наследуется от \texttt{TextContainer}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, начинающихся с гласной (в любом регистре), и сохраняющий это значение в атрибуте \texttt{vowel\_starts}.
+    
+    \item Создайте класс \texttt{OverallWordCounter}, который также наследуется от \texttt{TextContainer}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{overall}.
+    
+    \item Создайте класс \texttt{VowelStartAnalyzer}, который наследуется от \texttt{VowelStartCounter} и \texttt{OverallWordCounter}. Класс \texttt{VowelStartAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о словах, начинающихся с гласной.
+    
+    \item Создайте экземпляр класса \texttt{VowelStartAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{VowelStartAnalyzer}, включая исходный текст (\texttt{text\_container}), количество слов с гласной в начале (\texttt{vowel\_starts}) и общее количество слов (\texttt{overall}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{VowelStartAnalyzer} должен содержать атрибуты \texttt{text\_container}, \texttt{vowel\_starts} и \texttt{overall}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{VowelStartAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start TextContainer.__init__
+End TextContainer.__init__
+Start VowelStartCounter.__init__
+End VowelStartCounter.__init__
+Start OverallWordCounter.__init__
+End OverallWordCounter.__init__
+Start VowelStartAnalyzer.__init__
+End VowelStartAnalyzer.__init__
+\end{verbatim}
+
+    \item[31]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, содержащих только латинские буквы, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{SourceData} должен сохранять исходный текст. Класс \texttt{LatinOnlyWordCounter} — подсчитывать количество слов, состоящих только из латинских букв. Класс \texttt{FullWordCounter} — подсчитывать общее количество слов. Класс \texttt{LatinWordAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{SourceData}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{source}.
+    
+    \item Создайте класс \texttt{LatinOnlyWordCounter}, который наследуется от \texttt{SourceData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, состоящих исключительно из латинских букв, и сохраняющий это значение в атрибуте \texttt{latin\_only}.
+    
+    \item Создайте класс \texttt{FullWordCounter}, который также наследуется от \texttt{SourceData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{full}.
+    
+    \item Создайте класс \texttt{LatinWordAnalyzer}, который наследуется от \texttt{LatinOnlyWordCounter} и \texttt{FullWordCounter}. Класс \texttt{LatinWordAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о латинских словах.
+    
+    \item Создайте экземпляр класса \texttt{LatinWordAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{LatinWordAnalyzer}, включая исходный текст (\texttt{source}), количество слов только из латинских букв (\texttt{latin\_only}) и общее количество слов (\texttt{full}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{LatinWordAnalyzer} должен содержать атрибуты \texttt{source}, \texttt{latin\_only} и \texttt{full}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{LatinWordAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start SourceData.__init__
+End SourceData.__init__
+Start LatinOnlyWordCounter.__init__
+End LatinOnlyWordCounter.__init__
+Start FullWordCounter.__init__
+End FullWordCounter.__init__
+Start LatinWordAnalyzer.__init__
+End LatinWordAnalyzer.__init__
+\end{verbatim}
+
+    \item[32]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, оканчивающихся на «ing», подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{TextBase} должен сохранять исходный текст. Класс \texttt{IngEndingCounter} — подсчитывать количество слов, оканчивающихся на «ing». Класс \texttt{AllWordCounter} — подсчитывать общее количество слов. Класс \texttt{IngAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{TextBase}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{text\_base}.
+    
+    \item Создайте класс \texttt{IngEndingCounter}, который наследуется от \texttt{TextBase}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, оканчивающихся на «ing» (в любом регистре), и сохраняющий это значение в атрибуте \texttt{ing\_count}.
+    
+    \item Создайте класс \texttt{AllWordCounter}, который также наследуется от \texttt{TextBase}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{all\_words}.
+    
+    \item Создайте класс \texttt{IngAnalyzer}, который наследуется от \texttt{IngEndingCounter} и \texttt{AllWordCounter}. Класс \texttt{IngAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о словах с окончанием «ing».
+    
+    \item Создайте экземпляр класса \texttt{IngAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{IngAnalyzer}, включая исходный текст (\texttt{text\_base}), количество слов с окончанием «ing» (\texttt{ing\_count}) и общее количество слов (\texttt{all\_words}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{IngAnalyzer} должен содержать атрибуты \texttt{text\_base}, \texttt{ing\_count} и \texttt{all\_words}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{IngAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start TextBase.__init__
+End TextBase.__init__
+Start IngEndingCounter.__init__
+End IngEndingCounter.__init__
+Start AllWordCounter.__init__
+End AllWordCounter.__init__
+Start IngAnalyzer.__init__
+End IngAnalyzer.__init__
+\end{verbatim}
+
+    \item[33]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, содержащих хотя бы одну цифру, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{InitialTextData} должен сохранять исходный текст. Класс \texttt{WordsWithDigits} — подсчитывать количество слов, содержащих хотя бы одну цифру. Класс \texttt{TotalWordCount} — подсчитывать общее количество слов. Класс \texttt{DigitInWordAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{InitialTextData}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{initial\_text}.
+    
+    \item Создайте класс \texttt{WordsWithDigits}, который наследуется от \texttt{InitialTextData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, содержащих хотя бы одну цифру, и сохраняющий это значение в атрибуте \texttt{words\_with\_digits}.
+    
+    \item Создайте класс \texttt{TotalWordCount}, который также наследуется от \texttt{InitialTextData}. Этот класс должен содержит метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total\_words}.
+    
+    \item Создайте класс \texttt{DigitInWordAnalyzer}, который наследуется от \texttt{WordsWithDigits} и \texttt{TotalWordCount}. Класс \texttt{DigitInWordAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о словах с цифрами.
+    
+    \item Создайте экземпляр класса \texttt{DigitInWordAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{DigitInWordAnalyzer}, включая исходный текст (\texttt{initial\_text}), количество слов с цифрами (\texttt{words\_with\_digits}) и общее количество слов (\texttt{total\_words}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{DigitInWordAnalyzer} должен содержать атрибуты \texttt{initial\_text}, \texttt{words\_with\_digits} и \texttt{total\_words}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{DigitInWordAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start InitialTextData.__init__
+End InitialTextData.__init__
+Start WordsWithDigits.__init__
+End WordsWithDigits.__init__
+Start TotalWordCount.__init__
+End TotalWordCount.__init__
+Start DigitInWordAnalyzer.__init__
+End DigitInWordAnalyzer.__init__
+\end{verbatim}
+
+    \item[34]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, длина которых меньше 4 символов, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{BaseTextData} должен сохранять исходный текст. Класс \texttt{ShortWordCounter} — подсчитывать количество слов длиной менее 4 символов. Класс \texttt{OverallWordCounter} — подсчитывать общее количество слов. Класс \texttt{ShortWordAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{BaseTextData}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{base\_text}.
+    
+    \item Создайте класс \texttt{ShortWordCounter}, который наследуется от \texttt{BaseTextData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов длиной менее 4 и сохраняющий это значение в атрибуте \texttt{short\_count}.
+    
+    \item Создайте класс \texttt{OverallWordCounter}, который также наследуется от \texttt{BaseTextData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{overall\_count}.
+    
+    \item Создайте класс \texttt{ShortWordAnalyzer}, который наследуется от \texttt{ShortWordCounter} и \texttt{OverallWordCounter}. Класс \texttt{ShortWordAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о коротких словах.
+    
+    \item Создайте экземпляр класса \texttt{ShortWordAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{ShortWordAnalyzer}, включая исходный текст (\texttt{base\_text}), количество коротких слов (\texttt{short\_count}) и общее количество слов (\texttt{overall\_count}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{ShortWordAnalyzer} должен содержать атрибуты \texttt{base\_text}, \texttt{short\_count} и \texttt{overall\_count}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{ShortWordAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start BaseTextData.__init__
+End BaseTextData.__init__
+Start ShortWordCounter.__init__
+End ShortWordCounter.__init__
+Start OverallWordCounter.__init__
+End OverallWordCounter.__init__
+Start ShortWordAnalyzer.__init__
+End ShortWordAnalyzer.__init__
+\end{verbatim}
+
+    \item[35]
+Создать классы, которые будут выполнять различные функции, такие как определение количества слов, содержащих хотя бы один символ пунктуации, подсчёт общего количества слов и сохранение исходного текста, а также выводить результаты на печать методом \texttt{print}.
+
+\begin{enumerate}
+    \item Класс \texttt{OriginalTextData} должен сохранять исходный текст. Класс \texttt{PunctuatedWordCounter} — подсчитывать количество слов, содержащих хотя бы один знак пунктуации. Класс \texttt{TotalWordTally} — подсчитывать общее количество слов. Класс \texttt{PunctuationInWordAnalyzer} объединяет функциональность всех трёх классов.
+    
+    Создайте класс \texttt{OriginalTextData}, который содержит метод \texttt{\_\_init\_\_}, принимающий текст в качестве аргумента и сохраняющий его в атрибуте \texttt{original\_text}.
+    
+    \item Создайте класс \texttt{PunctuatedWordCounter}, который наследуется от \texttt{OriginalTextData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий количество слов, содержащих хотя бы один знак пунктуации, и сохраняющий это значение в атрибуте \texttt{punct\_words}.
+    
+    \item Создайте класс \texttt{TotalWordTally}, который также наследуется от \texttt{OriginalTextData}. Этот класс должен содержать метод \texttt{\_\_init\_\_}, вызывающий метод \texttt{\_\_init\_\_} базового класса с помощью \texttt{super()}, а затем подсчитывающий общее количество слов и сохраняющий это значение в атрибуте \texttt{total\_words}.
+    
+    \item Создайте класс \texttt{PunctuationInWordAnalyzer}, который наследуется от \texttt{PunctuatedWordCounter} и \texttt{TotalWordTally}. Класс \texttt{PunctuationInWordAnalyzer} должен содержать метод \texttt{\_\_init\_\_}, корректно вызывающий инициализаторы всех родительских классов через \texttt{super()}, и после инициализации выводить информацию о словах со знаками пунктуации.
+    
+    \item Создайте экземпляр класса \texttt{PunctuationInWordAnalyzer} и передайте ему текст для обработки.
+    
+    \item Выведите результаты работы класса \texttt{PunctuationInWordAnalyzer}, включая исходный текст (\texttt{original\_text}), количество слов со знаками пунктуации (\texttt{punct\_words}) и общее количество слов (\texttt{total\_words}).
+\end{enumerate}
+
+В результате выполнения кода объект класса \texttt{PunctuationInWordAnalyzer} должен содержать атрибуты \texttt{original\_text}, \texttt{punct\_words} и \texttt{total\_words}, унаследованные от соответствующих базовых классов. Все дочерние классы должны использовать \texttt{super().\_\_init\_\_()} для делегирования инициализации родительских классов.
+
+Также необходимо вывести в консоль сообщения о начале и завершении выполнения каждого метода \texttt{\_\_init\_\_} при создании одного объекта \texttt{PunctuationInWordAnalyzer}. Пример вывода:
+
+\begin{verbatim}
+Start OriginalTextData.__init__
+End OriginalTextData.__init__
+Start PunctuatedWordCounter.__init__
+End PunctuatedWordCounter.__init__
+Start TotalWordTally.__init__
+End TotalWordTally.__init__
+Start PunctuationInWordAnalyzer.__init__
+End PunctuationInWordAnalyzer.__init__
+\end{verbatim}
+
+\end{enumerate}
