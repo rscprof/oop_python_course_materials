@@ -1,0 +1,2401 @@
+\subsection{Семинар <<Классы-миксины и множественное наследование>> (2 часа)}
+\subsubsection*{Классы-миксины}
+Классы-миксины или метод подмешивания классов в основную 
+иерархию классов во множественном наследовании ООП 
+представляют собой простые классы, которые включают набор 
+методов, предназначенных для добавления к другому классу, и 
+позволяют расширять функциональность классов без глубокой 
+иерархии наследования. Это устраняет проблемы, связанные с 
+множественным наследованием, и делает миксины гибким средством 
+для улучшения и модификации структуры кода. Миксины создаются 
+для того, чтобы повторно использовать функции во множестве классов. 
+Они не предполагают инициализацию объектов или 
+метод \texttt{\_\_init\_\_} и не должны иметь своего состояния.
+
+\begin{enumerate}
+    \item[1]
+\subsubsection*{Задание 1}
+
+Написать класс-миксин на Python, который моделирует работу 
+автомобильной климатической сплит-системы.  
+Создать класс-миксин \texttt{SplitSystem}, который будет содержать 
+методы для включения и выключения системы, установки 
+температуры охлаждения, а также для переключения между режимами охлаждения и обогрева.
+
+\begin{enumerate}
+\item Класс \texttt{SplitSystem} определяет объект, который моделирует сплит-систему.
+\item Метод \texttt{turn\_on} включает сплит-систему, если она выключена, 
+устанавливая начальные параметры: \texttt{is\_on}, 
+\texttt{mode} и \texttt{temperature}, и устанавливает режим в \texttt{"cooling"}.
+\item Метод \texttt{turn\_off} выключает сплит-систему, если она включена.
+\item Метод \texttt{set\_cooling\_temperature} устанавливает температуру 
+охлаждения, если сплит-система включена и находится в режиме \texttt{"cooling"}.
+\item Метод \texttt{turn\_on\_cooling} включает режим охлаждения, если 
+сплит-система выключена, или меняет режим на \texttt{"cooling"}, если 
+система уже включена, но находится в другом режиме.
+\item Метод \texttt{turn\_off\_cooling} выключает режим охлаждения, если 
+сплит-система включена и находится в режиме \texttt{"cooling"}.
+\item Метод \texttt{turn\_on\_heating} включает режим обогрева, если 
+сплит-система выключена, или меняет режим на \texttt{"heating"}, если 
+система уже включена, но находится в другом режиме.
+\item Метод \texttt{turn\_off\_heating} выключает режим обогрева, 
+если сплит-система включена и находится в режиме \texttt{"heating"}.
+\item В примере использования класса создаётся объект \texttt{split\_system}, после 
+чего выполняются различные команды для управления сплит-системой.
+\end{enumerate}
+
+\section*{Задание 2}
+
+Написать класс-миксин на Python, который моделирует работу автомобильного радио.
+
+\begin{enumerate}
+\item Создать класс-миксин \texttt{Radio}, который будет представлять радиоприёмник.
+\item Определить метод \texttt{turn\_on(self)}, который включает радиоприёмник. 
+В методе установить переменную \texttt{self.is\_on = False}, так как по 
+умолчанию радио выключено. Также установить начальную станцию на 0.  
+Если \texttt{self.is\_on} было \texttt{False}, поменять его на \texttt{True} и 
+вывести сообщение, что радио включено.
+\item Определить метод \texttt{turn\_off(self)}, который выключает 
+радиоприёмник. Если радио включено, поменять 
+\texttt{self.is\_on} на \texttt{False} и вывести сообщение о выключении.
+\item Определить метод \texttt{tune\_to\_station(self, station\_number)}, 
+который настраивает радио на нужную станцию. Если радио включено, 
+установить \texttt{self.station = station\_number} и вывести сообщение 
+о настройке. Если радио выключено, вывести сообщение о необходимости 
+сначала включить радио.
+\item Создать экземпляр класса \texttt{Radio} и сохранить его в переменной \texttt{radio}.
+\item Вызвать метод \texttt{turn\_on()} для экземпляра \texttt{radio}.
+\item Вызвать метод \texttt{tune\_to\_station(101.5)} для настройки на станцию 101.5.
+\item Вызвать метод \texttt{turn\_off()} для выключения радио.
+\end{enumerate}
+
+\subsubsection*{Задание 3}
+
+Используя программный код задания 5 из прошлого практикума текущего курса ООП, 
+выполнить подмешивание класса-миксина \texttt{Radio} к классу \texttt{Hatchback(Sedan)} 
+и подмешивание класса-миксина \texttt{SplitSystem} к классу \texttt{Car(SUV, Hatchback)}.  
+При запуске класса \texttt{Car} должна быть отображена в консоли 
+следующая последовательность действий.
+
+\subsubsection*{Пример вывода программы}
+
+\begin{verbatim}
+Запуск двигателя
+Переключение трансмиссии
+Ускорение
+Сплит-система включена.
+Температура охлаждения установлена на 22°C.
+Режим охлаждения выключен.
+Режим обогрева включен.
+Радио включено.
+Настроено на радиостанцию 101.5.
+Режим обогрева выключен.
+Радио выключено.
+Торможение
+Doors: 4, Engine type: 567-ВАП-02, Cargo space: 5, Transmission: АВТОМАТ
+\end{verbatim}
+
+
+\subsubsection*{Схема классов}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, every node/.style={draw, rounded corners, minimum width=3.2cm, minimum height=1cm, align=center}]
+\node (sedan) {Class Sedan()};
+\node (suv) [below left=of sedan,xshift=-0.1cm] {Class SUV()};
+\node (hatchback) [below right=of sedan,xshift=-0.7cm] {Class Hatchback()};
+\node (radio) [right=of hatchback,xshift=-0.7cm] {Class RadioMixin};
+\node (car) [below=of $(suv)!0.5!(hatchback)$] {Class Car()};
+\node (split) [right=of car,xshift=0.1cm] {Class SplitSystemMixin};
+
+\draw[->] (car) -- (suv);
+\draw[->] (car) -- (hatchback);
+\draw[->] (suv) -- (sedan);
+\draw[->] (hatchback) -- (sedan);
+\draw[->, dashed] (radio) -- (hatchback);
+\draw[->, dashed] (split) -- (car);
+\end{tikzpicture}
+\end{center}
+
+    \item[2]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы рекуперативного торможения электромобиля.  
+    Создать класс-миксин \texttt{RegenerativeBraking}, который будет содержать 
+    методы для включения и выключения рекуперации, установки уровня рекуперации 
+    и отображения текущего уровня заряда аккумулятора.
+    \begin{enumerate}
+    \item Класс \texttt{RegenerativeBraking} определяет объект, который моделирует систему рекуперативного торможения.
+    \item Метод \texttt{enable\_regen} включает рекуперацию, если она выключена, 
+    устанавливая начальные параметры: \texttt{is\_enabled}, 
+    \texttt{regen\_level} и \texttt{battery\_level}, и устанавливает уровень рекуперации на 2.
+    \item Метод \texttt{disable\_regen} выключает рекуперацию, если она включена.
+    \item Метод \texttt{set\_regen\_level} устанавливает уровень рекуперации от 1 до 3, если система включена.
+    \item Метод \texttt{show\_battery} выводит текущий уровень заряда аккумулятора в процентах.
+    \item Метод \texttt{simulate\_braking} имитирует торможение с рекуперацией, увеличивая уровень батареи на величину, зависящую от уровня рекуперации.
+    \item В примере использования класса создаётся объект \texttt{regen}, после 
+    чего выполняются различные команды для управления системой.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу режима «Эко» в гибридном автомобиле.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{EcoMode}, который будет представлять режим энергосбережения.
+    \item Определить метод \texttt{activate\_eco(self)}, который активирует режим «Эко». 
+    По умолчанию \texttt{self.eco\_active = False}.  
+    Если режим неактивен, установить \texttt{True} и вывести сообщение об активации.
+    \item Определить метод \texttt{deactivate\_eco(self)}, который деактивирует режим. 
+    Если активен, установить \texttt{False} и вывести сообщение.
+    \item Определить метод \texttt{optimize\_consumption(self)}, 
+    который оптимизирует расход топлива и энергии, если режим активен, и выводит соответствующее сообщение.
+    \item Создать экземпляр класса \texttt{EcoMode} и сохранить его в переменной \texttt{eco}.
+    \item Вызвать метод \texttt{activate\_eco()}.
+    \item Вызвать метод \texttt{optimize\_consumption()}.
+    \item Вызвать метод \texttt{deactivate\_eco()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 2 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{EcoMode} к классу \texttt{HybridCar} 
+    и подмешивание класса-миксина \texttt{RegenerativeBraking} к классу \texttt{GreenCar(ElectricCar, HybridCar, FuelCellCar)}.  
+    При запуске класса \texttt{GreenCar} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Режим «Эко» активирован.
+Оптимизация расхода топлива и энергии.
+Режим «Эко» деактивирован.
+Зарядка батареи
+Заправка водородом
+Переключение режимов
+Движение на электротяге
+Рекуперативное торможение включено.
+Уровень рекуперации: 3
+Уровень батареи: 85%
+Battery capacity: 75, Motor type: AC, Fuel tank size: 45, Hydrogen tank: 5 kg
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (electric) {Class ElectricCar()};
+    \node (hybrid) [below left=of electric,xshift=-0.1cm] {Class HybridCar()};
+    \node (fuelcell) [below right=of electric,xshift=-0.7cm] {Class FuelCellCar()};
+    \node (eco) [left=of hybrid,xshift=0.7cm] {Class EcoModeMixin};
+    \node (green) [below=of $(hybrid)!0.5!(fuelcell)$] {Class GreenCar()};
+    \node (regen) [right=of green,xshift=0.1cm] {Class RegenerativeBrakingMixin};
+    \draw[->] (green) -- (hybrid);
+    \draw[->] (green) -- (fuelcell);
+    \draw[->] (hybrid) -- (electric);
+    \draw[->] (fuelcell) -- (electric);
+    \draw[->, dashed] (eco) -- (hybrid);
+    \draw[->, dashed] (regen) -- (green);
+    \end{tikzpicture}
+    \end{center}
+
+    % ------------------- Далее аналогично для всех остальных пунктов -------------------
+
+    \item[3]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы контроля груза в коммерческом транспорте.  
+    Создать класс-миксин \texttt{CargoMonitor}, который будет содержать 
+    методы для проверки веса груза, блокировки дверей при превышении лимита и 
+    отправки уведомлений о состоянии груза.
+    \begin{enumerate}
+    \item Класс \texttt{CargoMonitor} определяет объект, который моделирует систему мониторинга груза.
+    \item Метод \texttt{load\_check} проверяет, не превышен ли максимальный вес груза, и устанавливает флаг \texttt{overloaded}.
+    \item Метод \texttt{lock\_doors} блокирует задние двери, если груз превышает лимит.
+    \item Метод \texttt{unlock\_doors} разблокирует двери, если груз в пределах нормы.
+    \item Метод \texttt{send\_alert} отправляет уведомление оператору при перегрузке.
+    \item Метод \texttt{reset\_monitor} сбрасывает состояние системы после разгрузки.
+    \item В примере использования создаётся объект \texttt{monitor}, после чего вызываются методы для проверки и управления.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы климат-контроля в минивэне.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{ClimateZones}, который будет представлять многозонный климат-контроль.
+    \item Определить метод \texttt{activate\_front(self)}, который включает климат в передней зоне.
+    \item Определить метод \texttt{activate\_rear(self)}, который включает климат в задней зоне.
+    \item Определить метод \texttt{set\_temperature(self, zone, temp)}, 
+    который устанавливает температуру для указанной зоны (\texttt{"front"} или \texttt{"rear"}).
+    \item Создать экземпляр класса \texttt{ClimateZones} и сохранить его в переменной \texttt{climate}.
+    \item Вызвать метод \texttt{activate\_front()}.
+    \item Вызвать метод \texttt{set\_temperature("rear", 23)}.
+    \item Вызвать метод \texttt{activate\_rear()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 3 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{ClimateZones} к классу \texttt{Minivan} 
+    и подмешивание класса-миксина \texttt{CargoMonitor} к классу \texttt{UtilityVehicle(Van, Pickup, Minivan)}.  
+    При запуске класса \texttt{UtilityVehicle} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Климат в передней зоне включён.
+Температура в зоне rear установлена на 23°C.
+Климат в задней зоне включён.
+Загрузка груза
+Проверка веса: перегрузка!
+Двери заблокированы.
+Уведомление отправлено.
+Запуск двигателя
+Прицепка прицепа
+Разгрузка завершена. Состояние сброшено.
+Cargo volume: 10 m³, Cargo bed size: 2.5 m, Seats: 7, AC system: Dual-zone
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (van) {Class Van()};
+    \node (pickup) [below left=of van,xshift=-0.1cm] {Class Pickup()};
+    \node (minivan) [below right=of van,xshift=-0.7cm] {Class Minivan()};
+    \node (climate) [right=of minivan,xshift=-0.7cm] {Class ClimateZonesMixin};
+    \node (utility) [below=of $(pickup)!0.5!(minivan)$] {Class UtilityVehicle()};
+    \node (cargo) [right=of utility,xshift=0.1cm] {Class CargoMonitorMixin};
+    \draw[->] (utility) -- (pickup);
+    \draw[->] (utility) -- (minivan);
+    \draw[->] (pickup) -- (van);
+    \draw[->] (minivan) -- (van);
+    \draw[->, dashed] (climate) -- (minivan);
+    \draw[->, dashed] (cargo) -- (utility);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[4]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы динамической стабилизации спортивного автомобиля.  
+    Создать класс-миксин \texttt{StabilityControl}, который будет содержать 
+    методы для включения и выключения системы, регулировки чувствительности 
+    и вывода статуса системы.
+    \begin{enumerate}
+    \item Класс \texttt{StabilityControl} определяет объект, который моделирует систему динамической стабилизации.
+    \item Метод \texttt{enable\_dsc} включает систему стабилизации.
+    \item Метод \texttt{disable\_dsc} отключает систему (например, для дрифта).
+    \item Метод \texttt{set\_sensitivity} устанавливает уровень чувствительности от 1 до 5.
+    \item Метод \texttt{status\_report} выводит текущее состояние системы.
+    \item В примере использования создаётся объект \texttt{dsc}, после чего вызываются методы для настройки.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы управления открытым верхом кабриолета.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{RoofManager}, который будет управлять крышей кабриолета.
+    \item Определить метод \texttt{open\_roof(self)}, который открывает крышу, если скорость автомобиля ниже 50 км/ч.
+    \item Определить метод \texttt{close\_roof(self)}, который закрывает крышу.
+    \item Определить метод \texttt{check\_speed(self, speed)}, который проверяет допустимость открытия крыши.
+    \item Создать экземпляр класса \texttt{RoofManager} и сохранить его в переменной \texttt{roof}.
+    \item Вызвать метод \texttt{check\_speed(40)}.
+    \item Вызвать метод \texttt{open\_roof()}.
+    \item Вызвать метод \texttt{close\_roof()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 4 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{RoofManager} к классу \texttt{Convertible} 
+    и подмешивание класса-миксина \texttt{StabilityControl} к классу \texttt{PerformanceCar(SportsCar, Coupe, Convertible)}.  
+    При запуске класса \texttt{PerformanceCar} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Скорость 40 км/ч — крышу можно открыть.
+Крыша открыта.
+Крыша закрыта.
+Старт с контролем сцепления
+Аэродинамика активирована
+Переключение передач
+Система стабилизации включена.
+Чувствительность: 4
+Max speed: 320, Doors: 2, Roof type: Soft top, Aerodynamics: High
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (sports) {Class SportsCar()};
+    \node (coupe) [below left=of sports,xshift=-0.1cm] {Class Coupe()};
+    \node (convertible) [below right=of sports,xshift=-0.7cm] {Class Convertible()};
+    \node (roof) [right=of convertible,xshift=-0.7cm] {Class RoofManagerMixin};
+    \node (perf) [below=of $(coupe)!0.5!(convertible)$] {Class PerformanceCar()};
+    \node (stability) [right=of perf,xshift=0.1cm] {Class StabilityControlMixin};
+    \draw[->] (perf) -- (coupe);
+    \draw[->] (perf) -- (convertible);
+    \draw[->] (coupe) -- (sports);
+    \draw[->] (convertible) -- (sports);
+    \draw[->, dashed] (roof) -- (convertible);
+    \draw[->, dashed] (stability) -- (perf);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[5]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы антиблокировки тормозов (ABS) для двухколёсного транспорта.  
+    Создать класс-миксин \texttt{ABS\_System}, который будет содержать 
+    методы для активации ABS, имитации торможения и вывода состояния системы.
+    \begin{enumerate}
+    \item Класс \texttt{ABS\_System} определяет объект, который моделирует систему ABS.
+    \item Метод \texttt{activate\_abs} включает систему антиблокировки.
+    \item Метод \texttt{simulate\_braking} имитирует резкое торможение с активной ABS.
+    \item Метод \texttt{abs\_status} выводит текущее состояние системы.
+    \item В примере использования создаётся объект \texttt{abs}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу подсветки приборной панели мотоцикла.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{DashboardLighting}, который управляет подсветкой.
+    \item Определить метод \texttt{set\_brightness(self, level)}, который устанавливает яркость от 1 до 10.
+    \item Определить метод \texttt{enable\_night\_mode(self)}, который включает ночной режим (цвет подсветки — красный).
+    \item Определить метод \texttt{disable\_night\_mode(self)}, который возвращает дневной режим.
+    \item Создать экземпляр класса \texttt{DashboardLighting} и сохранить его в переменной \texttt{dash}.
+    \item Вызвать метод \texttt{set\_brightness(7)}.
+    \item Вызвать метод \texttt{enable\_night\_mode()}.
+    \item Вызвать метод \texttt{disable\_night\_mode()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 5 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{DashboardLighting} к классу \texttt{Motorcycle} 
+    и подмешивание класса-миксина \texttt{ABS\_System} к классу \texttt{TwoWheeler(Scooter, Motorcycle, Moped)}.  
+    При запуске класса \texttt{TwoWheeler} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Яркость панели: 7.
+Ночной режим включён.
+Дневной режим восстановлен.
+Включение питания
+Розжиг двигателя
+Нажатие педалей
+Дроссель активирован
+Антиблокировочная система включена.
+Имитация торможения: ABS предотвратила блокировку колёс.
+Battery life: 40 km, Engine displacement: 600 cc, Pedal assist: Yes
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (scooter) {Class Scooter()};
+    \node (motorcycle) [below left=of scooter,xshift=-0.1cm] {Class Motorcycle()};
+    \node (moped) [below right=of scooter,xshift=-0.7cm] {Class Moped()};
+    \node (lighting) [left=of motorcycle,xshift=0.7cm] {Class DashboardLightingMixin};
+    \node (twowheeler) [below=of $(motorcycle)!0.5!(moped)$] {Class TwoWheeler()};
+    \node (abs) [right=of twowheeler,xshift=0.1cm] {Class ABS\_SystemMixin};
+    \draw[->] (twowheeler) -- (motorcycle);
+    \draw[->] (twowheeler) -- (moped);
+    \draw[->] (motorcycle) -- (scooter);
+    \draw[->] (moped) -- (scooter);
+    \draw[->, dashed] (lighting) -- (motorcycle);
+    \draw[->, dashed] (abs) -- (twowheeler);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[6]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы навигации для велосипедов.  
+    Создать класс-миксин \texttt{BikeNavigation}, который будет содержать 
+    методы для установки маршрута, отслеживания текущего положения и вывода указаний.
+    \begin{enumerate}
+    \item Класс \texttt{BikeNavigation} определяет объект, который моделирует велонавигатор.
+    \item Метод \texttt{set\_route} устанавливает маршрут от точки A до точки B.
+    \item Метод \texttt{track\_position} имитирует определение текущего положения.
+    \item Метод \texttt{give\_direction} выводит следующее указание (например, «Поверните направо через 200 м»).
+    \item В примере использования создаётся объект \texttt{nav}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу антиугонной системы для электровелосипеда.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{AntiTheft}, который будет управлять защитой от кражи.
+    \item Определить метод \texttt{lock\_bike(self)}, который блокирует мотор и колёса.
+    \item Определить метод \texttt{unlock\_bike(self, pin)}, который разблокирует велосипед при вводе правильного PIN.
+    \item Определить метод \texttt{trigger\_alarm(self)}, который срабатывает при попытке перемещения заблокированного велосипеда.
+    \item Создать экземпляр класса \texttt{AntiTheft} и сохранить его в переменной \texttt{theft}.
+    \item Вызвать метод \texttt{lock\_bike()}.
+    \item Вызвать метод \texttt{trigger\_alarm()}.
+    \item Вызвать метод \texttt{unlock\_bike(1234)}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 6 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{AntiTheft} к классу \texttt{Ebike} 
+    и подмешивание класса-миксина \texttt{BikeNavigation} к классу \texttt{Cycle(Bicycle, Ebike, Tandem)}.  
+    При запуске класса \texttt{Cycle} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Велосипед заблокирован.
+Сработала сигнализация!
+Велосипед разблокирован.
+Маршрут установлен: от парка до станции.
+Текущее положение отслеживается.
+Указание: Поверните налево через 300 м.
+Педалирование начато.
+Координация на тандеме
+Мотор включён.
+Торможение выполнено.
+Frame size: 56 cm, Battery capacity: 500 Wh, Rider count: 2
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (bicycle) {Class Bicycle()};
+    \node (ebike) [below left=of bicycle,xshift=-0.1cm] {Class Ebike()};
+    \node (tandem) [below right=of bicycle,xshift=-0.7cm] {Class Tandem()};
+    \node (antitheft) [left=of ebike,xshift=0.7cm] {Class AntiTheftMixin};
+    \node (cycle) [below=of $(ebike)!0.5!(tandem)$] {Class Cycle()};
+    \node (nav) [right=of cycle,xshift=0.1cm] {Class BikeNavigationMixin};
+    \draw[->] (cycle) -- (ebike);
+    \draw[->] (cycle) -- (tandem);
+    \draw[->] (ebike) -- (bicycle);
+    \draw[->] (tandem) -- (bicycle);
+    \draw[->, dashed] (antitheft) -- (ebike);
+    \draw[->, dashed] (nav) -- (cycle);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[7]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы автоматического возврата дрона.  
+    Создать класс-миксин \texttt{ReturnToHome}, который будет содержать 
+    методы для установки домашней точки, активации возврата и отслеживания статуса.
+    \begin{enumerate}
+    \item Класс \texttt{ReturnToHome} определяет объект, который моделирует функцию «Вернуться домой».
+    \item Метод \texttt{set\_home} устанавливает координаты домашней точки.
+    \item Метод \texttt{return\_home} запускает автоматический возврат.
+    \item Метод \texttt{is\_returning} выводит статус возврата.
+    \item В примере использования создаётся объект \texttt{rth}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы предотвращения столкновений для вертолёта.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{CollisionAvoidance}, который будет анализировать окружение.
+    \item Определить метод \texttt{scan\_obstacles(self)}, который сканирует пространство.
+    \item Определить метод \texttt{alert\_pilot(self)}, который предупреждает пилота об опасности.
+    \item Определить метод \texttt{auto\_maneuver(self)}, который автоматически уводит аппарат от препятствия.
+    \item Создать экземпляр класса \texttt{CollisionAvoidance} и сохранить его в переменной \texttt{avoid}.
+    \item Вызвать метод \texttt{scan\_obstacles()}.
+    \item Вызвать метод \texttt{alert\_pilot()}.
+    \item Вызвать метод \texttt{auto\_maneuver()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 7 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{CollisionAvoidance} к классу \texttt{Helicopter} 
+    и подмешивание класса-миксина \texttt{ReturnToHome} к классу \texttt{Rotorcraft(Drone, Helicopter, Gyrocopter)}.  
+    При запуске класса \texttt{Rotorcraft} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Сканирование окружения...
+Обнаружено препятствие!
+Предупреждение пилота.
+Автоманёвр выполнен.
+Домашняя точка установлена: (0, 0, 0).
+Возврат домой инициирован.
+Запуск двигателей
+Вращение роторов
+Взлёт выполнен
+Зависание на высоте 50 м
+Посадка завершена.
+Flight time: 25 min, Rotor diameter: 12 m, Engine power: 150 hp
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (drone) {Class Drone()};
+    \node (helicopter) [below left=of drone,xshift=-0.1cm] {Class Helicopter()};
+    \node (gyrocopter) [below right=of drone,xshift=-0.7cm] {Class Gyrocopter()};
+    \node (avoid) [left=of helicopter,xshift=0.7cm] {Class CollisionAvoidanceMixin};
+    \node (rotor) [below=of $(helicopter)!0.5!(gyrocopter)$] {Class Rotorcraft()};
+    \node (rth) [right=of rotor,xshift=0.1cm] {Class ReturnToHomeMixin};
+    \draw[->] (rotor) -- (helicopter);
+    \draw[->] (rotor) -- (gyrocopter);
+    \draw[->] (helicopter) -- (drone);
+    \draw[->] (gyrocopter) -- (drone);
+    \draw[->, dashed] (avoid) -- (helicopter);
+    \draw[->, dashed] (rth) -- (rotor);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[8]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу автопилота для самолёта.  
+    Создать класс-миксин \texttt{Autopilot}, который будет содержать 
+    методы для включения автопилота, установки высоты и курса, а также для деактивации.
+    \begin{enumerate}
+    \item Класс \texttt{Autopilot} определяет объект, который моделирует автопилот.
+    \item Метод \texttt{engage} включает автопилот.
+    \item Метод \texttt{set\_altitude} устанавливает целевую высоту.
+    \item Метод \texttt{set\_heading} устанавливает курс.
+    \item Метод \texttt{disengage} отключает автопилот.
+    \item В примере использования создаётся объект \texttt{ap}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы антиобледенения крыльев.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{DeicingSystem}, который предотвращает обледенение.
+    \item Определить метод \texttt{activate\_deicing(self)}, который включает систему.
+    \item Определить метод \texttt{deactivate\_deicing(self)}, который выключает систему.
+    \item Определить метод \texttt{check\_icing\_risk(self)}, который оценивает риск обледенения.
+    \item Создать экземпляр класса \texttt{DeicingSystem} и сохранить его в переменной \texttt{deice}.
+    \item Вызвать метод \texttt{check\_icing\_risk()}.
+    \item Вызвать метод \texttt{activate\_deicing()}.
+    \item Вызвать метод \texttt{deactivate\_deicing()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 8 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{DeicingSystem} к классу \texttt{Airplane} 
+    и подмешивание класса-миксина \texttt{Autopilot} к классу \texttt{FixedWing(Airplane, Jet, Glider)}.  
+    При запуске класса \texttt{FixedWing} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Риск обледенения: высокий.
+Система антиобледенения включена.
+Система антиобледенения выключена.
+Руление начато
+Взлёт выполнен
+Форсаж включён
+Буксировка отцеплена
+Автопилот включён.
+Высота: 10000 м, курс: 270°
+Wingspan: 35 m, Engine thrust: 100 kN, Aspect ratio: 20
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (airplane) {Class Airplane()};
+    \node (jet) [below left=of airplane,xshift=-0.1cm] {Class Jet()};
+    \node (glider) [below right=of airplane,xshift=-0.7cm] {Class Glider()};
+    \node (deice) [left=of airplane,xshift=0.7cm] {Class DeicingSystemMixin};
+    \node (fixed) [below=of $(jet)!0.5!(glider)$] {Class FixedWing()};
+    \node (auto) [right=of fixed,xshift=0.1cm] {Class AutopilotMixin};
+    \draw[->] (fixed) -- (jet);
+    \draw[->] (fixed) -- (glider);
+    \draw[->] (jet) -- (airplane);
+    \draw[->] (glider) -- (airplane);
+    \draw[->, dashed] (deice) -- (airplane);
+    \draw[->, dashed] (auto) -- (fixed);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[9]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы оповещения пассажиров на круизном судне.  
+    Создать класс-миксин \texttt{PassengerAlert}, который будет содержать 
+    методы для объявления информации, экстренных оповещений и проверки систем связи.
+    \begin{enumerate}
+    \item Класс \texttt{PassengerAlert} определяет объект, который моделирует систему оповещения.
+    \item Метод \texttt{announce} делает общее объявление.
+    \item Метод \texttt{emergency\_alert} запускает экстренное оповещение.
+    \item Метод \texttt{test\_system} проверяет работоспособность динамиков.
+    \item В примере использования создаётся объект \texttt{alert}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы стабилизации качки на яхте.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{Stabilizers}, который управляет гироскопами или плавниками.
+    \item Определить метод \texttt{activate\_stabilizers(self)}, который включает систему.
+    \item Определить метод \texttt{deactivate\_stabilizers(self)}, который выключает систему.
+    \item Определить метод \texttt{adjust\_for\_sea(self, wave\_height)}, который адаптирует настройки под волнение.
+    \item Создать экземпляр класса \texttt{Stabilizers} и сохранить его в переменной \texttt{stab}.
+    \item Вызвать метод \texttt{activate\_stabilizers()}.
+    \item Вызвать метод \texttt{adjust\_for\_sea(2.5)}.
+    \item Вызвать метод \texttt{deactivate\_stabilizers()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 9 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{Stabilizers} к классу \texttt{Yacht} 
+    и подмешивание класса-миксина \texttt{PassengerAlert} к классу \texttt{Vessel(Cruiser, Ferry, Yacht)}.  
+    При запуске класса \texttt{Vessel} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Система стабилизации включена.
+Настройка под волнение 2.5 м.
+Система стабилизации выключена.
+Объявление: Отплытие через 10 минут.
+Экстренное оповещение: учения по безопасности.
+Тест систем связи пройден.
+Отплытие начато
+Паруса подняты
+Транспорт загружен
+Плавание в режиме круиза
+Причаливание завершено.
+Passenger capacity: 3000, Vehicle deck size: 50 cars, Mast height: 30 m
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (cruiser) {Class Cruiser()};
+    \node (ferry) [below left=of cruiser,xshift=-0.1cm] {Class Ferry()};
+    \node (yacht) [below right=of cruiser,xshift=-0.7cm] {Class Yacht()};
+    \node (stab) [right=of yacht,xshift=-0.7cm] {Class StabilizersMixin};
+    \node (vessel) [below=of $(ferry)!0.5!(yacht)$] {Class Vessel()};
+    \node (alert) [right=of vessel,xshift=0.1cm] {Class PassengerAlertMixin};
+    \draw[->] (vessel) -- (ferry);
+    \draw[->] (vessel) -- (yacht);
+    \draw[->] (ferry) -- (cruiser);
+    \draw[->] (yacht) -- (cruiser);
+    \draw[->, dashed] (stab) -- (yacht);
+    \draw[->, dashed] (alert) -- (vessel);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[10]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы обнаружения препятствий под водой.  
+    Создать класс-миксин \texttt{SonarSystem}, который будет содержать 
+    методы для сканирования, обнаружения объектов и вывода карты дна.
+    \begin{enumerate}
+    \item Класс \texttt{SonarSystem} определяет объект, который моделирует гидролокатор.
+    \item Метод \texttt{scan\_area} запускает сканирование.
+    \item Метод \texttt{detect\_object} определяет наличие препятствий.
+    \item Метод \texttt{map\_seabed} генерирует упрощённую карту.
+    \item В примере использования создаётся объект \texttt{sonar}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу герметизации корпуса амфибии.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{HullSeal}, который управляет герметичностью.
+    \item Определить метод \texttt{seal\_hull(self)}, который закрывает все люки и клапаны.
+    \item Определить метод \texttt{unseal\_hull(self)}, который открывает их.
+    \item Определить метод \texttt{check\_pressure(self)}, который проверяет герметичность.
+    \item Создать экземпляр класса \texttt{HullSeal} и сохранить его в переменной \texttt{seal}.
+    \item Вызвать метод \texttt{seal\_hull()}.
+    \item Вызвать метод \texttt{check\_pressure()}.
+    \item Вызвать метод \texttt{unseal\_hull()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 10 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{HullSeal} к классу \texttt{AmphibiousVehicle} 
+    и подмешивание класса-миксина \texttt{SonarSystem} к классу \texttt{AmphibiousCraft(Submarine, Hovercraft, AmphibiousVehicle)}.  
+    При запуске класса \texttt{AmphibiousCraft} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Корпус герметизирован.
+Давление в норме.
+Корпус разгерметизирован.
+Сканирование дна начато.
+Объект обнаружен на глубине 15 м.
+Карта дна сгенерирована.
+Погружение начато
+Юбка надута
+Режим переключён: вода → суша
+Подводная навигация активирована
+Depth rating: 300 m, Skirt material: Neoprene, Wheel type: All-terrain
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (sub) {Class Submarine()};
+    \node (hover) [below left=of sub,xshift=-0.1cm] {Class Hovercraft()};
+    \node (amphi) [below right=of sub,xshift=-0.7cm] {Class AmphibiousVehicle()};
+    \node (seal) [left=of amphi,xshift=0.7cm] {Class HullSealMixin};
+    \node (craft) [below=of $(hover)!0.5!(amphi)$] {Class AmphibiousCraft()};
+    \node (sonar) [right=of craft,xshift=0.1cm] {Class SonarSystemMixin};
+    \draw[->] (craft) -- (hover);
+    \draw[->] (craft) -- (amphi);
+    \draw[->] (hover) -- (sub);
+    \draw[->] (amphi) -- (sub);
+    \draw[->, dashed] (seal) -- (amphi);
+    \draw[->, dashed] (sonar) -- (craft);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[11]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы GPS-навигации для сельхозтехники.  
+    Создать класс-миксин \texttt{FieldGPS}, который будет содержать 
+    методы для загрузки поля, отслеживания пройденного пути и коррекции курса.
+    \begin{enumerate}
+    \item Класс \texttt{FieldGPS} определяет объект, который моделирует GPS-навигатор.
+    \item Метод \texttt{load\_field\_map} загружает карту поля.
+    \item Метод \texttt{track\_path} записывает пройденный маршрут.
+    \item Метод \texttt{correct\_course} корректирует направление движения.
+    \item В примере использования создаётся объект \texttt{gps}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы автоматической дозаправки комбайна.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{AutoRefuel}, который управляет дозаправкой.
+    \item Определить метод \texttt{request\_refuel(self)}, который отправляет запрос.
+    \item Определить метод \texttt{connect\_hose(self)}, который имитирует подключение шланга.
+    \item Определить метод \texttt{complete\_refuel(self)}, который завершает процесс.
+    \item Создать экземпляр класса \texttt{AutoRefuel} и сохранить его в переменной \texttt{refuel}.
+    \item Вызвать метод \texttt{request\_refuel()}.
+    \item Вызвать метод \texttt{connect\_hose()}.
+    \item Вызвать метод \texttt{complete\_refuel()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 11 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{AutoRefuel} к классу \texttt{Combine} 
+    и подмешивание класса-миксина \texttt{FieldGPS} к классу \texttt{AgriculturalMachine(Tractor, Combine, Sprayer)}.  
+    При запуске класса \texttt{AgriculturalMachine} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Запрос на дозаправку отправлен.
+Шланг подключён.
+Дозаправка завершена.
+Карта поля загружена.
+Маршрут отслеживается.
+Курс скорректирован.
+Двигатель запущен
+Вспашка начата
+Уборка урожая в процессе
+Форсунки активированы
+Разгрузка завершена
+Engine HP: 120, Grain tank size: 8000 L, Tank capacity: 300 L
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (tractor) {Class Tractor()};
+    \node (combine) [below left=of tractor,xshift=-0.1cm] {Class Combine()};
+    \node (sprayer) [below right=of tractor,xshift=-0.7cm] {Class Sprayer()};
+    \node (refuel) [left=of combine,xshift=0.7cm] {Class AutoRefuelMixin};
+    \node (agro) [below=of $(combine)!0.5!(sprayer)$] {Class AgriculturalMachine()};
+    \node (gps) [right=of agro,xshift=0.1cm] {Class FieldGPSMixin};
+    \draw[->] (agro) -- (combine);
+    \draw[->] (agro) -- (sprayer);
+    \draw[->] (combine) -- (tractor);
+    \draw[->] (sprayer) -- (tractor);
+    \draw[->, dashed] (refuel) -- (combine);
+    \draw[->, dashed] (gps) -- (agro);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[12]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы мониторинга нагрузки на кран.  
+    Создать класс-миксин \texttt{LoadSensor}, который будет содержать 
+    методы для проверки веса груза, предупреждения о перегрузке и блокировки подъёма.
+    \begin{enumerate}
+    \item Класс \texttt{LoadSensor} определяет объект, который моделирует датчик нагрузки.
+    \item Метод \texttt{measure\_load} измеряет текущую нагрузку.
+    \item Метод \texttt{warn\_overload} выводит предупреждение при превышении.
+    \item Метод \texttt{block\_lift} блокирует подъём при критической перегрузке.
+    \item В примере использования создаётся объект \texttt{sensor}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы автоматического выравнивания экскаватора.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{AutoLevel}, который управляет гидравликой для выравнивания.
+    \item Определить метод \texttt{check\_slope(self)}, который определяет уклон.
+    \item Определить метод \texttt{adjust\_stabilizers(self)}, который выравнивает платформу.
+    \item Определить метод \texttt{confirm\_level(self)}, который подтверждает горизонталь.
+    \item Создать экземпляр класса \texttt{AutoLevel} и сохранить его в переменной \texttt{level}.
+    \item Вызвать метод \texttt{check\_slope()}.
+    \item Вызвать метод \texttt{adjust\_stabilizers()}.
+    \item Вызвать метод \texttt{confirm\_level()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 12 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{AutoLevel} к классу \texttt{Excavator} 
+    и подмешивание класса-миксина \texttt{LoadSensor} к классу \texttt{ConstructionEquipment(Excavator, Bulldozer, Crane)}.  
+    При запуске класса \texttt{ConstructionEquipment} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Уклон: 8 градусов.
+Стабилизаторы отрегулированы.
+Платформа выровнена.
+Нагрузка: 4.8 тонн.
+Предупреждение: близко к пределу!
+Подъём разрешён.
+Двигатель запущен
+Копка выполнена
+Грунт выровнен
+Груз поднят
+Материалы перемещены
+Bucket capacity: 1.2 m³, Blade width: 3.5 m, Max load: 5 t
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (excavator) {Class Excavator()};
+    \node (bulldozer) [below left=of excavator,xshift=-0.1cm] {Class Bulldozer()};
+    \node (crane) [below right=of excavator,xshift=-0.7cm] {Class Crane()};
+    \node (level) [left=of excavator,xshift=0.7cm] {Class AutoLevelMixin};
+    \node (construction) [below=of $(bulldozer)!0.5!(crane)$] {Class ConstructionEquipment()};
+    \node (load) [right=of construction,xshift=0.1cm] {Class LoadSensorMixin};
+    \draw[->] (construction) -- (bulldozer);
+    \draw[->] (construction) -- (crane);
+    \draw[->] (bulldozer) -- (excavator);
+    \draw[->] (crane) -- (excavator);
+    \draw[->, dashed] (level) -- (excavator);
+    \draw[->, dashed] (load) -- (construction);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[13]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы связи между экстренными службами.  
+    Создать класс-миксин \texttt{EmergencyComms}, который будет содержать 
+    методы для шифрования связи, передачи координат и экстренного вызова подкрепления.
+    \begin{enumerate}
+    \item Класс \texttt{EmergencyComms} определяет объект, который моделирует защищённую связь.
+    \item Метод \texttt{encrypt\_channel} шифрует радиоканал.
+    \item Метод \texttt{send\_coordinates} передаёт GPS-координаты.
+    \item Метод \texttt{request\_backup} вызывает подкрепление.
+    \item В примере использования создаётся объект \texttt{comms}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу медицинского холодильника в машине скорой помощи.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{MedRefrigerator}, который управляет температурой лекарств.
+    \item Определить метод \texttt{cool\_meds(self)}, который включает охлаждение.
+    \item Определить метод \texttt{monitor\_temp(self)}, который проверяет температуру.
+    \item Определить метод \texttt{alert\_temp\_breach(self)}, который срабатывает при отклонении.
+    \item Создать экземпляр класса \texttt{MedRefrigerator} и сохранить его в переменной \texttt{fridge}.
+    \item Вызвать метод \texttt{cool\_meds()}.
+    \item Вызвать метод \texttt{monitor\_temp()}.
+    \item Вызвать метод \texttt{alert\_temp\_breach()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 13 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{MedRefrigerator} к классу \texttt{Ambulance} 
+    и подмешивание класса-миксина \texttt{EmergencyComms} к классу \texttt{EmergencyVehicle(Ambulance, FireTruck, PoliceCar)}.  
+    При запуске класса \texttt{EmergencyVehicle} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Охлаждение лекарств включено.
+Температура: 4°C.
+Отклонение температуры: нет.
+Канал связи зашифрован.
+Координаты отправлены: 55.7558° N, 37.6176° E.
+Подкрепление запрошено.
+Сирена включена
+Пациент загружен
+Лестница развернута
+Погоня начата
+Пожар потушен
+Medical kit: Advanced, Water tank: 2000 L, Radio type: Encrypted
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (ambulance) {Class Ambulance()};
+    \node (firetruck) [below left=of ambulance,xshift=-0.1cm] {Class FireTruck()};
+    \node (police) [below right=of ambulance,xshift=-0.7cm] {Class PoliceCar()};
+    \node (fridge) [left=of ambulance,xshift=0.7cm] {Class MedRefrigeratorMixin};
+    \node (emergency) [below=of $(firetruck)!0.5!(police)$] {Class EmergencyVehicle()};
+    \node (comms) [right=of emergency,xshift=0.1cm] {Class EmergencyCommsMixin};
+    \draw[->] (emergency) -- (firetruck);
+    \draw[->] (emergency) -- (police);
+    \draw[->] (firetruck) -- (ambulance);
+    \draw[->] (police) -- (ambulance);
+    \draw[->, dashed] (fridge) -- (ambulance);
+    \draw[->, dashed] (comms) -- (emergency);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[14]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы оценки клиентов в такси.  
+    Создать класс-миксин \texttt{RatingSystem}, который будет содержать 
+    методы для отправки запроса на оценку, получения отзыва и расчёта рейтинга водителя.
+    \begin{enumerate}
+    \item Класс \texttt{RatingSystem} определяет объект, который моделирует систему рейтинга.
+    \item Метод \texttt{request\_review} отправляет клиенту запрос.
+    \item Метод \texttt{submit\_review} принимает оценку от 1 до 5.
+    \item Метод \texttt{calculate\_rating} обновляет средний рейтинг.
+    \item В примере использования создаётся объект \texttt{rating}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу мини-бара в лимузине.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{MiniBar}, который управляет напитками.
+    \item Определить метод \texttt{stock\_bar(self)}, который заполняет бар.
+    \item Определить метод \texttt{serve\_drink(self, drink)}, который подаёт напиток.
+    \item Определить метод \texttt{check\_stock(self)}, который проверяет наличие.
+    \item Создать экземпляр класса \texttt{MiniBar} и сохранить его в переменной \texttt{bar}.
+    \item Вызвать метод \texttt{stock\_bar()}.
+    \item Вызвать метод \texttt{serve\_drink("Виски")}.
+    \item Вызвать метод \texttt{check\_stock()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 14 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{MiniBar} к классу \texttt{Limousine} 
+    и подмешивание класса-миксина \texttt{RatingSystem} к классу \texttt{PassengerVehicle(Taxi, RideShare, Limousine)}.  
+    При запуске класса \texttt{PassengerVehicle} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Мини-бар пополнен.
+Подан напиток: Виски.
+Остаток: 5 напитков.
+Запрос на оценку отправлен.
+Отзыв получен: 5 звёзд.
+Рейтинг обновлён: 4.8.
+Клиент подобран
+Автомобиль разблокирован
+Шампанское подано
+Клиент высаден
+Passenger seats: 4, App integration: Yes, Interior luxury: Premium
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (taxi) {Class Taxi()};
+    \node (rideshare) [below left=of taxi,xshift=-0.1cm] {Class RideShare()};
+    \node (limo) [below right=of taxi,xshift=-0.7cm] {Class Limousine()};
+    \node (bar) [right=of limo,xshift=-0.7cm] {Class MiniBarMixin};
+    \node (passenger) [below=of $(rideshare)!0.5!(limo)$] {Class PassengerVehicle()};
+    \node (rating) [right=of passenger,xshift=0.1cm] {Class RatingSystemMixin};
+    \draw[->] (passenger) -- (rideshare);
+    \draw[->] (passenger) -- (limo);
+    \draw[->] (rideshare) -- (taxi);
+    \draw[->] (limo) -- (taxi);
+    \draw[->, dashed] (bar) -- (limo);
+    \draw[->, dashed] (rating) -- (passenger);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[15]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы видеонаблюдения в школьном автобусе.  
+    Создать класс-миксин \texttt{BusCameras}, который будет содержать 
+    методы для включения записи, сохранения архива и обнаружения движения.
+    \begin{enumerate}
+    \item Класс \texttt{BusCameras} определяет объект, который моделирует систему камер.
+    \item Метод \texttt{start\_recording} включает запись.
+    \item Метод \texttt{save\_archive} сохраняет файлы.
+    \item Метод \texttt{detect\_motion} определяет активность в салоне.
+    \item В примере использования создаётся объект \texttt{cams}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы развлечений в туристическом автобусе.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{EntertainmentSystem}, который управляет мультимедиа.
+    \item Определить метод \texttt{play\_movie(self)}, который запускает фильм.
+    \item Определить метод \texttt{connect\_headphones(self)}, который подключает наушники.
+    \item Определить метод \texttt{volume\_control(self, level)}, который регулирует громкость.
+    \item Создать экземпляр класса \texttt{EntertainmentSystem} и сохранить его в переменной \texttt{ent}.
+    \item Вызвать метод \texttt{play\_movie()}.
+    \item Вызвать метод \texttt{connect\_headphones()}.
+    \item Вызвать метод \texttt{volume\_control(6)}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 15 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{EntertainmentSystem} к классу \texttt{Coach} 
+    и подмешивание класса-миксина \texttt{BusCameras} к классу \texttt{Bus(SchoolBus, Coach, Minibus)}.  
+    При запуске класса \texttt{Bus} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Фильм запущен.
+Наушники подключены.
+Громкость установлена: 6.
+Запись начата.
+Движение обнаружено: дети зашли.
+Архив сохранён.
+Дети загружены
+Знак активирован
+Двери открыты
+Аудиогид включён
+Отправление начато
+Seat belts: Yes, Toilet installed: Yes, Door type: Sliding
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (school) {Class SchoolBus()};
+    \node (coach) [below left=of school,xshift=-0.1cm] {Class Coach()};
+    \node (mini) [below right=of school,xshift=-0.7cm] {Class Minibus()};
+    \node (ent) [left=of coach,xshift=0.7cm] {Class EntertainmentSystemMixin};
+    \node (bus) [below=of $(coach)!0.5!(mini)$] {Class Bus()};
+    \node (cams) [right=of bus,xshift=0.1cm] {Class BusCamerasMixin};
+    \draw[->] (bus) -- (coach);
+    \draw[->] (bus) -- (mini);
+    \draw[->] (coach) -- (school);
+    \draw[->] (mini) -- (school);
+    \draw[->, dashed] (ent) -- (coach);
+    \draw[->, dashed] (cams) -- (bus);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[16]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы тахографа в грузовике.  
+    Создать класс-миксин \texttt{Tachograph}, который будет содержать 
+    методы для записи скорости, времени в пути и контроля режима труда водителя.
+    \begin{enumerate}
+    \item Класс \texttt{Tachograph} определяет объект, который моделирует тахограф.
+    \item Метод \texttt{start\_log} начинает запись поездки.
+    \item Метод \texttt{record\_speed} сохраняет текущую скорость.
+    \item Метод \texttt{check\_driving\_time} проверяет превышение лимита вождения.
+    \item В примере использования создаётся объект \texttt{tacho}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы автоматической разгрузки самосвала.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{AutoUnload}, который управляет гидравликой кузова.
+    \item Определить метод \texttt{prepare\_unload(self)}, который готовит к разгрузке.
+    \item Определить метод \texttt{execute\_unload(self)}, который поднимает кузов.
+    \item Определить метод \texttt{confirm\_empty(self)}, который проверяет пустоту кузова.
+    \item Создать экземпляр класса \texttt{AutoUnload} и сохранить его в переменной \texttt{unload}.
+    \item Вызвать метод \texttt{prepare\_unload()}.
+    \item Вызвать метод \texttt{execute\_unload()}.
+    \item Вызвать метод \texttt{confirm\_empty()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 16 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{AutoUnload} к классу \texttt{DumpTruck} 
+    и подмешивание класса-миксина \texttt{Tachograph} к классу \texttt{FreightVehicle(Truck, Semi, DumpTruck)}.  
+    При запуске класса \texttt{FreightVehicle} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Подготовка к разгрузке.
+Кузов поднят.
+Кузов пуст.
+Запись поездки начата.
+Текущая скорость: 85 км/ч.
+Лимит вождения: OK.
+Двигатель запущен
+Груз погружен
+Прицеп подцеплен
+Кузов поднят
+Разгрузка завершена
+Payload capacity: 20 t, Fifth wheel: Standard, Bed angle: 45°
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (truck) {Class Truck()};
+    \node (semi) [below left=of truck,xshift=-0.1cm] {Class Semi()};
+    \node (dump) [below right=of truck,xshift=-0.7cm] {Class DumpTruck()};
+    \node (auto) [right=of dump,xshift=-0.7cm] {Class AutoUnloadMixin};
+    \node (freight) [below=of $(semi)!0.5!(dump)$] {Class FreightVehicle()};
+    \node (tacho) [right=of freight,xshift=0.1cm] {Class TachographMixin};
+    \draw[->] (freight) -- (semi);
+    \draw[->] (freight) -- (dump);
+    \draw[->] (semi) -- (truck);
+    \draw[->] (dump) -- (truck);
+    \draw[->, dashed] (auto) -- (dump);
+    \draw[->, dashed] (tacho) -- (freight);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[17]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы термоконтроля в космическом аппарате.  
+    Создать класс-миксин \texttt{ThermalControl}, который будет содержать 
+    методы для охлаждения, обогрева и мониторинга температуры компонентов.
+    \begin{enumerate}
+    \item Класс \texttt{ThermalControl} определяет объект, который моделирует термосистему.
+    \item Метод \texttt{activate\_cooling} включает радиаторы.
+    \item Метод \texttt{activate\_heating} включает нагреватели.
+    \item Метод \texttt{monitor\_temp} проверяет температуру модулей.
+    \item В примере использования создаётся объект \texttt{thermal}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы посадки по координатам.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{PrecisionLanding}, который управляет посадкой.
+    \item Определить метод \texttt{acquire\_target(self)}, который захватывает цель.
+    \item Определить метод \texttt{adjust\_descent(self)}, который корректирует траекторию.
+    \item Определить метод \texttt{confirm\_landing(self)}, который подтверждает контакт.
+    \item Создать экземпляр класса \texttt{PrecisionLanding} и сохранить его в переменной \texttt{landing}.
+    \item Вызвать метод \texttt{acquire\_target()}.
+    \item Вызвать метод \texttt{adjust\_descent()}.
+    \item Вызвать метод \texttt{confirm\_landing()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 17 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{PrecisionLanding} к классу \texttt{Lander} 
+    и подмешивание класса-миксина \texttt{ThermalControl} к классу \texttt{Spacecraft(Rocket, Spaceplane, Lander)}.  
+    При запуске класса \texttt{Spacecraft} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Цель захвачена.
+Траектория скорректирована.
+Контакт с поверхностью подтверждён.
+Охлаждение активировано.
+Нагрев отключён.
+Температура модулей: 22°C.
+Запуск выполнен
+Выход на орбиту
+Вход в атмосферу
+Посадка завершена
+Груз выгружен
+Stage count: 2, Reentry shield: Ceramic, Thruster count: 4
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (rocket) {Class Rocket()};
+    \node (spaceplane) [below left=of rocket,xshift=-0.1cm] {Class Spaceplane()};
+    \node (lander) [below right=of rocket,xshift=-0.7cm] {Class Lander()};
+    \node (landing) [right=of lander,xshift=-0.7cm] {Class PrecisionLandingMixin};
+    \node (spacecraft) [below=of $(spaceplane)!0.5!(lander)$] {Class Spacecraft()};
+    \node (thermal) [right=of spacecraft,xshift=0.1cm] {Class ThermalControlMixin};
+    \draw[->] (spacecraft) -- (spaceplane);
+    \draw[->] (spacecraft) -- (lander);
+    \draw[->] (spaceplane) -- (rocket);
+    \draw[->] (lander) -- (rocket);
+    \draw[->, dashed] (landing) -- (lander);
+    \draw[->, dashed] (thermal) -- (spacecraft);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[18]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы уведомлений в умных часах.  
+    Создать класс-миксин \texttt{NotificationHub}, который будет содержать 
+    методы для фильтрации уведомлений, вибрации и отображения иконок приложений.
+    \begin{enumerate}
+    \item Класс \texttt{NotificationHub} определяет объект, который моделирует центр уведомлений.
+    \item Метод \texttt{filter\_apps} настраивает, от каких приложений приходят уведомления.
+    \item Метод \texttt{vibrate\_alert} активирует вибрацию.
+    \item Метод \texttt{show\_icon} отображает иконку приложения.
+    \item В примере использования создаётся объект \texttt{hub}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы отслеживания сна в фитнес-трекере.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{SleepTracker}, который анализирует сон.
+    \item Определить метод \texttt{start\_monitoring(self)}, который включает мониторинг.
+    \item Определить метод \texttt{analyze\_sleep(self)}, который оценивает качество.
+    \item Определить метод \texttt{generate\_report(self)}, который формирует отчёт.
+    \item Создать экземпляр класса \texttt{SleepTracker} и сохранить его в переменной \texttt{sleep}.
+    \item Вызвать метод \texttt{start\_monitoring()}.
+    \item Вызвать метод \texttt{analyze\_sleep()}.
+    \item Вызвать метод \texttt{generate\_report()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 18 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{SleepTracker} к классу \texttt{FitnessTracker} 
+    и подмешивание класса-миксина \texttt{NotificationHub} к классу \texttt{WearableDevice(Smartwatch, FitnessTracker, AR\_Glasses)}.  
+    При запуске класса \texttt{WearableDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Мониторинг сна начат.
+Качество сна: 85%.
+Отчёт сформирован.
+Уведомления от WhatsApp разрешены.
+Вибрация активирована.
+Иконка отображена.
+Уведомления получены
+ЧСС в норме
+Данные синхронизированы
+Оверлей отображён
+Battery life: 2 days, Heart rate sensor: Optical, Display resolution: 1920x1080
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (watch) {Class Smartwatch()};
+    \node (fitness) [below left=of watch,xshift=-0.1cm] {Class FitnessTracker()};
+    \node (ar) [below right=of watch,xshift=-0.7cm] {Class AR\_Glasses()};
+    \node (sleep) [left=of fitness,xshift=0.7cm] {Class SleepTrackerMixin};
+    \node (wearable) [below=of $(fitness)!0.5!(ar)$] {Class WearableDevice()};
+    \node (notify) [right=of wearable,xshift=0.1cm] {Class NotificationHubMixin};
+    \draw[->] (wearable) -- (fitness);
+    \draw[->] (wearable) -- (ar);
+    \draw[->] (fitness) -- (watch);
+    \draw[->] (ar) -- (watch);
+    \draw[->, dashed] (sleep) -- (fitness);
+    \draw[->, dashed] (notify) -- (wearable);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[19]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы распознавания лиц в смартфоне.  
+    Создать класс-миксин \texttt{FaceUnlock}, который будет содержать 
+    методы для сканирования лица, разблокировки и обработки ошибок.
+    \begin{enumerate}
+    \item Класс \texttt{FaceUnlock} определяет объект, который моделирует Face ID.
+    \item Метод \texttt{scan\_face} запускает камеру для сканирования.
+    \item Метод \texttt{unlock\_device} разблокирует устройство при совпадении.
+    \item Метод \texttt{handle\_failure} обрабатывает неудачные попытки.
+    \item В примере использования создаётся объект \texttt{face}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы стилуса в планшете.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{StylusManager}, который управляет стилусом.
+    \item Определить метод \texttt{detect\_stylus(self)}, который проверяет подключение.
+    \item Определить метод \texttt{calibrate\_pen(self)}, который калибрует чувствительность.
+    \item Определить метод \texttt{enable\_palm\_rejection(self)}, который отключает ладонь.
+    \item Создать экземпляр класса \texttt{StylusManager} и сохранить его в переменной \texttt{stylus}.
+    \item Вызвать метод \texttt{detect\_stylus()}.
+    \item Вызвать метод \texttt{calibrate\_pen()}.
+    \item Вызвать метод \texttt{enable\_palm\_rejection()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 19 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{StylusManager} к классу \texttt{Tablet} 
+    и подмешивание класса-миксина \texttt{FaceUnlock} к классу \texttt{MobileDevice(Smartphone, Tablet, Ereader)}.  
+    При запуске класса \texttt{MobileDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Стилус обнаружен.
+Калибровка завершена.
+Отклонение ладони включено.
+Лицо отсканировано.
+Устройство разблокировано.
+Звонок совершён
+Фото сделано
+Рисование начато
+Книга открыта
+Видео воспроизведено
+Screen size: 6.5", Stylus support: Yes, Front light: Yes
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (phone) {Class Smartphone()};
+    \node (tablet) [below left=of phone,xshift=-0.1cm] {Class Tablet()};
+    \node (ereader) [below right=of phone,xshift=-0.7cm] {Class Ereader()};
+    \node (stylus) [left=of tablet,xshift=0.7cm] {Class StylusManagerMixin};
+    \node (mobile) [below=of $(tablet)!0.5!(ereader)$] {Class MobileDevice()};
+    \node (face) [right=of mobile,xshift=0.1cm] {Class FaceUnlockMixin};
+    \draw[->] (mobile) -- (tablet);
+    \draw[->] (mobile) -- (ereader);
+    \draw[->] (tablet) -- (phone);
+    \draw[->] (ereader) -- (phone);
+    \draw[->, dashed] (stylus) -- (tablet);
+    \draw[->, dashed] (face) -- (mobile);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[20]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы резервного копирования в компьютере.  
+    Создать класс-миксин \texttt{BackupSystem}, который будет содержать 
+    методы для создания резервной копии, проверки целостности и восстановления данных.
+    \begin{enumerate}
+    \item Класс \texttt{BackupSystem} определяет объект, который моделирует бэкап.
+    \item Метод \texttt{create\_backup} сохраняет данные на внешний носитель.
+    \item Метод \texttt{verify\_integrity} проверяет целостность архива.
+    \item Метод \texttt{restore\_data} восстанавливает систему из резервной копии.
+    \item В примере использования создаётся объект \texttt{backup}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы мониторинга температуры в рабочей станции.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{TempMonitor}, который отслеживает нагрев компонентов.
+    \item Определить метод \texttt{read\_cpu\_temp(self)}, который считывает температуру CPU.
+    \item Определить метод \texttt{read\_gpu\_temp(self)}, который считывает температуру GPU.
+    \item Определить метод \texttt{alert\_overheat(self)}, который срабатывает при перегреве.
+    \item Создать экземпляр класса \texttt{TempMonitor} и сохранить его в переменной \texttt{temp}.
+    \item Вызвать метод \texttt{read\_cpu\_temp()}.
+    \item Вызвать метод \texttt{read\_gpu\_temp()}.
+    \item Вызвать метод \texttt{alert\_overheat()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 20 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{TempMonitor} к классу \texttt{Workstation} 
+    и подмешивание класса-миксина \texttt{BackupSystem} к классу \texttt{Computer(Laptop, Desktop, Workstation)}.  
+    При запуске класса \texttt{Computer} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Температура CPU: 68°C.
+Температура GPU: 72°C.
+Перегрев не обнаружен.
+Резервная копия создана.
+Целостность проверена.
+Восстановление не требуется.
+ОС загружена
+Питание включено
+Приложение запущено
+Сцена отрендерена
+Система выключена
+RAM: 16 GB, GPU model: RTX 4090, CPU cores: 16
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (laptop) {Class Laptop()};
+    \node (desktop) [below left=of laptop,xshift=-0.1cm] {Class Desktop()};
+    \node (workstation) [below right=of laptop,xshift=-0.7cm] {Class Workstation()};
+    \node (temp) [left=of workstation,xshift=0.7cm] {Class TempMonitorMixin};
+    \node (computer) [below=of $(desktop)!0.5!(workstation)$] {Class Computer()};
+    \node (backup) [right=of computer,xshift=0.1cm] {Class BackupSystemMixin};
+    \draw[->] (computer) -- (desktop);
+    \draw[->] (computer) -- (workstation);
+    \draw[->] (desktop) -- (laptop);
+    \draw[->] (workstation) -- (laptop);
+    \draw[->, dashed] (temp) -- (workstation);
+    \draw[->, dashed] (backup) -- (computer);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[21]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы логирования трафика в сетевом устройстве.  
+    Создать класс-миксин \texttt{TrafficLogger}, который будет содержать 
+    методы для включения логирования, фильтрации по IP и экспорта логов.
+    \begin{enumerate}
+    \item Класс \texttt{TrafficLogger} определяет объект, который моделирует логгер.
+    \item Метод \texttt{enable\_logging} включает запись трафика.
+    \item Метод \texttt{filter\_by\_ip} задаёт IP-адрес для фильтрации.
+    \item Метод \texttt{export\_logs} сохраняет логи в файл.
+    \item В примере использования создаётся объект \texttt{logger}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы диагностики маршрутизатора.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{RouterDiagnostics}, который проверяет работоспособность.
+    \item Определить метод \texttt{run\_self\_test(self)}, который запускает самодиагностику.
+    \item Определить метод \texttt{check\_interfaces(self)}, который проверяет порты.
+    \item Определить метод \texttt{report\_status(self)}, который выводит отчёт.
+    \item Создать экземпляр класса \texttt{RouterDiagnostics} и сохранить его в переменной \texttt{diag}.
+    \item Вызвать метод \texttt{run\_self\_test()}.
+    \item Вызвать метод \texttt{check\_interfaces()}.
+    \item Вызвать метод \texttt{report\_status()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 21 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{RouterDiagnostics} к классу \texttt{Router} 
+    и подмешивание класса-миксина \texttt{TrafficLogger} к классу \texttt{NetworkDevice(Router, Switch, Firewall)}.  
+    При запуске класса \texttt{NetworkDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Самодиагностика запущена.
+Порты проверены: все активны.
+Статус: норма.
+Логирование включено.
+Фильтрация по IP: 192.168.1.100.
+Логи экспортированы.
+Устройство подключено
+Пакеты переданы
+SSID транслируется
+VLAN настроен
+Угроза заблокирована
+LAN ports: 4, Port speed: 1 Gbps, Rules count: 50
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (router) {Class Router()};
+    \node (switch) [below left=of router,xshift=-0.1cm] {Class Switch()};
+    \node (firewall) [below right=of router,xshift=-0.7cm] {Class Firewall()};
+    \node (diag) [left=of router,xshift=0.7cm] {Class RouterDiagnosticsMixin};
+    \node (netdev) [below=of $(switch)!0.5!(firewall)$] {Class NetworkDevice()};
+    \node (logger) [right=of netdev,xshift=0.1cm] {Class TrafficLoggerMixin};
+    \draw[->] (netdev) -- (switch);
+    \draw[->] (netdev) -- (firewall);
+    \draw[->] (switch) -- (router);
+    \draw[->] (firewall) -- (router);
+    \draw[->, dashed] (diag) -- (router);
+    \draw[->, dashed] (logger) -- (netdev);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[22]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы энергосбережения в офисной технике.  
+    Создать класс-миксин \texttt{EcoMode}, который будет содержать 
+    методы для перехода в спящий режим, отключения дисплея и учёта энергопотребления.
+    \begin{enumerate}
+    \item Класс \texttt{EcoMode} определяет объект, который моделирует режим энергосбережения.
+    \item Метод \texttt{enter\_sleep} переводит устройство в сон.
+    \item Метод \texttt{turn\_off\_display} выключает экран.
+    \item Метод \texttt{log\_energy} записывает потреблённую энергию.
+    \item В примере использования создаётся объект \texttt{eco}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы автоматической подачи бумаги в принтере.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{AutoFeeder}, который управляет лотком.
+    \item Определить метод \texttt{load\_tray(self)}, который заполняет лоток.
+    \item Определить метод \texttt{detect\_jam(self)}, который определяет зажевывание.
+    \item Определить метод \texttt{resume\_printing(self)}, который возобновляет печать.
+    \item Создать экземпляр класса \texttt{AutoFeeder} и сохранить его в переменной \texttt{feeder}.
+    \item Вызвать метод \texttt{load\_tray()}.
+    \item Вызвать метод \texttt{detect\_jam()}.
+    \item Вызвать метод \texttt{resume\_printing()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 22 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{AutoFeeder} к классу \texttt{Printer} 
+    и подмешивание класса-миксина \texttt{EcoMode} к классу \texttt{OfficeDevice(Printer, Scanner, Copier)}.  
+    При запуске класса \texttt{OfficeDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Лоток заполнен.
+Зажевывание не обнаружено.
+Печать продолжена.
+Спящий режим активирован.
+Дисплей выключен.
+Энергопотребление: 120 Вт·ч.
+Бумага загружена
+Страница отсканирована
+Документ напечатан
+PDF сохранён
+Копирование завершено
+Ink type: Laser, Color depth: 48-bit, Duplex: Yes
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (printer) {Class Printer()};
+    \node (scanner) [below left=of printer,xshift=-0.1cm] {Class Scanner()};
+    \node (copier) [below right=of printer,xshift=-0.7cm] {Class Copier()};
+    \node (feeder) [left=of printer,xshift=0.7cm] {Class AutoFeederMixin};
+    \node (office) [below=of $(scanner)!0.5!(copier)$] {Class OfficeDevice()};
+    \node (eco) [right=of office,xshift=0.1cm] {Class EcoModeMixin};
+    \draw[->] (office) -- (scanner);
+    \draw[->] (office) -- (copier);
+    \draw[->] (scanner) -- (printer);
+    \draw[->] (copier) -- (printer);
+    \draw[->, dashed] (feeder) -- (printer);
+    \draw[->, dashed] (eco) -- (office);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[23]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы стабилизации изображения в камере.  
+    Создать класс-миксин \texttt{ImageStabilizer}, который будет содержать 
+    методы для включения оптической стабилизации, компенсации дрожания и вывода качества кадра.
+    \begin{enumerate}
+    \item Класс \texttt{ImageStabilizer} определяет объект, который моделирует стабилизацию.
+    \item Метод \texttt{enable\_ois} включает оптическую стабилизацию.
+    \item Метод \texttt{compensate\_shake} корректирует дрожание.
+    \item Метод \texttt{assess\_quality} оценивает резкость кадра.
+    \item В примере использования создаётся объект \texttt{stab}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы распознавания объектов в видеокамере.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{ObjectDetector}, который анализирует кадры.
+    \item Определить метод \texttt{scan\_frame(self)}, который обрабатывает изображение.
+    \item Определить метод \texttt{identify\_objects(self)}, который распознаёт объекты.
+    \item Определить метод \texttt{tag\_scene(self)}, который добавляет метки.
+    \item Создать экземпляр класса \texttt{ObjectDetector} и сохранить его в переменной \texttt{detect}.
+    \item Вызвать метод \texttt{scan\_frame()}.
+    \item Вызвать метод \texttt{identify\_objects()}.
+    \item Вызвать метод \texttt{tag\_scene()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 23 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{ObjectDetector} к классу \texttt{Camcorder} 
+    и подмешивание класса-миксина \texttt{ImageStabilizer} к классу \texttt{ImagingDevice(Camera, Camcorder, DroneCam)}.  
+    При запуске класса \texttt{ImagingDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Кадр обработан.
+Объекты распознаны: человек, автомобиль.
+Метки добавлены.
+Оптическая стабилизация включена.
+Дрожание компенсировано.
+Качество кадра: высокое.
+Фокусировка выполнена
+Фото сделано
+Видео записано
+Запись остановлена
+Поток транслируется
+Sensor size: Full-frame, Video format: 4K, Gimbal axes: 3
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (camera) {Class Camera()};
+    \node (camcorder) [below left=of camera,xshift=-0.1cm] {Class Camcorder()};
+    \node (dronecam) [below right=of camera,xshift=-0.7cm] {Class DroneCam()};
+    \node (detect) [left=of camcorder,xshift=0.7cm] {Class ObjectDetectorMixin};
+    \node (imaging) [below=of $(camcorder)!0.5!(dronecam)$] {Class ImagingDevice()};
+    \node (stab) [right=of imaging,xshift=0.1cm] {Class ImageStabilizerMixin};
+    \draw[->] (imaging) -- (camcorder);
+    \draw[->] (imaging) -- (dronecam);
+    \draw[->] (camcorder) -- (camera);
+    \draw[->] (dronecam) -- (camera);
+    \draw[->, dashed] (detect) -- (camcorder);
+    \draw[->, dashed] (stab) -- (imaging);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[24]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы управления рецептами в кухонной технике.  
+    Создать класс-миксин \texttt{RecipeManager}, который будет содержать 
+    методы для загрузки рецепта, установки режимов приготовления и отслеживания прогресса.
+    \begin{enumerate}
+    \item Класс \texttt{RecipeManager} определяет объект, который моделирует систему рецептов.
+    \item Метод \texttt{load\_recipe} загружает рецепт по названию.
+    \item Метод \texttt{set\_program} устанавливает параметры приготовления.
+    \item Метод \texttt{track\_progress} отслеживает этапы готовки.
+    \item В примере использования создаётся объект \texttt{recipe}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы самоочистки в духовке.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{SelfCleanOven}, который управляет очисткой.
+    \item Определить метод \texttt{start\_pyrolysis(self)}, который запускает пиролиз.
+    \item Определить метод \texttt{check\_temperature(self)}, который контролирует нагрев.
+    \item Определить метод \texttt{complete\_cycle(self)}, который завершает цикл.
+    \item Создать экземпляр класса \texttt{SelfCleanOven} и сохранить его в переменной \texttt{clean}.
+    \item Вызвать метод \texttt{start\_pyrolysis()}.
+    \item Вызвать метод \texttt{check\_temperature()}.
+    \item Вызвать метод \texttt{complete\_cycle()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 24 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{SelfCleanOven} к классу \texttt{Oven} 
+    и подмешивание класса-миксина \texttt{RecipeManager} к классу \texttt{CookingAppliance(Microwave, Oven, AirFryer)}.  
+    При запуске класса \texttt{CookingAppliance} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Пиролиз запущен.
+Температура: 500°C.
+Цикл очистки завершён.
+Рецепт загружен: Курица гриль.
+Программа установлена.
+Этап: запекание.
+Таймер установлен
+Предварительный нагрев начат
+Хрустящая корочка готова
+Прибор выключен
+Power watt: 1000, Convection: Yes, Basket size: 5 L
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (microwave) {Class Microwave()};
+    \node (oven) [below left=of microwave,xshift=-0.1cm] {Class Oven()};
+    \node (airfryer) [below right=of microwave,xshift=-0.7cm] {Class AirFryer()};
+    \node (clean) [left=of oven,xshift=0.7cm] {Class SelfCleanOvenMixin};
+    \node (cooking) [below=of $(oven)!0.5!(airfryer)$] {Class CookingAppliance()};
+    \node (recipe) [right=of cooking,xshift=0.1cm] {Class RecipeManagerMixin};
+    \draw[->] (cooking) -- (oven);
+    \draw[->] (cooking) -- (airfryer);
+    \draw[->] (oven) -- (microwave);
+    \draw[->] (airfryer) -- (microwave);
+    \draw[->, dashed] (clean) -- (oven);
+    \draw[->, dashed] (recipe) -- (cooking);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[25]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы энергомониторинга в охлаждающей технике.  
+    Создать класс-миксин \texttt{EnergyMonitor}, который будет содержать 
+    методы для измерения потребления, расчёта стоимости и рекомендаций по экономии.
+    \begin{enumerate}
+    \item Класс \texttt{EnergyMonitor} определяет объект, который моделирует мониторинг энергии.
+    \item Метод \texttt{measure\_consumption} измеряет потребление за час.
+    \item Метод \texttt{calculate\_cost} вычисляет стоимость.
+    \item Метод \texttt{suggest\_savings} даёт советы по экономии.
+    \item В примере использования создаётся объект \texttt{energy}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы быстрой заморозки в морозильной камере.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{QuickFreeze}, который управляет режимом заморозки.
+    \item Определить метод \texttt{activate\_mode(self)}, который включает режим.
+    \item Определить метод \texttt{monitor\_temp(self)}, который следит за температурой.
+    \item Определить метод \texttt{deactivate\_mode(self)}, который выключает режим.
+    \item Создать экземпляр класса \texttt{QuickFreeze} и сохранить его в переменной \texttt{freeze}.
+    \item Вызвать метод \texttt{activate\_mode()}.
+    \item Вызвать метод \texttt{monitor\_temp()}.
+    \item Вызвать метод \texttt{deactivate\_mode()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 25 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{QuickFreeze} к классу \texttt{Freezer} 
+    и подмешивание класса-миксина \texttt{EnergyMonitor} к классу \texttt{CoolingAppliance(Refrigerator, Freezer, MiniFridge)}.  
+    При запуске класса \texttt{CoolingAppliance} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Режим быстрой заморозки включён.
+Температура: -24°C.
+Режим выключен.
+Потребление: 1.2 кВт·ч/ч.
+Стоимость: 6.5 руб/ч.
+Совет: установите режим «Эко».
+Охлаждение начато
+Заморозка выполнена
+Сигнализация активна
+Напиток охлаждён
+Продукты размещены
+Capacity liters: 300, Temp min: -25°C, Door type: Glass
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (fridge) {Class Refrigerator()};
+    \node (freezer) [below left=of fridge,xshift=-0.1cm] {Class Freezer()};
+    \node (minifridge) [below right=of fridge,xshift=-0.7cm] {Class MiniFridge()};
+    \node (quick) [left=of freezer,xshift=0.7cm] {Class QuickFreezeMixin};
+    \node (cooling) [below=of $(freezer)!0.5!(minifridge)$] {Class CoolingAppliance()};
+    \node (energy) [right=of cooling,xshift=0.1cm] {Class EnergyMonitorMixin};
+    \draw[->] (cooling) -- (freezer);
+    \draw[->] (cooling) -- (minifridge);
+    \draw[->] (freezer) -- (fridge);
+    \draw[->] (minifridge) -- (fridge);
+    \draw[->, dashed] (quick) -- (freezer);
+    \draw[->, dashed] (energy) -- (cooling);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[26]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы дозирования моющих средств в стиральной машине.  
+    Создать класс-миксин \texttt{DetergentDispenser}, который будет содержать 
+    методы для загрузки средства, автоматического дозирования и оповещения о замене.
+    \begin{enumerate}
+    \item Класс \texttt{DetergentDispenser} определяет объект, который моделирует дозатор.
+    \item Метод \texttt{load\_detergent} загружает средство.
+    \item Метод \texttt{auto\_dose} дозирует средство в зависимости от загрузки.
+    \item Метод \texttt{alert\_refill} оповещает о необходимости дозаправки.
+    \item В примере использования создаётся объект \texttt{disp}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы защиты от перегрева в утюге.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{OverheatProtection}, который следит за температурой.
+    \item Определить метод \texttt{monitor\_plate(self)}, который измеряет температуру подошвы.
+    \item Определить метод \texttt{cut\_power(self)}, который отключает нагрев.
+    \item Определить метод \texttt{resume\_heating(self)}, который возобновляет нагрев.
+    \item Создать экземпляр класса \texttt{OverheatProtection} и сохранить его в переменной \texttt{protect}.
+    \item Вызвать метод \texttt{monitor\_plate()}.
+    \item Вызвать метод \texttt{cut\_power()}.
+    \item Вызвать метод \texttt{resume\_heating()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 26 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{OverheatProtection} к классу \texttt{Iron} 
+    и подмешивание класса-миксина \texttt{DetergentDispenser} к классу \texttt{LaundryAppliance(WashingMachine, Dryer, Iron)}.  
+    При запуске класса \texttt{LaundryAppliance} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Температура подошвы: 210°C.
+Нагрев отключён.
+Нагрев возобновлён.
+Средство загружено.
+Дозирование выполнено.
+Дозаправка не требуется.
+Бельё загружено
+Стирка начата
+Сушка завершена
+Глажка выполнена
+Устройство остыло
+Drum size: 8 kg, Heat type: Condenser, Steam output: High
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (washing) {Class WashingMachine()};
+    \node (dryer) [below left=of washing,xshift=-0.1cm] {Class Dryer()};
+    \node (iron) [below right=of washing,xshift=-0.7cm] {Class Iron()};
+    \node (protect) [right=of iron,xshift=-0.7cm] {Class OverheatProtectionMixin};
+    \node (laundry) [below=of $(dryer)!0.5!(iron)$] {Class LaundryAppliance()};
+    \node (disp) [right=of laundry,xshift=0.1cm] {Class DetergentDispenserMixin};
+    \draw[->] (laundry) -- (dryer);
+    \draw[->] (laundry) -- (iron);
+    \draw[->] (dryer) -- (washing);
+    \draw[->] (iron) -- (washing);
+    \draw[->, dashed] (protect) -- (iron);
+    \draw[->, dashed] (disp) -- (laundry);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[27]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы фильтрации воды в пароочистителе.  
+    Создать класс-миксин \texttt{WaterFilter}, который будет содержать 
+    методы для установки фильтра, проверки качества воды и замены картриджа.
+    \begin{enumerate}
+    \item Класс \texttt{WaterFilter} определяет объект, который моделирует фильтрацию.
+    \item Метод \texttt{install\_filter} устанавливает фильтр.
+    \item Метод \texttt{check\_purity} проверяет качество воды.
+    \item Метод \texttt{replace\_cartridge} заменяет картридж.
+    \item В примере использования создаётся объект \texttt{filter}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы картографирования помещений в роботе-мойщике.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{MappingSystem}, который строит карту.
+    \item Определить метод \texttt{scan\_room(self)}, который сканирует помещение.
+    \item Определить метод \texttt{build\_map(self)}, который создаёт карту.
+    \item Определить метод \texttt{plan\_route(self)}, который строит маршрут уборки.
+    \item Создать экземпляр класса \texttt{MappingSystem} и сохранить его в переменной \texttt{mapsys}.
+    \item Вызвать метод \texttt{scan\_room()}.
+    \item Вызвать метод \texttt{build\_map()}.
+    \item Вызвать метод \texttt{plan\_route()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 27 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{MappingSystem} к классу \texttt{MopRobot} 
+    и подмешивание класса-миксина \texttt{WaterFilter} к классу \texttt{CleaningDevice(Vacuum, MopRobot, SteamCleaner)}.  
+    При запуске класса \texttt{CleaningDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Помещение отсканировано.
+Карта построена.
+Маршрут запланирован.
+Фильтр установлен.
+Чистота воды: высокая.
+Картридж в порядке.
+Всасывание начато
+Пол вымыт
+Паровая очистка выполнена
+Контейнер опорожнён
+Подзарядка завершена
+Suction power: 200 W, Water tank: 0.8 L, Pressure: 4 bar
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (vacuum) {Class Vacuum()};
+    \node (mop) [below left=of vacuum,xshift=-0.1cm] {Class MopRobot()};
+    \node (steam) [below right=of vacuum,xshift=-0.7cm] {Class SteamCleaner()};
+    \node (map) [left=of mop,xshift=0.7cm] {Class MappingSystemMixin};
+    \node (cleaning) [below=of $(mop)!0.5!(steam)$] {Class CleaningDevice()};
+    \node (filter) [right=of cleaning,xshift=0.1cm] {Class WaterFilterMixin};
+    \draw[->] (cleaning) -- (mop);
+    \draw[->] (cleaning) -- (steam);
+    \draw[->] (mop) -- (vacuum);
+    \draw[->] (steam) -- (vacuum);
+    \draw[->, dashed] (map) -- (mop);
+    \draw[->, dashed] (filter) -- (cleaning);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[28]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы планирования графика работы климатической техники.  
+    Создать класс-миксин \texttt{ScheduleManager}, который будет содержать 
+    методы для установки времени включения, настройки дней недели и сохранения расписания.
+    \begin{enumerate}
+    \item Класс \texttt{ScheduleManager} определяет объект, который моделирует планировщик.
+    \item Метод \texttt{set\_time} устанавливает время.
+    \item Метод \texttt{set\_days} задаёт дни недели.
+    \item Метод \texttt{save\_schedule} сохраняет расписание.
+    \item В примере использования создаётся объект \texttt{schedule}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы контроля качества воздуха в очистителе.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{AirQualitySensor}, который измеряет параметры воздуха.
+    \item Определить метод \texttt{measure\_pm25(self)}, который измеряет пыль.
+    \item Определить метод \texttt{measure\_voc(self)}, который измеряет летучие соединения.
+    \item Определить метод \texttt{report\_index(self)}, который выводит индекс качества.
+    \item Создать экземпляр класса \texttt{AirQualitySensor} и сохранить его в переменной \texttt{air}.
+    \item Вызвать метод \texttt{measure\_pm25()}.
+    \item Вызвать метод \texttt{measure\_voc()}.
+    \item Вызвать метод \texttt{report\_index()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 28 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{AirQualitySensor} к классу \texttt{AirPurifier} 
+    и подмешивание класса-миксина \texttt{ScheduleManager} к классу \texttt{ClimateDevice(Thermostat, Humidifier, AirPurifier)}.  
+    При запуске класса \texttt{ClimateDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+PM2.5: 12 мкг/м³.
+ЛОС: 0.3 мг/м³.
+Индекс качества: Отличный.
+Время включения: 07:00.
+Дни: Пн–Пт.
+Расписание сохранено.
+Температура установлена
+Увлажнение начато
+Воздух очищен
+Параметры считаны
+Резервуар пополнен
+Temp range: 18–30°C, Tank liters: 4, Filter HEPA: True
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (thermostat) {Class Thermostat()};
+    \node (humidifier) [below left=of thermostat,xshift=-0.1cm] {Class Humidifier()};
+    \node (purifier) [below right=of thermostat,xshift=-0.7cm] {Class AirPurifier()};
+    \node (air) [right=of purifier,xshift=-0.7cm] {Class AirQualitySensorMixin};
+    \node (climate) [below=of $(humidifier)!0.5!(purifier)$] {Class ClimateDevice()};
+    \node (schedule) [right=of climate,xshift=0.1cm] {Class ScheduleManagerMixin};
+    \draw[->] (climate) -- (humidifier);
+    \draw[->] (climate) -- (purifier);
+    \draw[->] (humidifier) -- (thermostat);
+    \draw[->] (purifier) -- (thermostat);
+    \draw[->, dashed] (air) -- (purifier);
+    \draw[->, dashed] (schedule) -- (climate);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[29]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы распознавания лиц в умном замке.  
+    Создать класс-миксин \texttt{FaceRecognition}, который будет содержать 
+    методы для сканирования лица, верификации и разблокировки двери.
+    \begin{enumerate}
+    \item Класс \texttt{FaceRecognition} определяет объект, который моделирует Face ID для замка.
+    \item Метод \texttt{scan\_visitor} сканирует лицо у двери.
+    \item Метод \texttt{verify\_identity} проверяет соответствие базе.
+    \item Метод \texttt{unlock\_if\_authorized} разблокирует, если лицо разрешено.
+    \item В примере использования создаётся объект \texttt{face}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы хранения видео в камере наблюдения.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{VideoStorage}, который управляет архивом.
+    \item Определить метод \texttt{start\_recording(self)}, который записывает видео.
+    \item Определить метод \texttt{compress\_files(self)}, который сжимает архив.
+    \item Определить метод \texttt{rotate\_archive(self)}, который удаляет старые записи.
+    \item Создать экземпляр класса \texttt{VideoStorage} и сохранить его в переменной \texttt{storage}.
+    \item Вызвать метод \texttt{start\_recording()}.
+    \item Вызвать метод \texttt{compress\_files()}.
+    \item Вызвать метод \texttt{rotate\_archive()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 29 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{VideoStorage} к классу \texttt{SecurityCamera} 
+    и подмешивание класса-миксина \texttt{FaceRecognition} к классу \texttt{SecurityDevice(SmartLock, SecurityCamera, AlarmSystem)}.  
+    При запуске класса \texttt{SecurityDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Запись начата.
+Архив сжат.
+Старые записи удалены.
+Лицо отсканировано.
+Идентичность подтверждена.
+Дверь разблокирована.
+Дверь заблокирована
+Доступ предоставлен
+Видео записано
+Оповещение отправлено
+Сирена активирована
+Unlock method: Biometric, Night vision: Yes, Siren dB: 120
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (lock) {Class SmartLock()};
+    \node (camera) [below left=of lock,xshift=-0.1cm] {Class SecurityCamera()};
+    \node (alarm) [below right=of lock,xshift=-0.7cm] {Class AlarmSystem()};
+    \node (storage) [left=of camera,xshift=0.7cm] {Class VideoStorageMixin};
+    \node (security) [below=of $(camera)!0.5!(alarm)$] {Class SecurityDevice()};
+    \node (face) [right=of security,xshift=0.1cm] {Class FaceRecognitionMixin};
+    \draw[->] (security) -- (camera);
+    \draw[->] (security) -- (alarm);
+    \draw[->] (camera) -- (lock);
+    \draw[->] (alarm) -- (lock);
+    \draw[->, dashed] (storage) -- (camera);
+    \draw[->, dashed] (face) -- (security);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[30]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы музыкальной синхронизации в освещении.  
+    Создать класс-миксин \texttt{MusicSync}, который будет содержать 
+    методы для подключения к аудиоисточнику, анализа ритма и синхронизации цвета.
+    \begin{enumerate}
+    \item Класс \texttt{MusicSync} определяет объект, который моделирует синхронизацию света с музыкой.
+    \item Метод \texttt{connect\_audio} подключается к источнику.
+    \item Метод \texttt{analyze\_beat} определяет ритм.
+    \item Метод \texttt{sync\_light} меняет цвет в такт музыке.
+    \item В примере использования создаётся объект \texttt{sync}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы учёта энергопотребления в умной розетке.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{PowerMeter}, который измеряет потребление.
+    \item Определить метод \texttt{measure\_watts(self)}, который измеряет мощность.
+    \item Определить метод \texttt{log\_daily\_usage(self)}, который записывает дневное потребление.
+    \item Определить метод \texttt{alert\_overload(self)}, который срабатывает при перегрузке.
+    \item Создать экземпляр класса \texttt{PowerMeter} и сохранить его в переменной \texttt{meter}.
+    \item Вызвать метод \texttt{measure\_watts()}.
+    \item Вызвать метод \texttt{log\_daily\_usage()}.
+    \item Вызвать метод \texttt{alert\_overload()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 30 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{PowerMeter} к классу \texttt{SmartPlug} 
+    и подмешивание класса-миксина \texttt{MusicSync} к классу \texttt{LightingSystem(SmartBulb, SmartPlug, LightStrip)}.  
+    При запуске класса \texttt{LightingSystem} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Мощность: 85 Вт.
+Потребление за день: 2.1 кВт·ч.
+Перегрузка не обнаружена.
+Аудиоисточник подключён.
+Ритм распознан.
+Свет синхронизирован.
+Лампа включена
+Цвет установлен
+Анимация запущена
+Питание подано
+Потребление учтено
+Color temp: 2700K, Max wattage: 2000 W, Length: 5 m
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (bulb) {Class SmartBulb()};
+    \node (plug) [below left=of bulb,xshift=-0.1cm] {Class SmartPlug()};
+    \node (strip) [below right=of bulb,xshift=-0.7cm] {Class LightStrip()};
+    \node (meter) [left=of plug,xshift=0.7cm] {Class PowerMeterMixin};
+    \node (lighting) [below=of $(plug)!0.5!(strip)$] {Class LightingSystem()};
+    \node (music) [right=of lighting,xshift=0.1cm] {Class MusicSyncMixin};
+    \draw[->] (lighting) -- (plug);
+    \draw[->] (lighting) -- (strip);
+    \draw[->] (plug) -- (bulb);
+    \draw[->] (strip) -- (bulb);
+    \draw[->, dashed] (meter) -- (plug);
+    \draw[->, dashed] (music) -- (lighting);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[31]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы облачных сохранений в игровом устройстве.  
+    Создать класс-миксин \texttt{CloudSave}, который будет содержать 
+    методы для сохранения прогресса, синхронизации между устройствами и восстановления данных.
+    \begin{enumerate}
+    \item Класс \texttt{CloudSave} определяет объект, который моделирует облачное сохранение.
+    \item Метод \texttt{save\_progress} сохраняет игру в облако.
+    \item Метод \texttt{sync\_devices} синхронизирует данные.
+    \item Метод \texttt{restore\_game} восстанавливает сохранение.
+    \item В примере использования создаётся объект \texttt{cloud}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы отслеживания времени игры.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{PlayTimeTracker}, который контролирует сессии.
+    \item Определить метод \texttt{start\_session(self)}, который запускает отсчёт.
+    \item Определить метод \texttt{pause\_session(self)}, который приостанавливает.
+    \item Определить метод \texttt{report\_hours(self)}, который выводит статистику.
+    \item Создать экземпляр класса \texttt{PlayTimeTracker} и сохранить его в переменной \texttt{tracker}.
+    \item Вызвать метод \texttt{start\_session()}.
+    \item Вызвать метод \texttt{pause\_session()}.
+    \item Вызвать метод \texttt{report\_hours()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 31 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{PlayTimeTracker} к классу \texttt{Handheld} 
+    и подмешивание класса-миксина \texttt{CloudSave} к классу \texttt{GamingDevice(GameConsole, Handheld, VR\_Headset)}.  
+    При запуске класса \texttt{GamingDevice} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Сессия начата.
+Сессия приостановлена.
+Игровое время: 4.5 ч.
+Прогресс сохранён.
+Синхронизация выполнена.
+Сохранение восстановлено.
+Система загружена
+Игра запущена
+VR активирован
+Портативная сессия начата
+Режим сна включён
+GPU TFLOPS: 12, Screen refresh: 120 Hz, FOV: 110°
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (console) {Class GameConsole()};
+    \node (handheld) [below left=of console,xshift=-0.1cm] {Class Handheld()};
+    \node (vr) [below right=of console,xshift=-0.7cm] {Class VR\_Headset()};
+    \node (tracker) [left=of handheld,xshift=0.7cm] {Class PlayTimeTrackerMixin};
+    \node (gaming) [below=of $(handheld)!0.5!(vr)$] {Class GamingDevice()};
+    \node (cloud) [right=of gaming,xshift=0.1cm] {Class CloudSaveMixin};
+    \draw[->] (gaming) -- (handheld);
+    \draw[->] (gaming) -- (vr);
+    \draw[->] (handheld) -- (console);
+    \draw[->] (vr) -- (console);
+    \draw[->, dashed] (tracker) -- (handheld);
+    \draw[->, dashed] (cloud) -- (gaming);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[32]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы автоматического тюнинга в электрогитаре.  
+    Создать класс-миксин \texttt{AutoTuner}, который будет содержать 
+    методы для анализа звука, сравнения с эталоном и коррекции строя.
+    \begin{enumerate}
+    \item Класс \texttt{AutoTuner} определяет объект, который моделирует автотюнер.
+    \item Метод \texttt{detect\_pitch} определяет текущую ноту.
+    \item Метод \texttt{compare\_to\_standard} сравнивает с эталоном.
+    \item Метод \texttt{adjust\_string} корректирует натяжение струны.
+    \item В примере использования создаётся объект \texttt{tuner}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы записи в драм-машине.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{PatternRecorder}, который записывает ритм-паттерны.
+    \item Определить метод \texttt{start\_recording(self)}, который начинает запись.
+    \item Определить метод \texttt{save\_pattern(self)}, который сохраняет паттерн.
+    \item Определить метод \texttt{play\_back(self)}, который воспроизводит запись.
+    \item Создать экземпляр класса \texttt{PatternRecorder} и сохранить его в переменной \texttt{recorder}.
+    \item Вызвать метод \texttt{start\_recording()}.
+    \item Вызвать метод \texttt{save\_pattern()}.
+    \item Вызвать метод \texttt{play\_back()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 32 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{PatternRecorder} к классу \texttt{DrumMachine} 
+    и подмешивание класса-миксина \texttt{AutoTuner} к классу \texttt{ElectronicInstrument(ElectricGuitar, Synthesizer, DrumMachine)}.  
+    При запуске класса \texttt{ElectronicInstrument} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Запись начата.
+Паттерн сохранён.
+Воспроизведение запущено.
+Нота: E2.
+Отклонение: +3 цента.
+Строй скорректирован.
+Струны настроены
+Пресет выбран
+Бит запрограммирован
+Модуляция активирована
+Игра начата
+Pickup type: Humbucker, Polyphony: 128, Sample quality: 24-bit
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (guitar) {Class ElectricGuitar()};
+    \node (synth) [below left=of guitar,xshift=-0.1cm] {Class Synthesizer()};
+    \node (drum) [below right=of guitar,xshift=-0.7cm] {Class DrumMachine()};
+    \node (recorder) [right=of drum,xshift=-0.7cm] {Class PatternRecorderMixin};
+    \node (electronic) [below=of $(synth)!0.5!(drum)$] {Class ElectronicInstrument()};
+    \node (tuner) [right=of electronic,xshift=0.1cm] {Class AutoTunerMixin};
+    \draw[->] (electronic) -- (synth);
+    \draw[->] (electronic) -- (drum);
+    \draw[->] (synth) -- (guitar);
+    \draw[->] (drum) -- (guitar);
+    \draw[->, dashed] (recorder) -- (drum);
+    \draw[->, dashed] (tuner) -- (electronic);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[33]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы распознавания присутствия в умном доме.  
+    Создать класс-миксин \texttt{PresenceDetector}, который будет содержать 
+    методы для обнаружения движения, определения количества людей и настройки режимов.
+    \begin{enumerate}
+    \item Класс \texttt{PresenceDetector} определяет объект, который моделирует детектор присутствия.
+    \item Метод \texttt{detect\_motion} обнаруживает перемещение.
+    \item Метод \texttt{count\_occupants} оценивает число людей.
+    \item Метод \texttt{set\_mode} устанавливает режим «Дома» или «Отсутствие».
+    \item В примере использования создаётся объект \texttt{presence}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы прогноза погоды в умных жалюзи.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{WeatherForecast}, который получает данные о погоде.
+    \item Определить метод \texttt{get\_forecast(self)}, который запрашивает прогноз.
+    \item Определить метод \texttt{adjust\_for\_sun(self)}, который настраивает жалюзи по солнцу.
+    \item Определить метод \texttt{protect\_from\_rain(self)}, который закрывает при дожде.
+    \item Создать экземпляр класса \texttt{WeatherForecast} и сохранить его в переменной \texttt{weather}.
+    \item Вызвать метод \texttt{get\_forecast()}.
+    \item Вызвать метод \texttt{adjust\_for\_sun()}.
+    \item Вызвать метод \texttt{protect\_from\_rain()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 33 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{WeatherForecast} к классу \texttt{SmartBlinds} 
+    и подмешивание класса-миксина \texttt{PresenceDetector} к классу \texttt{SmartHomeSystem(SmartThermostat, SmartBlinds, SmartSprinkler)}.  
+    При запуске класса \texttt{SmartHomeSystem} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Прогноз получен: солнечно.
+Жалюзи настроены на солнце.
+Дождь не ожидается.
+Движение обнаружено.
+Людей: 2.
+Режим: Дома.
+Расписание изучено
+Жалюзи открыты
+Солнце синхронизировано
+Газон полит
+Температура скорректирована
+Learning mode: Adaptive, Motor type: Stepper, Zone count: 4
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (thermostat) {Class SmartThermostat()};
+    \node (blinds) [below left=of thermostat,xshift=-0.1cm] {Class SmartBlinds()};
+    \node (sprinkler) [below right=of thermostat,xshift=-0.7cm] {Class SmartSprinkler()};
+    \node (weather) [left=of blinds,xshift=0.7cm] {Class WeatherForecastMixin};
+    \node (smarthome) [below=of $(blinds)!0.5!(sprinkler)$] {Class SmartHomeSystem()};
+    \node (presence) [right=of smarthome,xshift=0.1cm] {Class PresenceDetectorMixin};
+    \draw[->] (smarthome) -- (blinds);
+    \draw[->] (smarthome) -- (sprinkler);
+    \draw[->] (blinds) -- (thermostat);
+    \draw[->] (sprinkler) -- (thermostat);
+    \draw[->, dashed] (weather) -- (blinds);
+    \draw[->, dashed] (presence) -- (smarthome);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[34]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы геолокации в персональном электротранспорте.  
+    Создать класс-миксин \texttt{GeoLocator}, который будет содержать 
+    методы для определения местоположения, отслеживания маршрута и поиска транспорта.
+    \begin{enumerate}
+    \item Класс \texttt{GeoLocator} определяет объект, который моделирует GPS-трекер.
+    \item Метод \texttt{get\_coordinates} получает текущие координаты.
+    \item Метод \texttt{track\_route} записывает пройденный путь.
+    \item Метод \texttt{locate\_device} помогает найти транспорт при утере.
+    \item В примере использования создаётся объект \texttt{geo}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы балансировки в сигвее.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{BalanceSystem}, который поддерживает равновесие.
+    \item Определить метод \texttt{calibrate\_sensors(self)}, который калибрует гироскопы.
+    \item Определить метод \texttt{adjust\_motors(self)}, который регулирует мощность моторов.
+    \item Определить метод \texttt{enter\_standby(self)}, который переводит в режим ожидания.
+    \item Создать экземпляр класса \texttt{BalanceSystem} и сохранить его в переменной \texttt{balance}.
+    \item Вызвать метод \texttt{calibrate\_sensors()}.
+    \item Вызвать метод \texttt{adjust\_motors()}.
+    \item Вызвать метод \texttt{enter\_standby()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 34 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{BalanceSystem} к классу \texttt{Segway} 
+    и подмешивание класса-миксина \texttt{GeoLocator} к классу \texttt{PersonalTransport(ElectricScooter, Segway, Hoverboard)}.  
+    При запуске класса \texttt{PersonalTransport} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Гироскопы откалиброваны.
+Моторы сбалансированы.
+Режим ожидания активирован.
+Координаты: 55.7558° N, 37.6176° E.
+Маршрут записан.
+Транспорт найден.
+Поездка разблокирована
+Балансировка начата
+Ускорение выполнено
+Музыка включена
+Парковка завершена
+Max speed: 25 km/h, Balance type: Dynamic, Wheel size: 8.5"
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, 
+        every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm, minimum height=1cm, align=center}]
+    \node (scooter) {Class ElectricScooter()};
+    \node (segway) [below left=of scooter,xshift=-0.1cm] {Class Segway()};
+    \node (hover) [below right=of scooter,xshift=-0.7cm] {Class Hoverboard()};
+    \node (balance) [left=of segway,xshift=0.7cm] {Class BalanceSystemMixin};
+    \node (personal) [below=of $(segway)!0.5!(hover)$] {Class PersonalTransport()};
+    \node (geo) [right=of personal,xshift=0.1cm] {Class GeoLocatorMixin};
+    \draw[->] (personal) -- (segway);
+    \draw[->] (personal) -- (hover);
+    \draw[->] (segway) -- (scooter);
+    \draw[->] (hover) -- (scooter);
+    \draw[->, dashed] (balance) -- (segway);
+    \draw[->, dashed] (geo) -- (personal);
+    \end{tikzpicture}
+    \end{center}
+
+    \item[35]
+    \subsubsection*{Задание 1}
+    Написать класс-миксин на Python, который моделирует работу системы управления вкусом в кофемашине.  
+    Создать класс-миксин \texttt{FlavorProfile}, который будет содержать 
+    методы для выбора профиля вкуса, настройки крепости и температуры подачи.
+    \begin{enumerate}
+    \item Класс \texttt{FlavorProfile} определяет объект, который моделирует настройку вкуса.
+    \item Метод \texttt{select\_profile} выбирает профиль: «сбалансированный», «интенсивный» и т.д.
+    \item Метод \texttt{set\_strength} устанавливает крепость от 1 до 10.
+    \item Метод \texttt{adjust\_serving\_temp} настраивает температуру подачи.
+    \item В примере использования создаётся объект \texttt{flavor}, после чего вызываются методы.
+    \end{enumerate}
+
+    \subsubsection*{Задание 2}
+    Написать класс-миксин на Python, который моделирует работу системы самоочистки в соковыжималке.
+    \begin{enumerate}
+    \item Создать класс-миксин \texttt{SelfCleanJuicer}, который управляет очисткой.
+    \item Определить метод \texttt{start\_rinse(self)}, который запускает промывку.
+    \item Определить метод \texttt{flush\_system(self)}, который промывает систему водой.
+    \item Определить метод \texttt{dry\_components(self)}, который сушит детали.
+    \item Создать экземпляр класса \texttt{SelfCleanJuicer} и сохранить его в переменной \texttt{clean}.
+    \item Вызвать метод \texttt{start\_rinse()}.
+    \item Вызвать метод \texttt{flush\_system()}.
+    \item Вызвать метод \texttt{dry\_components()}.
+    \end{enumerate}
+
+    \subsubsection*{Задание 3}
+    Используя программный код задания 35 из прошлого практикума текущего курса ООП, 
+    выполнить подмешивание класса-миксина \texttt{SelfCleanJuicer} к классу \texttt{Juicer} 
+    и подмешивание класса-миксина \texttt{FlavorProfile} к классу \texttt{BeverageAppliance(CoffeeMachine, Teapot, Juicer)}.  
+    При запуске класса \texttt{BeverageAppliance} должна быть отображена в консоли 
+    следующая последовательность действий.
+
+    \subsubsection*{Пример вывода программы}
+    \begin{verbatim}
+Промывка начата.
+Система промыта.
+Детали высушены.
+Профиль: Интенсивный.
+Крепость: 8.
+Температура подачи: 65°C.
+Зёрна помолоты
+Вода вскипячена
+Сок выжат
+Кофе заварен
+Устройство выключено
+Bean type: Arabica, Temp control: Yes, RPM speed: 12000
+    \end{verbatim}
+
+    \subsubsection*{Схема классов}
+    \begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, rounded corners, minimum width=3.2cm, text width =3.1cm,minimum height=1cm, align=center}]
+    \node (coffee) {Class CoffeeMachine()};
+    \node (teapot) [below left=of coffee,xshift=-0.1cm] {Class Teapot()};
+    \node (juicer) [below right=of coffee,xshift=-0.7cm] {Class Juicer()};
+    \node (clean) [right=of juicer,xshift=-0.7cm] {Class SelfCleanJuicerMixin};
+    \node (beverage) [below=of $(teapot)!0.5!(juicer)$] {Class BeverageAppliance()};
+    \node (flavor) [right=of beverage,xshift=0.1cm] {Class FlavorProfileMixin};
+    \draw[->] (beverage) -- (teapot);
+    \draw[->] (beverage) -- (juicer);
+    \draw[->] (teapot) -- (coffee);
+    \draw[->] (juicer) -- (coffee);
+    \draw[->, dashed] (clean) -- (juicer);
+    \draw[->, dashed] (flavor) -- (beverage);
+    \end{tikzpicture}
+    \end{center}
+\end{enumerate}

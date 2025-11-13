@@ -1,0 +1,424 @@
+\subsection{Семинар <<Перегрузка операций в классах>> (2 часа)}
+
+\begin{enumerate}
+    \item[1]
+Создать класс \texttt{Person}, который будет представлять человека с именем, фамилией и возрастом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что присваиваемые атрибуты соответствуют определённым правилам (например, имя состоит только из буквенных символов, фамилия состоит только из буквенных и цифр, возраст является целым числом). Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута, если он существует, иначе должен возвращать сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, если какой-либо атрибут не найден, а также создавать атрибут \texttt{City} с определённым именем города, например \texttt{``Moscow''}. Метод \texttt{\_\_delattr\_\_} должен удалять атрибут, если он существует.
+
+\begin{enumerate}
+    \item Класс \texttt{Person} определяет атрибуты \texttt{first\_name}, \texttt{last\_name} и \texttt{age}.
+    \item Метод \texttt{\_\_setattr\_\_} используется для проверки ввода при присваивании атрибутов. Если введённое значение не соответствует ожидаемому формату, вызывается исключение \texttt{ValueError}.
+    \item Метод \texttt{\_\_getattribute\_\_} используется для получения атрибутов объекта. Если атрибут не найден, возвращается сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} используется для обработки запросов на получение несуществующих атрибутов, возвращает \texttt{None}, если не найден атрибут, кроме \texttt{City}, который создаётся на лету со значением имени города.
+    \item Метод \texttt{\_\_delattr\_\_} используется для проверки возможности удаления атрибутов. Некоторые атрибуты (\texttt{first\_name}, \texttt{last\_name}, \texttt{age}) не могут быть удалены, и попытка их удаления вызывает исключение \texttt{AttributeError}.
+    \item В примере использования создаётся экземпляр класса \texttt{Person} с именем \texttt{person}. Затем проверяется доступ к атрибутам и попытки их изменения.
+\end{enumerate}
+
+\item[2]
+Создать класс \texttt{Book}, который будет представлять книгу с названием, автором и годом издания. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять корректность присваиваемых значений (название и автор — строковые значения, не пустые; год — целое число в диапазоне от 0 до текущего года). Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута, если он существует, иначе сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, если атрибут не найден, за исключением атрибута \texttt{Genre}, который автоматически создаётся со значением \texttt{``Fiction''}. Метод \texttt{\_\_delattr\_\_} должен позволять удалять только необязательные атрибуты.
+
+\begin{enumerate}
+    \item Класс \texttt{Book} определяет атрибуты \texttt{title}, \texttt{author} и \texttt{year}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует входные данные и вызывает \texttt{ValueError} при нарушении правил.
+    \item Метод \texttt{\_\_getattribute\_\_} перехватывает доступ ко всем атрибутам и при неудаче возвращает строку с сообщением об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} обрабатывает отсутствующие атрибуты, возвращая \texttt{None}, но для \texttt{Genre} создаёт его со значением \texttt{``Fiction''}.
+    \item Метод \texttt{\_\_delattr\_\_} запрещает удаление обязательных атрибутов (\texttt{title}, \texttt{author}, \texttt{year}), вызывая \texttt{AttributeError}.
+    \item В примере создаётся объект \texttt{book} и тестируются операции присвоения, чтения и удаления атрибутов.
+\end{enumerate}
+
+\item[3]
+Создать класс \texttt{Car}, который будет представлять автомобиль с маркой, моделью и годом выпуска. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что марка и модель — непустые строки без цифр, а год — целое число от 1886 до текущего года. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке, если атрибут не существует. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Country}, который создаётся со значением \texttt{``Germany''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление обязательных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Car} определяет атрибуты \texttt{make}, \texttt{model} и \texttt{year}.
+    \item Метод \texttt{\_\_setattr\_\_} проводит валидацию значений и выбрасывает \texttt{ValueError} при нарушении формата.
+    \item Метод \texttt{\_\_getattribute\_\_} перехватывает все попытки доступа к атрибутам; при отсутствии атрибута возвращает понятное сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт атрибут \texttt{Country} со значением \texttt{``Germany''}, если запрашивается именно он; иначе возвращает \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять \texttt{make}, \texttt{model} или \texttt{year}, вызывая \texttt{AttributeError}.
+    \item Пример использования включает создание объекта \texttt{car} и демонстрацию работы всех четырёх методов.
+\end{enumerate}
+
+\item[4]
+Создать класс \texttt{Student}, который будет представлять студента с именем, номером зачётной книжки и средним баллом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что имя — строка из букв, номер зачётной книжки — строка из цифр длиной 6 символов, а средний балл — число от 0.0 до 5.0. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{University}, который создаётся со значением \texttt{``State University''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление обязательных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Student} определяет атрибуты \texttt{name}, \texttt{record\_book} и \texttt{gpa}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и выбрасывает \texttt{ValueError} при несоответствии формату.
+    \item Метод \texttt{\_\_getattribute\_\_} перехватывает все обращения к атрибутам; если атрибут отсутствует, возвращается ошибка в виде строки.
+    \item Метод \texttt{\_\_getattr\_\_} возвращает \texttt{None} для несуществующих атрибутов, но создаёт \texttt{University} со значением \texttt{``State University''}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалить \texttt{name}, \texttt{record\_book} или \texttt{gpa}, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{student}, тестируются присвоение, чтение и удаление атрибутов.
+\end{enumerate}
+
+\item[5]
+Создать класс \texttt{Product}, который будет представлять товар с названием, ценой и категорией. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название — непустая строка, цена — положительное число (целое или с плавающей точкой), категория — строка из букв. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Currency}, который создаётся со значением \texttt{``USD''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление обязательных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Product} определяет атрибуты \texttt{name}, \texttt{price} и \texttt{category}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность значений и вызывает \texttt{ValueError} при нарушении.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке, если его нет.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт атрибут \texttt{Currency} со значением \texttt{``USD''}, иначе возвращает \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять \texttt{name}, \texttt{price} или \texttt{category}, вызывая \texttt{AttributeError}.
+    \item Пример использования включает создание объекта \texttt{product} и проверку всех операций.
+\end{enumerate}
+
+\item[6]
+Создать класс \texttt{Animal}, который будет представлять животное с видом, кличкой и возрастом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что вид и кличка — непустые строки из букв, возраст — целое число от 0 до 100. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Habitat}, который создаётся со значением \texttt{``Wild''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Animal} определяет атрибуты \texttt{species}, \texttt{name} и \texttt{age}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует входные данные и вызывает \texttt{ValueError} при нарушении.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Habitat = ``Wild''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять \texttt{species}, \texttt{name} или \texttt{age}, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{animal}, проверяются все операции с атрибутами.
+\end{enumerate}
+
+\item[7]
+Создать класс \texttt{Movie}, который будет представлять фильм с названием, режиссёром и рейтингом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и режиссёр — непустые строки, рейтинг — число от 0.0 до 10.0. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Studio}, который создаётся со значением \texttt{``Universal''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление обязательных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Movie} определяет атрибуты \texttt{title}, \texttt{director} и \texttt{rating}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет формат значений и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или понятное сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Studio = ``Universal''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалить основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{movie}, проверяются все методы.
+\end{enumerate}
+
+\item[8]
+Создать класс \texttt{Employee}, который будет представлять сотрудника с именем, должностью и зарплатой. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что имя — строка из букв, должность — непустая строка, зарплата — положительное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Department}, который создаётся со значением \texttt{``HR''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление обязательных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Employee} определяет атрибуты \texttt{name}, \texttt{position} и \texttt{salary}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при нарушении.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Department = ``HR''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{employee}, тестируются все операции.
+\end{enumerate}
+
+\item[9]
+Создать класс \texttt{Course}, который будет представлять учебный курс с названием, продолжительностью (в неделях) и уровнем сложности. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название — непустая строка, продолжительность — целое число от 1 до 52, уровень — строка из набора \{\texttt{``Beginner''}, \texttt{``Intermediate''}, \texttt{``Advanced''}\}. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Platform}, который создаётся со значением \texttt{``Online''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Course} определяет атрибуты \texttt{title}, \texttt{duration} и \texttt{level}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Platform = ``Online''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{course}, проверяются все методы.
+\end{enumerate}
+
+\item[10]
+Создать класс \texttt{BankAccount}, который будет представлять банковский счёт с номером счёта, владельцем и балансом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что номер счёта — строка из 10 цифр, владелец — непустая строка из букв, баланс — неотрицательное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Currency}, который создаётся со значением \texttt{``EUR''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{BankAccount} определяет атрибуты \texttt{account\_number}, \texttt{owner} и \texttt{balance}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при нарушении формата.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Currency = ``EUR''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{account}, тестируются все операции.
+\end{enumerate}
+
+\item[11]
+Создать класс \texttt{Game}, который будет представлять видеоигру с названием, жанром и годом выпуска. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и жанр — непустые строки, год — целое число от 1970 до текущего года. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Developer}, который создаётся со значением \texttt{``Indie Studio''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Game} определяет атрибуты \texttt{name}, \texttt{genre} и \texttt{release\_year}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность значений и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Developer = ``Indie Studio''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{game}, проверяются все методы.
+\end{enumerate}
+
+\item[12]
+Создать класс \texttt{Flight}, который будет представлять авиарейс с номером рейса, аэропортом вылета и временем вылета (в формате \texttt{HH:MM}). Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что номер — строка из 4–6 символов (буквы и цифры), аэропорт — строка из 3 заглавных букв, время — строка в формате \texttt{HH:MM} с валидными часами и минутами. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Airline}, который создаётся со значением \texttt{``SkyWings''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Flight} определяет атрибуты \texttt{flight\_number}, \texttt{departure\_airport} и \texttt{departure\_time}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует форматы и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Airline = ``SkyWings''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{flight}, проверяются все операции.
+\end{enumerate}
+
+\item[13]
+Создать класс \texttt{Restaurant}, который будет представлять ресторан с названием, кухней и рейтингом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и кухня — непустые строки, рейтинг — число от 0.0 до 5.0 с одним знаком после запятой. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Location}, который создаётся со значением \texttt{``Downtown''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Restaurant} определяет атрибуты \texttt{name}, \texttt{cuisine} и \texttt{rating}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Location = ``Downtown''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{restaurant}, проверяются все методы.
+\end{enumerate}
+
+\item[14]
+Создать класс \texttt{Song}, который будет представлять музыкальную композицию с названием, исполнителем и длительностью (в секундах). Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и исполнитель — непустые строки, длительность — целое положительное число от 1 до 3600. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Album}, который создаётся со значением \texttt{``Greatest Hits''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Song} определяет атрибуты \texttt{title}, \texttt{artist} и \texttt{duration}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует значения и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Album = ``Greatest Hits''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{song}, проверяются все операции.
+\end{enumerate}
+
+\item[15]
+Создать класс \texttt{Weather}, который будет представлять погодные условия с датой, температурой и описанием. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что дата — строка в формате \texttt{YYYY-MM-DD}, температура — число от -100 до +60, описание — непустая строка. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Unit}, который создаётся со значением \texttt{``Celsius''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Weather} определяет атрибуты \texttt{date}, \texttt{temperature} и \texttt{description}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Unit = ``Celsius''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{weather}, проверяются все методы.
+\end{enumerate}
+
+\item[16]
+Создать класс \texttt{Task}, который будет представлять задачу с описанием, статусом и дедлайном. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что описание — непустая строка, статус — строка из набора \{\texttt{``Pending''}, \texttt{``In Progress''}, \texttt{``Completed''}\}, дедлайн — строка в формате \texttt{YYYY-MM-DD}. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Priority}, который создаётся со значением \texttt{``Medium''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Task} определяет атрибуты \texttt{description}, \texttt{status} и \texttt{deadline}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Priority = ``Medium''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{task}, проверяются все операции.
+\end{enumerate}
+
+\item[17]
+Создать класс \texttt{House}, который будет представлять дом с адресом, количеством комнат и площадью. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что адрес — непустая строка, количество комнат — целое число от 1 до 20, площадь — положительное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Type}, который создаётся со значением \texttt{``Residential''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{House} определяет атрибуты \texttt{address}, \texttt{rooms} и \texttt{area}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Type = ``Residential''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{house}, проверяются все методы.
+\end{enumerate}
+
+\item[18]
+Создать класс \texttt{Planet}, который будет представлять планету с названием, диаметром и расстоянием до Солнца. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название — строка из букв, диаметр и расстояние — положительные числа. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{System}, который создаётся со значением \texttt{``Solar''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Planet} определяет атрибуты \texttt{name}, \texttt{diameter} и \texttt{distance\_to\_sun}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{System = ``Solar''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{planet}, проверяются все методы.
+\end{enumerate}
+
+\item[19]
+Создать класс \texttt{Event}, который будет представлять событие с названием, датой и местом проведения. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и место — непустые строки, дата — строка в формате \texttt{YYYY-MM-DD}. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Organizer}, который создаётся со значением \texttt{``Community Group''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Event} определяет атрибуты \texttt{name}, \texttt{date} и \texttt{location}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Organizer = ``Community Group''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{event}, проверяются все операции.
+\end{enumerate}
+
+\item[20]
+Создать класс \texttt{Device}, который будет представлять электронное устройство с моделью, производителем и годом выпуска. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что модель и производитель — непустые строки, год — целое число от 1950 до текущего года. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{OS}, который создаётся со значением \texttt{``Proprietary''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Device} определяет атрибуты \texttt{model}, \texttt{manufacturer} и \texttt{year}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{OS = ``Proprietary''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{device}, проверяются все методы.
+\end{enumerate}
+
+\item[21]
+Создать класс \texttt{Recipe}, который будет представлять кулинарный рецепт с названием, списком ингредиентов и временем приготовления (в минутах). Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название — непустая строка, ингредиенты — список непустых строк, время — целое число от 1 до 300. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Cuisine}, который создаётся со значением \texttt{``International''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Recipe} определяет атрибуты \texttt{name}, \texttt{ingredients} и \texttt{cook\_time}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Cuisine = ``International''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{recipe}, проверяются все операции.
+\end{enumerate}
+
+\item[22]
+Создать класс \texttt{Project}, который будет представлять проект с названием, руководителем и бюджетом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и руководитель — непустые строки, бюджет — положительное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Status}, который создаётся со значением \texttt{``Active''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Project} определяет атрибуты \texttt{name}, \texttt{manager} и \texttt{budget}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Status = ``Active''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{project}, проверяются все методы.
+\end{enumerate}
+
+\item[23]
+Создать класс \texttt{Ticket}, который будет представлять билет с идентификатором, типом и ценой. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что идентификатор — строка из 8 символов (буквы и цифры), тип — строка из набора \{\texttt{``Economy''}, \texttt{``Business''}, \texttt{``VIP''}\}, цена — положительное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Validity}, который создаётся со значением \texttt{``1 year''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Ticket} определяет атрибуты \texttt{id}, \texttt{type} и \texttt{price}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Validity = ``1 year''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{ticket}, проверяются все операции.
+\end{enumerate}
+
+\item[24]
+Создать класс \texttt{Document}, который будет представлять документ с названием, автором и датой создания. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и автор — непустые строки, дата — строка в формате \texttt{YYYY-MM-DD}. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Format}, который создаётся со значением \texttt{``PDF''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Document} определяет атрибуты \texttt{title}, \texttt{author} и \texttt{creation\_date}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Format = ``PDF''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{document}, проверяются все операции.
+\end{enumerate}
+
+\item[25]
+Создать класс \texttt{Pet}, который будет представлять домашнего питомца с кличкой, видом и весом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что кличка и вид — непустые строки из букв, вес — положительное число до 100. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Owner}, который создаётся со значением \texttt{``Anonymous''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Pet} определяет атрибуты \texttt{name}, \texttt{species} и \texttt{weight}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Owner = ``Anonymous''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{pet}, проверяются все методы.
+\end{enumerate}
+
+\item[26]
+Создать класс \texttt{Lecture}, который будет представлять лекцию с темой, преподавателем и длительностью (в минутах). Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что тема и преподаватель — непустые строки, длительность — целое число от 10 до 180. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Format}, который создаётся со значением \texttt{``In-person''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Lecture} определяет атрибуты \texttt{topic}, \texttt{instructor} и \texttt{duration}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Format = ``In-person''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{lecture}, проверяются все операции.
+\end{enumerate}
+
+\item[27]
+Создать класс \texttt{Order}, который будет представлять заказ с номером, списком товаров и общей суммой. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что номер — строка из 6 цифр, товары — список непустых строк, сумма — положительное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Status}, который создаётся со значением \texttt{``Processing''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Order} определяет атрибуты \texttt{order\_id}, \texttt{items} и \texttt{total}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Status = ``Processing''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{order}, проверяются все методы.
+\end{enumerate}
+
+\item[28]
+Создать класс \texttt{Conference}, который будет представлять конференцию с названием, датой и местом проведения. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и место — непустые строки, дата — строка в формате \texttt{YYYY-MM-DD}. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Theme}, который создаётся со значением \texttt{``Innovation''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Conference} определяет атрибуты \texttt{name}, \texttt{date} и \texttt{location}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Theme = ``Innovation''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{conference}, проверяются все операции.
+\end{enumerate}
+
+\item[29]
+Создать класс \texttt{Album}, который будет представлять музыкальный альбом с названием, исполнителем и годом выпуска. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и исполнитель — непустые строки, год — целое число от 1900 до текущего года. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Genre}, который создаётся со значением \texttt{``Pop''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Album} определяет атрибуты \texttt{title}, \texttt{artist} и \texttt{year}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Genre = ``Pop''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{album}, проверяются все методы.
+\end{enumerate}
+
+\item[30]
+Создать класс \texttt{Building}, который будет представлять здание с названием, количеством этажей и годом постройки. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название — непустая строка, количество этажей — целое число от 1 до 200, год — целое число от 1000 до текущего года. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Use}, который создаётся со значением \texttt{``Commercial''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Building} определяет атрибуты \texttt{name}, \texttt{floors} и \texttt{year\_built}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Use = ``Commercial''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{building}, проверяются все операции.
+\end{enumerate}
+
+\item[31]
+Создать класс \texttt{Trip}, который будет представлять поездку с направлением, продолжительностью (в днях) и бюджетом. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что направление — непустая строка, продолжительность — целое число от 1 до 365, бюджет — положительное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Type}, который создаётся со значением \texttt{``Leisure''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Trip} определяет атрибуты \texttt{destination}, \texttt{duration} и \texttt{budget}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Type = ``Leisure''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{trip}, проверяются все методы.
+\end{enumerate}
+
+\item[32]
+Создать класс \texttt{Invoice}, который будет представлять счёт с номером, датой и суммой. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что номер — строка из 8 символов (буквы и цифры), дата — строка в формате \texttt{YYYY-MM-DD}, сумма — положительное число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Currency}, который создаётся со значением \texttt{``USD''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Invoice} определяет атрибуты \texttt{invoice\_number}, \texttt{date} и \texttt{amount}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Currency = ``USD''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{invoice}, проверяются все операции.
+\end{enumerate}
+
+\item[33]
+Создать класс \texttt{Library}, который будет представлять библиотеку с названием, адресом и годом основания. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что название и адрес — непустые строки, год — целое число от 1000 до текущего года. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Type}, который создаётся со значением \texttt{``Public''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Library} определяет атрибуты \texttt{name}, \texttt{address} и \texttt{founded}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Type = ``Public''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{library}, проверяются все методы.
+\end{enumerate}
+
+\item[34]
+Создать класс \texttt{Sensor}, который будет представлять датчик с идентификатором, типом и текущим значением. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что идентификатор — строка из 6 цифр, тип — непустая строка, значение — число. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Unit}, который создаётся со значением \texttt{``V''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Sensor} определяет атрибуты \texttt{id}, \texttt{type} и \texttt{value}.
+    \item Метод \texttt{\_\_setattr\_\_} проверяет корректность и вызывает \texttt{ValueError} при ошибке.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Unit = ``V''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять основные атрибуты, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{sensor}, проверяются все операции.
+\end{enumerate}
+
+\item[35]
+Создать класс \texttt{Member}, который будет представлять участника клуба с именем, фамилией и датой регистрации. Класс должен поддерживать методы перегрузки операций \texttt{\_\_setattr\_\_}, \texttt{\_\_getattribute\_\_}, \texttt{\_\_getattr\_\_} и \texttt{\_\_delattr\_\_}. Метод \texttt{\_\_setattr\_\_} должен проверять, что имя и фамилия — строки только из букв, дата — строка в формате \texttt{YYYY-MM-DD}. Метод \texttt{\_\_getattribute\_\_} должен возвращать значение атрибута или сообщение об ошибке. Метод \texttt{\_\_getattr\_\_} должен возвращать \texttt{None}, за исключением атрибута \texttt{Status}, который создаётся со значением \texttt{``Active''}. Метод \texttt{\_\_delattr\_\_} должен запрещать удаление основных атрибутов.
+
+\begin{enumerate}
+    \item Класс \texttt{Member} определяет атрибуты \texttt{first\_name}, \texttt{last\_name} и \texttt{registration\_date}.
+    \item Метод \texttt{\_\_setattr\_\_} валидирует данные и вызывает \texttt{ValueError} при нарушении формата.
+    \item Метод \texttt{\_\_getattribute\_\_} возвращает атрибут или сообщение об ошибке.
+    \item Метод \texttt{\_\_getattr\_\_} создаёт \texttt{Status = ``Active''}, если запрашивается; иначе — \texttt{None}.
+    \item Метод \texttt{\_\_delattr\_\_} не позволяет удалять \texttt{first\_name}, \texttt{last\_name} или \texttt{registration\_date}, вызывая \texttt{AttributeError}.
+    \item Пример: создаётся объект \texttt{member}, проверяются все операции с атрибутами.
+\end{enumerate}
+
+\end{enumerate}
