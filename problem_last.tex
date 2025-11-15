@@ -1,0 +1,1646 @@
+\subsection{Семинар <<Разработка метакласса и классов для создания таблиц в 
+базах данных объектным способом>>}
+
+Необходимо разработать программу на основе метакласса, которая позволяет создавать 
+модели (таблицы) данных, используя технологию ORM. 
+ORM (Object-Relational Mapping, объектно-реляционное отображение) — это технология 
+ООП программирования, которая позволяет разработчикам взаимодействовать 
+с реляционными базами данных, работая с ними как с обычными 
+объектами ООП в памяти программы, а не напрямую с SQL-запросами. 
+Основная цель ORM — абстракция доступа к данным, что делает работу с 
+базами данных проще и безопаснее. Примером реализации такой 
+технологии являются классы \texttt{models.Model} веб-фреймворка Django.
+
+\textbf{Важно:} В рамках данного практического задания 
+\textbf{не предполагается подключение к реальной базе данных}. Программа должна 
+генерировать и \textbf{выводить SQL-запросы в консоль}, демонстрируя корректность 
+формирования DDL (Data Definition Language) и DML (Data Manipulation Language) команд.
+
+Для реализации этой задачи необходимо создать 
+метакласс \texttt{ModelBase}, который будет служить основой для создания 
+классов моделей данных. Этот метакласс должен обеспечивать следующие возможности:
+
+\begin{enumerate}
+    \item \textbf{Сбор полей модели:} Метакласс должен уметь анализировать 
+    пространство имён создаваемого класса и собирать все поля, 
+    которые являются объектами класса \texttt{Field}. Собранные поля 
+    должны сохраняться в специальном атрибуте \texttt{\_fields} нового 
+    класса, а сами поля должны удаляться из исходного пространства 
+    имён, чтобы избежать конфликтов.
+    \item Необходимо реализовать классы-типы данных, которые будут представлять 
+    различные типы полей в модели:
+    \begin{itemize}
+        \item \texttt{CharField}: Представляет строку символов с возможностью 
+        указания максимальной длины и ограничений на допустимые значения.
+        \item \texttt{IntegerField}: Представляет целое число с возможностью 
+        задания ограничений на допустимые значения.
+        \item \texttt{DateField}: Представляет дату с возможностью задания 
+        ограничений на допустимые значения.
+    \end{itemize}
+    Эти классы должны наследоваться от общего класса \texttt{Field} и переопределять 
+    метод \texttt{to\_sql()} для генерации соответствующей части SQL-запроса, 
+    учитывая особенности каждого типа данных.
+    \item \textbf{Создание класса:} Метакласс должен формировать новый класс 
+    на основе собранной информации и возвращать его. Новый класс 
+    должен содержать собранные поля в виде словаря \texttt{\_fields}.
+    \item \textbf{Генерация SQL-запросов:} Класс модели должен предоставлять метод для 
+    генерации SQL-запроса, который <<создаёт>> таблицу в базе данных на основе 
+    собранных полей. Этот запрос должен учитывать типы данных и ограничения, 
+    заданные в соответствующих полях.
+\end{enumerate}
+
+\subsubsection*{Алгоритм программирования задачи}
+
+Алгоритм программирования задачи, позволяющей создавать классы для описания 
+таблиц баз данных с помощью метакласса \texttt{ModelBase} и других классов, 
+таких как \texttt{Field}, \texttt{CharField}, \texttt{IntegerField}, 
+\texttt{DateField}, \texttt{Model}, следующий:
+
+\begin{enumerate}
+    \item \textbf{Определение класса \texttt{Field}}: Определяется базовый 
+    класс \texttt{Field}, который будет представлять различные типы данных в модели.
+    \begin{enumerate}
+        \item Импортируйте модуль \texttt{datetime}.
+        \item Определите класс \texttt{Field}.
+        \item В конструкторе \texttt{\_\_init\_\_} примите 
+        аргументы: \texttt{field\_type}, \texttt{max\_length=None}, \texttt{null=False}, \texttt{default=None}.
+        \item Сохраните их как атрибуты экземпляра.
+        \item Добавьте метод \texttt{to\_sql(self, name)}, который генерирует 
+        SQL-представление столбца:
+            \begin{itemize}
+                \item Сопоставьте Python-типы с SQL-типами 
+                (например, \texttt{str} → \texttt{VARCHAR}, 
+                \texttt{int} → \texttt{INTEGER}, 
+                \texttt{datetime.date} → \texttt{DATE}).
+                \item Если \texttt{max\_length} задано и тип — строковый, 
+                используйте \texttt{VARCHAR(max\_length)}.
+                \item Добавьте \texttt{NOT NULL}, если \texttt{null=False}.
+                \item Укажите \texttt{DEFAULT} в соответствии со значением 
+                \texttt{default}.\\
+                \textbf{Важно:} На данном этапе \texttt{default} используется 
+                только для генерации DDL. Для вызываемых значений 
+                (callable defaults, например, \texttt{datetime.date.today}) в DDL 
+                следует подставлять конкретное значение, полученное при 
+                создании модели (см. ниже).
+            \end{itemize}
+    \end{enumerate}
+    
+    \item \textbf{Реализация классов-типов данных}:
+    \begin{enumerate}
+        \item \texttt{CharField}:  
+        \begin{itemize}
+            \item В \texttt{\_\_init\_\_} установите: \texttt{max\_length=255} 
+            (по умолчанию), \texttt{null=False}, \texttt{default=''}.
+            \item Вызовите \texttt{super().\_\_init\_\_(str, max\_length, null, default)}.
+        \end{itemize}
+        \item \texttt{IntegerField}:  
+        \begin{itemize}
+            \item В \texttt{\_\_init\_\_} установите: \texttt{null=False}, \texttt{default=0}.
+            \item Вызовите \texttt{super().\_\_init\_\_(int, None, null, default)}.
+        \end{itemize}
+        \item \texttt{DateField}:  
+        \begin{itemize}
+            \item В \texttt{\_\_init\_\_} установите: \texttt{null=False}, 
+            \texttt{default=datetime.date.today} \textbf{(без скобок!)}.
+            \item Вызовите \texttt{super().\_\_init\_\_(datetime.date, None, null, default)}.
+            \item \textbf{Пояснение:} Передача \texttt{datetime.date.today} как callable 
+            позволяет вычислять «сегодняшнюю дату» на момент создания 
+            объекта модели, а не на момент определения класса.
+        \end{itemize}
+    \end{enumerate}
+    
+    \item \textbf{Создание метакласса \texttt{ModelBase}}:
+    \begin{enumerate}
+        \item Определите \texttt{class ModelBase(type)}.
+        \item Реализуйте \texttt{\_\_new\_\_(cls, name, bases, attrs)}:
+            \begin{itemize}
+                \item Создайте пустой словарь \texttt{fields}.
+                \item Пройдитесь по \texttt{attrs}, соберите все значения, 
+                являющиеся экземплярами \texttt{Field}, в \texttt{fields}, и удалите 
+                их из \texttt{attrs}.
+                \item Вызовите \texttt{super().\_\_new\_\_(cls, name, bases, attrs)}.
+                \item Присвойте \texttt{new\_class.\_fields = fields}.
+                \item Верните \texttt{new\_class}.
+            \end{itemize}
+        \end{enumerate}
+        
+    \item \textbf{Создание базового класса \texttt{Model}}:
+    \begin{enumerate}
+        \item Определите \texttt{class Model(metaclass=ModelBase)}.
+        \item В \texttt{\_\_init\_\_(self, **kwargs)}:
+            \begin{itemize}
+                \item Для каждого поля из \texttt{self.\_fields}:
+                    \begin{itemize}
+                        \item Если имя поля есть в \texttt{kwargs}, используйте 
+                        переданное значение.
+                        \item Иначе, если у поля есть \texttt{default}:
+                            \begin{itemize}
+                                \item Если \texttt{default} — callable (например, 
+                                \texttt{datetime.date.today}), вызовите его.
+                                \item Иначе — используйте значение напрямую.
+                            \end{itemize}
+                        \item Установите значение через \texttt{setattr(self, name, value)}.
+                    \end{itemize}
+            \end{itemize}
+        \item Реализуйте метод 
+        класса \texttt{@classmethod def create\_table(cls, table\_name)}:
+            \begin{itemize}
+                \item Соберите SQL-представление каждого поля: \texttt{field.to\_sql(name)}.
+                \item Сформируйте команду \texttt{CREATE TABLE IF NOT EXISTS \{table\_name\} (...)}.
+                \item \textbf{Выведите её на печать.}
+            \end{itemize}
+        \item Реализуйте метод \texttt{save(self)}:
+            \begin{itemize}
+                \item Получите значения всех полей 
+                из \texttt{self.\_fields} через \texttt{getattr(self, name)}.
+                \item \textbf{Важно:} Для безопасной работы с данными 
+                в реальных ORM используются \textbf{параметризованные запросы}, чтобы 
+                предотвратить SQL-инъекции. В данном учебном задании, 
+                поскольку мы только выводим SQL, \textbf{значения должны 
+                быть корректно экранированы или преобразованы в SQL-литералы} (например, 
+                строки — в кавычки, числа — без кавычек, даты — в формате 'ГГГГ-ММ-ДД'; 
+                не забудьте про то, что внутри строки могут быть кавычки, переносы строк и 
+                другие особенности). 
+                \item Сформируйте \texttt{INSERT INTO ... VALUES (...)}.
+                \item Выведите запрос на печать.
+            \end{itemize}
+    \end{enumerate}
+\end{enumerate}
+
+\subsubsection{Тестирование созданной программы (по вариантам)}
+
+\begin{enumerate}
+    \item[1]
+
+
+    \begin{enumerate}
+        \item Определите класс \texttt{Book}:
+        \begin{verbatim}
+class Book(Model):
+    title = CharField(max_length=255)
+    author = CharField(max_length=100)
+    published_date = DateField()
+    year = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Book.create\_table('books')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+book = Book(
+    title='Python Cookbook',
+    author='David Beazley',
+    published_date=datetime.date(2013, 5, 10),
+    year=2012,
+)
+book.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS books (
+    title VARCHAR(255) NOT NULL DEFAULT '',
+    author VARCHAR(100) NOT NULL DEFAULT '',
+    published_date DATE NOT NULL DEFAULT '2025-04-05',
+    year INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO books (title, author, published_date, year) VALUES
+('Python Cookbook', 'David Beazley', '2013-05-10', 2012);
+        \end{verbatim}
+    \end{enumerate}
+    \item[2]
+    \begin{enumerate}
+        \item Определите класс \texttt{Student}:
+        \begin{verbatim}
+class Student(Model):
+    name = CharField(max_length=100)
+    surname = CharField(max_length=100)
+    birth_date = DateField()
+    course = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Student.create\_table('students')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+student = Student(
+    name='Иван',
+    surname='Петров',
+    birth_date=datetime.date(2002, 8, 15),
+    course=3,
+)
+student.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS students (
+    name VARCHAR(100) NOT NULL DEFAULT '',
+    surname VARCHAR(100) NOT NULL DEFAULT '',
+    birth_date DATE NOT NULL DEFAULT '2025-04-05',
+    course INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO students (name, surname, birth_date, course) VALUES
+('Иван', 'Петров', '2002-08-15', 3);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[3]
+    \begin{enumerate}
+        \item Определите класс \texttt{Product}:
+        \begin{verbatim}
+class Product(Model):
+    name = CharField(max_length=200)
+    brand = CharField(max_length=100)
+    release_date = DateField()
+    price_cents = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Product.create\_table('products')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+product = Product(
+    name='Wireless Headphones',
+    brand='SoundMax',
+    release_date=datetime.date(2023, 11, 1),
+    price_cents=5999,
+)
+product.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS products (
+    name VARCHAR(200) NOT NULL DEFAULT '',
+    brand VARCHAR(100) NOT NULL DEFAULT '',
+    release_date DATE NOT NULL DEFAULT '2025-04-05',
+    price_cents INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO products (name, brand, release_date, price_cents) VALUES
+('Wireless Headphones', 'SoundMax', '2023-11-01', 5999);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[4]
+    \begin{enumerate}
+        \item Определите класс \texttt{Employee}:
+        \begin{verbatim}
+class Employee(Model):
+    first_name = CharField(max_length=50)
+    last_name = CharField(max_length=50)
+    hire_date = DateField()
+    department_id = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Employee.create\_table('employees')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+employee = Employee(
+    first_name='Анна',
+    last_name='Смирнова',
+    hire_date=datetime.date(2021, 3, 12),
+    department_id=7,
+)
+employee.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS employees (
+    first_name VARCHAR(50) NOT NULL DEFAULT '',
+    last_name VARCHAR(50) NOT NULL DEFAULT '',
+    hire_date DATE NOT NULL DEFAULT '2025-04-05',
+    department_id INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO employees (first_name, last_name, hire_date, department_id) VALUES
+('Анна', 'Смирнова', '2021-03-12', 7);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[5]
+    \begin{enumerate}
+        \item Определите класс \texttt{Movie}:
+        \begin{verbatim}
+class Movie(Model):
+    title = CharField(max_length=150)
+    director = CharField(max_length=100)
+    release_date = DateField()
+    duration_minutes = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Movie.create\_table('movies')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+movie = Movie(
+    title='Inception',
+    director='Christopher Nolan',
+    release_date=datetime.date(2010, 7, 16),
+    duration_minutes=148,
+)
+movie.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS movies (
+    title VARCHAR(150) NOT NULL DEFAULT '',
+    director VARCHAR(100) NOT NULL DEFAULT '',
+    release_date DATE NOT NULL DEFAULT '2025-04-05',
+    duration_minutes INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO movies (title, director, release_date, duration_minutes) VALUES
+('Inception', 'Christopher Nolan', '2010-07-16', 148);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[6]
+    \begin{enumerate}
+        \item Определите класс \texttt{Car}:
+        \begin{verbatim}
+class Car(Model):
+    make = CharField(max_length=50)
+    model = CharField(max_length=50)
+    production_date = DateField()
+    horsepower = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Car.create\_table('cars')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+car = Car(
+    make='Toyota',
+    model='Corolla',
+    production_date=datetime.date(2022, 9, 5),
+    horsepower=139,
+)
+car.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS cars (
+    make VARCHAR(50) NOT NULL DEFAULT '',
+    model VARCHAR(50) NOT NULL DEFAULT '',
+    production_date DATE NOT NULL DEFAULT '2025-04-05',
+    horsepower INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO cars (make, model, production_date, horsepower) VALUES
+('Toyota', 'Corolla', '2022-09-05', 139);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[7]
+    \begin{enumerate}
+        \item Определите класс \texttt{Task}:
+        \begin{verbatim}
+class Task(Model):
+    title = CharField(max_length=200)
+    assignee = CharField(max_length=100)
+    due_date = DateField()
+    priority = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Task.create\_table('tasks')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+task = Task(
+    title='Refactor ORM module',
+    assignee='developer@example.com',
+    due_date=datetime.date(2025, 4, 20),
+    priority=1,
+)
+task.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS tasks (
+    title VARCHAR(200) NOT NULL DEFAULT '',
+    assignee VARCHAR(100) NOT NULL DEFAULT '',
+    due_date DATE NOT NULL DEFAULT '2025-04-05',
+    priority INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO tasks (title, assignee, due_date, priority) VALUES
+('Refactor ORM module', 'developer@example.com', '2025-04-20', 1);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[8]
+    \begin{enumerate}
+        \item Определите класс \texttt{Course}:
+        \begin{verbatim}
+class Course(Model):
+    name = CharField(max_length=255)
+    instructor = CharField(max_length=100)
+    start_date = DateField()
+    credits = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Course.create\_table('courses')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+course = Course(
+    name='Advanced Python Programming',
+    instructor='Dr. Elena Volkova',
+    start_date=datetime.date(2025, 2, 10),
+    credits=6,
+)
+course.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS courses (
+    name VARCHAR(255) NOT NULL DEFAULT '',
+    instructor VARCHAR(100) NOT NULL DEFAULT '',
+    start_date DATE NOT NULL DEFAULT '2025-04-05',
+    credits INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO courses (name, instructor, start_date, credits) VALUES
+('Advanced Python Programming', 'Dr. Elena Volkova', '2025-02-10', 6);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[9]
+    \begin{enumerate}
+        \item Определите класс \texttt{Order}:
+        \begin{verbatim}
+class Order(Model):
+    customer_name = CharField(max_length=150)
+    product = CharField(max_length=200)
+    order_date = DateField()
+    quantity = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Order.create\_table('orders')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+order = Order(
+    customer_name='John Doe',
+    product='Laptop Stand',
+    order_date=datetime.date(2025, 3, 22),
+    quantity=2,
+)
+order.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS orders (
+    customer_name VARCHAR(150) NOT NULL DEFAULT '',
+    product VARCHAR(200) NOT NULL DEFAULT '',
+    order_date DATE NOT NULL DEFAULT '2025-04-05',
+    quantity INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO orders (customer_name, product, order_date, quantity) VALUES
+('John Doe', 'Laptop Stand', '2025-03-22', 2);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[10]
+    \begin{enumerate}
+        \item Определите класс \texttt{Event}:
+        \begin{verbatim}
+class Event(Model):
+    title = CharField(max_length=300)
+    location = CharField(max_length=200)
+    event_date = DateField()
+    attendees = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Event.create\_table('events')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+event = Event(
+    title='Tech Conference 2025',
+    location='Moscow Expo Center',
+    event_date=datetime.date(2025, 6, 15),
+    attendees=350,
+)
+event.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS events (
+    title VARCHAR(300) NOT NULL DEFAULT '',
+    location VARCHAR(200) NOT NULL DEFAULT '',
+    event_date DATE NOT NULL DEFAULT '2025-04-05',
+    attendees INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO events (title, location, event_date, attendees) VALUES
+('Tech Conference 2025', 'Moscow Expo Center', '2025-06-15', 350);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[11]
+    \begin{enumerate}
+        \item Определите класс \texttt{Animal}:
+        \begin{verbatim}
+class Animal(Model):
+    species = CharField(max_length=100)
+    name = CharField(max_length=50)
+    birth_date = DateField()
+    weight_kg = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Animal.create\_table('animals')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+animal = Animal(
+    species='Dog',
+    name='Buddy',
+    birth_date=datetime.date(2020, 11, 3),
+    weight_kg=25,
+)
+animal.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS animals (
+    species VARCHAR(100) NOT NULL DEFAULT '',
+    name VARCHAR(50) NOT NULL DEFAULT '',
+    birth_date DATE NOT NULL DEFAULT '2025-04-05',
+    weight_kg INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO animals (species, name, birth_date, weight_kg) VALUES
+('Dog', 'Buddy', '2020-11-03', 25);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[12]
+    \begin{enumerate}
+        \item Определите класс \texttt{Recipe}:
+        \begin{verbatim}
+class Recipe(Model):
+    dish_name = CharField(max_length=200)
+    chef = CharField(max_length=100)
+    created_date = DateField()
+    difficulty = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Recipe.create\_table('recipes')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+recipe = Recipe(
+    dish_name='Beef Stroganoff',
+    chef='Maria Ivanova',
+    created_date=datetime.date(2023, 12, 1),
+    difficulty=3,
+)
+recipe.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS recipes (
+    dish_name VARCHAR(200) NOT NULL DEFAULT '',
+    chef VARCHAR(100) NOT NULL DEFAULT '',
+    created_date DATE NOT NULL DEFAULT '2025-04-05',
+    difficulty INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO recipes (dish_name, chef, created_date, difficulty) VALUES
+('Beef Stroganoff', 'Maria Ivanova', '2023-12-01', 3);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[13]
+    \begin{enumerate}
+        \item Определите класс \texttt{Flight}:
+        \begin{verbatim}
+class Flight(Model):
+    airline = CharField(max_length=100)
+    flight_number = CharField(max_length=10)
+    departure_date = DateField()
+    seats = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Flight.create\_table('flights')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+flight = Flight(
+    airline='Aeroflot',
+    flight_number='SU1234',
+    departure_date=datetime.date(2025, 5, 8),
+    seats=180,
+)
+flight.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS flights (
+    airline VARCHAR(100) NOT NULL DEFAULT '',
+    flight_number VARCHAR(10) NOT NULL DEFAULT '',
+    departure_date DATE NOT NULL DEFAULT '2025-04-05',
+    seats INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO flights (airline, flight_number, departure_date, seats) VALUES
+('Aeroflot', 'SU1234', '2025-05-08', 180);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[14]
+    \begin{enumerate}
+        \item Определите класс \texttt{User}:
+        \begin{verbatim}
+class User(Model):
+    username = CharField(max_length=50)
+    email = CharField(max_length=150)
+    registration_date = DateField()
+    score = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{User.create\_table('users')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+user = User(
+    username='coder42',
+    email='coder42@example.com',
+    registration_date=datetime.date(2024, 1, 10),
+    score=1250,
+)
+user.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS users (
+    username VARCHAR(50) NOT NULL DEFAULT '',
+    email VARCHAR(150) NOT NULL DEFAULT '',
+    registration_date DATE NOT NULL DEFAULT '2025-04-05',
+    score INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO users (username, email, registration_date, score) VALUES
+('coder42', 'coder42@example.com', '2024-01-10', 1250);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[15]
+    \begin{enumerate}
+        \item Определите класс \texttt{Project}:
+        \begin{verbatim}
+class Project(Model):
+    name = CharField(max_length=200)
+    manager = CharField(max_length=100)
+    start_date = DateField()
+    budget_thousands = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Project.create\_table('projects')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+project = Project(
+    name='ORM Framework Development',
+    manager='Alex Johnson',
+    start_date=datetime.date(2025, 1, 15),
+    budget_thousands=250,
+)
+project.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS projects (
+    name VARCHAR(200) NOT NULL DEFAULT '',
+    manager VARCHAR(100) NOT NULL DEFAULT '',
+    start_date DATE NOT NULL DEFAULT '2025-04-05',
+    budget_thousands INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO projects (name, manager, start_date, budget_thousands) VALUES
+('ORM Framework Development', 'Alex Johnson', '2025-01-15', 250);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[16]
+    \begin{enumerate}
+        \item Определите класс \texttt{Invoice}:
+        \begin{verbatim}
+class Invoice(Model):
+    client = CharField(max_length=150)
+    description = CharField(max_length=300)
+    issue_date = DateField()
+    amount = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Invoice.create\_table('invoices')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+invoice = Invoice(
+    client='ABC Corp',
+    description='Software License',
+    issue_date=datetime.date(2025, 3, 1),
+    amount=4500,
+)
+invoice.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS invoices (
+    client VARCHAR(150) NOT NULL DEFAULT '',
+    description VARCHAR(300) NOT NULL DEFAULT '',
+    issue_date DATE NOT NULL DEFAULT '2025-04-05',
+    amount INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO invoices (client, description, issue_date, amount) VALUES
+('ABC Corp', 'Software License', '2025-03-01', 4500);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[17]
+    \begin{enumerate}
+        \item Определите класс \texttt{License}:
+        \begin{verbatim}
+class License(Model):
+    software = CharField(max_length=100)
+    owner = CharField(max_length=150)
+    valid_from = DateField()
+    duration_days = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{License.create\_table('licenses')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+license = License(
+    software='TextEditor Pro',
+    owner='Jane Smith',
+    valid_from=datetime.date(2025, 2, 20),
+    duration_days=365,
+)
+license.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS licenses (
+    software VARCHAR(100) NOT NULL DEFAULT '',
+    owner VARCHAR(150) NOT NULL DEFAULT '',
+    valid_from DATE NOT NULL DEFAULT '2025-04-05',
+    duration_days INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO licenses (software, owner, valid_from, duration_days) VALUES
+('TextEditor Pro', 'Jane Smith', '2025-02-20', 365);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[18]
+    \begin{enumerate}
+        \item Определите класс \texttt{Sensor}:
+        \begin{verbatim}
+class Sensor(Model):
+    model = CharField(max_length=50)
+    location = CharField(max_length=200)
+    install_date = DateField()
+    reading_interval_sec = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Sensor.create\_table('sensors')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+sensor = Sensor(
+    model='TempX200',
+    location='Warehouse A',
+    install_date=datetime.date(2024, 10, 5),
+    reading_interval_sec=30,
+)
+sensor.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS sensors (
+    model VARCHAR(50) NOT NULL DEFAULT '',
+    location VARCHAR(200) NOT NULL DEFAULT '',
+    install_date DATE NOT NULL DEFAULT '2025-04-05',
+    reading_interval_sec INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO sensors (model, location, install_date, reading_interval_sec) VALUES
+('TempX200', 'Warehouse A', '2024-10-05', 30);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[19]
+    \begin{enumerate}
+        \item Определите класс \texttt{Membership}:
+        \begin{verbatim}
+class Membership(Model):
+    member_name = CharField(max_length=100)
+    club = CharField(max_length=150)
+    join_date = DateField()
+    fee_paid = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Membership.create\_table('memberships')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+membership = Membership(
+    member_name='Olga Petrova',
+    club='Photography Club',
+    join_date=datetime.date(2023, 9, 12),
+    fee_paid=1200,
+)
+membership.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS memberships (
+    member_name VARCHAR(100) NOT NULL DEFAULT '',
+    club VARCHAR(150) NOT NULL DEFAULT '',
+    join_date DATE NOT NULL DEFAULT '2025-04-05',
+    fee_paid INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO memberships (member_name, club, join_date, fee_paid) VALUES
+('Olga Petrova', 'Photography Club', '2023-09-12', 1200);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[20]
+    \begin{enumerate}
+        \item Определите класс \texttt{Document}:
+        \begin{verbatim}
+class Document(Model):
+    title = CharField(max_length=255)
+    author = CharField(max_length=100)
+    created_date = DateField()
+    pages = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Document.create\_table('documents')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+doc = Document(
+    title='Annual Report 2024',
+    author='Finance Team',
+    created_date=datetime.date(2025, 1, 25),
+    pages=42,
+)
+doc.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS documents (
+    title VARCHAR(255) NOT NULL DEFAULT '',
+    author VARCHAR(100) NOT NULL DEFAULT '',
+    created_date DATE NOT NULL DEFAULT '2025-04-05',
+    pages INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO documents (title, author, created_date, pages) VALUES
+('Annual Report 2024', 'Finance Team', '2025-01-25', 42);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[21]
+    \begin{enumerate}
+        \item Определите класс \texttt{Exam}:
+        \begin{verbatim}
+class Exam(Model):
+    subject = CharField(max_length=100)
+    teacher = CharField(max_length=100)
+    exam_date = DateField()
+    max_score = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Exam.create\_table('exams')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+exam = Exam(
+    subject='Mathematics',
+    teacher='Prof. Ivanov',
+    exam_date=datetime.date(2025, 5, 20),
+    max_score=100,
+)
+exam.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS exams (
+    subject VARCHAR(100) NOT NULL DEFAULT '',
+    teacher VARCHAR(100) NOT NULL DEFAULT '',
+    exam_date DATE NOT NULL DEFAULT '2025-04-05',
+    max_score INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO exams (subject, teacher, exam_date, max_score) VALUES
+('Mathematics', 'Prof. Ivanov', '2025-05-20', 100);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[22]
+    \begin{enumerate}
+        \item Определите класс \texttt{Game}:
+        \begin{verbatim}
+class Game(Model):
+    name = CharField(max_length=200)
+    developer = CharField(max_length=150)
+    release_date = DateField()
+    rating = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Game.create\_table('games')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+game = Game(
+    name='Mystic Forest',
+    developer='Pixel Studios',
+    release_date=datetime.date(2024, 11, 30),
+    rating=92,
+)
+game.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS games (
+    name VARCHAR(200) NOT NULL DEFAULT '',
+    developer VARCHAR(150) NOT NULL DEFAULT '',
+    release_date DATE NOT NULL DEFAULT '2025-04-05',
+    rating INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO games (name, developer, release_date, rating) VALUES
+('Mystic Forest', 'Pixel Studios', '2024-11-30', 92);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[23]
+    \begin{enumerate}
+        \item Определите класс \texttt{Building}:
+        \begin{verbatim}
+class Building(Model):
+    name = CharField(max_length=150)
+    architect = CharField(max_length=100)
+    completion_date = DateField()
+    floors = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Building.create\_table('buildings')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+building = Building(
+    name='Sky Tower',
+    architect='Mikhail Sokolov',
+    completion_date=datetime.date(2022, 7, 14),
+    floors=45,
+)
+building.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS buildings (
+    name VARCHAR(150) NOT NULL DEFAULT '',
+    architect VARCHAR(100) NOT NULL DEFAULT '',
+    completion_date DATE NOT NULL DEFAULT '2025-04-05',
+    floors INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO buildings (name, architect, completion_date, floors) VALUES
+('Sky Tower', 'Mikhail Sokolov', '2022-07-14', 45);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[24]
+    \begin{enumerate}
+        \item Определите класс \texttt{Subscription}:
+        \begin{verbatim}
+class Subscription(Model):
+    service = CharField(max_length=100)
+    subscriber = CharField(max_length=150)
+    start_date = DateField()
+    monthly_fee = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Subscription.create\_table('subscriptions')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+sub = Subscription(
+    service='Cloud Storage Plus',
+    subscriber='user@domain.com',
+    start_date=datetime.date(2025, 4, 1),
+    monthly_fee=250,
+)
+sub.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS subscriptions (
+    service VARCHAR(100) NOT NULL DEFAULT '',
+    subscriber VARCHAR(150) NOT NULL DEFAULT '',
+    start_date DATE NOT NULL DEFAULT '2025-04-05',
+    monthly_fee INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO subscriptions (service, subscriber, start_date, monthly_fee) VALUES
+('Cloud Storage Plus', 'user@domain.com', '2025-04-01', 250);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[25]
+    \begin{enumerate}
+        \item Определите класс \texttt{Vehicle}:
+        \begin{verbatim}
+class Vehicle(Model):
+    brand = CharField(max_length=50)
+    model = CharField(max_length=50)
+    manufacture_date = DateField()
+    mileage = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Vehicle.create\_table('vehicles')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+vehicle = Vehicle(
+    brand='BMW',
+    model='X5',
+    manufacture_date=datetime.date(2021, 8, 22),
+    mileage=45000,
+)
+vehicle.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS vehicles (
+    brand VARCHAR(50) NOT NULL DEFAULT '',
+    model VARCHAR(50) NOT NULL DEFAULT '',
+    manufacture_date DATE NOT NULL DEFAULT '2025-04-05',
+    mileage INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO vehicles (brand, model, manufacture_date, mileage) VALUES
+('BMW', 'X5', '2021-08-22', 45000);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[26]
+    \begin{enumerate}
+        \item Определите класс \texttt{Conference}:
+        \begin{verbatim}
+class Conference(Model):
+    title = CharField(max_length=300)
+    organizer = CharField(max_length=150)
+    event_date = DateField()
+    participants = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Conference.create\_table('conferences')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+conf = Conference(
+    title='AI Ethics Summit',
+    organizer='Global Tech Ethics',
+    event_date=datetime.date(2025, 9, 10),
+    participants=200,
+)
+conf.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS conferences (
+    title VARCHAR(300) NOT NULL DEFAULT '',
+    organizer VARCHAR(150) NOT NULL DEFAULT '',
+    event_date DATE NOT NULL DEFAULT '2025-04-05',
+    participants INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO conferences (title, organizer, event_date, participants) VALUES
+('AI Ethics Summit', 'Global Tech Ethics', '2025-09-10', 200);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[27]
+    \begin{enumerate}
+        \item Определите класс \texttt{LogEntry}:
+        \begin{verbatim}
+class LogEntry(Model):
+    level = CharField(max_length=20)
+    message = CharField(max_length=500)
+    timestamp_date = DateField()
+    code = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{LogEntry.create\_table('log\_entries')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+log = LogEntry(
+    level='ERROR',
+    message='Database connection failed',
+    timestamp_date=datetime.date(2025, 4, 4),
+    code=5001,
+)
+log.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS log_entries (
+    level VARCHAR(20) NOT NULL DEFAULT '',
+    message VARCHAR(500) NOT NULL DEFAULT '',
+    timestamp_date DATE NOT NULL DEFAULT '2025-04-05',
+    code INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO log_entries (level, message, timestamp_date, code) VALUES
+('ERROR', 'Database connection failed', '2025-04-04', 5001);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[28]
+    \begin{enumerate}
+        \item Определите класс \texttt{Certificate}:
+        \begin{verbatim}
+class Certificate(Model):
+    course_name = CharField(max_length=200)
+    student = CharField(max_length=150)
+    issue_date = DateField()
+    grade = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Certificate.create\_table('certificates')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+cert = Certificate(
+    course_name='Web Development Fundamentals',
+    student='Nikolai Smirnov',
+    issue_date=datetime.date(2025, 3, 28),
+    grade=88,
+)
+cert.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS certificates (
+    course_name VARCHAR(200) NOT NULL DEFAULT '',
+    student VARCHAR(150) NOT NULL DEFAULT '',
+    issue_date DATE NOT NULL DEFAULT '2025-04-05',
+    grade INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO certificates (course_name, student, issue_date, grade) VALUES
+('Web Development Fundamentals', 'Nikolai Smirnov', '2025-03-28', 88);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[29]
+    \begin{enumerate}
+        \item Определите класс \texttt{Device}:
+        \begin{verbatim}
+class Device(Model):
+    serial = CharField(max_length=100)
+    manufacturer = CharField(max_length=100)
+    purchase_date = DateField()
+    warranty_months = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Device.create\_table('devices')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+device = Device(
+    serial='SN123456789',
+    manufacturer='TechCorp',
+    purchase_date=datetime.date(2024, 12, 15),
+    warranty_months=24,
+)
+device.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS devices (
+    serial VARCHAR(100) NOT NULL DEFAULT '',
+    manufacturer VARCHAR(100) NOT NULL DEFAULT '',
+    purchase_date DATE NOT NULL DEFAULT '2025-04-05',
+    warranty_months INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO devices (serial, manufacturer, purchase_date, warranty_months) VALUES
+('SN123456789', 'TechCorp', '2024-12-15', 24);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[30]
+    \begin{enumerate}
+        \item Определите класс \texttt{Transaction}:
+        \begin{verbatim}
+class Transaction(Model):
+    account = CharField(max_length=50)
+    description = CharField(max_length=200)
+    date = DateField()
+    amount_cents = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Transaction.create\_table('transactions')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+txn = Transaction(
+    account='ACCT-8899',
+    description='Online Purchase',
+    date=datetime.date(2025, 4, 3),
+    amount_cents=-12500,
+)
+txn.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS transactions (
+    account VARCHAR(50) NOT NULL DEFAULT '',
+    description VARCHAR(200) NOT NULL DEFAULT '',
+    date DATE NOT NULL DEFAULT '2025-04-05',
+    amount_cents INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO transactions (account, description, date, amount_cents) VALUES
+('ACCT-8899', 'Online Purchase', '2025-04-03', -12500);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[31]
+    \begin{enumerate}
+        \item Определите класс \texttt{Publication}:
+        \begin{verbatim}
+class Publication(Model):
+    journal = CharField(max_length=200)
+    author = CharField(max_length=150)
+    publish_date = DateField()
+    citations = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Publication.create\_table('publications')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+pub = Publication(
+    journal='Journal of AI Research',
+    author='Dr. Anna Volkova',
+    publish_date=datetime.date(2024, 6, 12),
+    citations=34,
+)
+pub.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS publications (
+    journal VARCHAR(200) NOT NULL DEFAULT '',
+    author VARCHAR(150) NOT NULL DEFAULT '',
+    publish_date DATE NOT NULL DEFAULT '2025-04-05',
+    citations INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO publications (journal, author, publish_date, citations) VALUES
+('Journal of AI Research', 'Dr. Anna Volkova', '2024-06-12', 34);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[32]
+    \begin{enumerate}
+        \item Определите класс \texttt{Appointment}:
+        \begin{verbatim}
+class Appointment(Model):
+    patient = CharField(max_length=100)
+    doctor = CharField(max_length=100)
+    appointment_date = DateField()
+    duration_minutes = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Appointment.create\_table('appointments')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+appt = Appointment(
+    patient='Sergey Orlov',
+    doctor='Dr. Elena Kuznetsova',
+    appointment_date=datetime.date(2025, 4, 7),
+    duration_minutes=30,
+)
+appt.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS appointments (
+    patient VARCHAR(100) NOT NULL DEFAULT '',
+    doctor VARCHAR(100) NOT NULL DEFAULT '',
+    appointment_date DATE NOT NULL DEFAULT '2025-04-05',
+    duration_minutes INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO appointments (patient, doctor, appointment_date, duration_minutes) VALUES
+('Sergey Orlov', 'Dr. Elena Kuznetsova', '2025-04-07', 30);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[33]
+    \begin{enumerate}
+        \item Определите класс \texttt{Contract}:
+        \begin{verbatim}
+class Contract(Model):
+    party_a = CharField(max_length=150)
+    party_b = CharField(max_length=150)
+    signed_date = DateField()
+    term_months = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Contract.create\_table('contracts')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+contract = Contract(
+    party_a='Company LLC',
+    party_b='Freelancer Inc.',
+    signed_date=datetime.date(2025, 2, 28),
+    term_months=12,
+)
+contract.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS contracts (
+    party_a VARCHAR(150) NOT NULL DEFAULT '',
+    party_b VARCHAR(150) NOT NULL DEFAULT '',
+    signed_date DATE NOT NULL DEFAULT '2025-04-05',
+    term_months INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO contracts (party_a, party_b, signed_date, term_months) VALUES
+('Company LLC', 'Freelancer Inc.', '2025-02-28', 12);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[34]
+    \begin{enumerate}
+        \item Определите класс \texttt{Award}:
+        \begin{verbatim}
+class Award(Model):
+    title = CharField(max_length=200)
+    recipient = CharField(max_length=150)
+    award_date = DateField()
+    rank = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Award.create\_table('awards')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+award = Award(
+    title='Best Open Source Project',
+    recipient='Team ORM',
+    award_date=datetime.date(2024, 10, 15),
+    rank=1,
+)
+award.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS awards (
+    title VARCHAR(200) NOT NULL DEFAULT '',
+    recipient VARCHAR(150) NOT NULL DEFAULT '',
+    award_date DATE NOT NULL DEFAULT '2025-04-05',
+    rank INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO awards (title, recipient, award_date, rank) VALUES
+('Best Open Source Project', 'Team ORM', '2024-10-15', 1);
+        \end{verbatim}
+    \end{enumerate}
+
+    \item[35]
+    \begin{enumerate}
+        \item Определите класс \texttt{Playlist}:
+        \begin{verbatim}
+class Playlist(Model):
+    name = CharField(max_length=150)
+    creator = CharField(max_length=100)
+    created_date = DateField()
+    track_count = IntegerField()
+        \end{verbatim}
+        \item Вызовите: \texttt{Playlist.create\_table('playlists')}
+        \item Создайте экземпляр:
+        \begin{verbatim}
+playlist = Playlist(
+    name='Coding Focus',
+    creator='user123',
+    created_date=datetime.date(2025, 3, 30),
+    track_count=18,
+)
+playlist.save()
+        \end{verbatim}
+    \end{enumerate}
+    Программа должна вывести следующие SQL-запросы:
+    
+    \begin{enumerate}
+        \item Запрос на создание таблицы (пример для даты выполнения 2025-04-05):
+        \begin{verbatim}
+CREATE TABLE IF NOT EXISTS playlists (
+    name VARCHAR(150) NOT NULL DEFAULT '',
+    creator VARCHAR(100) NOT NULL DEFAULT '',
+    created_date DATE NOT NULL DEFAULT '2025-04-05',
+    track_count INTEGER NOT NULL DEFAULT 0
+);
+        \end{verbatim}
+        
+        \item Запрос на вставку данных:
+        \begin{verbatim}
+INSERT INTO playlists (name, creator, created_date, track_count) VALUES
+('Coding Focus', 'user123', '2025-03-30', 18);
+        \end{verbatim}
+    \end{enumerate}
+\end{enumerate}
+
+
+\end{document}
