@@ -1,6 +1,7 @@
 name: Build and Deploy LaTeX Document
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -22,16 +23,31 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-lang-cyrillic \
+            fonts-dejavu \
             latexmk
 
       - name: Build LaTeX document
         run: |
           latexmk -pdf -interaction=nonstopmode -file-line-error problems.tex
 
+      - name: Build lectures (one PDF per .tex in lectures/)
+        run: |
+          set -e
+          mkdir -p dist/lectures
+          cd lectures
+          for f in *.tex; do
+            base="${f%.tex}"
+            echo ">> Building $base.tex"
+            xelatex -interaction=nonstopmode -file-line-error "$base.tex"
+            xelatex -interaction=nonstopmode -file-line-error "$base.tex"
+          done
+          cp -f *.pdf ../dist/lectures/
+
       - name: Prepare dist directory
         run: |
           mkdir -p dist
           cp problems.pdf dist/
+          cp index.html dist/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

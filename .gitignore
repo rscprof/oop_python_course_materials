@@ -3,3 +3,7 @@
 *.out
 *.pdf
 *.toc
+*.nav
+*.snm
+*.fdb_latexmk
+*.fls

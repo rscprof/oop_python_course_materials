@@ -1,0 +1,738 @@
+% Порождающие паттерны проектирования: Beamer + TikZ (UML)
+% Компиляция: xelatex design_patterns.tex (дважды)
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{DejaVu Sans}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}[Scale=0.88]
+\newfontfamily\cyrillicfont{DejaVu Sans}
+\newfontfamily\cyrillicfontsf{DejaVu Sans}
+\newfontfamily\cyrillicfonttt{DejaVu Sans Mono}[Scale=0.88]
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,shapes.multipart,calc,positioning}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% ---------- оформление ----------
+\definecolor{main}{HTML}{1F4E79}
+\definecolor{accent}{HTML}{B5472B}
+\setbeamercolor{structure}{fg=main}
+\setbeamercolor{frametitle}{fg=white,bg=main}
+\setbeamercolor{block title}{fg=white,bg=main}
+\setbeamercolor{block body}{bg=main!7}
+\setbeamercolor{block title alerted}{fg=white,bg=accent}
+\setbeamercolor{block body alerted}{bg=accent!8}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{block title}{size=\small,series=\bfseries}
+\setbeamerfont{block body}{size=\small}
+\setbeamerfont{block body alerted}{size=\small}
+\setbeamerfont{itemize/enumerate body}{size=\small}
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{items}[circle]
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.05cm,dp=0.35cm,leftskip=0.8cm,rightskip=0.8cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+  \vskip1.5mm
+}
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{\hspace{0.8cm}\color{black!55}\scriptsize
+    Порождающие паттерны проектирования\hfill
+    \insertframenumber\,/\,\inserttotalframenumber\hspace{0.8cm}}%
+  \vskip3mm
+}
+
+% ---------- стили UML ----------
+\tikzset{
+  uml/.style={draw=black!70, fill=main!6, rectangle split,
+    rectangle split draw splits, font=\footnotesize,
+    text width=3.2cm, inner sep=3pt},
+  cls3/.style={uml, rectangle split parts=3,
+    rectangle split part align={center,left,left}},
+  cls2/.style={uml, rectangle split parts=2,
+    rectangle split part align={center,left}},
+  cls1/.style={uml, rectangle split parts=1, align=center},
+  smallcls/.style={cls1/.append style={font=\scriptsize},
+    cls2/.append style={font=\scriptsize},
+    cls3/.append style={font=\scriptsize}},
+  inherit/.style={-{Triangle[open,length=9pt,width=8pt]}, thick},
+  realize/.style={-{Triangle[open,length=9pt,width=8pt]}, thick, dashed},
+  assoc/.style={-{Stealth[length=7pt,width=6pt]}, thick},
+  depend/.style={-{Stealth[length=7pt,width=6pt]}, thick, dashed},
+  aggr/.style={{Diamond[open,length=10pt,width=7pt]}-, thick},
+  compo/.style={{Diamond[length=10pt,width=7pt]}-, thick},
+  lg/.style={text width=5.6cm,anchor=west,font=\small},
+  ndash/.style={dashed, black!60},
+  lbl/.style={font=\scriptsize, inner sep=1.5pt, fill=white, text=black!80, align=center},
+  note/.style={draw=black!50, fill=yellow!22, font=\scriptsize\ttfamily,
+    align=left, inner sep=3pt},
+}
+
+\title{Порождающие паттерны проектирования}
+\date{\today}
+
+\begin{document}
+
+% ======================= Титульный слайд =======================
+\begin{frame}[plain]
+  \vfill
+  \centering
+  {\color{main}\fontsize{26}{31}\selectfont\bfseries Порождающие паттерны\\проектирования\par}
+  \vspace{5mm}
+  {\color{accent}\rule{6cm}{1.2pt}\par}
+  \vspace{5mm}
+  {\large UML-диаграммы\par}
+  \vspace{7mm}
+  {\small Singleton \,·\, Abstract Factory \,·\, Builder \,·\, Factory Method \,·\,
+   Lazy initialization\\[1mm]
+   Multiton \,·\, Object pool \,·\, Prototype% \,%·\, RAII
+   \par}
+  \vfill
+%  {\footnotesize\color{black!60}\insertdate\par}
+%  \vspace{4mm}
+\end{frame}
+
+% ======================= Содержание =======================
+\begin{frame}{Содержание}
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      \begin{enumerate}\setlength\itemsep{3pt}
+        \item Singleton
+        \item Abstract Factory
+        \item Builder
+        \item Factory Method
+        \item Lazy initialization
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{enumerate}\setcounter{enumi}{5}\setlength\itemsep{3pt}
+        \item Multiton
+        \item Object pool
+        \item Prototype
+%        \item Resource acquisition is initialization (RAII)
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+  % \vspace{3mm}
+  % \begin{block}{Что объединяет эти паттерны}
+  %   Все девять~— \textbf{порождающие}: они отвечают за создание объектов
+  %   и скрывают, как, когда и сколько экземпляров создаётся.
+  %   Singleton, Abstract Factory, Builder, Factory Method и Prototype~— из каталога GoF;
+  %   остальные~— распространённые дополнения к нему.
+  % \end{block}
+  % \vspace{1mm}
+  % {\footnotesize На каждый паттерн~— слайд с описанием и слайд с UML-диаграммой.}
+\end{frame}
+
+% ======================= Легенда UML =======================
+% \begin{frame}{Обозначения UML на диаграммах}
+%   \begin{columns}[T]
+%     \begin{column}{0.64\textwidth}
+%       \begin{tikzpicture}[x=1cm,y=1cm]
+%         \draw[inherit] (0,0)    -- (2.4,0);
+%         \node[lg] at (2.8,0)    {\textbf{Наследование}: подкласс $\to$ суперкласс};
+%         \draw[realize] (0,-0.95) -- (2.4,-0.95);
+%         \node[lg] at (2.8,-0.95) {\textbf{Реализация} интерфейса};
+%         \draw[assoc] (0,-1.9)   -- (2.4,-1.9);
+%         \node[lg] at (2.8,-1.9)  {\textbf{Ассоциация}: объект хранит ссылку и использует другой};
+%         \draw[depend] (0,-2.95) -- (2.4,-2.95);
+%         \node[lg] at (2.8,-2.95) {\textbf{Зависимость}: создаёт или временно использует};
+%         \draw[aggr] (0,-4.0)    -- (2.4,-4.0);
+%         \node[lg] at (2.8,-4.0)  {\textbf{Агрегация}: «имеет», части живут независимо};
+%         \draw[compo] (0,-5.05)  -- (2.4,-5.05);
+%         \node[lg] at (2.8,-5.05) {\textbf{Композиция}: «владеет», части живут вместе с целым};
+%       \end{tikzpicture}
+%     \end{column}
+%     \begin{column}{0.32\textwidth}
+%       \begin{block}{Элементы класса}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item[\texttt{+}] открытый (public)
+%           \item[\texttt{−}] закрытый (private)
+%           \item[\texttt{\#}] защищённый (protected)
+%           \item \underline{подчёркнутый} — статический
+%           \item \textit{курсив} — абстрактный
+%           \item «interface» — интерфейс
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+% ======================= 1. Singleton =======================
+% \begin{frame}{1. Singleton (Одиночка)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Гарантирует, что у класса есть только один экземпляр, и даёт
+%         глобальную точку доступа к нему.
+%       \end{block}
+%       \begin{block}{Как устроен}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item закрытый конструктор;
+%           \item статическое поле с единственным экземпляром;
+%           \item статический метод \texttt{getInstance()};
+%           \item в многопоточной среде~— синхронизация,
+%                 double-checked locking или создание при загрузке класса.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Когда применять}
+%         Конфигурация, логгер, кэш, пул соединений~— всё, что должно
+%         существовать в единственном числе.
+%       \end{block}
+%       \begin{alertblock}{Минусы и риски}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item глобальное состояние;
+%           \item затрудняет модульное тестирование;
+%           \item нарушает принцип единственной ответственности;
+%           \item осторожно с потоками.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Singleton: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}[scale=1.35, transform shape]
+    \node[cls1, text width=1.4cm] (client) at (0,0.8) {\textbf{Client}};
+    \node[cls3, text width=4.0cm] (s) at (6.2,0.8) {\textbf{Singleton}
+      \nodepart{two} − \underline{instance : Singleton}
+      \nodepart{three} − Singleton()\\
+      + \underline{getInstance() : Singleton}};
+    \draw[depend] (client.east) -- (s.west)
+      node[lbl, midway, above] {getInstance()};
+    \draw[assoc] ([yshift=0.45cm]s.east) -- ++(0.9,0) |- ([yshift=-0.45cm]s.east);
+    \node[lbl, anchor=west] at ([xshift=0.95cm]s.east) {instance\\[-1pt]1};
+    \node[note] (n) at (6.2,-1.7) {if (instance == null)\\
+      \quad instance = new Singleton();\\
+      return instance;};
+    \draw[ndash] (n.north) -- (s.south);
+  \end{tikzpicture}
+
+  \vspace{4mm}
+  {\small Клиенты получают объект только через статический \texttt{getInstance()};
+   конструктор закрыт.}
+\end{frame}
+
+% ======================= 2. Abstract Factory =======================
+% \begin{frame}{2. Abstract Factory (Абстрактная фабрика)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Предоставляет интерфейс для создания \textbf{семейств}
+%         взаимосвязанных объектов, не привязываясь к их конкретным классам.
+%       \end{block}
+%       \begin{block}{Когда применять}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item система не должна зависеть от способа создания продуктов;
+%           \item продукты одного семейства обязаны использоваться вместе;
+%           \item примеры: виджеты Windows/macOS, темы интерфейса,
+%                 драйверы разных СУБД.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Плюсы}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item совместимость продуктов семейства;
+%           \item лёгкая замена всего семейства;
+%           \item принцип открытости/закрытости.
+%         \end{itemize}
+%       \end{block}
+%       \begin{alertblock}{Минусы}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item новый вид продукта требует менять интерфейс и все фабрики;
+%           \item много классов и интерфейсов.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Abstract Factory: UML-диаграмма}
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[smallcls]
+    % клиент и абстрактная фабрика
+    \node[cls1, text width=1.2cm] (client) at (-0.3,4.4) {\textbf{Client}};
+    \node[cls2, text width=2.8cm] (af) at (3.1,4.4)
+      {«interface»\\\textbf{AbstractFactory}
+       \nodepart{two}+ createProductA()\\+ createProductB()};
+    % конкретные фабрики
+    \node[cls2, text width=2.8cm] (cf1) at (1.6,1.4)
+      {\textbf{ConcreteFactory1}
+       \nodepart{two}+ createProductA()\\+ createProductB()};
+    \node[cls2, text width=2.8cm] (cf2) at (4.7,1.4)
+      {\textbf{ConcreteFactory2}
+       \nodepart{two}+ createProductA()\\+ createProductB()};
+    % абстрактные продукты
+    \node[cls2, text width=2.7cm] (apa) at (8.2,4.4)
+      {«interface»\\\textbf{AbstractProductA}\nodepart{two}+ operationA()};
+    \node[cls2, text width=2.7cm] (apb) at (11.4,4.4)
+      {«interface»\\\textbf{AbstractProductB}\nodepart{two}+ operationB()};
+    % конкретные продукты
+    \node[cls1, text width=1.5cm] (a1) at (7.4,1.4) {\textbf{ProductA1}};
+    \node[cls1, text width=1.5cm] (a2) at (9.2,1.4) {\textbf{ProductA2}};
+    \node[cls1, text width=1.5cm] (b1) at (11.0,1.4) {\textbf{ProductB1}};
+    \node[cls1, text width=1.5cm] (b2) at (12.8,1.4) {\textbf{ProductB2}};
+    % связи
+    \draw[assoc] (client) -- (af);
+    \draw[realize] (cf1.north) -- (af.south);
+    \draw[realize] (cf2.north) -- (af.south);
+    \draw[realize] (a1.north) -- (apa.south);
+    \draw[realize] (a2.north) -- (apa.south);
+    \draw[realize] (b1.north) -- (apb.south);
+    \draw[realize] (b2.north) -- (apb.south);
+    \draw[depend] (client.north) -- ++(0,0.9) -| (apa.north);
+    \draw[depend] ([xshift=0.2cm]client.north) -- ++(0,1.25) -| (apb.north);
+    % создание продуктов
+    \draw[depend] ([xshift=-0.5cm]cf1.south) to[out=-80,in=-100,looseness=0.9] (a1.south);
+    \draw[depend] ([xshift=0.5cm]cf1.south) to[out=-70,in=-110,looseness=0.8] (b1.south);
+    \draw[depend] ([xshift=-0.5cm]cf2.south) to[out=-80,in=-100,looseness=0.9] (a2.south);
+    \draw[depend] ([xshift=0.5cm]cf2.south) to[out=-70,in=-110,looseness=0.8] (b2.south);
+    \node[lbl] at (6.1,-0.15) {«create»};
+  \end{tikzpicture}}
+
+  \vspace{2mm}
+  {\small Клиент знает только абстрактную фабрику и абстрактные продукты;
+   семейство задаёт выбранная конкретная фабрика.}
+\end{frame}
+
+% ======================= 3. Builder =======================
+% \begin{frame}{3. Builder (Строитель)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Отделяет конструирование сложного объекта от его представления:
+%         один и тот же процесс может давать разные результаты.
+%       \end{block}
+%       \begin{block}{Участники}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item \textbf{Builder}~— интерфейс шагов сборки;
+%           \item \textbf{ConcreteBuilder}~— собирает и отдаёт Product;
+%           \item \textbf{Director}~— задаёт порядок шагов;
+%           \item \textbf{Product}~— создаваемый объект.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Когда применять}
+%         Конструктор с множеством параметров, пошаговая сборка
+%         (SQL-запросы, HTTP-запросы, документы), разные представления объекта.
+%       \end{block}
+%       \begin{alertblock}{Минусы}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item больше классов;
+%           \item Product привязан к своему ConcreteBuilder;
+%           \item строитель должен быть изменяемым.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Builder: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls3, text width=2.9cm] (dir) at (0,3.4) {\textbf{Director}
+      \nodepart{two}− builder : Builder
+      \nodepart{three}+ construct()};
+    \node[cls2, text width=3.7cm] (b) at (5.8,3.4) {«interface»\\\textbf{Builder}
+      \nodepart{two}+ buildPartA()\\+ buildPartB()\\+ getResult() : Product};
+    \node[cls3, text width=3.7cm] (cb) at (5.8,0.4) {\textbf{ConcreteBuilder}
+      \nodepart{two}− product : Product
+      \nodepart{three}+ buildPartA()\\+ buildPartB()\\+ getResult() : Product};
+    \node[cls2, text width=2.2cm] (p) at (11.2,0.4) {\textbf{Product}
+      \nodepart{two}− parts : List};
+    \draw[aggr] (dir.east) -- (b.west) node[lbl, midway, above] {builder};
+    \draw[realize] (cb.north) -- (b.south);
+    \draw[depend] (cb.east) -- (p.west) node[lbl, midway, above] {«create»};
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Director задаёт порядок шагов, ConcreteBuilder собирает Product;
+   готовый результат запрашивают у строителя.}
+\end{frame}
+
+% ======================= 4. Factory Method =======================
+% \begin{frame}{4. Factory Method (Фабричный метод)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Определяет интерфейс создания объекта, но позволяет подклассам
+%         решать, экземпляр какого класса создавать.
+%       \end{block}
+%       \begin{block}{Когда применять}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item заранее неизвестны точные типы объектов;
+%           \item подклассы должны расширять внутренние компоненты
+%                 фреймворка;
+%           \item примеры: транспорт (Truck/Ship), парсеры, логгеры,
+%                 страницы документа.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Плюсы}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item слабая связанность Creator и продуктов;
+%           \item код создания собран в одном месте;
+%           \item принцип открытости/закрытости.
+%         \end{itemize}
+%       \end{block}
+%       \begin{alertblock}{Минусы}
+%         Для каждого нового продукта нужен свой подкласс-создатель,
+%         иерархия классов разрастается.
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Factory Method: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}[scale=1.25, transform shape]
+    \node[cls2, text width=4.0cm] (cr) at (2.4,3.2) {\textbf{\textit{Creator}}
+      \nodepart{two}+ someOperation()\\+ \textit{factoryMethod() : Product}};
+    \node[cls2, text width=4.0cm] (cc) at (2.4,0.5) {\textbf{ConcreteCreator}
+      \nodepart{two}+ factoryMethod() : Product};
+    \node[cls2, text width=2.6cm] (pr) at (9.6,3.2) {«interface»\\\textbf{Product}
+      \nodepart{two}+ operation()};
+    \node[cls2, text width=2.6cm] (cp) at (9.6,0.5) {\textbf{ConcreteProduct}
+      \nodepart{two}+ operation()};
+    \draw[inherit] (cc.north) -- (cr.south);
+    \draw[realize] (cp.north) -- (pr.south);
+    \draw[assoc] (cr.east) -- (pr.west) node[lbl, midway, above] {uses};
+    \draw[depend] (cc.east) -- (cp.west) node[lbl, midway, above] {«create»};
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Creator вызывает фабричный метод, не зная конкретного продукта;
+   тип определяет ConcreteCreator.}
+\end{frame}
+
+% ======================= 5. Lazy initialization =======================
+% \begin{frame}{5. Lazy initialization (Отложенная инициализация)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Откладывает создание объекта или вычисление значения до момента
+%         первого обращения.
+%       \end{block}
+%       \begin{block}{Как устроен}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item поле изначально пустое (\texttt{null});
+%           \item при первом обращении объект создаётся и сохраняется;
+%           \item дальше возвращается уже готовый объект;
+%           \item для потоков: double-checked locking или holder-идиома.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Когда применять}
+%         Создание дорогое (БД, файл, сеть), а объект может не
+%         понадобиться; нужно ускорить запуск приложения.
+%       \end{block}
+%       \begin{alertblock}{Минусы}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item задержка при первом обращении;
+%           \item проверка в каждом доступе;
+%           \item потокобезопасность усложняет код.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Lazy initialization: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}[scale=1.15, transform shape]
+    \node[cls1, text width=1.4cm] (client) at (-1.0,1.6) {\textbf{Client}};
+    \node[cls3, text width=4.7cm] (lz) at (5.2,1.6) {\textbf{LazyHolder}
+      \nodepart{two}− resource : Resource = null
+      \nodepart{three}+ getResource() : Resource\\− createResource() : Resource};
+    \node[cls2, text width=2.4cm] (r) at (10.9,1.6) {\textbf{Resource}
+      \nodepart{two}+ use()};
+    \draw[depend] (client.east) -- (lz.west)
+      node[lbl, midway, above] {getResource()};
+    \draw[assoc] (lz.east) -- (r.west)
+      node[lbl, pos=0.45, above] {resource}
+      node[lbl, pos=0.85, below] {0..1};
+    \node[note] (n) at (5.2,-0.9) {if (resource == null)\\
+      \quad resource = createResource();\\
+      return resource;};
+    \draw[ndash] (n.north) -- (lz.south);
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Объект создаётся при первом обращении и затем переиспользуется
+   (кратность связи \texttt{0..1}).}
+\end{frame}
+
+% ======================= 6. Multiton =======================
+% \begin{frame}{6. Multiton (Мультитон)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Обобщение Singleton: хранит набор именованных экземпляров, для
+%         каждого ключа существует не более одного объекта.
+%       \end{block}
+%       \begin{block}{Как устроен}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item закрытый конструктор;
+%           \item статический реестр \texttt{Map<Key, Multiton>};
+%           \item \texttt{getInstance(key)} создаёт объект при первом
+%                 запросе ключа и далее возвращает его же.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Когда применять}
+%         Логгеры по имени, подключения к разным БД, локали, любые
+%         объекты, которых нужно ровно по одному на ключ.
+%       \end{block}
+%       \begin{alertblock}{Минусы и риски}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item все недостатки Singleton;
+%           \item реестр держит объекты, нужна политика очистки;
+%           \item синхронизация доступа к реестру.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Multiton: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}[scale=1.25, transform shape]
+    \node[cls1, text width=1.4cm] (client) at (0,0.8) {\textbf{Client}};
+    \node[cls3, text width=5.3cm] (m) at (5.9,0.8) {\textbf{Multiton}
+      \nodepart{two}− \underline{instances : Map<Key, Multiton>}
+      \nodepart{three}− Multiton(key : Key)\\
+      + \underline{getInstance(key : Key) : Multiton}};
+    \draw[depend] (client.east) -- (m.west)
+      node[lbl, midway, above] {getInstance(key)};
+    \draw[assoc] ([yshift=0.5cm]m.east) -- ++(0.9,0) |- ([yshift=-0.5cm]m.east);
+    \node[lbl, anchor=west] at ([xshift=0.95cm]m.east) {instances\\[-1pt]0..*};
+    \node[note] (n) at (5.9,-1.8) {if (!instances.containsKey(key))\\
+      \quad instances[key] = new Multiton(key);\\
+      return instances[key];};
+    \draw[ndash] (n.north) -- (m.south);
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Реестр хранит по одному экземпляру на ключ; новые объекты создаются
+   по требованию.}
+\end{frame}
+
+% ======================= 7. Object pool =======================
+% \begin{frame}{7. Object pool (Пул объектов)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Хранит набор заранее созданных переиспользуемых объектов: клиент
+%         берёт объект из пула и возвращает после работы, вместо создания и
+%         уничтожения.
+%       \end{block}
+%       \begin{block}{Когда применять}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item создание объекта дорогое (соединения с БД, потоки,
+%                 сокеты, буферы);
+%           \item много кратковременных объектов;
+%           \item число ресурсов ограничено.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Плюсы}
+%         Выше производительность, предсказуемое потребление ресурсов,
+%         меньше нагрузка на сборщик мусора.
+%       \end{block}
+%       \begin{alertblock}{Минусы и риски}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item состояние нужно сбрасывать (\texttt{reset});
+%           \item утечки, если клиент не вернул объект;
+%           \item потокобезопасность и размер пула.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Object pool: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls1, text width=1.4cm] (client) at (0,1.8) {\textbf{Client}};
+    \node[cls3, text width=4.4cm] (pool) at (5.6,1.8) {\textbf{ObjectPool}
+      \nodepart{two}− available : List<Reusable>\\− inUse : List<Reusable>
+      \nodepart{three}+ acquire() : Reusable\\+ release(obj : Reusable)};
+    \node[cls3, text width=2.6cm] (re) at (11.4,1.8) {\textbf{Reusable}
+      \nodepart{two}− state
+      \nodepart{three}+ reset()\\+ doWork()};
+    \draw[depend] (client.east) -- (pool.west)
+      node[lbl, midway, above] {acquire / release};
+    \draw[compo] (pool.east) -- (re.west);
+    \node[lbl, anchor=south west] at ([xshift=0.1cm,yshift=0.02cm]pool.east) {1};
+    \node[lbl, anchor=south east] at ([xshift=-0.1cm,yshift=0.02cm]re.west) {0..*};
+    \draw[depend] (client.north) -- ++(0,1.5) -| (re.north)
+      node[lbl, pos=0.25, above] {uses};
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Клиент берёт объект методом \texttt{acquire()} и возвращает через
+   \texttt{release()}; пул владеет объектами.}
+\end{frame}
+
+% ======================= 8. Prototype =======================
+% \begin{frame}{8. Prototype (Прототип)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Создаёт новые объекты копированием существующего экземпляра~—
+%         прототипа, а не через конструктор.
+%       \end{block}
+%       \begin{block}{Как устроен}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item интерфейс \texttt{Prototype} с методом \texttt{clone()};
+%           \item каждый класс сам решает, как себя копировать
+%                 (поверхностно или глубоко);
+%           \item при необходимости~— реестр прототипов.
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Когда применять}
+%         Класс объекта известен только во время выполнения; создание
+%         дорогое, а копирование дешевле; нужны готовые настроенные образцы.
+%       \end{block}
+%       \begin{alertblock}{Минусы}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item сложно копировать объекты с циклическими ссылками;
+%           \item глубокое копирование требует аккуратности;
+%           \item \texttt{clone()} нужен в каждом классе.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Prototype: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls3, text width=3.5cm] (cl) at (1.8,3.2) {\textbf{Client}
+      \nodepart{two}− prototype : Prototype
+      \nodepart{three}+ operation()};
+    \node[cls2, text width=3.0cm] (pr) at (7.4,3.2) {«interface»\\\textbf{Prototype}
+      \nodepart{two}+ clone() : Prototype};
+    \node[cls3, text width=3.2cm] (p1) at (5.0,0.5) {\textbf{ConcretePrototype1}
+      \nodepart{two}− field : Type
+      \nodepart{three}+ clone() : Prototype};
+    \node[cls3, text width=3.2cm] (p2) at (10.4,0.5) {\textbf{ConcretePrototype2}
+      \nodepart{two}− field : Type
+      \nodepart{three}+ clone() : Prototype};
+    \node[note] (n) at (0.4,0.5) {return new\\ConcretePrototype1(this);};
+    \draw[assoc] (cl.east) -- (pr.west) node[lbl, midway, above] {prototype};
+    \draw[realize] (p1.north) -- (pr.south);
+    \draw[realize] (p2.north) -- (pr.south);
+    \draw[ndash] (n.east) -- (p1.west);
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Клиент клонирует образец через интерфейс \texttt{Prototype}, не зная
+   его конкретного класса.}
+\end{frame}
+
+% ======================= 9. RAII =======================
+% \begin{frame}{9. Resource acquisition is initialization (RAII)}
+%   \begin{columns}[T]
+%     \begin{column}{0.52\textwidth}
+%       \begin{block}{Назначение}
+%         Привязывает жизненный цикл ресурса (память, файл, мьютекс, сокет)
+%         к времени жизни объекта: захват в конструкторе, освобождение в
+%         деструкторе.
+%       \end{block}
+%       \begin{block}{Где встречается}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item C++: \texttt{std::unique\_ptr}, \texttt{std::lock\_guard},
+%                 \texttt{std::fstream};
+%           \item Rust: трейт \texttt{Drop};
+%           \item аналоги: \texttt{try}-with-resources (Java), \texttt{using}
+%                 (C\#), \texttt{with} (Python).
+%         \end{itemize}
+%       \end{block}
+%     \end{column}
+%     \begin{column}{0.44\textwidth}
+%       \begin{block}{Плюсы}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item нет утечек: ресурс освобождается при выходе из области
+%                 видимости, в том числе при исключении;
+%           \item не нужны явные \texttt{finally} и \texttt{free}.
+%         \end{itemize}
+%       \end{block}
+%       \begin{alertblock}{Минусы и риски}
+%         \begin{itemize}\setlength\itemsep{2pt}
+%           \item деструктор не должен бросать исключения;
+%           \item передача владения требует move-семантики.
+%         \end{itemize}
+%       \end{alertblock}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+
+% \begin{frame}{RAII: UML-диаграмма}
+%   \centering
+%   \begin{tikzpicture}
+%     \node[cls1, text width=1.4cm] (client) at (0,1.8) {\textbf{Client}\\(scope)};
+%     \node[cls3, text width=4.5cm] (g) at (5.8,1.8) {\textbf{ResourceGuard}
+%       \nodepart{two}− resource : Resource
+%       \nodepart{three}+ ResourceGuard(r : Resource)\\
+%       + \textasciitilde ResourceGuard()\\+ get() : Resource};
+%     \node[cls2, text width=2.3cm] (r) at (11.7,1.8) {\textbf{Resource}
+%       \nodepart{two}+ open()\\+ close()};
+%     \draw[depend] (client.east) -- (g.west) node[lbl, midway, above] {«create»};
+%     \draw[compo] (g.east) -- (r.west);
+%     \node[lbl, anchor=south west] at ([xshift=0.1cm,yshift=0.02cm]g.east) {1};
+%     \node[lbl, anchor=south east] at ([xshift=-0.1cm,yshift=0.02cm]r.west) {1};
+%     \node[note] (n) at (5.8,-0.6) {\{ ResourceGuard g(res);\quad // acquire\\
+%       \quad g.get()->use();\\
+%       \}\quad // деструктор: release};
+%     \draw[ndash] (n.north) -- (g.south);
+%   \end{tikzpicture}
+
+%   \vspace{3mm}
+%   {\small Захват ресурса~— в конструкторе \texttt{ResourceGuard}, освобождение~—
+%    в деструкторе при выходе из области видимости.}
+% \end{frame}
+
+% ======================= Сравнение =======================
+% \begin{frame}{Сравнение паттернов}
+%   \renewcommand{\arraystretch}{1.3}
+%   \scriptsize
+%   \begin{tabular}{@{}L{2.7cm}L{4.1cm}L{7.2cm}@{}}
+%     \toprule
+%     \textbf{Паттерн} & \textbf{Что решает} & \textbf{Ключевая идея}\\
+%     \midrule
+%     Singleton           & единственный экземпляр класса      & закрытый конструктор + статический \texttt{getInstance()}\\
+%     Abstract Factory    & семейства связанных объектов       & интерфейс фабрики + конкретная фабрика на каждое семейство\\
+%     Builder             & сложный объект по шагам            & Director управляет Builder, Builder собирает Product\\
+%     Factory Method      & тип продукта выбирают подклассы    & фабричный метод в Creator переопределяется в подклассах\\
+%     Lazy initialization & момент создания объекта            & создание откладывается до первого обращения\\
+%     Multiton            & набор именованных экземпляров      & реестр \texttt{Map}: ключ $\to$ единственный экземпляр\\
+%     Object pool         & переиспользование дорогих объектов & \texttt{acquire()}/\texttt{release()} вместо создания и уничтожения\\
+%     Prototype           & создание копированием              & \texttt{clone()} образца, при необходимости реестр прототипов\\
+%     RAII                & время жизни ресурса                & захват в конструкторе, освобождение в деструкторе\\
+%     \bottomrule
+%   \end{tabular}
+% \end{frame}
+
+\end{document}
