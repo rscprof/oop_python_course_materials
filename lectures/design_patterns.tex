@@ -1,14 +1,15 @@
 \documentclass[aspectratio=169,10pt]{beamer}
 
+% Компилировать XeLaTeX или LuaLaTeX (fontspec + polyglossia)
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setmainlanguage{russian}
 \setotherlanguage{english}
-\setmainfont{DejaVu Sans}
-\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
+\setsansfont{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
 \setmonofont{DejaVu Sans Mono}[Scale=0.88]
-\newfontfamily\cyrillicfont{DejaVu Sans}
-\newfontfamily\cyrillicfontsf{DejaVu Sans}
+\newfontfamily\cyrillicfont{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
+\newfontfamily\cyrillicfontsf{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
 \newfontfamily\cyrillicfonttt{DejaVu Sans Mono}[Scale=0.88]
 
 \usepackage{graphicx}
@@ -55,13 +56,19 @@
   cls2/.style={uml, rectangle split parts=2,
     rectangle split part align={center,left}},
   cls1/.style={uml, rectangle split parts=1, align=center},
-  smallcls/.style={cls1/.append style={font=\scriptsize},
-    cls2/.append style={font=\scriptsize},
-    cls3/.append style={font=\scriptsize}},
+  % уменьшенный шрифт: применяется ПОСЛЕ cls*, без глобальных побочных эффектов
+  scls1/.style={cls1, font=\scriptsize},
+  scls2/.style={cls2, font=\scriptsize},
+  scls3/.style={cls3, font=\scriptsize},
+  % обобщение: сплошная линия, незакрашенный треугольник
   inherit/.style={-{Triangle[open,length=9pt,width=8pt]}, thick},
+  % реализация: пунктир, незакрашенный треугольник
   realize/.style={-{Triangle[open,length=9pt,width=8pt]}, thick, dashed},
-  assoc/.style={thick},
-  depend/.style={-{Stealth[open,length=7pt,width=5pt]}, thick, dashed},
+  % навигируемая ассоциация: сплошная линия, открытая «галочка» (V)
+  assoc/.style={thick, -{Straight Barb[length=8pt,width=6pt]}},
+  % зависимость: пунктир, открытая «галочка» (V)
+  depend/.style={-{Straight Barb[length=9pt,width=7pt]}, thick, dashed},
+  % композиция: закрашенный ромб у целого
   compo/.style={{Diamond[length=10pt,width=7pt]}-, thick},
   ndash/.style={dashed, black!60},
   lbl/.style={font=\scriptsize, inner sep=1.5pt, fill=white, text=black!80, align=center},
@@ -110,65 +117,60 @@
   \end{columns}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 3
 \begin{frame}{Singleton: UML-диаграмма}
   \centering
-  \begin{tikzpicture}[scale=1.35, transform shape]
+  \begin{tikzpicture}[scale=1.1, transform shape]
     \node[cls1, text width=1.4cm] (client) at (0,0.8) {\textbf{Client}};
     \node[cls3, text width=4.0cm] (s) at (6.2,0.8) {\textbf{Singleton}
       \nodepart{two} − \underline{instance : Singleton}
       \nodepart{three} − Singleton()\\
       + \underline{getInstance() : Singleton}};
     \draw[depend] (client.east) -- (s.west)
-      node[lbl, midway, above] {getInstance()};
-    \node[note] (n) at (6.2,-1.7) {if (instance == null)\\
+      node[lbl, midway, above=1mm] {getInstance()};
+    \node[note] (n) at (6.2,-1.3) {if (instance == null)\\
       \quad instance = new Singleton();\\
       return instance;};
     \draw[ndash] (n.north) -- (s.south);
   \end{tikzpicture}
 
-  \vspace{4mm}
-  {\small Клиенты получают объект только через статический \texttt{getInstance()};
-   конструктор закрыт.}
+  \vspace{2mm}
+  {\small Доступ только через статический \texttt{getInstance()}; конструктор закрыт.
+   Экземпляр создаётся лениво и существует в единственном числе.}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 4
 \begin{frame}{Abstract Factory: UML-диаграмма}
   \centering
   \resizebox{\textwidth}{!}{%
-  \begin{tikzpicture}[smallcls]
-    \node[cls1, text width=1.2cm] (client) at (-0.3,4.4) {\textbf{Client}};
-    \node[cls2, text width=3.0cm] (af) at (3.1,4.4)
+  \begin{tikzpicture}
+    \node[scls1, text width=1.2cm] (client) at (-0.3,4.4) {\textbf{Client}};
+    \node[scls2, text width=3.0cm] (af) at (3.1,4.4)
       {«interface»\\\textbf{AbstractFactory}
        \nodepart{two}+ createProductA() : AbstractProductA\\+ createProductB() : AbstractProductB};
-
-    \node[cls2, text width=2.8cm] (cf1) at (1.6,1.4)
+    \node[scls2, text width=2.8cm] (cf1) at (1.6,1.4)
       {\textbf{ConcreteFactory1}
        \nodepart{two}+ createProductA() : ProductA1\\+ createProductB() : ProductB1};
-    \node[cls2, text width=2.8cm] (cf2) at (4.7,1.4)
+    \node[scls2, text width=2.8cm] (cf2) at (4.7,1.4)
       {\textbf{ConcreteFactory2}
        \nodepart{two}+ createProductA() : ProductA2\\+ createProductB() : ProductB2};
-
-    \node[cls2, text width=2.7cm] (apa) at (8.2,4.4)
+    \node[scls2, text width=2.7cm] (apa) at (8.2,4.4)
       {«interface»\\\textbf{AbstractProductA}\nodepart{two}+ operationA()};
-    \node[cls2, text width=2.7cm] (apb) at (11.4,4.4)
+    \node[scls2, text width=2.7cm] (apb) at (11.4,4.4)
       {«interface»\\\textbf{AbstractProductB}\nodepart{two}+ operationB()};
-
-    \node[cls1, text width=1.5cm] (a1) at (7.4,1.4) {\textbf{ProductA1}};
-    \node[cls1, text width=1.5cm] (a2) at (9.2,1.4) {\textbf{ProductA2}};
-    \node[cls1, text width=1.5cm] (b1) at (11.0,1.4) {\textbf{ProductB1}};
-    \node[cls1, text width=1.5cm] (b2) at (12.8,1.4) {\textbf{ProductB2}};
-
+    \node[scls1, text width=1.5cm] (a1) at (7.4,1.4) {\textbf{ProductA1}};
+    \node[scls1, text width=1.5cm] (a2) at (9.2,1.4) {\textbf{ProductA2}};
+    \node[scls1, text width=1.5cm] (b1) at (11.0,1.4) {\textbf{ProductB1}};
+    \node[scls1, text width=1.5cm] (b2) at (12.8,1.4) {\textbf{ProductB2}};
     \draw[assoc] (client.east) -- (af.west);
     \draw[realize] ([xshift=-0.65cm]cf1.north) -- ([xshift=-0.55cm]af.south);
     \draw[realize] ([xshift=0.65cm]cf2.north) -- ([xshift=0.55cm]af.south);
-
     \draw[realize] ([xshift=-0.35cm]a1.north) -- ([xshift=-0.45cm]apa.south);
     \draw[realize] ([xshift=0.35cm]a2.north) -- ([xshift=0.45cm]apa.south);
     \draw[realize] ([xshift=-0.35cm]b1.north) -- ([xshift=-0.45cm]apb.south);
     \draw[realize] ([xshift=0.35cm]b2.north) -- ([xshift=0.45cm]apb.south);
-
-    \draw[depend] (client.north) -- ++(0,0.9) -| (apa.north);
-    \draw[depend] ([xshift=0.2cm]client.north) -- ++(0,1.25) -| (apb.north);
-
+    \draw[depend] (client.north) -- ++(0,1.0) -| (apa.north);
+    \draw[depend] ([xshift=0.2cm]client.north) -- ++(0,1.35) -| (apb.north);
   \end{tikzpicture}}
 
   \vspace{2mm}
@@ -176,6 +178,7 @@
    согласованную пару продуктов, ковариантно уточняя типы результатов методов.}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 5
 \begin{frame}{Builder: UML-диаграмма}
   \centering
   \begin{tikzpicture}
@@ -190,11 +193,10 @@
     \node[cls2, text width=2.2cm] (p) at (11.2,0.4) {\textbf{Product}
       \nodepart{two}− parts : List};
     \draw[assoc] (dir.east) -- (b.west)
-      node[lbl, midway, above] {builder};
+      node[lbl, midway, above=1mm] {builder};
     \draw[realize] (cb.north) -- (b.south);
     \draw[assoc] (cb.east) -- (p.west)
-      node[lbl, midway, above] {product};
-    \node[lbl, anchor=south east] at ([xshift=-0.05cm,yshift=0.25cm]p.west) {0..1};
+      node[lbl, midway, above=1mm] {product};
   \end{tikzpicture}
 
   \vspace{3mm}
@@ -202,6 +204,7 @@
    готовый результат запрашивают у строителя.}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 6
 \begin{frame}{Factory Method: UML-диаграмма}
   \centering
   \begin{tikzpicture}[scale=1.25, transform shape]
@@ -209,37 +212,38 @@
       \nodepart{two}+ someOperation()\\+ \textit{factoryMethod() : Product}};
     \node[cls2, text width=4.0cm] (cc) at (2.4,0.5) {\textbf{ConcreteCreator}
       \nodepart{two}+ factoryMethod() : Product};
-    \node[cls2, text width=2.6cm] (pr) at (9.6,3.2) {«interface»\\\textbf{Product}
+    \node[cls2, text width=2.75cm] (pr) at (9.6,3.2) {«interface»\\\textbf{Product}
       \nodepart{two}+ operation()};
-    \node[cls2, text width=2.6cm] (cp) at (9.6,0.5) {\textbf{ConcreteProduct}
+    \node[cls2, text width=2.75cm] (cp) at (9.6,0.5) {\textbf{ConcreteProduct}
       \nodepart{two}+ operation()};
     \draw[inherit] (cc.north) -- (cr.south);
     \draw[realize] (cp.north) -- (pr.south);
     \draw[depend] (cr.east) -- (pr.west)
-      node[lbl, midway, above] {«use»};
+      node[lbl, midway, above=1mm] {«use»};
     \draw[depend] (cc.east) -- (cp.west)
-      node[lbl, midway, above] {«create»};
+      node[lbl, midway, above=1mm] {«create»};
   \end{tikzpicture}
 
   \vspace{3mm}
-  {\small Creator вызывает фабричный метод, не зная конкретного продукта;
-   тип создаваемого объекта определяет ConcreteCreator.}
+  {\small Creator \textbf{объявляет} абстрактный фабричный метод, возвращающий Product.
+   ConcreteCreator реализует его и создаёт ConcreteProduct — подкласс сам решает,
+   какой класс инстанцировать.}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 7
 \begin{frame}{Lazy initialization: UML-диаграмма}
   \centering
   \begin{tikzpicture}
-    \node[cls1, text width=1.4cm] (client) at (0,1.6) {\textbf{Client}};
+    \node[cls1, text width=1.4cm] (client) at (-1.1,1.6) {\textbf{Client}};
     \node[cls3, text width=4.7cm] (lz) at (4.6,1.6) {\textbf{LazyHolder}
       \nodepart{two}− resource : Resource = null
       \nodepart{three}+ getResource() : Resource\\− createResource() : Resource};
-    \node[cls2, text width=2.4cm] (r) at (9.6,1.6) {\textbf{Resource}
+    \node[cls2, text width=2.4cm] (r) at (9.9,1.6) {\textbf{Resource}
       \nodepart{two}+ use()};
     \draw[depend] (client.east) -- (lz.west)
-      node[lbl, midway, above] {getResource()};
+      node[lbl, midway, above=1mm] {getResource()};
     \draw[assoc] (lz.east) -- (r.west)
-      node[lbl, pos=0.30, above] {resource};
-    \node[lbl, anchor=south east] at ([xshift=-0.05cm,yshift=0.25cm]r.west) {0..1};
+      node[lbl, pos=0.5, above=1mm] {resource};
     \node[note] (n) at (4.6,-0.9) {if (resource == null)\\
       \quad resource = createResource();\\
       return resource;};
@@ -251,51 +255,61 @@
    поле \texttt{resource} может не содержать ссылку до первого вызова.}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 8
 \begin{frame}{Multiton: UML-диаграмма}
   \centering
-  \begin{tikzpicture}[scale=1.25, transform shape]
-    \node[cls1, text width=1.4cm] (client) at (0,0.8) {\textbf{Client}};
-    \node[cls3, text width=5.3cm] (m) at (5.9,0.8) {\textbf{Multiton}
-      \nodepart{two}− \underline{instances : Map<Key, Multiton>}\\
+  \begin{tikzpicture}[scale=1.0, transform shape]
+    \node[cls1, text width=1.4cm] (client) at (-2.0,1.0) {\textbf{Client}};
+    \node[cls3, text width=5.3cm] (m) at (4.8,1.0) {\textbf{Multiton}
+      \nodepart{two}− \underline{instances : Map<Key, Multiton>}
       \nodepart{three}− Multiton(key : Key)\\
       + \underline{getInstance(key : Key) : Multiton}};
     \draw[depend] (client.east) -- (m.west)
-      node[lbl, midway, above] {getInstance(key)};
-    \node[note] (n) at (5.9,-1.8) {if (!instances.containsKey(key))\\
+      node[lbl, midway, above=1mm] {getInstance(key)};
+    % Самоассоциация: целое одно (ромб), экземпляров 0..* — по одному на ключ
+    \draw[compo] ([yshift=0.35cm]m.east) -- ++(0.8,0) -- ++(0,-1.0)
+                 -- ([yshift=-0.65cm]m.east);
+    \node[lbl, anchor=south west] at ([xshift=0.5cm,yshift=0.45cm]m.east) {1};
+    \node[lbl, anchor=west] at (8.45,0.5) {instances};
+    \node[lbl, anchor=north] at (7.95,0.28) {0..*};
+    \node[note] (n) at (4.8,-1.15) {if (!instances.containsKey(key))\\
       \quad instances[key] = new Multiton(key);\\
       return instances[key];};
     \draw[ndash] (n.north) -- (m.south);
   \end{tikzpicture}
 
-  \vspace{3mm}
-  {\small Статический реестр хранит не более одного экземпляра для каждого ключа;
-   новые экземпляры создаются по требованию.}
+  \vspace{2mm}
+  {\small По одному экземпляру на каждый ключ: повторный вызов \texttt{getInstance(key)}
+   возвращает уже созданный объект. Всего экземпляров 0..*.}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 9
 \begin{frame}{Object pool: UML-диаграмма}
   \centering
   \begin{tikzpicture}
-    \node[cls1, text width=1.4cm] (client) at (0,1.8) {\textbf{Client}};
-    \node[cls3, text width=4.4cm] (pool) at (5.6,1.8) {\textbf{ObjectPool}
+    \node[cls1, text width=1.4cm] (client) at (-1.0,1.8) {\textbf{Client}};
+    \node[cls3, text width=4.4cm] (pool) at (5.4,1.8) {\textbf{ObjectPool}
       \nodepart{two}− available : List<Reusable>\\− inUse : List<Reusable>
       \nodepart{three}+ acquire() : Reusable\\+ release(obj : Reusable)};
-    \node[cls3, text width=2.6cm] (re) at (11.4,1.8) {\textbf{Reusable}
-      \nodepart{two}− state
+    \node[cls3, text width=2.6cm] (re) at (10.9,1.8) {\textbf{Reusable}
+      \nodepart{two}− state : State
       \nodepart{three}+ reset()\\+ doWork()};
     \draw[depend] (client.east) -- (pool.west)
-      node[lbl, midway, above] {acquire() / release()};
+      node[lbl, midway, above=1mm] {acquire() / release()};
     \draw[compo] (pool.east) -- (re.west);
-    \node[lbl, anchor=south west] at ([xshift=0.1cm,yshift=0.02cm]pool.east) {1};
-    \node[lbl, anchor=south east] at ([xshift=-0.1cm,yshift=0.02cm]re.west) {0..*};
+    \node[lbl, anchor=south west] at ([xshift=0.5cm,yshift=0.1cm]pool.east) {1};
+    \node[lbl, anchor=north east] at ([xshift=-0.45cm,yshift=-0.1cm]re.west) {0..*};
     \draw[depend] (client.north) -- ++(0,1.5) -| (re.north)
-      node[lbl, pos=0.25, above] {uses};
+      node[lbl, pos=0.25, above=1mm] {uses};
   \end{tikzpicture}
 
   \vspace{3mm}
   {\small Клиент берёт объект методом \texttt{acquire()} и возвращает через
-   \texttt{release()}; пул управляет жизненным циклом объектов.}
+   \texttt{release()}; пул владеет жизненным циклом объектов и сбрасывает
+   их состояние вызовом \texttt{reset()}.}
 \end{frame}
 
+% --------------------------------------------------------------- Слайд 10
 \begin{frame}{Prototype: UML-диаграмма}
   \centering
   \begin{tikzpicture}
@@ -312,7 +326,7 @@
       \nodepart{three}+ clone() : Prototype};
     \node[note] (n) at (0.4,0.5) {return new\\ConcretePrototype1(this);};
     \draw[assoc] (cl.east) -- (pr.west)
-      node[lbl, midway, above] {prototype};
+      node[lbl, midway, above=1mm] {prototype};
     \draw[realize] (p1.north) -- ([xshift=-0.45cm]pr.south);
     \draw[realize] (p2.north) -- ([xshift=0.45cm]pr.south);
     \draw[ndash] (n.east) -- (p1.west);
@@ -320,7 +334,8 @@
 
   \vspace{3mm}
   {\small Клиент хранит ссылку на образец и клонирует его через интерфейс
-   \texttt{Prototype}, не зная конкретного класса.}
+   \texttt{Prototype}, не зная конкретного класса; поверхностное или глубокое
+   копирование определяется реализацией \texttt{clone()}.}
 \end{frame}
 
 \end{document}
