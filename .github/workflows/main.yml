@@ -44,6 +44,14 @@ jobs:
           done
           cp -f *.pdf ../dist/lectures/
 
+      - name: Build midterm question bank
+        run: |
+          cd test1
+          python3 generate_latex.py
+          latexmk -pdf -interaction=nonstopmode -file-line-error output
+          mkdir -p ../dist/test1
+          cp -f output.pdf ../dist/test1/output.pdf
+
       - name: Prepare dist directory
         run: |
           mkdir -p dist
