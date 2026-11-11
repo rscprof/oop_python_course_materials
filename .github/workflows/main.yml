@@ -52,6 +52,14 @@ jobs:
           mkdir -p ../dist/test1
           cp -f output.pdf ../dist/test1/output.pdf
 
+      - name: Build end-of-semester question bank
+        run: |
+          cd test2
+          python3 ../test1/generate_latex.py
+          latexmk -pdf -interaction=nonstopmode -file-line-error output
+          mkdir -p ../dist/test2
+          cp -f output.pdf ../dist/test2/output.pdf
+
       - name: Prepare dist directory
         run: |
           mkdir -p dist
