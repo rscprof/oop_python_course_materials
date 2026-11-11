@@ -7,3 +7,5 @@
 *.snm
 *.fdb_latexmk
 *.fls
+test2/*.tex
+test1/*.tex
