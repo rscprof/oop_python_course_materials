@@ -1,0 +1,295 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+% Компилировать XeLaTeX или LuaLaTeX (fontspec + polyglossia)
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
+\setsansfont{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
+\setmonofont{DejaVu Sans Mono}[Scale=0.88]
+\newfontfamily\cyrillicfont{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
+\newfontfamily\cyrillicfontsf{DejaVu Sans}[ItalicFont={DejaVu Sans},ItalicFeatures={FakeSlant=0.22},BoldItalicFont={DejaVu Sans},BoldItalicFeatures={FakeSlant=0.22}]
+\newfontfamily\cyrillicfonttt{DejaVu Sans Mono}[Scale=0.88]
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,shapes.multipart,calc,positioning,fit}
+
+\definecolor{main}{HTML}{1F4E79}
+\definecolor{accent}{HTML}{B5472B}
+\setbeamercolor{structure}{fg=main}
+\setbeamercolor{frametitle}{fg=white,bg=main}
+\setbeamercolor{block title}{fg=white,bg=main}
+\setbeamercolor{block body}{bg=main!7}
+\setbeamercolor{block title alerted}{fg=white,bg=accent}
+\setbeamercolor{block body alerted}{bg=accent!8}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{block title}{size=\small,series=\bfseries}
+\setbeamerfont{block body}{size=\small}
+\setbeamerfont{block body alerted}{size=\small}
+\setbeamerfont{itemize/enumerate body}{size=\small}
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{items}[circle]
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.05cm,dp=0.35cm,leftskip=0.8cm,rightskip=0.8cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+  \vskip1.5mm
+}
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{\hspace{0.8cm}\color{black!55}\scriptsize
+    Структурные паттерны проектирования\hfill
+    \insertframenumber\,/\,\inserttotalframenumber\hspace{0.8cm}}%
+  \vskip3mm
+}
+
+\tikzset{
+  uml/.style={draw=black!70, fill=main!6, rectangle split,
+    rectangle split draw splits, font=\footnotesize,
+    text width=3.2cm, inner sep=3pt},
+  cls3/.style={uml, rectangle split parts=3,
+    rectangle split part align={center,left,left}},
+  cls2/.style={uml, rectangle split parts=2,
+    rectangle split part align={center,left}},
+  cls1/.style={uml, rectangle split parts=1, align=center},
+  % уменьшенный шрифт: применяется ПОСЛЕ cls*, без глобальных побочных эффектов
+  scls1/.style={cls1, font=\scriptsize},
+  scls2/.style={cls2, font=\scriptsize},
+  scls3/.style={cls3, font=\scriptsize},
+  % обобщение: сплошная линия, незакрашенный треугольник
+  inherit/.style={-{Triangle[open,length=9pt,width=8pt]}, thick},
+  % реализация: пунктир, незакрашенный треугольник
+  realize/.style={-{Triangle[open,length=9pt,width=8pt]}, thick, dashed},
+  % навигируемая ассоциация: сплошная линия, открытая «галочка» (V)
+  assoc/.style={thick, -{Straight Barb[length=8pt,width=6pt]}},
+  % зависимость: пунктир, открытая «галочка» (V)
+  depend/.style={-{Straight Barb[length=9pt,width=7pt]}, thick, dashed},
+  % композиция/агрегация: ромб у целого
+  compo/.style={{Diamond[length=10pt,width=7pt]}-, thick},
+  ndash/.style={dashed, black!60},
+  lbl/.style={font=\scriptsize, inner sep=1.5pt, fill=white, text=black!80, align=center},
+  note/.style={draw=black!50, fill=yellow!22, font=\scriptsize\ttfamily,
+    align=left, inner sep=3pt},
+}
+
+\title{Структурные паттерны проектирования}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \vfill
+  \centering
+  {\color{main}\fontsize{26}{31}\selectfont\bfseries Структурные паттерны\\проектирования\par}
+  \vspace{5mm}
+  {\color{accent}\rule{6cm}{1.2pt}\par}
+  \vspace{5mm}
+  {\large UML-диаграммы\par}
+  \vspace{7mm}
+  {\small Adapter \,·\, Bridge \,·\, Composite \,·\, Decorator \,·\, Facade, \\[1mm]
+  Proxy\par}
+  \vfill
+\end{frame}
+
+\begin{frame}{Содержание}
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      \begin{enumerate}\setlength\itemsep{3pt}
+        \item Адаптер (Adapter)
+        \item Мост (Bridge)
+        \item Компоновщик (Composite)
+        \item Декоратор (Decorator)
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{enumerate}\setcounter{enumi}{4}\setlength\itemsep{3pt}
+        \item Фасад (Facade)
+        \item Заместитель (Proxy)
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% --------------------------------------------------------------- Слайд 3
+\begin{frame}{Adapter: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls1, text width=1.4cm] (client) at (0.0,3.4) {\textbf{Client}};
+    \node[cls2, text width=3.0cm] (t) at (5.8,3.4) {«interface»\\\textbf{Target}
+      \nodepart{two}+ request()};
+    \node[cls2, text width=3.2cm] (a) at (5.8,0.4) {\textbf{Adapter}
+      \nodepart{two}− adaptee : Adaptee\\+ request()};
+    \node[cls2, text width=3.0cm] (ad) at (11.2,0.4) {\textbf{Adaptee}
+      \nodepart{two}+ specificRequest()};
+    \node[note] (n) at (1.5,0.4) {adaptee\\\quad .specificRequest();};
+    \draw[depend] (client.east) -- (t.west)
+      node[lbl, midway, above=1mm] {request()};
+    \draw[realize] (a.north) -- (t.south);
+    \draw[assoc] (a.east) -- (ad.west)
+      node[lbl, midway, above=1mm] {adaptee};
+    \draw[ndash] (n.east) -- (a.west);
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Клиент работает с интерфейсом Target. Adapter реализует его и переводит вызовы
+   в вызовы несовместимого интерфейса класса Adaptee.}
+\end{frame}
+
+% --------------------------------------------------------------- Слайд 4
+\begin{frame}{Bridge: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls1, text width=1.4cm] (client) at (-0.3,3.4) {\textbf{Client}};
+    \node[cls3, text width=3.4cm] (ab) at (3.8,3.4) {\textbf{Abstraction}
+      \nodepart{two}− impl : Implementor
+      \nodepart{three}+ operation()};
+    \node[cls1, text width=3.4cm] (ra) at (3.0,0.4) {\textbf{RefinedAbstraction}};
+    \node[cls2, text width=3.0cm] (im) at (9.2,3.4) {«interface»\\\textbf{Implementor}
+      \nodepart{two}+ operationImpl()};
+    \node[scls1, text width=3.3cm] (ca) at (7.5,0.4) {\textbf{ConcreteImplementorA}};
+    \node[scls1, text width=3.3cm] (cb) at (11.0,0.4) {\textbf{ConcreteImplementorB}};
+    \draw[depend] (client.east) -- (ab.west);
+    \draw[inherit] (ra.north) -- (ab.south);
+    \draw[assoc] (ab.east) -- (im.west)
+      node[lbl, midway, above=1mm] {impl};
+    \draw[realize] ([xshift=-0.3cm]ca.north) -- ([xshift=-0.55cm]im.south);
+    \draw[realize] ([xshift=0.3cm]cb.north) -- ([xshift=0.55cm]im.south);
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Абстракция и реализация образуют две независимые иерархии; связь между ними~--- ссылка
+   \texttt{impl}, поэтому каждую иерархию можно развивать отдельно.}
+\end{frame}
+
+% --------------------------------------------------------------- Слайд 5
+\begin{frame}{Composite: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls1, text width=1.4cm] (client) at (0.0,3.4) {\textbf{Client}};
+    \node[cls2, text width=4.4cm] (c) at (6.4,3.4) {«interface»\\\textbf{Component}
+      \nodepart{two}+ operation()\\+ add(c : Component)\\+ remove(c : Component)};
+    \node[cls2, text width=2.4cm] (l) at (1.8,0.2) {\textbf{Leaf}
+      \nodepart{two}+ operation()};
+    \node[cls3, text width=4.0cm] (cp) at (8.6,0.0) {\textbf{Composite}
+      \nodepart{two}− children : List<Component>
+      \nodepart{three}+ operation()\\+ add(c : Component)\\+ remove(c : Component)};
+    \draw[depend] (client.east) -- (c.west);
+    \draw[realize] (l.north) -- ([xshift=-1.8cm]c.south);
+    \draw[realize] ([xshift=-1.5cm]cp.north) -- ([xshift=0.5cm]c.south);
+    \draw[compo] ([xshift=0.5cm]cp.north) -- ([xshift=2.2cm]c.south)
+      node[lbl, pos=0.6, right=1mm] {children};
+    \node[lbl, anchor=south west] at ([xshift=0.5cm,yshift=0.02cm]cp.north) {0..*};
+  \end{tikzpicture}
+
+  \vspace{1mm}
+  {\small Лист и составной объект реализуют единый интерфейс Component, поэтому клиент
+   одинаково работает с одиночными объектами и с целыми деревьями.}
+\end{frame}
+
+% --------------------------------------------------------------- Слайд 6
+\begin{frame}{Decorator: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls1, text width=3.5cm] (cc) at (1.7,3.4) {\textbf{ConcreteComponent}};
+    \node[cls2, text width=3.0cm] (c) at (6.0,3.4) {«interface»\\\textbf{Component}
+      \nodepart{two}+ operation()};
+    \node[cls1, text width=1.4cm] (client) at (11.2,3.4) {\textbf{Client}};
+    \node[cls3, text width=3.4cm] (d) at (6.0,0.3) {\textbf{Decorator}
+      \nodepart{two}− component : Component
+      \nodepart{three}+ operation()};
+    \node[cls1, text width=3.5cm] (da) at (1.7,0.3) {\textbf{ConcreteDecoratorA}};
+    \node[cls1, text width=3.5cm] (db) at (10.7,0.3) {\textbf{ConcreteDecoratorB}};
+    \draw[realize] (cc.east) -- (c.west);
+    \draw[depend] (client.west) -- (c.east);
+    \draw[realize] ([xshift=-0.7cm]d.north) -- ([xshift=-0.7cm]c.south);
+    \draw[compo] ([xshift=0.9cm]d.north) -- ([xshift=0.9cm]c.south);
+    \node[lbl, anchor=west] at ([xshift=0.95cm,yshift=1.1cm]d.north) {component};
+    \draw[inherit] (da.east) -- (d.west);
+    \draw[inherit] (db.west) -- (d.east);
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Декоратор реализует тот же интерфейс, что и оборачиваемый объект, и хранит ссылку на него;
+   дополнительное поведение добавляется до или после делегирования вызова.}
+\end{frame}
+
+% --------------------------------------------------------------- Слайд 7
+\begin{frame}{Facade: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls1, text width=1.4cm] (client) at (0.0,1.7) {\textbf{Client}};
+    \node[cls2, text width=3.4cm] (f) at (4.6,1.7) {\textbf{Facade}
+      \nodepart{two}+ operation()};
+    \node[cls1, text width=2.2cm] (a) at (10.0,3.0) {\textbf{SubsystemA}};
+    \node[cls1, text width=2.2cm] (b) at (10.0,1.7) {\textbf{SubsystemB}};
+    \node[cls1, text width=2.2cm] (c) at (10.0,0.4) {\textbf{SubsystemC}};
+    \node[draw=black!50, dashed, fit=(a)(b)(c), inner sep=9pt,
+      label={[font=\scriptsize,text=black!70]below:Подсистема}] (sub) {};
+    \draw[depend] (client.east) -- (f.west)
+      node[lbl, midway, above=1mm] {operation()};
+    \draw[depend] (f.east) -- (a.west);
+    \draw[depend] (f.east) -- (b.west);
+    \draw[depend] (f.east) -- (c.west);
+  \end{tikzpicture}
+
+  \vspace{3mm}
+  {\small Facade предоставляет единый упрощённый интерфейс к набору классов подсистемы
+   и скрывает от клиента их взаимодействие.}
+\end{frame}
+
+% % --------------------------------------------------------------- Слайд 8
+% \begin{frame}{Front Controller (единая точка входа): UML-диаграмма}
+%   \centering
+%   \begin{tikzpicture}
+%     \node[cls1, text width=1.4cm] (client) at (-0.3,2.0) {\textbf{Client}};
+%     \node[cls3, text width=3.8cm] (fc) at (4.0,2.0) {\textbf{FrontController}
+%       \nodepart{two}− commands : Map<String, Command>
+%       \nodepart{three}+ handleRequest(r : Request)\\− authenticate(r : Request)};
+%     \node[cls2, text width=2.8cm] (cmd) at (9.6,3.2) {«interface»\\\textbf{Command}
+%       \nodepart{two}+ execute(r : Request)};
+%     \node[scls1, text width=2.9cm] (c1) at (8.0,0.4) {\textbf{ConcreteCommandA}};
+%     \node[scls1, text width=2.9cm] (c2) at (11.4,0.4) {\textbf{ConcreteCommandB}};
+%     \draw[depend] (client.east) -- (fc.west)
+%       node[lbl, midway, above=1mm] {request};
+%     \draw[assoc] (fc.north east) -- (cmd.west)
+%       node[lbl, midway, above=1mm] {execute()};
+%     \draw[realize] ([xshift=-0.3cm]c1.north) -- ([xshift=-0.65cm]cmd.south);
+%     \draw[realize] ([xshift=0.3cm]c2.north) -- ([xshift=0.65cm]cmd.south);
+%   \end{tikzpicture}
+
+%   \vspace{3mm}
+%   {\small Все запросы поступают в один обработчик: он выполняет общую обработку (аутентификация,
+%    журналирование), выбирает по запросу нужную команду и передаёт ей управление.}
+% \end{frame}
+
+% --------------------------------------------------------------- Слайд 10
+\begin{frame}{Proxy: UML-диаграмма}
+  \centering
+  \begin{tikzpicture}
+    \node[cls1, text width=1.4cm] (client) at (0.0,3.4) {\textbf{Client}};
+    \node[cls2, text width=3.0cm] (s) at (6.2,3.4) {«interface»\\\textbf{Subject}
+      \nodepart{two}+ request()};
+    \node[cls2, text width=3.4cm] (p) at (3.0,0.3) {\textbf{Proxy}
+      \nodepart{two}− realSubject : RealSubject\\+ request()};
+    \node[cls2, text width=3.0cm] (rs) at (10.4,0.3) {\textbf{RealSubject}
+      \nodepart{two}+ request()};
+    \node[note] (n) at (6.7,-0.8) {if (checkAccess())\\\quad realSubject.request();};
+    \draw[depend] (client.east) -- (s.west)
+      node[lbl, midway, above=1mm] {request()};
+    \draw[realize] ([xshift=0.3cm]p.north) -- ([xshift=-0.6cm]s.south);
+    \draw[realize] ([xshift=-0.3cm]rs.north) -- ([xshift=0.6cm]s.south);
+    \draw[assoc] (p.east) -- (rs.west)
+      node[lbl, pos=0.5, above=1mm] {realSubject};
+    \draw[ndash] (n.north) -- (6.7,0.3);
+  \end{tikzpicture}
+
+  \vspace{1mm}
+  {\small Proxy имеет тот же интерфейс, что и RealSubject, и контролирует доступ к нему
+   (защита, ленивое создание, кэширование, журналирование).}
+\end{frame}
+
+\end{document}
